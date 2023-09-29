@@ -17,14 +17,13 @@
         </div>
     </div>
     <div class='table-responsive'>
-        <table class='table' *ngIf="products.length">
+        <table class='table' *ngIf="filteredBirthdays.length">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Code</th>
-              <th>Available</th>
-              <th>Price</th>
-              <th>5 Star Rating</th>
+              <th>Name</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Phone Number</th>
             </tr>
           </thead>
           <tbody>
@@ -37,11 +36,6 @@
                 <td>{{ birthday.title }}</td>
                 <td>{{ birthday.body }}</td>
                 <td>{{ birthday.phone_number }}</td>
-                <td>
-                  <pm-star [rating]="product.starRating"
-                      (ratingClicked)="onRatingClicked($event)">
-                  </pm-star>
-                </td>
             </tr>
           </tbody>
         </table>

@@ -36,11 +36,13 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        let data = this.birthdayService.getBirthdays()
+        this.birthdays = data
+        this.filteredBirthdays = this.birthdays
     }
 
     ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+        this.sub.unsubscribe();
     }
     
 }
