@@ -1,38 +1,42 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "name": "Test 8",
         "title": "test-8",
-        "phone_number": "",
-        "body": "",
+        "phone_number": "123123123",
+        "body": "qweqweqwe",
         "birthday_date": "2024-09-04 06:28:00",
+        "user_id": 1, 
         "group_id": null
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Test 1",
         "title": "test-1",
-        "phone_number": "",
-        "body": "",
+        "phone_number": "123123123",
+        "body": "asdasdasd",
         "birthday_date": "2024-09-04 06:28:00",
+        "user_id": 2,
         "group_id": null
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Test 2",
         "title": "test-2",
-        "phone_number": "",
-        "body": "",
+        "phone_number": "123123123",
+        "body": "zxczxczxc",
         "birthday_date": "2024-09-04 06:28:00",
-        "group_id": null
+        "user_id": 3,
+        "group_id": 1
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Test 3",
         "title": "test-3",
-        "phone_number": "",
-        "body": "",
+        "phone_number": "123123123",
+        "body": "rtyrtyrty",
         "birthday_date": "2024-09-04 06:28:00",
+        "user_id": 4,
         "group_id": null
     }
 ]

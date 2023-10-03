@@ -27,7 +27,8 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     filteredBirthdays: IBirthday[] = [];
     birthdays: IBirthday[] = [];
     
-    constructor(private birthdayService: BirthdayService) {}
+    constructor(private birthdayService: BirthdayService) {
+    }
     
     performFilter(filterBy: string): IBirthday[] {
         filterBy = filterBy.toLocaleLowerCase();
@@ -36,9 +37,13 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        let data = this.birthdayService.getBirthdays()
-        this.birthdays = data
-        this.filteredBirthdays = this.birthdays
+        this.sub = this.birthdayService.getBirthdays().subscribe({
+            next: birthdays => {
+                this.birthdays = birthdays;
+                this.filteredBirthdays = this.birthdays;
+            },
+            error: err => this.errorMessage = err
+        });
     }
 
     ngOnDestroy(): void {

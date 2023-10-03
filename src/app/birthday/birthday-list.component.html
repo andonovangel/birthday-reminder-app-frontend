@@ -24,9 +24,11 @@
               <th>Title</th>
               <th>Body</th>
               <th>Phone Number</th>
+              <th>Birthday Date</th>
+              <th>Group</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
             <tr *ngFor="let birthday of filteredBirthdays">
                 <td>
                   <a [routerLink]="['/birthdays', birthday.id]">
@@ -36,9 +38,14 @@
                 <td>{{ birthday.title }}</td>
                 <td>{{ birthday.body }}</td>
                 <td>{{ birthday.phone_number }}</td>
+                <td>{{ birthday.birthday_date }}</td>
+                <td *ngIf="birthday.group_id != null; else noGroup">{{ birthday.group_id }}</td>
             </tr>
-            <hr>
           </tbody>
         </table>
       </div>
 </div>
+
+<ng-template #noGroup>
+  <td>N/A</td>
+</ng-template>
