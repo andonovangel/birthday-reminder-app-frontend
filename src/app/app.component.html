@@ -2,7 +2,10 @@
   <a class="navbar-brand">{{ pageTitle }}</a>
   <ul class="nav nav-pills">
     <li><a class="nav-link" routerLink="/welcome">Home</a></li>
-    <li><a class="nav-link" routerLink="/birthdays">Birthdays</a></li>
+    <li><a class="nav-link" routerLink="/birthdays" *ngIf="getAuthService().loggedIn()">Birthdays</a></li>
+    <li><a class="nav-link" routerLink="/register" *ngIf="!getAuthService().loggedIn()">Register</a></li>
+    <li><a class="nav-link" routerLink="/login" *ngIf="!getAuthService().loggedIn()">Log in</a></li>
+    <li><a class="nav-link" routerLink="/logout" *ngIf="getAuthService().loggedIn()" (click)="getAuthService().logoutUser()">Log out</a></li>
   </ul>
 </nav>
 <div class="container">

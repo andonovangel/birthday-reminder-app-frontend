@@ -1,6 +1,7 @@
 <div class="card">
     <div class="card-header">
         {{pageTitle}}
+        {{ filteredBirthdays.length }}
     </div>
     <div class="card-body">
         <div class="row">
@@ -28,7 +29,7 @@
               <th>Group</th>
             </tr>
           </thead>
-          <tbody> 
+          <tbody>
             <tr *ngFor="let birthday of filteredBirthdays">
                 <td>
                   <a [routerLink]="['/birthdays', birthday.id]">

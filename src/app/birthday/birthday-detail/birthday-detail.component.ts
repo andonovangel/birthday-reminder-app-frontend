@@ -21,7 +21,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.pageTitle += `: ${id}`;
+    // this.pageTitle += `: ${id}`;
 
     this.sub = this.birthdayService.getBirthdays().subscribe({
       next: birthdays => {

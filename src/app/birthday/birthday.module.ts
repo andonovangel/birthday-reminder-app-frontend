@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.component';
 import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
+import { authGuard } from '../auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,11 @@ import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
     CommonModule,
     FormsModule,
     RouterModule.forChild([
-      { path: 'birthdays', component: BirthdayListComponent },
+      { 
+        path: 'birthdays',
+        canActivate: [authGuard],
+        component: BirthdayListComponent,
+      },
       { 
         path: 'birthdays/:id', 
         canActivate: [BirthdayDetailGuard],
