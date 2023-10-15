@@ -1,0 +1,30 @@
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input [(ngModel)]="createBirthdayData.name" name="name" type="text" class="form-control" placeholder="Person name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input [(ngModel)]="createBirthdayData.title" name="title" type="text" class="form-control" placeholder="Title">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone number</label>
+            <input [(ngModel)]="createBirthdayData.phone_number" name="phone_number" type="text" class="form-control" placeholder="Phone number">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea [(ngModel)]="createBirthdayData.body" name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Birthday date</label>
+            <input [(ngModel)]="createBirthdayData.birthday_date" name="birthday_date" type="datetime-local" class="form-control" placeholder="Birthday date">
+        </div>
+        <div class="mb-3">
+            <select [(ngModel)]="createBirthdayData.group_id" name="group_id" class="form-select" aria-label="Default select example">
+                <option selected value=null>Add to group</option>
+            </select>
+        </div>
+        <button (click)="createBirthday()" type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

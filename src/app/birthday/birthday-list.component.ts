@@ -41,7 +41,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.sub = this.birthdayService.getBirthdays().subscribe({
             next: birthdays => {
-                console.log(birthdays);
                 this.birthdays = birthdays;
                 this.filteredBirthdays = this.birthdays;
             },

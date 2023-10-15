@@ -10,6 +10,7 @@ export class AuthService {
   private registerUrl = "http://127.0.0.1:8000/api/register"
   private loginUrl = "http://127.0.0.1:8000/api/login"
   private logoutUrl = "http://127.0.0.1:8000/api/logout"
+  private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -39,5 +40,9 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('token')
+  }
+
+  createBirthday(birthday: any) {
+    return this.http.post<any>(this.createBirthdayUrl, birthday)
   }
 }

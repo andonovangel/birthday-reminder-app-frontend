@@ -14,7 +14,6 @@ export class BirthdayService {
 
     getBirthdays(): Observable<IBirthday[]> {
         return this.http.get<IBirthday[]>(this.birthdaysUrl).pipe(
-            tap(data => console.log('All', JSON.stringify(data))),
             catchError(err => this.handleErrors(err))
         );
     }
