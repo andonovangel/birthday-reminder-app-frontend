@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(this.loginUserData).subscribe({
       next: res => {
         console.log(res)
-        localStorage.setItem('token', res.token)
-        this.router.navigate(['/birthdays'])
+        this.router.navigate(['/welcome'])
       },
       error: err => {
         console.log(err)
