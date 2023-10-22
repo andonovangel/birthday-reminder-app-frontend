@@ -7,12 +7,14 @@ import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.compo
 import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
 import { authGuard } from '../auth/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
+import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 
 @NgModule({
   declarations: [
     BirthdayListComponent,
     BirthdayDetailComponent,
     BirthdayCreateComponent,
+    BirthdayEditComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,12 @@ import { BirthdayCreateComponent } from './birthday-create/birthday-create.compo
         component: BirthdayCreateComponent,
       },
       { 
-        path: 'birthdays/:id', 
+        path: 'edit-birthday/:id',
+        canActivate: [authGuard],
+        component: BirthdayEditComponent,
+      },
+      { 
+        path: 'birthday/:id', 
         canActivate: [BirthdayDetailGuard],
         component: BirthdayDetailComponent 
       }

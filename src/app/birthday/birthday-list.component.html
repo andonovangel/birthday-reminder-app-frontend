@@ -27,12 +27,13 @@
               <th>Phone Number</th>
               <th>Birthday Date</th>
               <th>Group</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let birthday of filteredBirthdays">
                 <td>
-                  <a [routerLink]="['/birthdays', birthday.id]">
+                  <a [routerLink]="['/birthday', birthday.id]">
                     {{ birthday.name }}
                   </a>
                 </td>
@@ -41,6 +42,11 @@
                 <td>{{ birthday.phone_number }}</td>
                 <td>{{ birthday.birthday_date }}</td>
                 <td *ngIf="birthday.group_id != null; else noGroup">{{ birthday.group_id }}</td>
+                <td>
+                  <a [routerLink]="['/edit-birthday', birthday.id]">
+                    Edit
+                  </a>
+                </td>
             </tr>
           </tbody>
         </table>

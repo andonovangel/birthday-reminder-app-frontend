@@ -15,6 +15,7 @@ export class AuthService {
   private logoutUrl = "http://127.0.0.1:8000/api/logout"
 
   private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
+  private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -75,5 +76,9 @@ export class AuthService {
 
   createBirthday(birthday: any) {
     return this.http.post<any>(this.createBirthdayUrl, birthday)
+  }
+
+  editBirthday(birthday: any) {
+    return this.http.put<any>(this.editBirthdayUrl + birthday.id, birthday)
   }
 }
