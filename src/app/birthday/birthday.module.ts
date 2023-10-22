@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BirthdayListComponent } from './birthday-list.component';
+import { BirthdayListComponent } from './birthday-list/birthday-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.component';
@@ -8,7 +8,7 @@ import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
 import { authGuard } from '../auth/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
-import { BirthdayDeleteComponent } from './birthday-delete/birthday-delete.component';
+import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { BirthdayDeleteComponent } from './birthday-delete/birthday-delete.compo
     BirthdayDetailComponent,
     BirthdayCreateComponent,
     BirthdayEditComponent,
-    BirthdayDeleteComponent,
+    BirthdayArchivedComponent,
   ],
   imports: [
     CommonModule,
@@ -38,14 +38,14 @@ import { BirthdayDeleteComponent } from './birthday-delete/birthday-delete.compo
         component: BirthdayEditComponent,
       },
       { 
-        path: 'delete-birthday/:id',
-        canActivate: [authGuard],
-        component: BirthdayDeleteComponent,
-      },
-      { 
         path: 'birthday/:id', 
         canActivate: [BirthdayDetailGuard],
         component: BirthdayDetailComponent 
+      },
+      { 
+        path: 'birthdays-archived',
+        canActivate: [authGuard],
+        component: BirthdayArchivedComponent,
       }
     ])
   ]

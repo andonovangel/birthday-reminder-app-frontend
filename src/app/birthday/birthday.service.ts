@@ -11,6 +11,8 @@ export class BirthdayService {
     private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
     private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
     private deleteBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
+    private listArchivedBirthdaysUrl = "http://127.0.0.1:8000/api/archived-birthdays"
+    private restoreBirthdayUrl = "http://127.0.0.1:8000/api/restore-birthday/"
 
     constructor(private http: HttpClient) {
     }
@@ -30,9 +32,19 @@ export class BirthdayService {
     }
   
     deleteBirthday(birthday: any) {
-        console.log('deleted ' + birthday.id)
         return this.http.delete<any>(this.deleteBirthdayUrl + birthday.id, birthday)
     }
+
+    getArchivedBirthdays(): Observable<IBirthday[]> {
+        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl).pipe(
+            catchError(err => this.handleErrors(err))
+        );
+    }
+  
+    restoreBirthday(birthday: any) {
+        return this.http.post<any>(this.restoreBirthdayUrl + birthday.id, birthday)
+    }
+
 
     private handleErrors(err: HttpErrorResponse) {
         let errorMessage = '';
