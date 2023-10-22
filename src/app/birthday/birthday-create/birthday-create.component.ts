@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { IBirthday } from '../birthday';
+import { BirthdayService } from '../birthday.service';
 
 @Component({
   selector: 'app-birthday-create',
@@ -18,14 +18,17 @@ export class BirthdayCreateComponent implements OnInit {
     group_id: null
   }
   
-  constructor (private auth: AuthService, private router: Router) {}
+  constructor (
+    private auth: AuthService,
+    private birthdayService: BirthdayService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
   }
 
   createBirthday() {
-        // console.log(this.createBirthdayData)
-    this.auth.createBirthday(this.createBirthdayData).subscribe({
+    this.birthdayService.createBirthday(this.createBirthdayData).subscribe({
       next: res => {
         console.log(res)
         this.router.navigate(['/birthdays'])

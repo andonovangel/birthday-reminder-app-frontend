@@ -3,7 +3,6 @@ import { BirthdayService } from '../birthday.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IBirthday } from '../birthday';
-import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-birthday-edit',
@@ -28,8 +27,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
   constructor(
     private birthdayService: BirthdayService, 
     private route: ActivatedRoute, 
-    private router: Router,
-    private auth: AuthService
+    private router: Router
   ) { }
   
   ngOnInit(): void {
@@ -56,7 +54,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
   }
 
   editBirthday() {
-    this.auth.editBirthday(this.birthdayData).subscribe({
+    this.birthdayService.editBirthday(this.birthdayData).subscribe({
       next: res => {
         console.log(res)
         this.router.navigate(['/birthdays'])

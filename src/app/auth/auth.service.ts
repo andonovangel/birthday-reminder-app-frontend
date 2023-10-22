@@ -14,9 +14,6 @@ export class AuthService {
   private loginUrl = "http://127.0.0.1:8000/api/login"
   private logoutUrl = "http://127.0.0.1:8000/api/logout"
 
-  private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
-  private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
-
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user: any) {
@@ -72,13 +69,5 @@ export class AuthService {
 
   getCurrentUser(): Observable<any | null> {
     return this.currentUserSubject.asObservable()
-  }
-
-  createBirthday(birthday: any) {
-    return this.http.post<any>(this.createBirthdayUrl, birthday)
-  }
-
-  editBirthday(birthday: any) {
-    return this.http.put<any>(this.editBirthdayUrl + birthday.id, birthday)
   }
 }

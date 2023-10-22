@@ -7,15 +7,25 @@ import { IBirthday } from "./birthday";
     providedIn: 'root'
 })
 export class BirthdayService {
-    private birthdaysUrl = 'http://127.0.0.1:8000/api/birthdays'
+    private listBirthdaysUrl = 'http://127.0.0.1:8000/api/birthdays'
+    private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
+    private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
 
     constructor(private http: HttpClient) {
     }
 
     getBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.birthdaysUrl).pipe(
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl).pipe(
             catchError(err => this.handleErrors(err))
         );
+    }
+
+    createBirthday(birthday: any) {
+      return this.http.post<any>(this.createBirthdayUrl, birthday)
+    }
+  
+    editBirthday(birthday: any) {
+      return this.http.put<any>(this.editBirthdayUrl + birthday.id, birthday)
     }
 
     private handleErrors(err: HttpErrorResponse) {
