@@ -43,9 +43,12 @@
                 <td>{{ birthday.birthday_date }}</td>
                 <td *ngIf="birthday.group_id != null; else noGroup">{{ birthday.group_id }}</td>
                 <td>
-                  <a [routerLink]="['/edit-birthday', birthday.id]">
+                  <button type="button" class="btn btn-link" [routerLink]="['/edit-birthday', birthday.id]">
                     Edit
-                  </a>
+                  </button>
+                  <button type="button" class="btn btn-link" (click)="deleteBirthday(birthday)">
+                    Delete
+                  </button>
                 </td>
             </tr>
           </tbody>

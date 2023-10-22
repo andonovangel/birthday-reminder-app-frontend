@@ -10,6 +10,7 @@ export class BirthdayService {
     private listBirthdaysUrl = 'http://127.0.0.1:8000/api/birthdays'
     private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
     private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
+    private deleteBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
 
     constructor(private http: HttpClient) {
     }
@@ -21,11 +22,16 @@ export class BirthdayService {
     }
 
     createBirthday(birthday: any) {
-      return this.http.post<any>(this.createBirthdayUrl, birthday)
+        return this.http.post<any>(this.createBirthdayUrl, birthday)
     }
   
     editBirthday(birthday: any) {
-      return this.http.put<any>(this.editBirthdayUrl + birthday.id, birthday)
+        return this.http.put<any>(this.editBirthdayUrl + birthday.id, birthday)
+    }
+  
+    deleteBirthday(birthday: any) {
+        console.log('deleted ' + birthday.id)
+        return this.http.delete<any>(this.deleteBirthdayUrl + birthday.id, birthday)
     }
 
     private handleErrors(err: HttpErrorResponse) {

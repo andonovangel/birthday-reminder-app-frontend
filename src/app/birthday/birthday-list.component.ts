@@ -31,6 +31,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     
     constructor(private birthdayService: BirthdayService, private router: Router) {
     }
+
+    ngOnInit(): void {
+        this.sub = this.getBirthdays()
+    }
+
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
     
     performFilter(filterBy: string): IBirthday[] {
         filterBy = filterBy.toLocaleLowerCase();
@@ -38,8 +46,8 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             birthday.name.toLocaleLowerCase().includes(filterBy));
     }
 
-    ngOnInit(): void {
-        this.sub = this.birthdayService.getBirthdays().subscribe({
+    getBirthdays() {
+        return this.birthdayService.getBirthdays().subscribe({
             next: birthdays => {
                 this.birthdays = birthdays;
                 this.filteredBirthdays = this.birthdays;
@@ -54,9 +62,20 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             }
         });
     }
-
-    ngOnDestroy(): void {
-        this.sub.unsubscribe();
-    }
     
+
+    deleteBirthday(birthday: any) {
+        if(confirm("Are you sure to delete " + birthday.name)) {
+            this.birthdayService.deleteBirthday(birthday).subscribe({
+                next: res => {
+                    console.log(res)
+                    this.getBirthdays()
+                    this.router.navigate(['/birthdays'])
+                },
+                error: err => {
+                    console.log(err)
+                }
+            })
+        }
+    }
 }

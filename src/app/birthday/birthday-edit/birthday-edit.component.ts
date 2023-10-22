@@ -28,7 +28,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
     private birthdayService: BirthdayService, 
     private route: ActivatedRoute, 
     private router: Router
-  ) { }
+  ) {}
   
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));

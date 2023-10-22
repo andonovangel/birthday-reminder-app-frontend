@@ -8,6 +8,7 @@ import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
 import { authGuard } from '../auth/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
+import { BirthdayDeleteComponent } from './birthday-delete/birthday-delete.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
     BirthdayDetailComponent,
     BirthdayCreateComponent,
     BirthdayEditComponent,
+    BirthdayDeleteComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,11 @@ import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
         path: 'edit-birthday/:id',
         canActivate: [authGuard],
         component: BirthdayEditComponent,
+      },
+      { 
+        path: 'delete-birthday/:id',
+        canActivate: [authGuard],
+        component: BirthdayDeleteComponent,
       },
       { 
         path: 'birthday/:id', 
