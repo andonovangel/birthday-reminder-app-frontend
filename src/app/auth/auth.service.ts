@@ -14,7 +14,7 @@ export class AuthService {
   private loginUrl = "http://127.0.0.1:8000/api/login"
   private logoutUrl = "http://127.0.0.1:8000/api/logout"
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user).pipe(
