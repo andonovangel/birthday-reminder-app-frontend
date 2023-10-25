@@ -1,61 +1,67 @@
 <div class="container">
-    <form #birthdayCreateForm="ngForm" (ngSubmit)="onSubmit(birthdayCreateForm)">
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input  type="text" class="form-control" placeholder="Person name" 
-                    required
-                    [(ngModel)]="birthdayData.name" name="name"
-                    #name="ngModel"
-                    [ngClass]="{'error-input': (name.touched || submitted) && name.invalid}">
-            <div [hidden]="(name.valid || !name.touched) && !submitted" class="error">
-                Name is required
+                    formControlName="name" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="error"> 
+                <div *ngIf="name.errors?.['required']">
+                    Name is required
+                </div>
+                <div *ngIf="name.errors?.['maxlength']">
+                    Name can have maximum 50 characters
+                </div>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Title</label>
             <input type="text" class="form-control" placeholder="Title" 
-                    required
-                    [(ngModel)]="birthdayData.title" name="title" 
-                    #title="ngModel"
-                    [ngClass]="{'error-input': (title.touched || submitted) && title.invalid}">
-            <div [hidden]="(title.valid || !title.touched) && !submitted" class="error">
-                Title is required
+                    formControlName="title" required>
+            <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="error"> 
+                <div *ngIf="title.errors?.['required']">
+                    Title is required
+                </div>
+                <div *ngIf="title.errors?.['maxlength']">
+                    Title can have maximum 50 characters
+                </div>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Phone number</label>
             <input type="text" class="form-control" placeholder="Phone number"
-                    [(ngModel)]="birthdayData.phone_number" name="phone_number"
-                    [ngClass]="{'error-input': !isNumeric(phone_number.value)}"
-                    #phone_number="ngModel">
-            <div [hidden]="phone_number.valid && isNumeric(phone_number.value)" class="error">
-                Only numeric values are accepted
+                    formControlName="phone_number">
+            <div *ngIf="phone_number.invalid" class="error"> 
+                <div *ngIf="phone_number.errors?.['pattern']">
+                    Phone number can only contain numeric digits.
+                </div>
             </div>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea [(ngModel)]="birthdayData.body" name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label class="form-label">Body</label>
+            <textarea name="body" class="form-control" rows="3"></textarea>
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday date</label>
             <input type="datetime-local" class="form-control" placeholder="Birthday date" 
-                    required
-                    [(ngModel)]="birthdayData.birthday_date" name="birthday_date" 
-                    #birthday_date="ngModel"
-                    [ngClass]="{'error-input': (birthday_date.touched || submitted) && birthday_date.invalid}">
-            <div [hidden]="(birthday_date.valid || !birthday_date.touched) && !submitted" class="error">
-                BIrthday date is required
+                    formControlName="birthday_date" required>
+            <div *ngIf="birthday_date.invalid && (birthday_date.touched || submitted)" class="error"> 
+                <div *ngIf="birthday_date.errors?.['required']">
+                    Birthday date is required
+                </div>
             </div>
         </div>
         <div class="mb-3">
-            <select [(ngModel)]="birthdayData.group_id" name="group_id" class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example">
                 <option selected value=null>Add to group</option>
             </select>
         </div>
-        <!-- <button type="submit" class="btn btn-primary"
-                (click)="createBirthday(); birthdayCreateForm.reset()"   
-                [disabled]="!birthdayCreateForm.form.valid">Create</button> -->
             
-        <button type="submit" class="btn btn-primary"       >Create</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn btn-outline-secondary" 
+                type="button"
+                style="width: 80px;"
+                (click)="onBack()">
+            <i class="fa fa-chevron-left"></i> Back
+        </button>
     </form>
 </div>

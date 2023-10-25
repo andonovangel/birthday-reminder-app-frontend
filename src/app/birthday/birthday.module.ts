@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BirthdayListComponent } from './birthday-list/birthday-list.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.component';
 import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
 import { authGuard } from '../auth/auth.guard';
@@ -21,6 +21,7 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { 
         path: 'birthdays',
