@@ -33,7 +33,7 @@ export class BirthdayCreateComponent implements OnInit {
         Validators.pattern('^[0-9]*$'),
       ]),
       body: new FormControl('', [
-        Validators.maxLength(500)
+        Validators.maxLength(200)
       ]),
       birthday_date: new FormControl('', [
         Validators.required

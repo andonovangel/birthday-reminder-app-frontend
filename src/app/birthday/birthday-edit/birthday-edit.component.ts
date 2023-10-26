@@ -54,7 +54,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
               Validators.pattern('^[0-9]*$'),
             ]),
             body: new FormControl(this.birthday?.body, [
-              Validators.maxLength(500)
+              Validators.maxLength(200)
             ]),
             birthday_date: new FormControl(this.birthday?.birthday_date, [
               Validators.required
