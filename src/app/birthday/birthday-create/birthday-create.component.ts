@@ -11,7 +11,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 export class BirthdayCreateComponent implements OnInit {
   submitted: boolean = false
-  createForm: any;
+  formGroup! : FormGroup;
 
   constructor (
     private auth: AuthService,
@@ -20,7 +20,7 @@ export class BirthdayCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createForm = new FormGroup({
+    this.formGroup = new FormGroup({
       name: new FormControl('', [
         Validators.required,
         Validators.maxLength(50)
@@ -33,28 +33,21 @@ export class BirthdayCreateComponent implements OnInit {
         Validators.pattern('^[0-9]*$'),
       ]),
       body: new FormControl('', [
-        Validators.maxLength(500),
+        Validators.maxLength(500)
       ]),
       birthday_date: new FormControl('', [
         Validators.required
       ]),
-      group_id: new FormControl(null, [
-        Validators.nullValidator
-      ])
+      group_id: new FormControl(null)
     })
   }
-
-  get name() { return this.createForm.get('name'); }
-  get title() { return this.createForm.get('title'); }
-  get phone_number() { return this.createForm.get('phone_number'); }
-  get birthday_date() { return this.createForm.get('birthday_date'); }
   
   onSubmit() {
-    if (this.createForm.invalid) {
+    if (this.formGroup.invalid) {
       this.submitted = true
     } else {
-      console.log(this.createForm.value)
-      this.birthdayService.createBirthday(this.createForm.value).subscribe({
+      console.log(this.formGroup.value)
+      this.birthdayService.createBirthday(this.formGroup.value).subscribe({
         next: res => {
           console.log(res)
           this.router.navigate(['/birthdays'])
@@ -63,9 +56,8 @@ export class BirthdayCreateComponent implements OnInit {
           console.log(err)
         }
       })
-      this.createForm.reset()
+      this.formGroup.reset()
     }
-
   }
 
   onBack(): void {

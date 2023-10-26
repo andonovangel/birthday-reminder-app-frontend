@@ -1,14 +1,14 @@
-<div class="container">
-    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+<div class="container w-50">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input  type="text" class="form-control" placeholder="Person name" 
-                    formControlName="name" required>
-            <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="error"> 
-                <div *ngIf="name.errors?.['required']">
+                    formControlName="name" required/>
+            <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['name'].errors?.['required']">
                     Name is required
                 </div>
-                <div *ngIf="name.errors?.['maxlength']">
+                <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
                     Name can have maximum 50 characters
                 </div>
             </div>
@@ -16,12 +16,12 @@
         <div class="mb-3">
             <label class="form-label">Title</label>
             <input type="text" class="form-control" placeholder="Title" 
-                    formControlName="title" required>
-            <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="error"> 
-                <div *ngIf="title.errors?.['required']">
+                    formControlName="title" required/>
+            <div *ngIf="formGroup.controls['title'].invalid && (formGroup.controls['title'].dirty || formGroup.controls['title'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['title'].errors?.['required']">
                     Title is required
                 </div>
-                <div *ngIf="title.errors?.['maxlength']">
+                <div *ngIf="formGroup.controls['title'].errors?.['maxlength']">
                     Title can have maximum 50 characters
                 </div>
             </div>
@@ -29,29 +29,36 @@
         <div class="mb-3">
             <label class="form-label">Phone number</label>
             <input type="text" class="form-control" placeholder="Phone number"
-                    formControlName="phone_number">
-            <div *ngIf="phone_number.invalid" class="error"> 
-                <div *ngIf="phone_number.errors?.['pattern']">
+                    formControlName="phone_number"/>
+            <div *ngIf="formGroup.controls['phone_number'].invalid" class="error"> 
+                <div *ngIf="formGroup.controls['phone_number'].errors?.['pattern']">
                     Phone number can only contain numeric digits.
                 </div>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Body</label>
-            <textarea name="body" class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3"
+                        formControlName="body"></textarea>
+            <div *ngIf="formGroup.controls['body'].invalid" class="error"> 
+                <div *ngIf="formGroup.controls['body'].errors?.['maxlength']">
+                    Body can have maximum 500 characters
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday date</label>
             <input type="datetime-local" class="form-control" placeholder="Birthday date" 
-                    formControlName="birthday_date" required>
-            <div *ngIf="birthday_date.invalid && (birthday_date.touched || submitted)" class="error"> 
-                <div *ngIf="birthday_date.errors?.['required']">
+                    formControlName="birthday_date" required/>
+            <div *ngIf="formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['birthday_date'].errors?.['required']">
                     Birthday date is required
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example"
+                    formControlName="group_id">
                 <option selected value=null>Add to group</option>
             </select>
         </div>

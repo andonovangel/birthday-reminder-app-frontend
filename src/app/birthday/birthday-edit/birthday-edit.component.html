@@ -1,44 +1,77 @@
-<h1 *ngIf="birthday">
-    {{ birthday.name }}
-</h1>
-
-<div class="container">
-    <form *ngIf="birthday">
+<div class="container w-50" *ngIf="birthday">
+    <h1 class="text-center">
+        {{ birthday.name }}
+    </h1>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input [(ngModel)]="birthdayData.name" name="name" type="text" class="form-control" placeholder="Name">
+            <input type="text" class="form-control" placeholder="Person name"
+                    formControlName="name" required/>
+            <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['name'].errors?.['required']">
+                    Name is required
+                </div> 
+                <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
+                    Name can have maximum 50 characters
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Title</label>
-            <input [(ngModel)]="birthdayData.title" name="title" type="text" class="form-control" placeholder="Title">
+            <input type="text" class="form-control" placeholder="Title"
+                    formControlName="title" required/>
+            <div *ngIf="formGroup.controls['title'].invalid && (formGroup.controls['title'].dirty || formGroup.controls['title'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['title'].errors?.['required']">
+                    Title is required
+                </div> 
+                <div *ngIf="formGroup.controls['title'].errors?.['maxlength']">
+                    Title can have maximum 50 characters
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Phone number</label>
-            <input [(ngModel)]="birthdayData.phone_number" name="phone_number" type="text" class="form-control" placeholder="Phone number">
+            <input type="text" class="form-control" placeholder="Phone number"
+                    formControlName="phone_number"/>
+            <div *ngIf="formGroup.controls['phone_number'].invalid" class="error"> 
+                <div *ngIf="formGroup.controls['phone_number'].errors?.['pattern']">
+                    Phone number can only contain numeric digits.
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-            <textarea [(ngModel)]="birthdayData.body" name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                        formControlName="body"></textarea>
+            <div *ngIf="formGroup.controls['body'].invalid" class="error"> 
+                <div *ngIf="formGroup.controls['body'].errors?.['maxlength']">
+                    Body can have maximum 500 characters
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday date</label>
-            <input [(ngModel)]="birthdayData.birthday_date" name="birthday_date" type="datetime-local" class="form-control" placeholder="Birthday date">
+            <input type="datetime-local" class="form-control" placeholder="Birthday date"
+                    formControlName="birthday_date" required/>
+            <div *ngIf="formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['birthday_date'].errors?.['required']">
+                    Birthday date is required
+                </div>
+            </div>
         </div>
         <div class="mb-3">
-            <select [(ngModel)]="birthdayData.group_id" name="group_id" class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example"
+                    formControlName="group_id">
                 <option selected value=null>Add to group</option>
             </select>
         </div>
-        
-        <div class="card-footer">
-            <button (click)="editBirthday()" type="submit" class="btn btn-primary">Edit</button>
-            <button class="btn btn-outline-secondary" 
-                    type="button"
-                    style="width: 80px;"
-                    (click)="onBack()">
-                <i class="fa fa-chevron-left"></i> Back
-            </button>
-        </div>
-        
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn btn-outline-secondary" 
+                type="button"
+                style="width: 80px;"
+                (click)="onBack()">
+            <i class="fa fa-chevron-left"></i> Back
+        </button>
     </form>
 </div>
