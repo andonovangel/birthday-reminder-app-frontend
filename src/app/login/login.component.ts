@@ -16,21 +16,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService, 
-    private router: Router,
-    private birthdayService: BirthdayService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       email: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
       password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).*$/),
-        Validators.minLength(8),
-        Validators.maxLength(20)
+        Validators.required
       ])
     })
   }
@@ -40,28 +35,15 @@ export class LoginComponent implements OnInit {
       this.submitted = true
     } else {
       console.log(this.formGroup.value)
-      // this.birthdayService.createBirthday(this.formGroup.value).subscribe({
-      //   next: res => {
-      //     console.log(res)
-      //     this.router.navigate(['/birthdays'])
-      //   },
-      //   error: err => {
-      //     console.log(err)
-      //   }
-      // })
-      // this.formGroup.reset()
+      this.auth.loginUser(this.formGroup.value).subscribe({
+        next: () => {
+          this.router.navigate(['/welcome'])
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
     }
-  }
-
-  loginUser() {
-    this.auth.loginUser(this.loginUserData).subscribe({
-      next: res => {
-        this.router.navigate(['/welcome'])
-      },
-      error: err => {
-        console.log(err)
-      }
-    })
   }
 }
 

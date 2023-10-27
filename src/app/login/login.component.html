@@ -9,11 +9,6 @@
               Email is required
           </div>
         </div>
-        <div *ngIf="formGroup.controls['email'].invalid" class="error"> 
-          <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
-            Wrong pattern for email
-          </div>
-        </div>
       </div>
       <div class="form-group mb-3">
         <label for="exampleInputPassword1">Password</label>
@@ -23,20 +18,8 @@
           <div *ngIf="formGroup.controls['password'].errors?.['required']">
               Password is required
           </div>
-          <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
-              Body can have minimum 8 characters
-          </div>
-          <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
-              Body can have maximum 20 characters
-          </div>
-        </div>
-        <div *ngIf="formGroup.controls['password'].invalid" class="error"> 
-          <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
-            Wrong pattern for password
-          </div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>
-      <!-- <button (click)="loginUser()" type="submit" class="btn btn-primary">Submit</button> -->
   </form>
 </div>
