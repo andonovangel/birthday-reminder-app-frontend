@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginUserData: any = {}
   public formGroup!: FormGroup
   public submitted: boolean = false
+  public errorMessage: string | undefined
 
   constructor(
     private auth: AuthService, 
@@ -41,6 +42,12 @@ export class LoginComponent implements OnInit {
         },
         error: err => {
           console.log(err)
+          console.log(err.error.message)
+          
+          if (err.error.message) {
+            this.errorMessage = err.error.message
+            this.formGroup.setErrors({'incorrect': true})
+          }
         }
       })
     }
