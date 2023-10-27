@@ -24,10 +24,10 @@
               Password is required
           </div>
           <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
-              Body can have minimum 10 characters
+              Body can have minimum 8 characters
           </div>
           <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
-              Body can have maximum 64 characters
+              Body can have maximum 20 characters
           </div>
         </div>
         <div *ngIf="formGroup.controls['password'].invalid" class="error"> 

@@ -1,15 +1,56 @@
-<form>
+<div class="container w-50">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="form-group mb-4">
       <label for="exampleInputName1">Name</label>
-      <input [(ngModel)]="registerUserData.name" name="name" type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name">
+      <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name"
+              formControlName="name" required>
+      <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['name'].errors?.['required']">
+          Name is required
+        </div>
+        <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
+          Name can have maximum 20 characters
+        </div>
+        <div *ngIf="nameError" class="error">
+          {{ nameError }}
+        </div>
+      </div>
     </div>
     <div class="form-group mb-4">
       <label for="exampleInputEmail1">Email address</label>
-      <input [(ngModel)]="registerUserData.email" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+              formControlName="email" required>
+      <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['email'].errors?.['required']">
+          Email is required
+        </div>
+        <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
+          Wrong pattern for email
+        </div>
+        <div *ngIf="emailError" class="error">
+          {{ emailError }}
+        </div>
+      </div>
     </div>
     <div class="form-group mb-3">
       <label for="exampleInputPassword1">Password</label>
-      <input [(ngModel)]="registerUserData.password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+              formControlName="password" required>
+      <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['password'].errors?.['required']">
+          Password is required
+        </div>
+        <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
+          Password can have minimum 8 characters
+        </div>
+        <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
+          Password can have maximum 20 characters
+        </div>
+        <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
+          Wrong pattern for password
+        </div>
+      </div>
     </div>
-    <button (click)="registerUser()" type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
+</div>
