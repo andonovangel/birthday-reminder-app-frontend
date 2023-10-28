@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.component';
 import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
-import { authGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
@@ -25,17 +25,17 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
     RouterModule.forChild([
       { 
         path: 'birthdays',
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
         component: BirthdayListComponent,
       },
       { 
         path: 'create-birthday',
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
         component: BirthdayCreateComponent,
       },
       { 
         path: 'edit-birthday/:id',
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
         component: BirthdayEditComponent,
       },
       { 
@@ -45,7 +45,7 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
       },
       { 
         path: 'birthdays-archived',
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
         component: BirthdayArchivedComponent,
       }
     ])
