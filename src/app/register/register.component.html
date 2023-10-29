@@ -1,7 +1,7 @@
 <div class="container w-50">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="form-group mb-4">
-      <label for="exampleInputName1">Name</label>
+      <label>Name</label>
       <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name"
               formControlName="name" required>
       <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="form-group mb-4">
-      <label for="exampleInputEmail1">Email address</label>
+      <label>Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
               formControlName="email" required>
       <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
@@ -32,8 +32,21 @@
         </div>
       </div>
     </div>
+    <div class="form-group mb-4">
+      <label>Email confirmation</label>
+      <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email"
+              formControlName="confirmationEmail" required>
+      <div *ngIf="formGroup.controls['confirmationEmail'].invalid && (formGroup.controls['confirmationEmail'].dirty || formGroup.controls['confirmationEmail'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['confirmationEmail'].errors?.['required']">
+          Email confirmation is required
+        </div>
+        <div *ngIf="confirmationEmailError" class="error">
+          {{ confirmationEmailError }}
+        </div>
+      </div>
+    </div>
     <div class="form-group mb-3">
-      <label for="exampleInputPassword1">Password</label>
+      <label>Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
               formControlName="password" required>
       <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
@@ -48,6 +61,19 @@
         </div>
         <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
           Wrong pattern for password
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label>Password confirmation</label>
+      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"
+              formControlName="confirmationPassword" required>
+      <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['confirmationPassword'].errors?.['required']">
+          Password confirmation is required
+        </div>
+        <div *ngIf="confirmationPasswordError" class="error">
+          {{ confirmationPasswordError }}
         </div>
       </div>
     </div>
