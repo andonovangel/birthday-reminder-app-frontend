@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,7 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { 
         path: 'profile',

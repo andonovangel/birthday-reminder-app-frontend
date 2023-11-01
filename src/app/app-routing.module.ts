@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { BirthdayModule } from './birthday/birthday.module';
 import { RedirectGuard } from './auth/redirect.guard';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BirthdayModule,
+    UserProfileModule
   ],
   exports: [RouterModule]
 })
