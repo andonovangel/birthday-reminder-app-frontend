@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UserProfileService } from '../user-profile.service';
+import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-profile-edit',
@@ -19,7 +21,11 @@ export class ProfileEditComponent {
   public name: string = JSON.parse(localStorage.getItem('user') || '{}').name
   public email: string = JSON.parse(localStorage.getItem('user') || '{}').email
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService, 
+    private router: Router,
+    private userService: UserProfileService
+  ) {}
 
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe({
@@ -52,27 +58,45 @@ export class ProfileEditComponent {
     })
   }
 
+  getPusherData() {
+    Pusher.logToConsole = true;
+
+    const pusher = new Pusher('ea4bb3965237a32a93ba', {
+      cluster: 'eu'
+    });
+
+    const channel = pusher.subscribe('user-updates');
+    channel.bind('update', (data: any) => {
+      
+      localStorage.setItem('user', JSON.stringify(JSON.parse(JSON.stringify(data)).user));
+      this.auth.setCurrentUser(JSON.parse(JSON.stringify(data)).user)
+    });
+  }
+
   onSubmit() {
-    // this.submitted = true
-    // this.auth.registerUser(this.formGroup.value).subscribe({
-    //   next: res => {
-    //     console.log(res)
-    //     this.router.navigate(['/welcome'])
-    //   },
-    //   error: err => {
-    //     console.log(err)
+    this.submitted = true
+
+    this.getPusherData()
+    
+    this.userService.updateUser(this.formGroup.value).subscribe({
+      next: res => {
+        console.log(res)
+        this.router.navigate(['/profile'])
+      },
+      error: err => {
+        console.log(err)
         
-    //     if (err.error.errors['email']) {
-    //       this.emailError = err.error.errors['email']
-    //       this.formGroup.controls['email'].setErrors({'incorrect': true})
-    //     }
+        // if (err.error.errors['email']) {
+        //   this.emailError = err.error.errors['email']
+        //   this.formGroup.controls['email'].setErrors({'incorrect': true})
+        // }
 
-    //     if (err.error.errors['name']) {
-    //       this.nameError = err.error.errors['name']
+        // if (err.error.errors['name']) {
+        //   this.nameError = err.error.errors['name']
 
-    //       this.formGroup.controls['name'].setErrors({'incorrect': true})
-    //     }
-    //   }
-    // })
+        //   this.formGroup.controls['name'].setErrors({'incorrect': true})
+        // }
+      }
+    })
   }
 }

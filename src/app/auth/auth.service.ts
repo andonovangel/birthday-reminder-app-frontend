@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, EMPTY, map, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
   private currentUserSubject = new BehaviorSubject<any>(null)
 
   private registerUrl = "http://127.0.0.1:8000/api/register"
@@ -16,12 +16,16 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  ngOnInit(): void {
+    
+  }
+
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user).pipe(
       map(userInfo => {
         localStorage.setItem('token', userInfo.token);
         localStorage.setItem('user', JSON.stringify(userInfo.user));
-        this.setCurrentUser()
+        this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
 
         return userInfo.user;
       })
@@ -33,7 +37,7 @@ export class AuthService {
       map(userInfo => {
         localStorage.setItem('token', userInfo.token);
         localStorage.setItem('user', JSON.stringify(userInfo.user));
-        this.setCurrentUser()
+        this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
 
         return userInfo.user;
       })
@@ -61,8 +65,8 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  setCurrentUser() {
-    let user = JSON.parse(localStorage.getItem('user') || '{}')
+  setCurrentUser(data: any) {
+    let user = data
     this.currentUserSubject.next(user);
 
   }
