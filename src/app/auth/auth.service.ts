@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(null)
 
   private registerUrl = "http://127.0.0.1:8000/api/register"
@@ -15,10 +15,6 @@ export class AuthService implements OnInit {
   private logoutUrl = "http://127.0.0.1:8000/api/logout"
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  ngOnInit(): void {
-    
-  }
 
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user).pipe(
@@ -50,7 +46,7 @@ export class AuthService implements OnInit {
 
   logoutUser() {
     this.http.post<any>(this.logoutUrl, {}).subscribe({
-        next: res => {
+        next: () => {
             localStorage.clear()
             this.currentUserSubject.next(EMPTY)
             this.router.navigate(['/welcome'])
@@ -66,9 +62,8 @@ export class AuthService implements OnInit {
   }
 
   setCurrentUser(data: any) {
-    let user = data
-    this.currentUserSubject.next(user);
-
+    let userData = data
+    this.currentUserSubject.next(userData);
   }
 
   getCurrentUser(): Observable<any | null> {

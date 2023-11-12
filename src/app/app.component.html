@@ -1,15 +1,41 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
-  <a class="navbar-brand">{{ pageTitle }}</a>
-  <ul class="nav nav-pills">
-    <li><a class="nav-link" routerLink="/welcome">Home</a></li>
-    <li><a class="nav-link" routerLink="/birthdays" *ngIf="getAuthService().loggedIn()">Birthdays</a></li>
-    <li><a class="nav-link" routerLink="/birthdays-archived" *ngIf="getAuthService().loggedIn()">Archived</a></li>
-    <li><a class="nav-link" routerLink="/create-birthday" *ngIf="getAuthService().loggedIn()">Create</a></li>
-    <li><a class="nav-link" routerLink="/profile" *ngIf="getAuthService().loggedIn()">Profile</a></li>
-    <li><a class="nav-link" routerLink="/register" *ngIf="!getAuthService().loggedIn()">Register</a></li>
-    <li><a class="nav-link" routerLink="/login" *ngIf="!getAuthService().loggedIn()">Log in</a></li>
-    <li><a class="nav-link" routerLink="/logout" *ngIf="getAuthService().loggedIn()" (click)="getAuthService().logoutUser()">Log out</a></li>
-  </ul>
+  <div class="container-fluid">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item active">
+          <a class="btn btn-primary m-1" routerLink="/welcome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/birthdays" *ngIf="getAuthService().loggedIn()">Birthdays</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/birthdays-archived" *ngIf="getAuthService().loggedIn()">Archived</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/create-birthday" *ngIf="getAuthService().loggedIn()">Create</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="/welcome">{{ pageTitle }}</a>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/profile" *ngIf="getAuthService().loggedIn()">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/register" *ngIf="!getAuthService().loggedIn()">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/login" *ngIf="!getAuthService().loggedIn()">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/logout" *ngIf="getAuthService().loggedIn()" (click)="getAuthService().logoutUser()">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>

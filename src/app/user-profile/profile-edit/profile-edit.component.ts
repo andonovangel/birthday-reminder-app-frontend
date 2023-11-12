@@ -85,17 +85,18 @@ export class ProfileEditComponent {
       },
       error: err => {
         console.log(err)
+
+        if (err.error.data['name']) {
+          console.log(err.error.data['name'])
+          this.nameError = err.error.data['name']
+          this.formGroup.controls['name'].setErrors({'incorrect': true})
+        }
         
-        // if (err.error.errors['email']) {
-        //   this.emailError = err.error.errors['email']
-        //   this.formGroup.controls['email'].setErrors({'incorrect': true})
-        // }
-
-        // if (err.error.errors['name']) {
-        //   this.nameError = err.error.errors['name']
-
-        //   this.formGroup.controls['name'].setErrors({'incorrect': true})
-        // }
+        if (err.error.data['email']) {
+          console.log(err.error.data['email'])
+          this.emailError = err.error.data['email']
+          this.formGroup.controls['email'].setErrors({'incorrect': true})
+        }
       }
     })
   }
