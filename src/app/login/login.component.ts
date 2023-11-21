@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { BirthdayService } from '../birthday/birthday.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
-      console.log(this.formGroup.value)
       this.auth.loginUser(this.formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['/welcome'])

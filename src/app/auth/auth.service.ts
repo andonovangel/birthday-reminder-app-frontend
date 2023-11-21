@@ -1,20 +1,28 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, EMPTY, map, of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, EMPTY, map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private currentUserSubject = new BehaviorSubject<any>(null)
+export class AuthService implements OnInit {
+  private currentUserSubject = new BehaviorSubject<any>({})
 
-  private registerUrl = "http://127.0.0.1:8000/api/register"
-  private loginUrl = "http://127.0.0.1:8000/api/login"
-  private logoutUrl = "http://127.0.0.1:8000/api/logout"
+  private registerUrl = "http://localhost:8000/api/register"
+  private loginUrl = "http://localhost:8000/api/login"
+  private logoutUrl = "http://localhost:8000/api/logout"
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    
+  }
 
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user).pipe(
@@ -28,12 +36,19 @@ export class AuthService {
     )
   }
 
-  loginUser(user: any) {
-    return this.http.post<any>(this.loginUrl, user).pipe(
+   loginUser(user: any) {
+    this.http.get<any>('http://localhost:8000/api/csrf-cookie')
+    
+
+    return this.http.post<any>(this.loginUrl, user, {withCredentials: true}).pipe(
       map(userInfo => {
         localStorage.setItem('token', userInfo.token);
-        localStorage.setItem('user', JSON.stringify(userInfo.user));
-        this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
+        // localStorage.setItem('user', JSON.stringify(userInfo.user));
+        // this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
+
+
+        
+
 
         return userInfo.user;
       })
@@ -45,11 +60,11 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.http.post<any>(this.logoutUrl, {}).subscribe({
+    this.http.post<any>(this.logoutUrl, {withCredentials: true}).subscribe({
         next: () => {
             localStorage.clear()
-            this.currentUserSubject.next(EMPTY)
-            this.router.navigate(['/welcome'])
+            this.currentUserSubject.next({})
+            this.router.navigate(['/welcome'], { relativeTo: this.route })
         },
         error: err => {
             console.error('Logout failed:', err)
@@ -61,12 +76,23 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  setCurrentUser(data: any) {
-    let userData = data
-    this.currentUserSubject.next(userData);
+  getCurrentUser(): Observable<any | null> {
+    this.getUserFromApi().subscribe({
+      next: (user: any) => {
+        this.setCurrentUser(JSON.parse(JSON.stringify(user) || '{}'))
+      },
+      error: (err: any) => {
+        console.log(err)
+      }
+    })
+    return this.currentUserSubject.asObservable()
   }
 
-  getCurrentUser(): Observable<any | null> {
-    return this.currentUserSubject.asObservable()
+  setCurrentUser(data: any) {
+    this.currentUserSubject.next(data);
+  }
+
+  getUserFromApi(): Observable<any> {
+    return  this.http.get<any>("http://localhost:8000/api/user")
   }
 }

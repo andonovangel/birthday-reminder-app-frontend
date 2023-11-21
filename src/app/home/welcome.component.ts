@@ -8,26 +8,27 @@ import { AuthService } from '../auth/auth.service';
 })
 export class WelcomeComponent implements OnInit {
   public pageTitle = 'Welcome'
-  public name: string = JSON.parse(localStorage.getItem('user') || '{}').name
-  public email: string = JSON.parse(localStorage.getItem('user') || '{}').email
+  public name: string = ''
+  public email: string = ''
 
   constructor (private auth: AuthService) {}
 
   ngOnInit(): void {
+    // this.auth.getUserFromApi().subscribe({
+    //     next: (user: any) => {
+    //         this.name = user.name
+    //         this.email = user.email
+    //     },
+    //     error: (err: any) => {
+    //       console.log(err)
+    //     }
+    //   })
     this.auth.getCurrentUser().subscribe({
-      next: user => {
-        if (user) {
-          this.name = user.name
-          this.email = user.email
-
-          if (user.name != undefined)
-            localStorage.setItem('name', user.name)
-
-          if (user.email != undefined)
-            localStorage.setItem('email', user.email)
-        }
+      next: (user: any) => {
+        this.name = user.name
+        this.email = user.email
       },
-      error: err => {
+      error: (err: any) => {
         console.log(err)
       }
     })
