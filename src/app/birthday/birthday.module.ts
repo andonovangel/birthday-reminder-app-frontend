@@ -24,17 +24,17 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
     ReactiveFormsModule,
     RouterModule.forChild([
       { 
-        path: 'birthdays',
+        path: 'list',
         canActivate: [AuthGuard],
         component: BirthdayListComponent,
       },
       { 
-        path: 'create-birthday',
+        path: 'create',
         canActivate: [AuthGuard],
         component: BirthdayCreateComponent,
       },
       { 
-        path: 'edit-birthday/:id',
+        path: 'edit/:id',
         canActivate: [AuthGuard],
         component: BirthdayEditComponent,
       },
@@ -44,7 +44,7 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
         component: BirthdayDetailComponent 
       },
       { 
-        path: 'birthdays-archived',
+        path: 'archived',
         canActivate: [AuthGuard],
         component: BirthdayArchivedComponent,
       }

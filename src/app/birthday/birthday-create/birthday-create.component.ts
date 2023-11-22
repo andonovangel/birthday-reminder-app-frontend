@@ -61,6 +61,6 @@ export class BirthdayCreateComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/birthdays']);
+    this.router.navigate(['/birthdays/list']);
   }
 }

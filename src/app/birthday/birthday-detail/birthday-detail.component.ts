@@ -37,6 +37,6 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
   }
 
   onBack(): void {
-    this.router.navigate(['/birthdays']);
+    this.router.navigate(['/birthdays/list']);
   }
 }

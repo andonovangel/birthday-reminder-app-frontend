@@ -8,7 +8,15 @@ import { RedirectGuard } from './auth/redirect.guard';
 import { UserProfileModule } from './user-profile/user-profile.module';
 
 const routes: Routes = [
-  { path: 'welcome', component: WelcomeComponent },
+  { 
+    path: 'welcome',
+    component: WelcomeComponent 
+  },
+  { 
+    path: 'birthdays',
+    loadChildren: () =>
+      import('./birthday/birthday.module').then((b) => b.BirthdayModule),
+  },
   { 
     path: 'register', 
     canActivate: [RedirectGuard],
@@ -26,7 +34,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    BirthdayModule,
     UserProfileModule
   ],
   exports: [RouterModule]
