@@ -7,9 +7,9 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent {
-  public name: string = JSON.parse(localStorage.getItem('user') || '{}').name
-  public email: string = JSON.parse(localStorage.getItem('user') || '{}').email
-  public created_at: string = JSON.parse(localStorage.getItem('user') || '{}').created_at
+  public name: string = ''
+  public email: string = ''
+  public created_at: string = ''
 
   constructor (private auth: AuthService) {}
 
@@ -21,14 +21,14 @@ export class ProfileDetailComponent {
           this.email = user.email
           this.created_at = user.created_at
 
-          if (user.name != undefined)
-            localStorage.setItem('name', user.name)
+          // if (user.name != undefined)
+          //   localStorage.setItem('name', user.name)
 
-          if (user.email != undefined)
-            localStorage.setItem('email', user.email)
+          // if (user.email != undefined)
+          //   localStorage.setItem('email', user.email)
 
-            if (user.created_at != undefined)
-              localStorage.setItem('created_at', user.created_at)
+          //   if (user.created_at != undefined)
+          //     localStorage.setItem('created_at', user.created_at)
         }
       },
       error: err => {

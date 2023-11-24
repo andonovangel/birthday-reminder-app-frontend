@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 
@@ -19,10 +20,12 @@ import { ReactiveFormsModule } from '@angular/forms';
       { 
         path: 'profile',
         component: ProfileDetailComponent,
+        canActivate: [AuthGuard],
       },
       { 
         path: 'profile-edit',
         component: ProfileEditComponent,
+        canActivate: [AuthGuard],
       },
     ])
   ]
