@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BirthdayService } from '../birthday.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-birthday-create',
   templateUrl: './birthday-create.component.html',
   styleUrls: ['./birthday-create.component.scss']
 })
-export class BirthdayCreateComponent implements OnInit {
+export class BirthdayCreateComponent implements OnInit, OnDestroy {
   submitted: boolean = false
-  formGroup! : FormGroup;
+  formGroup!: FormGroup
+  createBirthdaySub?: Subscription
 
   constructor (
     private auth: AuthService,
@@ -42,15 +44,19 @@ export class BirthdayCreateComponent implements OnInit {
     })
   }
   
+  ngOnDestroy(): void {
+    this.createBirthdaySub?.unsubscribe()
+  }
+
   onSubmit() {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
       console.log(this.formGroup.value)
-      this.birthdayService.createBirthday(this.formGroup.value).subscribe({
+      this.createBirthdaySub = this.birthdayService.createBirthday(this.formGroup.value).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/birthdays'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)

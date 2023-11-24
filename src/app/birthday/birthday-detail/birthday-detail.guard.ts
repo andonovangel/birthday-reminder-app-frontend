@@ -12,7 +12,7 @@ export class BirthdayDetailGuard implements CanActivate {
     const id = Number(route.paramMap.get('id'));
     if (isNaN(id) || id < 1) {
       alert('Invalid birthday id');
-      this.router.navigate(['/birthday']);
+      this.router.navigate(['/birthdays/list']);
       return false;
     }
     return true;

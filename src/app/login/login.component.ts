@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginUserData: any = {}
   public formGroup!: FormGroup
   public submitted: boolean = false
   public errorMessage: string | undefined
+  
+  loginUserSub?: Subscription
 
   constructor(
     private auth: AuthService, 
@@ -29,12 +32,16 @@ export class LoginComponent implements OnInit {
       ])
     })
   }
+  
+  ngOnDestroy(): void {
+    this.loginUserSub?.unsubscribe()
+  }
 
   onSubmit() {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
-      this.auth.loginUser(this.formGroup.value).subscribe({
+      this.loginUserSub = this.auth.loginUser(this.formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['/welcome'])
         },

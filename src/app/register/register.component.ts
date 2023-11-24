@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit, OnDestroy{
   public formGroup! : FormGroup
   public emailError: string | undefined
   public nameError: string | undefined
   public confirmationEmailError: string | undefined
   public confirmationPasswordError: string | undefined
   public submitted: boolean = false;
+  private registerUserSub?: Subscription
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -42,10 +44,14 @@ export class RegisterComponent implements OnInit{
       ])
     })
   }
+  
+  ngOnDestroy(): void {
+    this.registerUserSub?.unsubscribe()
+  }
 
   onSubmit() {
     this.submitted = true
-    this.auth.registerUser(this.formGroup.value).subscribe({
+    this.registerUserSub = this.auth.registerUser(this.formGroup.value).subscribe({
       next: res => {
         console.log(res)
         this.router.navigate(['/welcome'])

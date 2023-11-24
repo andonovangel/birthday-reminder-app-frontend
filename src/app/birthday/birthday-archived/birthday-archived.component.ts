@@ -13,7 +13,9 @@ import { BirthdayService } from '../birthday.service';
 export class BirthdayArchivedComponent {
   pageTitle: string = 'Archived Birthday List';
     errorMessage: string = '';
-    sub!: Subscription;
+    getArchivedBirthdaysSub?: Subscription;
+    deleteBirthdaySub?: Subscription;
+    restoreBirthdaySub?: Subscription;
 
     private _listFilter: string = '';
     
@@ -36,11 +38,13 @@ export class BirthdayArchivedComponent {
     ) {}
 
     ngOnInit(): void {
-        this.sub = this.getArchivedBirthdays()
+        this.getArchivedBirthdaysSub = this.getArchivedBirthdays()
     }
 
     ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.getArchivedBirthdaysSub?.unsubscribe();
+        this.deleteBirthdaySub?.unsubscribe();
+        this.restoreBirthdaySub?.unsubscribe();
     }
     
     performFilter(filterBy: string): IBirthday[] {
@@ -69,11 +73,11 @@ export class BirthdayArchivedComponent {
 
     deleteBirthday(birthday: any) {
         if(confirm("Are you sure to delete " + birthday.name)) {
-            this.birthdayService.deleteBirthday(birthday).subscribe({
+            this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
                 next: res => {
                     console.log(res)
                     this.getArchivedBirthdays()
-                    this.router.navigate(['/birthdays'])
+                    this.router.navigate(['/birthdays/archived'])
                 },
                 error: err => {
                   console.log(err)
@@ -83,10 +87,10 @@ export class BirthdayArchivedComponent {
     }
 
     restoreBirthday(birthday: any) {
-      this.birthdayService.restoreBirthday(birthday).subscribe({
+      this.restoreBirthdaySub = this.birthdayService.restoreBirthday(birthday).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/birthdays'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)

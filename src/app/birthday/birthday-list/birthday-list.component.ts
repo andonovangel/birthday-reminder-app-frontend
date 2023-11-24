@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Subscription, tap } from "rxjs";
 import { IBirthday } from "../birthday";
 import { BirthdayService } from "../birthday.service";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -12,7 +12,11 @@ import { Router } from "@angular/router";
 export class BirthdayListComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Birthday List';
     errorMessage: string = '';
-    sub!: Subscription;
+    getBirthdaysSub?: Subscription;
+    deleteBirthdaysSub?: Subscription;
+
+    filteredBirthdays: IBirthday[] = [];
+    birthdays: IBirthday[] = [];
 
     private _listFilter: string = '';
     
@@ -26,20 +30,18 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         this.filteredBirthdays = this.performFilter(value);
     }
     
-    filteredBirthdays: IBirthday[] = [];
-    birthdays: IBirthday[] = [];
-    
     constructor(
         private birthdayService: BirthdayService, 
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.sub = this.getBirthdays()
+        this.getBirthdaysSub = this.getBirthdays()
     }
 
     ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.getBirthdaysSub?.unsubscribe();
+        this.deleteBirthdaysSub?.unsubscribe();
     }
     
     performFilter(filterBy: string): IBirthday[] {
@@ -68,11 +70,11 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     deleteBirthday(birthday: any) {
         if(confirm("Are you sure to delete " + birthday.name)) {
-            this.birthdayService.deleteBirthday(birthday).subscribe({
+            this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
                 next: res => {
                     console.log(res)
                     this.getBirthdays()
-                    this.router.navigate(['/birthdays'])
+                    this.router.navigate(['/birthdays/list'])
                 },
                 error: err => {
                     console.log(err)

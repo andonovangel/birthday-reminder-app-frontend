@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserProfileService } from '../user-profile.service';
 import Pusher from 'pusher-js';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent {
+export class ProfileEditComponent implements OnDestroy {
   public formGroup! : FormGroup
   public emailError: string | undefined
   public nameError: string | undefined
@@ -21,6 +22,9 @@ export class ProfileEditComponent {
   public name: string = JSON.parse(localStorage.getItem('user') || '{}').name
   public email: string = JSON.parse(localStorage.getItem('user') || '{}').email
 
+  private getCurrentUserSub?: Subscription
+  private updateUserSub?: Subscription
+
   constructor(
     private auth: AuthService, 
     private router: Router,
@@ -28,7 +32,7 @@ export class ProfileEditComponent {
   ) {}
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe({
+    this.getCurrentUserSub = this.auth.getCurrentUser().subscribe({
       next: user => {
         if (user) {
           this.name = user.name
@@ -57,6 +61,11 @@ export class ProfileEditComponent {
       ])
     })
   }
+  
+  ngOnDestroy(): void {
+    this.getCurrentUserSub?.unsubscribe()
+    this.updateUserSub?.unsubscribe()
+  }
 
   getPusherData() {
     Pusher.logToConsole = true;
@@ -64,8 +73,8 @@ export class ProfileEditComponent {
     const pusher = new Pusher('ea4bb3965237a32a93ba', {
       cluster: 'eu'
     });
-
-    const channel = pusher.subscribe('user-updates');
+    
+    const channel = pusher.subscribe('user-updates')
     channel.bind('update', (data: any) => {
       
       localStorage.setItem('user', JSON.stringify(JSON.parse(JSON.stringify(data)).user));
@@ -78,7 +87,7 @@ export class ProfileEditComponent {
 
     this.getPusherData()
     
-    this.userService.updateUser(this.formGroup.value).subscribe({
+    this.updateUserSub = this.userService.updateUser(this.formGroup.value).subscribe({
       next: res => {
         console.log(res)
         this.router.navigate(['/profile'])

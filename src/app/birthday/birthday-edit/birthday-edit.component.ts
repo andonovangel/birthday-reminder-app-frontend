@@ -12,7 +12,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class BirthdayEditComponent implements OnInit, OnDestroy {
   birthday: IBirthday | undefined;
-  sub!: Subscription
+  getBirthdaysSub?: Subscription
+  editBirthdaySub?: Subscription
   errorMessage: string = '';
 
   submitted: boolean = false
@@ -37,7 +38,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
   
-    this.sub = this.birthdayService.getBirthdays().subscribe({
+    this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
       next: birthdays => {
           this.birthday = birthdays.find(x => x.id === id)
 
@@ -71,10 +72,10 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
       this.submitted = true
     } else {
       console.log(this.formGroup.value)
-      this.birthdayService.editBirthday(this.formGroup.value, this.birthday?.id).subscribe({
+      this.editBirthdaySub = this.birthdayService.editBirthday(this.formGroup.value, this.birthday?.id).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/birthdays'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)
@@ -84,7 +85,8 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.getBirthdaysSub?.unsubscribe();
+    this.editBirthdaySub?.unsubscribe();
   }
 
   onBack(): void {

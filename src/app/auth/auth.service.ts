@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, EMPTY, map } from 'rxjs';
+import { BehaviorSubject, EMPTY, Subscription, map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService implements OnInit, OnDestroy {
   private currentUserSubject = new BehaviorSubject<any>({})
 
   private registerUrl = "http://localhost:8000/api/register"
   private loginUrl = "http://localhost:8000/api/login"
   private logoutUrl = "http://localhost:8000/api/logout"
+
+  getUserFromApiSub?: Subscription
+  logoutUserSub?: Subscription
 
   constructor(
     private http: HttpClient, 
@@ -22,6 +25,11 @@ export class AuthService implements OnInit {
 
   ngOnInit(): void {
     
+  }
+  
+  ngOnDestroy(): void {
+    this.getUserFromApiSub?.unsubscribe()
+    this.logoutUserSub?.unsubscribe()
   }
 
   registerUser(user: any) {
@@ -46,10 +54,6 @@ export class AuthService implements OnInit {
         // localStorage.setItem('user', JSON.stringify(userInfo.user));
         // this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
 
-
-        
-
-
         return userInfo.user;
       })
     )
@@ -60,7 +64,7 @@ export class AuthService implements OnInit {
   }
 
   logoutUser() {
-    this.http.post<any>(this.logoutUrl, {withCredentials: true}).subscribe({
+    this.logoutUserSub = this.http.post<any>(this.logoutUrl, {withCredentials: true}).subscribe({
         next: () => {
             localStorage.clear()
             this.currentUserSubject.next({})
@@ -77,7 +81,7 @@ export class AuthService implements OnInit {
   }
 
   getCurrentUser(): Observable<any | null> {
-    this.getUserFromApi().subscribe({
+    this.getUserFromApiSub = this.getUserFromApi().subscribe({
       next: (user: any) => {
         this.setCurrentUser(JSON.parse(JSON.stringify(user) || '{}'))
       },
