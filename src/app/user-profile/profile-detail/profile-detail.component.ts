@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -6,15 +7,20 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.scss']
 })
-export class ProfileDetailComponent {
+export class ProfileDetailComponent implements OnDestroy {
   public name: string = ''
   public email: string = ''
   public created_at: string = ''
+  private getCurrentUserSub?: Subscription
 
   constructor (private auth: AuthService) {}
 
+  ngOnDestroy(): void {
+    this.getCurrentUserSub?.unsubscribe()
+  }
+
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe({
+    this.getCurrentUserSub = this.auth.getCurrentUser().subscribe({
       next: user => {
         if (user) {
           this.name = user.name
