@@ -66,7 +66,7 @@ export class ProfileEditComponent implements OnDestroy {
   onSubmit() {
     this.submitted = true
 
-    this.getPusherData()
+    // this.getPusherData()
     
     this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
       next: res => {
@@ -99,9 +99,6 @@ export class ProfileEditComponent implements OnDestroy {
     });
     
     const channel = pusher.subscribe('user-updates')
-    channel.bind('update', (data: any) => {
-      
-      this.auth.setCurrentUser(JSON.parse(JSON.stringify(data)).user)
-    });
+    channel.bind('update', () => {});
   }
 }
