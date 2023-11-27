@@ -1,4 +1,4 @@
-<div class="container w-50">
+<div class="container w-50" *ngIf="formGroup">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="form-group mb-4">
         <label>Name</label>

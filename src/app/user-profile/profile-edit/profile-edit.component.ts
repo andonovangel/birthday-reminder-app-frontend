@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { UserProfileService } from '../user-profile.service';
 import Pusher from 'pusher-js';
 import { Subscription } from 'rxjs';
+import { IUser } from '../user';
 
 @Component({
   selector: 'app-profile-edit',
@@ -12,17 +13,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./profile-edit.component.scss']
 })
 export class ProfileEditComponent implements OnDestroy {
-  public formGroup! : FormGroup
-  public emailError: string | undefined
-  public nameError: string | undefined
-  public confirmationEmailError: string | undefined
-  public confirmationPasswordError: string | undefined
+  public formGroup?: FormGroup
+  public emailError?: string
+  public nameError?: string
+  public confirmationEmailError?: string
+  public confirmationPasswordError?: string
   public submitted: boolean = false;
+  public isFormCreated = false
 
-  public name: string = JSON.parse(localStorage.getItem('user') || '{}').name
-  public email: string = JSON.parse(localStorage.getItem('user') || '{}').email
+  public user?: IUser
 
-  private getCurrentUserSub?: Subscription
+  private getUserFromApiSub?: Subscription
   private updateUserSub?: Subscription
 
   constructor(
@@ -32,30 +33,25 @@ export class ProfileEditComponent implements OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getCurrentUserSub = this.auth.getCurrentUser().subscribe({
-      next: user => {
-        if (user) {
-          this.name = user.name
-          this.email = user.email
+    this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+        next: (user: any) => {
+          this.user = user
 
-          if (user.name != undefined)
-            localStorage.setItem('name', user.name)
-
-          if (user.email != undefined)
-            localStorage.setItem('email', user.email)
+          this.createFormGroup()          
+        },
+        error: (err: any) => {
+          console.log(err)
         }
-      },
-      error: err => {
-        console.log(err)
-      }
-    })
+      })
+  }
 
+  createFormGroup() {
     this.formGroup = new FormGroup({
-      name: new FormControl(this.name, [
+      name: new FormControl(this.user?.name, [
         Validators.required,
         Validators.maxLength(20)
       ]),
-      email: new FormControl(this.email, [
+      email: new FormControl(this.user?.email, [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ])
@@ -63,8 +59,36 @@ export class ProfileEditComponent implements OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this.getCurrentUserSub?.unsubscribe()
+    this.getUserFromApiSub?.unsubscribe()
     this.updateUserSub?.unsubscribe()
+  }
+
+  onSubmit() {
+    this.submitted = true
+
+    this.getPusherData()
+    
+    this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
+      next: res => {
+        console.log(res)
+        this.router.navigate(['/profile'])
+      },
+      error: err => {
+        console.log(err)
+
+        if (err.error.data['name']) {
+          console.log(err.error.data['name'])
+          this.nameError = err.error.data['name']
+          this.formGroup?.controls['name'].setErrors({'incorrect': true})
+        }
+        
+        if (err.error.data['email']) {
+          console.log(err.error.data['email'])
+          this.emailError = err.error.data['email']
+          this.formGroup?.controls['email'].setErrors({'incorrect': true})
+        }
+      }
+    })
   }
 
   getPusherData() {
@@ -77,36 +101,7 @@ export class ProfileEditComponent implements OnDestroy {
     const channel = pusher.subscribe('user-updates')
     channel.bind('update', (data: any) => {
       
-      localStorage.setItem('user', JSON.stringify(JSON.parse(JSON.stringify(data)).user));
       this.auth.setCurrentUser(JSON.parse(JSON.stringify(data)).user)
     });
-  }
-
-  onSubmit() {
-    this.submitted = true
-
-    this.getPusherData()
-    
-    this.updateUserSub = this.userService.updateUser(this.formGroup.value).subscribe({
-      next: res => {
-        console.log(res)
-        this.router.navigate(['/profile'])
-      },
-      error: err => {
-        console.log(err)
-
-        if (err.error.data['name']) {
-          console.log(err.error.data['name'])
-          this.nameError = err.error.data['name']
-          this.formGroup.controls['name'].setErrors({'incorrect': true})
-        }
-        
-        if (err.error.data['email']) {
-          console.log(err.error.data['email'])
-          this.emailError = err.error.data['email']
-          this.formGroup.controls['email'].setErrors({'incorrect': true})
-        }
-      }
-    })
   }
 }

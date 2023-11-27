@@ -14,8 +14,8 @@ export class AuthService implements OnInit, OnDestroy {
   private loginUrl = "http://localhost:8000/api/login"
   private logoutUrl = "http://localhost:8000/api/logout"
 
-  getUserFromApiSub?: Subscription
-  logoutUserSub?: Subscription
+  private getUserFromApiSub?: Subscription
+  private logoutUserSub?: Subscription
 
   constructor(
     private http: HttpClient, 
@@ -47,12 +47,13 @@ export class AuthService implements OnInit, OnDestroy {
    loginUser(user: any) {
     this.http.get<any>('http://localhost:8000/api/csrf-cookie')
     
-
     return this.http.post<any>(this.loginUrl, user, {withCredentials: true}).pipe(
       map(userInfo => {
         localStorage.setItem('token', userInfo.token);
         // localStorage.setItem('user', JSON.stringify(userInfo.user));
         // this.setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'))
+
+        this.setCurrentUser(userInfo.user)
 
         return userInfo.user;
       })
@@ -81,22 +82,21 @@ export class AuthService implements OnInit, OnDestroy {
   }
 
   getCurrentUser(): Observable<any | null> {
+    return this.currentUserSubject.asObservable()
+  }
+
+  setCurrentUser(data: any) {
     this.getUserFromApiSub = this.getUserFromApi().subscribe({
       next: (user: any) => {
-        this.setCurrentUser(JSON.parse(JSON.stringify(user) || '{}'))
+        this.currentUserSubject.next(user)
       },
       error: (err: any) => {
         console.log(err)
       }
     })
-    return this.currentUserSubject.asObservable()
-  }
-
-  setCurrentUser(data: any) {
-    this.currentUserSubject.next(data);
   }
 
   getUserFromApi(): Observable<any> {
-    return  this.http.get<any>("http://localhost:8000/api/user")
+    return this.http.get<any>("http://localhost:8000/api/user")
   }
 }

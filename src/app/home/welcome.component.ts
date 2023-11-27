@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { IUser } from '../user-profile/user';
 
 @Component({
   selector: 'app-welcome',
@@ -9,32 +10,21 @@ import { Subscription } from 'rxjs';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   public pageTitle = 'Welcome'
-  public name: string = ''
-  public email: string = ''
+  public user?: IUser
 
   public getCurrentUserSub?: Subscription
 
   constructor (private auth: AuthService) {}
 
   ngOnInit(): void {
-    // this.auth.getUserFromApi().subscribe({
-    //     next: (user: any) => {
-    //         this.name = user.name
-    //         this.email = user.email
-    //     },
-    //     error: (err: any) => {
-    //       console.log(err)
-    //     }
-    //   })
-    this.getCurrentUserSub = this.auth.getCurrentUser().subscribe({
-      next: (user: any) => {
-        this.name = user.name
-        this.email = user.email
-      },
-      error: (err: any) => {
-        console.log(err)
-      }
-    })
+    this.auth.getUserFromApi().subscribe({
+        next: (user: any) => {
+          this.user = user
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
   }
 
   ngOnDestroy(): void {
