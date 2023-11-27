@@ -12,12 +12,13 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public pageTitle = 'Welcome'
   public user?: IUser
 
-  public getCurrentUserSub?: Subscription
+  public getUserFromApiSub?: Subscription
 
   constructor (private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.auth.getUserFromApi().subscribe({
+    if (this.auth.loggedIn()) {
+      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
         next: (user: any) => {
           this.user = user
         },
@@ -25,9 +26,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
           console.log(err)
         }
       })
+    }
   }
 
   ngOnDestroy(): void {
-    this.getCurrentUserSub?.unsubscribe()
+    this.getUserFromApiSub?.unsubscribe()
   }
 }

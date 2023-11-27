@@ -7,12 +7,11 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit, OnDestroy {
+export class AuthService implements OnDestroy {
   private registerUrl = "http://localhost:8000/api/register"
   private loginUrl = "http://localhost:8000/api/login"
   private logoutUrl = "http://localhost:8000/api/logout"
 
-  private getUserFromApiSub?: Subscription
   private logoutUserSub?: Subscription
 
   constructor(
@@ -20,20 +19,15 @@ export class AuthService implements OnInit, OnDestroy {
     private router: Router, 
     private route: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {
-    
-  }
   
   ngOnDestroy(): void {
-    this.getUserFromApiSub?.unsubscribe()
     this.logoutUserSub?.unsubscribe()
   }
 
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user).pipe(
       map(userInfo => {
-        localStorage.setItem('token', userInfo.token);
+        localStorage.setItem('token', userInfo.token)
 
         return userInfo.user;
       })
@@ -45,7 +39,7 @@ export class AuthService implements OnInit, OnDestroy {
     
     return this.http.post<any>(this.loginUrl, user, {withCredentials: true}).pipe(
       map(userInfo => {
-        localStorage.setItem('token', userInfo.token);
+        localStorage.setItem('token', userInfo.token)
 
         return userInfo.user;
       })
@@ -60,7 +54,7 @@ export class AuthService implements OnInit, OnDestroy {
     this.logoutUserSub = this.http.post<any>(this.logoutUrl, {withCredentials: true}).subscribe({
         next: () => {
             localStorage.clear()
-            this.router.navigate(['/welcome'], { relativeTo: this.route })
+            this.router.navigate(['/login'], { relativeTo: this.route })
         },
         error: err => {
             console.error('Logout failed:', err)

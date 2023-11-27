@@ -33,16 +33,18 @@ export class ProfileEditComponent implements OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+    if (this.auth.loggedIn()) {
+      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
         next: (user: any) => {
           this.user = user
 
-          this.createFormGroup()          
+          this.createFormGroup() 
         },
         error: (err: any) => {
           console.log(err)
         }
       })
+    }
   }
 
   createFormGroup() {

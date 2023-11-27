@@ -15,14 +15,16 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   constructor (private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
-      next: (user: any) => {
-        this.user = user
-      },
-      error: (err: any) => {
-        console.log(err)
-      }
-    })
+    if (this.auth.loggedIn()) {
+      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+        next: (user: any) => {
+          this.user = user
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
+    }
   }
 
   ngOnDestroy(): void {
