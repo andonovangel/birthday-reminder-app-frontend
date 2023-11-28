@@ -69,7 +69,6 @@ export class ProfileEditComponent implements OnDestroy {
     
     this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
       next: res => {
-        console.log(res)
         this.router.navigate(['/profile'])
       },
       error: err => {
