@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserProfileService } from '../user-profile.service';
-import Pusher from 'pusher-js';
 import { Subscription } from 'rxjs';
 import { IUser } from '../user';
 
@@ -67,8 +66,6 @@ export class ProfileEditComponent implements OnDestroy {
 
   onSubmit() {
     this.submitted = true
-
-    // this.getPusherData()
     
     this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
       next: res => {
@@ -91,16 +88,5 @@ export class ProfileEditComponent implements OnDestroy {
         }
       }
     })
-  }
-
-  getPusherData() {
-    Pusher.logToConsole = true;
-
-    const pusher = new Pusher('ea4bb3965237a32a93ba', {
-      cluster: 'eu'
-    });
-    
-    const channel = pusher.subscribe('user-updates')
-    channel.bind('update', () => {});
   }
 }
