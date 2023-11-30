@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import axios from 'axios';
 import { Subscription, map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -18,7 +19,9 @@ export class AuthService implements OnDestroy {
     private http: HttpClient, 
     private router: Router, 
     private route: ActivatedRoute
-  ) {}
+  ) {
+    axios.defaults.withCredentials = true
+  }
   
   ngOnDestroy(): void {
     this.logoutUserSub?.unsubscribe()
@@ -35,8 +38,13 @@ export class AuthService implements OnDestroy {
   }
 
    loginUser(user: any) {
-    this.http.get<any>('http://localhost:8000/api/csrf-cookie')
-    
+    // await axios.get('http://localhost:8000/sanctum/csrf-cookie')
+    // await axios.post('http://localhost:8000/api/login', user).then( (response) => {
+    //   console.log(response)
+    //   localStorage.setItem('token', response.data.token)
+    //   this.router.navigate(['/welcome'])
+    // }).
+
     return this.http.post<any>(this.loginUrl, user, {withCredentials: true}).pipe(
       map(userInfo => {
         localStorage.setItem('token', userInfo.token)

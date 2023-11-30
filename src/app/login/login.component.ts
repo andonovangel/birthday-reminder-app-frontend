@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
+      // this.auth.loginUser(this.formGroup.value)
       this.loginUserSub = this.auth.loginUser(this.formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['/welcome'])

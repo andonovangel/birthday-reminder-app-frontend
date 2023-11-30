@@ -7,12 +7,12 @@ import { IBirthday } from "./birthday";
     providedIn: 'root'
 })
 export class BirthdayService {
-    private listBirthdaysUrl = 'http://127.0.0.1:8000/api/birthdays'
-    private createBirthdayUrl = "http://127.0.0.1:8000/api/birthdays"
-    private editBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
-    private deleteBirthdayUrl = "http://127.0.0.1:8000/api/birthdays/"
-    private listArchivedBirthdaysUrl = "http://127.0.0.1:8000/api/archived-birthdays"
-    private restoreBirthdayUrl = "http://127.0.0.1:8000/api/restore-birthday/"
+    private listBirthdaysUrl = 'http://localhost:8000/api/birthdays'
+    private createBirthdayUrl = "http://localhost:8000/api/birthdays"
+    private editBirthdayUrl = "http://localhost:8000/api/birthdays/"
+    private deleteBirthdayUrl = "http://localhost:8000/api/birthdays/"
+    private listArchivedBirthdaysUrl = "http://localhost:8000/api/archived-birthdays"
+    private restoreBirthdayUrl = "http://localhost:8000/api/restore-birthday/"
 
     constructor(private http: HttpClient) {
     }
