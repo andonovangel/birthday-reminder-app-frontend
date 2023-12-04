@@ -32,7 +32,7 @@ export class BirthdayService {
     }
   
     deleteBirthday(birthday: any) {
-        return this.http.delete<any>(this.deleteBirthdayUrl + birthday.id, birthday)
+        return this.http.delete<any>(this.deleteBirthdayUrl + birthday.id, { withCredentials: true })
     }
 
     getArchivedBirthdays(): Observable<IBirthday[]> {
