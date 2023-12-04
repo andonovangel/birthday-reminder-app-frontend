@@ -18,17 +18,17 @@ export class BirthdayService {
     }
 
     getBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl).pipe(
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { withCredentials: true }).pipe(
             catchError(err => this.handleErrors(err))
         );
     }
 
     createBirthday(birthday: any) {
-        return this.http.post<any>(this.createBirthdayUrl, birthday)
+        return this.http.post<any>(this.createBirthdayUrl, birthday, { withCredentials: true })
     }
   
     editBirthday(birthday: any, id: number | undefined) {
-        return this.http.put<any>(this.editBirthdayUrl + id, birthday)
+        return this.http.put<any>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
     }
   
     deleteBirthday(birthday: any) {
@@ -36,13 +36,13 @@ export class BirthdayService {
     }
 
     getArchivedBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl).pipe(
+        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { withCredentials: true }).pipe(
             catchError(err => this.handleErrors(err))
         );
     }
   
     restoreBirthday(birthday: any) {
-        return this.http.post<any>(this.restoreBirthdayUrl + birthday.id, birthday)
+        return this.http.post<any>(this.restoreBirthdayUrl + birthday.id, birthday, { withCredentials: true })
     }
 
 

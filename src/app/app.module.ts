@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { AuthService } from './auth/auth.service';
 import { BirthdayService } from './birthday/birthday.service';
-import { TokenInterceptorService } from './interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,11 +30,6 @@ import { TokenInterceptorService } from './interceptor/token-interceptor.service
   providers: [
     AuthService,
     BirthdayService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })
