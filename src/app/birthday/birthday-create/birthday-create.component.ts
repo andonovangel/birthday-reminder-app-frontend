@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
 import { BirthdayService } from '../birthday.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -16,7 +15,6 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
   createBirthdaySub?: Subscription
 
   constructor (
-    private auth: AuthService,
     private birthdayService: BirthdayService, 
     private router: Router
   ) {}

@@ -4,13 +4,15 @@ import { GroupListComponent } from './group-list/group-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GroupArchivedComponent } from './group-archived/group-archived.component';
+import { GroupCreateComponent } from './group-create/group-create.component';
 
 
 
 @NgModule({
   declarations: [
     GroupListComponent,
-    GroupArchivedComponent
+    GroupArchivedComponent,
+    GroupCreateComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,10 @@ import { GroupArchivedComponent } from './group-archived/group-archived.componen
       {
         path: 'list',
         component: GroupListComponent,
+      },
+      {
+        path: 'create',
+        component: GroupCreateComponent,
       },
       {
         path: 'archived',
