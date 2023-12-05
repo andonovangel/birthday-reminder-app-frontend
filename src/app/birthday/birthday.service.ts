@@ -26,7 +26,7 @@ export class BirthdayService {
         return this.http.post<any>(this.createBirthdayUrl, birthday, { withCredentials: true })
     }
   
-    editBirthday(birthday: any, id: number | undefined) {
+    editBirthday(birthday: any, id?: number) {
         return this.http.put<any>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
     }
   

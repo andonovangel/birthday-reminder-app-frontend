@@ -11,23 +11,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./birthday-edit.component.scss']
 })
 export class BirthdayEditComponent implements OnInit, OnDestroy {
-  birthday: IBirthday | undefined;
+  birthday?: IBirthday
   getBirthdaysSub?: Subscription
   editBirthdaySub?: Subscription
-  errorMessage: string = '';
+  errorMessage: string = ''
 
   submitted: boolean = false
-  formGroup!: FormGroup;
-
-  birthdayData = {
-    id: 0,
-    name: '',
-    title: '',
-    phone_number: '',
-    body: '',
-    birthday_date: '',
-    group_id: null
-  }
+  formGroup!: FormGroup
 
   constructor(
     private birthdayService: BirthdayService, 
@@ -40,31 +30,40 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
   
     this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
       next: birthdays => {
-          this.birthday = birthdays.find(x => x.id === id)
+        this.birthday = birthdays.find(x => x.id === id)
 
-          this.formGroup = new FormGroup({
-            name: new FormControl(this.birthday?.name, [
-              Validators.required,
-              Validators.maxLength(50)
-            ]),
-            title: new FormControl(this.birthday?.title, [
-              Validators.required,
-              Validators.maxLength(50)
-            ]),
-            phone_number: new FormControl(this.birthday?.phone_number, [
-              Validators.pattern('^[0-9]*$'),
-            ]),
-            body: new FormControl(this.birthday?.body, [
-              Validators.maxLength(200)
-            ]),
-            birthday_date: new FormControl(this.birthday?.birthday_date, [
-              Validators.required
-            ]),
-            group_id: new FormControl(this.birthday?.group_id)
-          })
+        this.createFormGroup()
       },
       error: err => this.errorMessage = err
     });
+  }
+
+  ngOnDestroy(): void {
+    this.getBirthdaysSub?.unsubscribe()
+    this.editBirthdaySub?.unsubscribe()
+  }
+
+  createFormGroup() {
+    this.formGroup = new FormGroup({
+      name: new FormControl(this.birthday?.name, [
+        Validators.required,
+        Validators.maxLength(50)
+      ]),
+      title: new FormControl(this.birthday?.title, [
+        Validators.required,
+        Validators.maxLength(50)
+      ]),
+      phone_number: new FormControl(this.birthday?.phone_number, [
+        Validators.pattern('^[0-9]*$'),
+      ]),
+      body: new FormControl(this.birthday?.body, [
+        Validators.maxLength(200)
+      ]),
+      birthday_date: new FormControl(this.birthday?.birthday_date, [
+        Validators.required
+      ]),
+      group_id: new FormControl(this.birthday?.group_id)
+    })
   }
 
   onSubmit() {
@@ -84,12 +83,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.getBirthdaysSub?.unsubscribe();
-    this.editBirthdaySub?.unsubscribe();
-  }
-
   onBack(): void {
-    this.router.navigate(['/birthdays/list']);
+    this.router.navigate(['/birthdays/list'])
   }
 }

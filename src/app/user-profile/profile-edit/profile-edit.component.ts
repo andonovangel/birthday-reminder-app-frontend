@@ -45,6 +45,11 @@ export class ProfileEditComponent implements OnDestroy {
       })
     }
   }
+  
+  ngOnDestroy(): void {
+    this.getUserFromApiSub?.unsubscribe()
+    this.updateUserSub?.unsubscribe()
+  }
 
   createFormGroup() {
     this.formGroup = new FormGroup({
@@ -57,11 +62,6 @@ export class ProfileEditComponent implements OnDestroy {
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ])
     })
-  }
-  
-  ngOnDestroy(): void {
-    this.getUserFromApiSub?.unsubscribe()
-    this.updateUserSub?.unsubscribe()
   }
 
   onSubmit() {

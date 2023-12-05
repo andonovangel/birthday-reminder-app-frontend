@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class GroupService {
   private listGroupsUrl = 'http://localhost:8000/api/groups'
   private createGroupUrl = 'http://localhost:8000/api/groups'
+  private editGroupUrl = 'http://localhost:8000/api/groups/'
   private deleteGroupUrl = 'http://localhost:8000/api/groups/'
   private listArchivedGroupsUrl = 'http://localhost:8000/api/archived-groups'
   private restoreGroupUrl = 'http://localhost:8000/api/restore-group/'
@@ -21,6 +22,10 @@ export class GroupService {
 
   createGroup(group: IGroup) {
       return this.http.post<IGroup>(this.createGroupUrl, group, { withCredentials: true })
+  }
+  
+  editGroup(group: IGroup, id?: number) {
+      return this.http.put<any>(this.editGroupUrl + id, group, { withCredentials: true })
   }
   
   deleteGroup(group: IGroup) {

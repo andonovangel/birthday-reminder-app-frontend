@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GroupArchivedComponent } from './group-archived/group-archived.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
+import { GroupEditComponent } from './group-edit/group-edit.component';
 
 
 
@@ -12,7 +13,8 @@ import { GroupCreateComponent } from './group-create/group-create.component';
   declarations: [
     GroupListComponent,
     GroupArchivedComponent,
-    GroupCreateComponent
+    GroupCreateComponent,
+    GroupEditComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,10 @@ import { GroupCreateComponent } from './group-create/group-create.component';
       {
         path: 'create',
         component: GroupCreateComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: GroupEditComponent,
       },
       {
         path: 'archived',
