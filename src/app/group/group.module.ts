@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { GroupListComponent } from './group-list/group-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { GroupArchivedComponent } from './group-archived/group-archived.component';
 
 
 
 @NgModule({
   declarations: [
-    GroupListComponent
+    GroupListComponent,
+    GroupArchivedComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,11 @@ import { RouterModule } from '@angular/router';
       {
         path: 'list',
         component: GroupListComponent,
-      }
+      },
+      {
+        path: 'archived',
+        component: GroupArchivedComponent,
+      },
     ])
   ]
 })

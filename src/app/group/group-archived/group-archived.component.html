@@ -35,8 +35,8 @@
                 </td>
                 <td>{{ group.description }}</td>
                 <td>
-                  <button type="button" class="btn btn-link" [routerLink]="['/group/edit', group.id]">
-                    Edit
+                  <button type="button" class="btn btn-link" (click)="restoreGroup(group)">
+                    Restore
                   </button>
                   <button type="button" class="btn btn-link" (click)="deleteGroup(group)">
                     Delete

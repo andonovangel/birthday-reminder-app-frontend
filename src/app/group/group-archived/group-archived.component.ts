@@ -1,18 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IGroup } from '../group';
 import { GroupService } from '../group.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-group-list',
-  templateUrl: './group-list.component.html',
-  styleUrls: ['./group-list.component.scss']
+  selector: 'app-group-archived',
+  templateUrl: './group-archived.component.html',
+  styleUrls: ['./group-archived.component.scss']
 })
-export class GroupListComponent implements OnInit, OnDestroy {
-  public pageTitle: string = 'Group List'
+export class GroupArchivedComponent {
+  public pageTitle: string = 'Archived Group List'
   public errorMessage: string = ''
-  private getGroupsSub?: Subscription
+  private getArchivedGroupsSub?: Subscription
   private deleteGroupSub?: Subscription
   private restoreGroupSub?: Subscription
 
@@ -36,10 +36,13 @@ export class GroupListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getGroupsSub = this.getGroups()
+    this.getArchivedGroupsSub = this.getArchivedGroups()
   }
+
   ngOnDestroy(): void {
-    this.getGroupsSub?.unsubscribe()
+    this.getArchivedGroupsSub?.unsubscribe()
+    this.deleteGroupSub?.unsubscribe()
+    this.restoreGroupSub?.unsubscribe()
   }
     
   performFilter(filterBy: string): IGroup[] {
@@ -49,8 +52,8 @@ export class GroupListComponent implements OnInit, OnDestroy {
     )
   }
 
-  getGroups() {
-    return this.groupService.getGroups().subscribe({
+  getArchivedGroups() {
+    return this.groupService.getArchivedGroups().subscribe({
       next: groups => {
         this.groups = groups
         this.filteredGroups = this.groups
@@ -66,13 +69,25 @@ export class GroupListComponent implements OnInit, OnDestroy {
       this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
         next: res => {
           console.log(res)
-          this.getGroups()
-          this.router.navigate(['/groups/list'])
+          this.getArchivedGroups()
+          this.router.navigate(['/groups/archived'])
         },
         error: err => {
           console.log(err)
         }
       })
     }
+  }
+
+  restoreGroup(group: any) {
+    this.restoreGroupSub = this.groupService.restoreGroup(group).subscribe({
+      next: res => {
+        console.log(res)
+        this.router.navigate(['/groups/list'])
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 }
