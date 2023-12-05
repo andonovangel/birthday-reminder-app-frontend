@@ -7,6 +7,7 @@ import { GroupArchivedComponent } from './group-archived/group-archived.componen
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupEditComponent } from './group-edit/group-edit.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 
@@ -25,22 +26,27 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
     RouterModule.forChild([
       {
         path: 'list',
+        canActivate: [AuthGuard],
         component: GroupListComponent,
       },
       {
         path: 'create',
+        canActivate: [AuthGuard],
         component: GroupCreateComponent,
       },
       {
         path: 'edit/:id',
+        canActivate: [AuthGuard],
         component: GroupEditComponent,
       },
       {
         path: 'group/:id',
+        canActivate: [AuthGuard],
         component: GroupDetailComponent,
       },
       {
         path: 'archived',
+        canActivate: [AuthGuard],
         component: GroupArchivedComponent,
       },
     ])

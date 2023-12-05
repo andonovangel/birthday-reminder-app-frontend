@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class BirthdayDetailComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Birthday Details'
-  birthday: IBirthday | undefined
+  birthday?: IBirthday
   birthdays: IBirthday[] = []
   getBirthdaysSub?: Subscription
   errorMessage: string = ''

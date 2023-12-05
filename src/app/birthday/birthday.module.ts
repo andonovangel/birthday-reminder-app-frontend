@@ -40,7 +40,7 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
       },
       { 
         path: 'birthday/:id', 
-        canActivate: [BirthdayDetailGuard],
+        canActivate: [BirthdayDetailGuard, AuthGuard],
         component: BirthdayDetailComponent,
       },
       { 
