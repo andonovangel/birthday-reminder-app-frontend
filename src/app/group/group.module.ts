@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GroupArchivedComponent } from './group-archived/group-archived.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupEditComponent } from './group-edit/group-edit.component';
+import { GroupDetailComponent } from './group-detail/group-detail.component';
 
 
 
@@ -14,7 +15,8 @@ import { GroupEditComponent } from './group-edit/group-edit.component';
     GroupListComponent,
     GroupArchivedComponent,
     GroupCreateComponent,
-    GroupEditComponent
+    GroupEditComponent,
+    GroupDetailComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,10 @@ import { GroupEditComponent } from './group-edit/group-edit.component';
       {
         path: 'edit/:id',
         component: GroupEditComponent,
+      },
+      {
+        path: 'group/:id',
+        component: GroupDetailComponent,
       },
       {
         path: 'archived',

@@ -10,11 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./birthday-detail.component.scss']
 })
 export class BirthdayDetailComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'Birthday Details';
-  birthday: IBirthday | undefined;
-  birthdays: IBirthday[] = [];
-  getBirthdaysSub?: Subscription;
-  errorMessage: string = '';
+  pageTitle: string = 'Birthday Details'
+  birthday: IBirthday | undefined
+  birthdays: IBirthday[] = []
+  getBirthdaysSub?: Subscription
+  errorMessage: string = ''
 
   constructor(
     private birthdayService: BirthdayService, 
@@ -24,22 +24,21 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    // this.pageTitle += `: ${id}`;
 
     this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
       next: birthdays => {
-          this.birthdays = birthdays;
-          this.birthday = birthdays.find(x => x.id === id)
+        this.birthdays = birthdays
+        this.birthday = birthdays.find(x => x.id === id)
       },
       error: err => this.errorMessage = err
     });
   }
 
   ngOnDestroy(): void {
-    this.getBirthdaysSub?.unsubscribe();
+    this.getBirthdaysSub?.unsubscribe()
   }
 
   onBack(): void {
-    this.router.navigate(['/birthdays/list']);
+    this.router.navigate(['/birthdays/list'])
   }
 }
