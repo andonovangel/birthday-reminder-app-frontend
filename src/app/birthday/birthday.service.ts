@@ -17,42 +17,26 @@ export class BirthdayService {
     constructor(private http: HttpClient) {}
 
     getBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { withCredentials: true }).pipe(
-            catchError(err => this.handleErrors(err))
-        )
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { withCredentials: true })
     }
 
-    createBirthday(birthday: any) {
-        return this.http.post<any>(this.createBirthdayUrl, birthday, { withCredentials: true })
+    createBirthday(birthday: IBirthday) {
+        return this.http.post<IBirthday>(this.createBirthdayUrl, birthday, { withCredentials: true })
     }
   
-    editBirthday(birthday: any, id?: number) {
-        return this.http.put<any>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
+    editBirthday(birthday: IBirthday, id?: number) {
+        return this.http.put<IBirthday>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
     }
   
-    deleteBirthday(birthday: any) {
-        return this.http.delete<any>(this.deleteBirthdayUrl + birthday.id, { withCredentials: true })
+    deleteBirthday(birthday: IBirthday) {
+        return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, { withCredentials: true })
     }
 
     getArchivedBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { withCredentials: true }).pipe(
-            catchError(err => this.handleErrors(err))
-        );
+        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { withCredentials: true })
     }
   
-    restoreBirthday(birthday: any) {
-        return this.http.post<any>(this.restoreBirthdayUrl + birthday.id, birthday, { withCredentials: true })
-    }
-
-
-    private handleErrors(err: HttpErrorResponse) {
-        let errorMessage = '';
-        if (err.error instanceof ErrorEvent) {
-            errorMessage = `An error occured: ${err.error.message}`;
-        } else {
-            errorMessage = `Server returned code: ${err.status}; error message is: ${err.message}`;
-        }
-        console.error(errorMessage);
-        return throwError(() => errorMessage);
+    restoreBirthday(birthday: IBirthday) {
+        return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, { withCredentials: true })
     }
 }

@@ -25,7 +25,7 @@ export class GroupService {
   }
   
   editGroup(group: IGroup, id?: number) {
-      return this.http.put<any>(this.editGroupUrl + id, group, { withCredentials: true })
+      return this.http.put<IGroup>(this.editGroupUrl + id, group, { withCredentials: true })
   }
   
   deleteGroup(group: IGroup) {
