@@ -18,6 +18,11 @@ const routes: Routes = [
       import('./birthday/birthday.module').then((b) => b.BirthdayModule),
   },
   { 
+    path: 'groups',
+    loadChildren: () =>
+      import('./group/group.module').then((b) => b.GroupModule),
+  },
+  { 
     path: 'register', 
     canActivate: [RedirectGuard],
     component: RegisterComponent 

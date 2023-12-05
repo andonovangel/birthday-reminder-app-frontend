@@ -8,19 +8,18 @@ import { IBirthday } from "./birthday";
 })
 export class BirthdayService {
     private listBirthdaysUrl = 'http://localhost:8000/api/birthdays'
-    private createBirthdayUrl = "http://localhost:8000/api/birthdays"
-    private editBirthdayUrl = "http://localhost:8000/api/birthdays/"
-    private deleteBirthdayUrl = "http://localhost:8000/api/birthdays/"
-    private listArchivedBirthdaysUrl = "http://localhost:8000/api/archived-birthdays"
-    private restoreBirthdayUrl = "http://localhost:8000/api/restore-birthday/"
+    private createBirthdayUrl = 'http://localhost:8000/api/birthdays'
+    private editBirthdayUrl = 'http://localhost:8000/api/birthdays/'
+    private deleteBirthdayUrl = 'http://localhost:8000/api/birthdays/'
+    private listArchivedBirthdaysUrl = 'http://localhost:8000/api/archived-birthdays'
+    private restoreBirthdayUrl = 'http://localhost:8000/api/restore-birthday/'
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     getBirthdays(): Observable<IBirthday[]> {
         return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { withCredentials: true }).pipe(
             catchError(err => this.handleErrors(err))
-        );
+        )
     }
 
     createBirthday(birthday: any) {

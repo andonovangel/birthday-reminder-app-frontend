@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { AuthService } from './auth/auth.service';
 import { BirthdayService } from './birthday/birthday.service';
+import { GroupService } from './group/group.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BirthdayService } from './birthday/birthday.service';
   providers: [
     AuthService,
     BirthdayService,
+    GroupService,
   ],
   bootstrap: [AppComponent]
 })

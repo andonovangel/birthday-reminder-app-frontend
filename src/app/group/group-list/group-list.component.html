@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+        {{ filteredGroups.length }}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col-md-4">
+                <input type="text"
+                        [(ngModel)]="listFilter">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filtered by: {{listFilter}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class='table-responsive'>
+        <table class='table' *ngIf="filteredGroups.length">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let group of filteredGroups">
+                <td>
+                  <a [routerLink]="['/groups/group', group.id]">
+                    {{ group.name }}
+                  </a>
+                </td>
+                <td>{{ group.description }}</td>
+                <td>
+                  <!-- <button type="button" class="btn btn-link" [routerLink]="['/group/edit', group.id]">
+                    Edit
+                  </button> -->
+                  <!-- <button type="button" class="btn btn-link" (click)="deleteBirthday(group)">
+                    Delete
+                  </button> -->
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</div>
