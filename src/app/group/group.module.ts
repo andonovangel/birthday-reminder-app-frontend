@@ -9,8 +9,6 @@ import { GroupEditComponent } from './group-edit/group-edit.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { AuthGuard } from '../auth/auth.guard';
 
-
-
 @NgModule({
   declarations: [
     GroupListComponent,

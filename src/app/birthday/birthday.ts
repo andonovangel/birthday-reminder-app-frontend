@@ -6,5 +6,5 @@ export interface IBirthday {
     body: string; 
     birthday_date: string; 
     user_id: number;
-    group_id: string | null;
+    group_id: number | null;
 }

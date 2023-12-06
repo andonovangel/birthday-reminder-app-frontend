@@ -41,7 +41,7 @@
                 <td>{{ birthday.body }}</td>
                 <td>{{ birthday.phone_number }}</td>
                 <td>{{ birthday.birthday_date }}</td>
-                <td *ngIf="birthday.group_id != null; else noGroup">{{ birthday.group_id }}</td>
+                <td *ngIf="birthday.group_id != null; else noGroup">{{ getGroup(birthday) }}</td>
                 <td>
                   <button type="button" class="btn btn-link" [routerLink]="['/birthdays/edit', birthday.id]">
                     Edit
