@@ -14,7 +14,9 @@ export class GroupEditComponent implements OnInit, OnDestroy {
   public group?: IGroup
   private getGroupsSub?: Subscription
   private editGroupSub?: Subscription
+  
   public errorMessage: string = ''
+  public nameError?: string
 
   submitted: boolean = false
   formGroup!: FormGroup
@@ -43,7 +45,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     this.editGroupSub?.unsubscribe()
   }
 
-  createFormGroup() {
+  createFormGroup(): void {
     this.formGroup = new FormGroup({
       name: new FormControl(this.group?.name, [
         Validators.required,
@@ -55,7 +57,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
@@ -67,6 +69,12 @@ export class GroupEditComponent implements OnInit, OnDestroy {
         },
         error: err => {
           console.log(err)
+
+          if (err.error.data['name']) {
+            console.log(err.error.data['name'])
+            this.nameError = err.error.data['name']
+            this.formGroup?.controls['name'].setErrors({'incorrect': true})
+          }
         }
       })
     }

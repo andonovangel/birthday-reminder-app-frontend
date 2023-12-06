@@ -13,6 +13,8 @@ export class GroupCreateComponent implements OnInit, OnDestroy {
   public submitted: boolean = false
   public formGroup!: FormGroup
   private createGroupSub?: Subscription
+  
+  public nameError?: string
 
   constructor(
     private groupService: GroupService,
@@ -35,7 +37,7 @@ export class GroupCreateComponent implements OnInit, OnDestroy {
     this.createGroupSub?.unsubscribe()
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
@@ -47,9 +49,14 @@ export class GroupCreateComponent implements OnInit, OnDestroy {
         },
         error: err => {
           console.log(err)
+
+          if (err.error.data['name']) {
+            console.log(err.error.data['name'])
+            this.nameError = err.error.data['name']
+            this.formGroup?.controls['name'].setErrors({'incorrect': true})
+          }
         }
       })
-      this.formGroup.reset()
     }
   }
 

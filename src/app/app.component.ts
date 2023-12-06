@@ -26,13 +26,8 @@ export class AppComponent implements OnInit{
         if (error && error.response && error.response.status && error.response.status == 401) {
           window.isAuthenticated = false;
         }
-          
       }
-    });
-  }
-
-  getAuth() {
-    return 
+    })
   }
 
   getAuthService() {
