@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { BirthdayService } from '../birthday.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { GroupService } from 'src/app/group/group.service';
+import { IGroup } from 'src/app/group/group';
 
 @Component({
   selector: 'app-birthday-create',
@@ -10,16 +12,22 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./birthday-create.component.scss']
 })
 export class BirthdayCreateComponent implements OnInit, OnDestroy {
-  submitted: boolean = false
-  formGroup!: FormGroup
-  createBirthdaySub?: Subscription
+  public submitted: boolean = false
+  public formGroup!: FormGroup
+  private createBirthdaySub?: Subscription
+  private getGroupsSub?: Subscription
+
+  public groups?: IGroup[]
 
   constructor (
-    private birthdayService: BirthdayService, 
+    private birthdayService: BirthdayService,
+    private groupService: GroupService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.getGroupsSub = this.getGroups()
+
     this.formGroup = new FormGroup({
       name: new FormControl('', [
         Validators.required,
@@ -44,6 +52,7 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     this.createBirthdaySub?.unsubscribe()
+    this.getGroupsSub?.unsubscribe()
   }
 
   onSubmit() {
@@ -62,6 +71,14 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
       })
       this.formGroup.reset()
     }
+  }
+
+  getGroups(): Subscription {
+    return this.groupService.getGroups().subscribe({
+      next: groups => {
+        this.groups = groups
+      }
+    })
   }
 
   onBack(): void {

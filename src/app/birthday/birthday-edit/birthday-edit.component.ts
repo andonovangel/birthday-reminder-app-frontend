@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IBirthday } from '../birthday';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IGroup } from 'src/app/group/group';
+import { GroupService } from 'src/app/group/group.service';
 
 @Component({
   selector: 'app-birthday-edit',
@@ -11,22 +13,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./birthday-edit.component.scss']
 })
 export class BirthdayEditComponent implements OnInit, OnDestroy {
-  birthday?: IBirthday
-  getBirthdaysSub?: Subscription
-  editBirthdaySub?: Subscription
-  errorMessage: string = ''
+  public birthday?: IBirthday
+  private getBirthdaysSub?: Subscription
+  private editBirthdaySub?: Subscription
+  private getGroupsSub?: Subscription
+  public errorMessage: string = ''
 
-  submitted: boolean = false
-  formGroup!: FormGroup
+  public groups?: IGroup[]
+
+  public submitted: boolean = false
+  public formGroup!: FormGroup
 
   constructor(
-    private birthdayService: BirthdayService, 
+    private birthdayService: BirthdayService,
+    private groupService: GroupService,
     private route: ActivatedRoute, 
     private router: Router
   ) {}
   
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    this.getGroupsSub = this.getGroups()
   
     this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
       next: birthdays => {
@@ -81,6 +88,18 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
         }
       })
     }
+  }
+
+  getGroups(): Subscription {
+    return this.groupService.getGroups().subscribe({
+      next: groups => {
+        this.groups = groups
+      }
+    })
+  }
+
+  getGroup(birthday: IBirthday) {
+      return this.groups?.find(x => x.id === birthday.group_id)?.name
   }
 
   onBack(): void {
