@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 })
 export class RegisterComponent implements OnInit, OnDestroy{
   public formGroup! : FormGroup
-  public emailError: string | undefined
-  public nameError: string | undefined
-  public confirmationEmailError: string | undefined
-  public confirmationPasswordError: string | undefined
+  public emailError?: string
+  public nameError?: string
+  public confirmationEmailError?: string
+  public confirmationPasswordError?: string
   public submitted: boolean = false;
   private registerUserSub?: Subscription
 
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
     this.registerUserSub?.unsubscribe()
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true
     this.registerUserSub = this.auth.registerUser(this.formGroup.value).subscribe({
       next: res => {

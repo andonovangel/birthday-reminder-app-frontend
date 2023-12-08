@@ -12,6 +12,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { AuthService } from './auth/auth.service';
 import { BirthdayService } from './birthday/birthday.service';
 import { GroupService } from './group/group.service';
+import { ChangePasswordComponent } from './user-profile/password-change/change-password.component';
 
 @NgModule({
   declarations: [

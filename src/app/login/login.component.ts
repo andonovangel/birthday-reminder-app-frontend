@@ -10,12 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  loginUserData: any = {}
   public formGroup!: FormGroup
   public submitted: boolean = false
-  public errorMessage: string | undefined
+  public errorMessage?: string
   
-  loginUserSub?: Subscription
+  private loginUserSub?: Subscription
 
   constructor(
     private auth: AuthService, 
@@ -37,11 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginUserSub?.unsubscribe()
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
-      // this.auth.loginUser(this.formGroup.value)
       this.loginUserSub = this.auth.loginUser(this.formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['/welcome'])
