@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
+import { UserProfileService } from './user-profile/user-profile.service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,14 @@ export class AppComponent implements OnInit{
   
   pageTitle = 'Birthday Reminder';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private userService: UserProfileService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.authService.getUserFromApi().subscribe({
+    this.userService.getUser().subscribe({
       next: () => {
         window.isAuthenticated = true;
       },
@@ -31,6 +36,6 @@ export class AppComponent implements OnInit{
   }
 
   getAuthService() {
-    return this.authService
+    return this.auth
   }
 }

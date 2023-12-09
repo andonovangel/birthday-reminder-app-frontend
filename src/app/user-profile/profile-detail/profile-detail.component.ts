@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IUser } from '../user';
+import { UserProfileService } from '../user-profile.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -10,13 +11,13 @@ import { IUser } from '../user';
 })
 export class ProfileDetailComponent implements OnInit, OnDestroy {
   public user?: IUser
-  private getUserFromApiSub?: Subscription
+  private getUserSub?: Subscription
 
-  constructor (private auth: AuthService) {}
+  constructor (private auth: AuthService, private userService: UserProfileService) {}
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
-      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+      this.getUserSub = this.userService.getUser().subscribe({
         next: (user: any) => {
           this.user = user
         },
@@ -28,6 +29,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getUserFromApiSub?.unsubscribe()
+    this.getUserSub?.unsubscribe()
   }
 }

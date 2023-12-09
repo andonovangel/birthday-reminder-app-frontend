@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { IUser } from '../user-profile/user';
+import { UserProfileService } from '../user-profile/user-profile.service';
 
 @Component({
   selector: 'app-welcome',
@@ -12,13 +13,13 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public pageTitle = 'Welcome'
   public user?: IUser
 
-  public getUserFromApiSub?: Subscription
+  public getUserSub?: Subscription
 
-  constructor (private auth: AuthService) {}
+  constructor (private auth: AuthService, private userService: UserProfileService) {}
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
-      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+      this.getUserSub = this.userService.getUser().subscribe({
         next: (user: any) => {
           this.user = user
         },
@@ -30,6 +31,6 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getUserFromApiSub?.unsubscribe()
+    this.getUserSub?.unsubscribe()
   }
 }

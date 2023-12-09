@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -56,9 +55,5 @@ export class AuthService implements OnDestroy {
           console.error('Logout failed:', err)
       }
     })
-  }
-
-  getUserFromApi(): Observable<any> {
-    return this.http.get<any>("http://localhost:8000/api/user", { withCredentials: true })
   }
 }

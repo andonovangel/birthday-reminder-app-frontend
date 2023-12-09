@@ -22,18 +22,18 @@ export class ProfileEditComponent implements OnDestroy {
 
   public user?: IUser
 
-  private getUserFromApiSub?: Subscription
+  private getUserSub?: Subscription
   private updateUserSub?: Subscription
 
   constructor(
     private auth: AuthService, 
+    private userService: UserProfileService,
     private router: Router,
-    private userService: UserProfileService
   ) {}
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
-      this.getUserFromApiSub = this.auth.getUserFromApi().subscribe({
+      this.getUserSub = this.userService.getUser().subscribe({
         next: (user: any) => {
           this.user = user
 
@@ -47,7 +47,7 @@ export class ProfileEditComponent implements OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this.getUserFromApiSub?.unsubscribe()
+    this.getUserSub?.unsubscribe()
     this.updateUserSub?.unsubscribe()
   }
 
