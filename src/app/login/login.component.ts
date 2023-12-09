@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       ]),
       password: new FormControl('', [
         Validators.required
-      ])
+      ]),
+      remember: new FormControl(false),
     })
   }
   
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: err => {
           console.log(err)
-          console.log(err.error.message)
           
           if (err.error.message) {
             this.errorMessage = err.error.message
