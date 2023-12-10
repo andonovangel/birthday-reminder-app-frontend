@@ -13,7 +13,6 @@ export class AppComponent implements OnInit{
     throw new Error('Method not implemented.');
   }
 
-  
   pageTitle = 'Birthday Reminder';
 
   constructor(
@@ -25,14 +24,18 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.userService.getUser().subscribe({
       next: () => {
-        window.isAuthenticated = true;
+        window.isAuthenticated = true
       },
       error: (error) => {
         if (error && error.response && error.response.status && error.response.status == 401) {
-          window.isAuthenticated = false;
+          window.isAuthenticated = false
         }
       }
     })
+  }
+
+  getUserRole() {
+    return window.userData.role
   }
 
   getAuthService() {

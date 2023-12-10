@@ -38,8 +38,11 @@ export class GroupListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getGroupsSub = this.getGroups()
   }
+
   ngOnDestroy(): void {
     this.getGroupsSub?.unsubscribe()
+    this.deleteGroupSub?.unsubscribe()
+    this.restoreGroupSub?.unsubscribe()
   }
     
   performFilter(filterBy: string): IGroup[] {

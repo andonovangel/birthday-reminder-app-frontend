@@ -22,6 +22,11 @@ const routes: Routes = [
       import('./group/group.module').then((b) => b.GroupModule),
   },
   { 
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((b) => b.AdminModule),
+  },
+  { 
     path: 'register', 
     canActivate: [RedirectGuard],
     component: RegisterComponent 
