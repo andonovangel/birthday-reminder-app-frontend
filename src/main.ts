@@ -4,6 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { IUser } from './app/user-profile/user';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 
@@ -19,6 +20,8 @@ declare global {
 window.isAuthenticated = false
 
 axios.defaults.withCredentials = true
+
+let router : Router
   
 axios.interceptors.response.use(
   (response) => {
@@ -27,7 +30,9 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       window.isAuthenticated = false;
+      
       // TODO: ADD REDIRECTION
+      router.navigate(['login'])
     }
     return Promise.reject(error);
   }

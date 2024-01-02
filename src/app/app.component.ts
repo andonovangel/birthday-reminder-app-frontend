@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import { UserProfileService } from './user-profile/user-profile.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -22,16 +23,18 @@ export class AppComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe({
-      next: () => {
-        window.isAuthenticated = true
-      },
-      error: (error) => {
-        if (error && error.response && error.response.status && error.response.status == 401) {
-          window.isAuthenticated = false
-        }
-      }
-    })
+    // this.userService.getUser().subscribe({
+    //   next: (response) => {
+    //     console.log(response)
+    //     window.userData = response
+    //     window.isAuthenticated = true
+    //   },
+    //   error: (error: HttpErrorResponse) => {
+    //     if (error && error.status == 401) {
+    //       window.isAuthenticated = false
+    //     }
+    //   }
+    // })
   }
 
   getUserRole() {

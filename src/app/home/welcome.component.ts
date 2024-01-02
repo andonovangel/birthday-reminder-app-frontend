@@ -19,14 +19,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
-      this.getUserSub = this.userService.getUser().subscribe({
-        next: (user: any) => {
-          this.user = user
-        },
-        error: (err: any) => {
-          console.log(err)
-        }
-      })
+      this.user = window.userData
     }
   }
 

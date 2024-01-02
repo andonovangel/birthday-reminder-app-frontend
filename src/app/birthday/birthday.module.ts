@@ -47,6 +47,11 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
         path: 'archived',
         canActivate: [AuthGuard],
         component: BirthdayArchivedComponent,
+      },
+      { 
+        path: '**',
+        redirectTo: 'list',
+        pathMatch: 'full'
       }
     ])
   ]

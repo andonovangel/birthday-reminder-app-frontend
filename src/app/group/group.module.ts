@@ -47,6 +47,11 @@ import { AuthGuard } from '../auth/auth.guard';
         canActivate: [AuthGuard],
         component: GroupArchivedComponent,
       },
+      { 
+        path: '**',
+        redirectTo: 'list',
+        pathMatch: 'full'
+      }
     ])
   ]
 })

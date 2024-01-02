@@ -20,6 +20,11 @@ import { AdminGuard } from './guards/admin.guard';
         path: 'users',
         component: UsersComponent,
         canActivate: [AdminGuard]
+      },
+      { 
+        path: '**',
+        redirectTo: 'list',
+        pathMatch: 'full'
       }
     ]),
   ]
