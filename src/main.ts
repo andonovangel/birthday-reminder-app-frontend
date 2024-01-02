@@ -32,7 +32,9 @@ axios.interceptors.response.use(
       window.isAuthenticated = false;
       
       // TODO: ADD REDIRECTION
-      router.navigate(['login'])
+      if (router) {
+        router.navigate(['login'])
+      }
     }
     return Promise.reject(error);
   }
@@ -44,7 +46,7 @@ axios
     window.isAuthenticated = true
     window.userData = response.data
   })
-  .catch((e) => {
+  .catch(() => {
     window.isAuthenticated = false
   }).finally(() => {
     platformBrowserDynamic().bootstrapModule(AppModule)

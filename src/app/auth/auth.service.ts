@@ -51,7 +51,7 @@ export class AuthService implements OnDestroy {
     this.logoutUserSub = this.http.post<any>(this.logoutUrl, null, { withCredentials: true }).subscribe({
       next: () => {
         window.isAuthenticated = false
-          this.router.navigate(['/login'])
+        this.router.navigate(['/login'])
       },
       error: err => {
           console.error('Logout failed:', err)
