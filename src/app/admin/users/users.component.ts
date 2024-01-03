@@ -47,7 +47,7 @@ export class UsersComponent {
   getUsers() {
     return this.adminService.getUsers().subscribe({
       next: response => {
-        this.users = response.users
+        this.users = response
         this.filteredUsers = this.users
       },
       error: err => {

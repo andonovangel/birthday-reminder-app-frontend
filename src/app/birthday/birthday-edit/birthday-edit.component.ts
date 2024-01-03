@@ -42,12 +42,13 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
         this.createFormGroup()
       },
       error: err => this.errorMessage = err
-    });
+    })
   }
 
   ngOnDestroy(): void {
     this.getBirthdaysSub?.unsubscribe()
     this.editBirthdaySub?.unsubscribe()
+    this.getGroupsSub?.unsubscribe()
   }
 
   createFormGroup() {

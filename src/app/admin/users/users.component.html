@@ -21,18 +21,22 @@
         <table class='table' *ngIf="filteredUsers.length">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
               <th>Date created</th>
+              <th>Edit Role</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of filteredUsers">
+                <td>{{ user.id }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
                 <td>{{ user.created_at | date:'medium' }}</td>
+                <td><a [routerLink]="['/admin/edit/', user.id]">Edit</a></td>
             </tr>
           </tbody>
         </table>
