@@ -49,7 +49,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         console.log('In setter: ', value)
         this.filteredBirthdays = this.performFilter(value)
     }
-    
 
     @ViewChild('toggleButton') toggleButton?: ElementRef
     @ViewChild('options') options?: ElementRef
@@ -61,11 +60,11 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private renderer: Renderer2
     ) {
-        this.renderer.listen('window', 'click', (e: Event)=>{
+        this.renderer.listen('window', 'click', (e: Event) => {
            if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
                this.isOptionVisible = false;
            }
-       });
+       })
     }
 
     ngOnInit(): void {
@@ -81,7 +80,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     performFilter(filterBy: string): IBirthday[] {
         filterBy = filterBy.toLocaleLowerCase()
         return this.birthdays.filter((birthday: IBirthday) =>
-            birthday.name.toLocaleLowerCase().includes(filterBy))
+            birthday.title.toLocaleLowerCase().includes(filterBy))
     }
 
     getBirthdays(): Subscription {
@@ -115,13 +114,10 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         }
     }
 
-    @ViewChild('myInput') myInput: ElementRef = {} as ElementRef
+    @ViewChild('reminderSearch') reminderSearch?: ElementRef
     focusInput() {
-        this.myInput.nativeElement.focus();
+        this.reminderSearch?.nativeElement.focus();
     }
-
-
-
 
     openModal(birthday: IBirthday) {
         const modalRef = this.modalService.open(BirthdayDetailComponent, {
@@ -138,5 +134,32 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         event.stopPropagation()
         this.isOptionVisible = !this.isOptionVisible
         this.optionBirthday = birthday
+    }
+
+    private titleSort: string = 'asc'
+    sortRemindersByTitle() {
+        this.filteredBirthdays = this.filteredBirthdays.slice()
+
+        this.filteredBirthdays.sort((a, b) => {
+            const comparison = a.title.localeCompare(b.title)
+            return this.titleSort === 'asc' ? comparison : -comparison
+        })
+
+        this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
+    }
+
+    private dateSort: string = 'asc'
+    sortRemindersByDate() {
+        this.filteredBirthdays = this.filteredBirthdays.slice()
+
+        this.filteredBirthdays.sort((a, b) => {
+            const aDate = new Date(a.birthday_date)
+            const bDate = new Date(b.birthday_date)
+            
+            const comparison = aDate.getTime() - bDate.getTime()
+            return this.dateSort === 'asc' ? comparison : -comparison
+        })
+
+        this.dateSort = this.dateSort === 'asc' ? 'desc' : 'asc'
     }
 }
