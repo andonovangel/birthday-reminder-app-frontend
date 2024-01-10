@@ -1,44 +1,91 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBirthday } from '../birthday';
 import { BirthdayService } from '../birthday.service';
 import { Subscription } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { GroupService } from 'src/app/group/group.service';
+import { IGroup } from 'src/app/group/group';
 
 @Component({
-  selector: 'app-birthday-detail',
+  selector: 'birthday-detail',
   templateUrl: './birthday-detail.component.html',
-  styleUrls: ['./birthday-detail.component.scss']
+  styleUrls: ['./birthday-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BirthdayDetailComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'Birthday Details'
-  birthday?: IBirthday
-  birthdays: IBirthday[] = []
-  getBirthdaysSub?: Subscription
-  errorMessage: string = ''
+  public pageTitle: string = 'Birthday Details'
+  public birthdays: IBirthday[] = []
+  public errorMessage: string = ''
+  public groups?: IGroup[]
+  
+  private deleteBirthdaysSub?: Subscription
+  private getGroupsSub?: Subscription
+
+  @Input() birthday?: IBirthday
 
   constructor(
     private birthdayService: BirthdayService, 
     private route: ActivatedRoute, 
-    private router: Router
+    private router: Router,
+    private activeModal: NgbActiveModal,
+    private groupService: GroupService
   ) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-
-    this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
-      next: birthdays => {
-        this.birthdays = birthdays
-        this.birthday = birthdays.find(x => x.id === id)
-      },
-      error: err => this.errorMessage = err
-    });
+    this.getGroupsSub = this.getGroups()
   }
 
   ngOnDestroy(): void {
-    this.getBirthdaysSub?.unsubscribe()
+    this.getGroupsSub?.unsubscribe()
+    this.deleteBirthdaysSub?.unsubscribe()
   }
 
-  onBack(): void {
-    this.router.navigate(['/birthdays/list'])
+  closeModal() {
+    this.activeModal.close()
+  }
+
+  editBirthday(id: number) {
+    this.closeModal()
+    this.router.navigate(['/birthdays/edit', id])
+  }
+
+  deleteBirthday(birthday: IBirthday) {
+    if(confirm("Are you sure to delete " + birthday.name)) {
+      this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
+        next: res => {
+          console.log(res)
+          this.closeModal()
+
+          // Refreshes component
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false
+          this.router.onSameUrlNavigation = 'reload'
+          this.router.navigate(['./birthdays/list'], { relativeTo: this.route, queryParamsHandling: "merge" })
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+    }
+  }
+
+  getGroups(): Subscription {
+    return this.groupService.getGroups().subscribe({
+      next: groups => {
+        this.groups = groups
+      },
+      error: err => {
+        this.errorMessage = err
+      }
+    })
+  }
+
+  getGroup(birthday: IBirthday) {
+    return this.groups?.find(x => x.id === birthday.group_id)
+  }
+
+  goToGroup(group?: IGroup) {
+    this.closeModal()
+    this.router.navigate(['/groups/group/', group?.id])
   }
 }

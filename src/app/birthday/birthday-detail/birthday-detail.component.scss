@@ -1,0 +1,74 @@
+@import '../../styles/master/colors.scss';
+@import '../../styles/master/mixins.scss';
+@import '../../styles/master/fonts.scss';
+
+.custom-modal .modal-content {
+    width: 623px;
+    margin: auto;
+    border: 2px #404040 solid;
+    border-radius: 16px;
+    color: #ffffff;
+    background-color: $reminderColor;
+    backdrop-filter: blur(10px);
+
+    .upperBirthdayItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 22px 0px 22px;
+
+        .group {
+            font-size: $p;
+
+            span {
+                color: $birthdayReminderLightGrey
+            }
+            a {
+                text-decoration: none;
+                color: #ffffff;
+                cursor: pointer;
+                transition: 0.3s;
+                @include brandLightHover;
+            }
+        }
+
+        .icons {            
+            .btn-filter {
+                padding: 0;
+                border: none;
+                background: none;
+                margin-left: 18px;
+                font-size: $p;
+                color: #ffffff;
+                transition: 0.3s;
+                @include brandLightHover;
+            }
+        }
+    }
+    
+    .lowerBirthdayItem{
+        padding: 33px 73px 18px 73px;
+        span {
+            color: $birthdayReminderLightGrey;
+        }
+
+        .row {
+            margin-bottom: 15px;
+        }
+
+        .itemName{
+            font-size: $h5;
+        }
+
+        .itemOtherInfo, .itemNotes{
+            font-size: $p;
+
+            textarea {
+                background-color: $backgroundMasterColor;
+                border-radius: 7px;
+                border: 1px $birthdayReminderLightGrey solid;
+                color: #ffffff;
+            }
+        }
+    }
+}

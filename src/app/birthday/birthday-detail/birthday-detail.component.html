@@ -1,73 +1,48 @@
-<div class="card" *ngIf="birthday">
-    <div class="card-header">
-        {{pageTitle + ': ' + birthday.name}}
+<div class="container" *ngIf="birthday">
+  <div class="upperBirthdayItem">
+    <!-- Left side content -->
+    <div class="group">
+      <span>Group: </span>
+      <a *ngIf="birthday.group_id" (click)="goToGroup(getGroup(birthday))">{{ getGroup(birthday)?.name }}</a>
     </div>
-    <div class="card-footer ">
-        <div class="row center">
-            <div class="col-lg-8">
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Name</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.name }}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Title</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.title }}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Phone number</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.phone_number }}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Body</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.body }}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Birthday date</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.birthday_date }}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Group</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{ birthday.group_id }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-        <button class="btn btn-outline-secondary" 
-                style="width: 80px;"
-                (click)="onBack()">
-            <i class="fa fa-chevron-left"></i> Back
-        </button>
+
+    <!-- Right side content -->
+    <div class="icons">
+      <button class="btn-filter" (click)="editBirthday(birthday.id)"><i class="fa-regular fa-pen-to-square"></i></button>
+      <button class="btn-filter" (click)="deleteBirthday(birthday)"><i class="fa-solid fa-box-archive"></i></button>
+      <button class="btn-filter" (click)="closeModal()"><i class="fa-regular fa-circle-xmark"></i></button>
     </div>
+  </div>
+  
+  <div class="lowerBirthdayItem">
+    <div class="row itemName">
+      <div class="col">
+      {{ birthday.title }}
+      </div>
+    </div>
+    <div class="row itemOtherInfo">
+      <div class="col">
+        <span>Birthday person</span><br>
+        {{  birthday.name }}
+      </div>
+      <div class="col">
+        <span>Birthday date</span><br>
+        {{ birthday.birthday_date | date:'mediumDate' }}
+      </div>
+      <div class="col">
+        <span>Phone number</span><br>
+        {{ birthday.phone_number }}
+      </div>
+    </div>
+    <div class="row itemNotes">
+      <div class="col">
+        <span>Notes</span><br>
+        {{ birthday.body }}
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #noGroup>
+  <div class="group"><span>Group: </span></div>
+</ng-template>
