@@ -7,6 +7,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { animate, state, style, transition, trigger } from "@angular/animations";
+import { HttpParams } from "@angular/common/http";
 
 @Component({
     templateUrl: './birthday-list.component.html',
@@ -38,20 +39,20 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     public birthdays: IBirthday[] = []
     public groups?: IGroup[]
 
-    private _listFilter: string = ''
+    @ViewChild('toggleButton') toggleButton?: ElementRef
+    @ViewChild('options') options?: ElementRef
     
+    public params?: HttpParams
+
+    private _listFilter: string = ''
     get listFilter(): string {
         return this._listFilter
     }
-
     set listFilter(value: string) {
         this._listFilter = value
         console.log('In setter: ', value)
         this.filteredBirthdays = this.performFilter(value)
     }
-
-    @ViewChild('toggleButton') toggleButton?: ElementRef
-    @ViewChild('options') options?: ElementRef
 
     constructor(
         private birthdayService: BirthdayService,
@@ -59,16 +60,16 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private renderer: Renderer2
-    ) {
-        this.renderer.listen('window', 'click', (e: Event) => {
-           if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
-               this.isOptionVisible = false;
-           }
-       })
-    }
+    ) { }
 
     ngOnInit(): void {
         this.getBirthdaysSub = this.getBirthdays()
+        
+        this.renderer.listen('window', 'click', (e: Event) => {
+            if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
+                this.isOptionVisible = false;
+            }
+        })
     }
 
     ngOnDestroy(): void {
@@ -84,7 +85,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     getBirthdays(): Subscription {
-        return this.birthdayService.getBirthdays().subscribe({
+        return this.birthdayService.getBirthdays(this.params).subscribe({
             next: birthdays => {
                 this.birthdays = birthdays
                 this.filteredBirthdays = this.birthdays
@@ -138,28 +139,15 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     private titleSort: string = 'asc'
     sortRemindersByTitle() {
-        this.filteredBirthdays = this.filteredBirthdays.slice()
-
-        this.filteredBirthdays.sort((a, b) => {
-            const comparison = a.title.localeCompare(b.title)
-            return this.titleSort === 'asc' ? comparison : -comparison
-        })
-
+        this.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.titleSort)
+        this.getBirthdaysSub = this.getBirthdays()
         this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
     }
 
     private dateSort: string = 'asc'
     sortRemindersByDate() {
-        this.filteredBirthdays = this.filteredBirthdays.slice()
-
-        this.filteredBirthdays.sort((a, b) => {
-            const aDate = new Date(a.birthday_date)
-            const bDate = new Date(b.birthday_date)
-            
-            const comparison = aDate.getTime() - bDate.getTime()
-            return this.dateSort === 'asc' ? comparison : -comparison
-        })
-
+        this.params = new HttpParams().set('sortBy', 'birthday_date').set('sortOrder', this.dateSort)
+        this.getBirthdaysSub = this.getBirthdays()
         this.dateSort = this.dateSort === 'asc' ? 'desc' : 'asc'
     }
 }

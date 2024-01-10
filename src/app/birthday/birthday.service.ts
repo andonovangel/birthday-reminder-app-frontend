@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap, catchError, throwError } from "rxjs";
 import { IBirthday } from "./birthday";
@@ -16,8 +16,11 @@ export class BirthdayService {
 
     constructor(private http: HttpClient) {}
 
-    getBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { withCredentials: true })
+    getBirthdays(params?: HttpParams): Observable<IBirthday[]> {
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
+            withCredentials: true, 
+            params: params
+        })
     }
 
     createBirthday(birthday: IBirthday) {
