@@ -44,7 +44,7 @@
         </a>
       </div>
       <div class="options-visibility" [@options]="isOptionVisible ? 'open' : 'closed'">
-        <div class="options" *ngIf="isOptionVisible && optionBirthday === birthday">
+        <div class="options" *ngIf="optionBirthday === birthday">
           <div class="option" [routerLink]="['/birthdays/edit', birthday.id]">
             <i class="fa-regular fa-pen-to-square"></i> Edit
           </div>

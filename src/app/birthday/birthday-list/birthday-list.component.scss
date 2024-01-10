@@ -148,7 +148,8 @@
                 backdrop-filter: blur(10px);
                 border-radius: 16px;
                 filter: drop-shadow(5px 5px 4px #000000);
-                // filter: drop-shadow(0 0 0.35rem #000000);
+
+                cursor: pointer;
                 
                 .option {
                     display: flex;

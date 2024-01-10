@@ -14,12 +14,12 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
     animations: [
         trigger('options', [
             state('open', style({
-              height: '*',
-              opacity: 1,
+                display: 'flex',
+                opacity: 1,
             })),
             state('closed', style({
-              height: '0',
-              opacity: 0,
+                display: 'none',
+                opacity: 0,
             })),
             transition('open => closed', animate('200ms ease-out')),
             transition('closed => open', animate('200ms ease-in')),
