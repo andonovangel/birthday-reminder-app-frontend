@@ -63,11 +63,12 @@
         .itemOtherInfo, .itemNotes{
             font-size: $p;
 
-            textarea {
-                background-color: $backgroundMasterColor;
-                border-radius: 7px;
+            .notes {
                 border: 1px $birthdayReminderLightGrey solid;
+                border-radius: 7px;
                 color: #ffffff;
+                padding: 10px;
+                word-wrap: break-word;
             }
         }
     }
