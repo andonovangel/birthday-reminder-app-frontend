@@ -145,6 +145,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             size: 'lg' 
         })
         modalRef.componentInstance.birthday = birthday
+        modalRef.componentInstance.group = this.group
     }
 
     public isOptionVisible: boolean = false

@@ -23,6 +23,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
   private getGroupsSub?: Subscription
 
   @Input() birthday?: IBirthday
+  @Input() group?: IGroup
 
   constructor(
     private birthdayService: BirthdayService, 
@@ -30,7 +31,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private activeModal: NgbActiveModal,
     private groupService: GroupService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getGroupsSub = this.getGroups()
