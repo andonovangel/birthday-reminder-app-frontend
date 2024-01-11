@@ -8,6 +8,7 @@ import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.comp
 import { ActivatedRoute, Router } from "@angular/router";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
+import { GroupService } from "src/app/group/group.service";
 
 @Component({
     templateUrl: './birthday-list.component.html',
@@ -37,7 +38,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     public filteredBirthdays: IBirthday[] = []
     public birthdays: IBirthday[] = []
-    public groups?: IGroup[]
+    public group?: IGroup
 
     @ViewChild('toggleButton') toggleButton?: ElementRef
     @ViewChild('options') options?: ElementRef
@@ -56,6 +57,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     constructor(
         private birthdayService: BirthdayService,
+        private groupService: GroupService,
         private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
@@ -63,7 +65,9 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.getBirthdaysSub = this.getBirthdays()
+        const id = Number(this.route.snapshot.paramMap.get('id'))
+        id !== 0 ? this.getGroupById(id) : null
+        this.getBirthdays(id)
         
         this.renderer.listen('window', 'click', (e: Event) => {
             if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
@@ -84,15 +88,29 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             birthday.title.toLocaleLowerCase().includes(filterBy))
     }
 
-    getBirthdays(): Subscription {
-        return this.birthdayService.getBirthdays(this.params).subscribe({
+    getGroupById(id: number) {
+        this.groupService.getGroup(id).subscribe({
+            next: response => {
+                this.group = response
+                this.pageTitle = response.name
+            },
+            error: error => {
+                console.log(error)
+            },
+        })
+    }
+
+    getBirthdays(id: number): void {
+        const observable = (id !== 0) ?
+            this.groupService.getBirthdaysByGroup(id, this.params) :
+            this.birthdayService.getBirthdays(this.params)
+
+        this.getBirthdaysSub = observable.subscribe({
             next: birthdays => {
                 this.birthdays = birthdays
                 this.filteredBirthdays = this.birthdays
             },
-            error: err => {
-                this.errorMessage = err
-            }
+            error: err => this.errorMessage = err,
         })
     }
 
@@ -140,14 +158,15 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     private titleSort: string = 'asc'
     sortRemindersByTitle() {
         this.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.titleSort)
-        this.getBirthdaysSub = this.getBirthdays()
+        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(0)
+        
         this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
     }
 
     private dateSort: string = 'asc'
     sortRemindersByDate() {
         this.params = new HttpParams().set('sortBy', 'birthday_date').set('sortOrder', this.dateSort)
-        this.getBirthdaysSub = this.getBirthdays()
+        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(0)
         this.dateSort = this.dateSort === 'asc' ? 'desc' : 'asc'
     }
 }

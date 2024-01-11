@@ -1,20 +1,20 @@
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { AdminService } from '../admin/admin.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BirthdayDetailGuard implements CanActivate {
-  constructor(private router: Router) {}
+export class AdminGuard implements CanActivate {
+  constructor(private router: Router, private adminService: AdminService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const id = Number(route.paramMap.get('id'));
-    if (isNaN(id) || id < 1) {
-      alert('Invalid birthday id');
-      this.router.navigate(['/birthdays/list']);
-      return false;
+    if (window.userData.role === 'Admin') {
+      return true
     }
-    return true;
-  };
+  
+    this.router.navigate(['/welcome'])
+    return false
+  }
 }

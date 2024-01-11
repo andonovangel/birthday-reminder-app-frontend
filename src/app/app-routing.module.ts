@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
-import { RedirectGuard } from './auth/redirect.guard';
+import { RedirectGuard } from './guards/redirect.guard';
 import { UserProfileModule } from './user-profile/user-profile.module';
 
 const routes: Routes = [

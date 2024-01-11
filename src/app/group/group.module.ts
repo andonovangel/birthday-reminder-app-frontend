@@ -7,7 +7,7 @@ import { GroupArchivedComponent } from './group-archived/group-archived.componen
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupEditComponent } from './group-edit/group-edit.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   declarations: [

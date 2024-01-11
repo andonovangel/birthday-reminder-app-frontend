@@ -4,7 +4,7 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 import { RouterModule } from '@angular/router';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { ForgetPasswordComponent } from './password-forget/forget-password.component';
 import { ResetPasswordComponent } from './password-reset/reset-password.component';
 import { ChangePasswordComponent } from './password-change/change-password.component';

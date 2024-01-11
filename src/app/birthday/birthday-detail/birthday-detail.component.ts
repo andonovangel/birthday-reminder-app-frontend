@@ -60,7 +60,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
           // Refreshes component
           this.router.routeReuseStrategy.shouldReuseRoute = () => false
           this.router.onSameUrlNavigation = 'reload'
-          this.router.navigate(['./birthdays/list'], { relativeTo: this.route, queryParamsHandling: "merge" })
+          this.router.navigate(['birthdays/.'], { relativeTo: this.route, queryParamsHandling: "merge" })
         },
         error: err => {
           console.log(err)
@@ -86,6 +86,6 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
 
   goToGroup(group?: IGroup) {
     this.closeModal()
-    this.router.navigate(['/groups/group/', group?.id])
+    this.router.navigate(['/birthdays/', group?.id])
   }
 }

@@ -4,11 +4,11 @@ import { BirthdayListComponent } from './birthday-list/birthday-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BirthdayDetailComponent } from './birthday-detail/birthday-detail.component';
-import { BirthdayDetailGuard } from './birthday-detail/birthday-detail.guard';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
+import { IsGroupValidGuard } from '../guards/is-group-valid.guard';
 
 @NgModule({
   declarations: [
@@ -39,14 +39,14 @@ import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived
         component: BirthdayEditComponent,
       },
       { 
-        path: 'birthday/:id', 
-        canActivate: [BirthdayDetailGuard, AuthGuard],
-        component: BirthdayDetailComponent,
-      },
-      { 
         path: 'archived',
         canActivate: [AuthGuard],
         component: BirthdayArchivedComponent,
+      },
+      { 
+        path: ':id', 
+        canActivate: [IsGroupValidGuard, AuthGuard],
+        component: BirthdayListComponent,
       },
       { 
         path: '**',
