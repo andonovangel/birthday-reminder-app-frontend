@@ -6,7 +6,7 @@ import { IGroup } from "src/app/group/group";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
 import { GroupService } from "src/app/group/group.service";
 
@@ -15,16 +15,8 @@ import { GroupService } from "src/app/group/group.service";
     styleUrls: ['./birthday-list.component.scss'],
     animations: [
         trigger('options', [
-            state('open', style({
-                display: 'flex',
-                opacity: 1,
-            })),
-            state('closed', style({
-                display: 'none',
-                opacity: 0,
-            })),
-            transition('open => closed', animate('200ms ease-out')),
-            transition('closed => open', animate('200ms ease-in')),
+            transition(':enter', [style({ opacity: 0 }), animate('200ms', style({ opacity: 1 }))]),
+            transition(':leave', [animate('200ms', style({ opacity: 0 }))]),
         ]),
     ]
 })
