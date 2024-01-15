@@ -13,6 +13,7 @@ import { AuthService } from './auth/auth.service';
 import { BirthdayService } from './birthday/birthday.service';
 import { GroupService } from './group/group.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     LoginComponent,
     WelcomeComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

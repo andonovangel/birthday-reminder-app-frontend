@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RedirectGuard } from './guards/redirect.guard';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   { 
@@ -36,8 +37,8 @@ const routes: Routes = [
     canActivate: [RedirectGuard],
     component: LoginComponent 
   },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: '', redirectTo: '**', pathMatch: 'full' },
+  { path: '**', component: ErrorComponent},
 ];
 
 @NgModule({

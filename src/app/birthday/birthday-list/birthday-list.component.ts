@@ -86,8 +86,8 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 this.group = response
                 this.pageTitle = response.name
             },
-            error: error => {
-                console.log(error)
+            error: () => {
+                this.router.navigate(['**'])
             },
         })
     }

@@ -11,10 +11,9 @@ export class IsGroupValidGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const id = Number(route.paramMap.get('id'))
     if (isNaN(id) || id < 1) {
-      alert('Invalid birthday id')
-      this.router.navigate(['/birthdays/list'])
-      return false;
+      this.router.navigate(['**'])
+      return false
     }
-    return true;
-  };
+    return true
+  }
 }
