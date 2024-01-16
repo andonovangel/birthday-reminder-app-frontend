@@ -86,9 +86,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 this.group = response
                 this.pageTitle = response.name
             },
-            error: () => {
-                this.router.navigate(['**'])
-            },
+            error: () => this.router.navigate(['**']),
         })
     }
 
@@ -152,7 +150,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     sortRemindersByTitle() {
         this.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.titleSort)
         this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(0)
-        
         this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
     }
 

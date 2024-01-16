@@ -14,6 +14,7 @@ import { BirthdayService } from './birthday/birthday.service';
 import { GroupService } from './group/group.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ErrorComponent } from './error/error.component';
     LoginComponent,
     WelcomeComponent,
     ErrorComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

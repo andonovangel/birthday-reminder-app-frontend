@@ -1,5 +1,6 @@
 @mixin brandLightHover {
     &:hover{
         color: $brandLightColor;
+        transition: 0.3s;
     }
 }
