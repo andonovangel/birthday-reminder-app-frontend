@@ -15,6 +15,7 @@ import { GroupService } from './group/group.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/groups-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     WelcomeComponent,
     ErrorComponent,
     SidebarComponent,
+    GroupsPanelComponent,
   ],
   imports: [
     BrowserModule,

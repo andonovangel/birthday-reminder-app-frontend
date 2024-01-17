@@ -1,0 +1,65 @@
+@import '../../../styles/master/colors.scss';
+@import '../../../styles/master/mixins.scss';
+@import '../../../styles/master/fonts.scss';
+
+
+.sticky-container {
+    position: absolute;
+    left: 98px;
+    height: 100%;
+    width: 307px;
+    background-color: #00455C;
+    z-index: 1;
+        
+    padding-left: 36px;
+    padding-right: 18px;
+    padding-top: 40px;
+    padding: 40px 18px 40px 36px;
+
+    .absolute-container {
+        position: sticky;
+        left: 0;
+        top: 0;
+
+        svg {
+            width: 24px;
+            @include brandLightHover;
+        }
+
+        .line-break {
+            border: 0;
+            border-radius: 5px;
+            border-top: 2px solid white;
+            margin: 1em 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .left {
+                display: flex;
+                font-size: $h5;
+
+                .title {
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .list {
+            .list-item {
+                display: flex;
+                justify-content: space-between;
+                font-size: $p;
+                margin-bottom: 10px;
+
+                .item-link {
+                    @include brandLightHover;
+                }
+            }
+        }
+    }
+}

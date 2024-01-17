@@ -10,10 +10,12 @@ import { UserProfileService } from './user-profile/user-profile.service';
 })
 export class AppComponent{
   title(title: any) {
-    throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.')
   }
 
-  pageTitle = 'Birthday Reminder';
+  pageTitle = 'Birthday Reminder'
+
+  sidebarExpanded = true
 
   constructor(
     private auth: AuthService,

@@ -37,7 +37,7 @@ const routes: Routes = [
     canActivate: [RedirectGuard],
     component: LoginComponent 
   },
-  { path: '', redirectTo: '**', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: ErrorComponent},
 ];
 

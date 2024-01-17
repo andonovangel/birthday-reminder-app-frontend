@@ -2,36 +2,46 @@
 @import '../styles/master/mixins.scss';
 @import '../styles/master/fonts.scss';
 
+
 .sidebar {
-    position: sticky;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 113px;
-    padding-top: 31px;
-    background-color: #005977;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
 
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-
-    filter: drop-shadow(5px 0 20px rgba(0, 0, 0, 0.15));
-
-    .img {
-        margin-bottom: 55px;
-    }
-
-    .icons {
+    .closed-panel {
+        position: sticky;
+        left: 0;
+        top: 0;
+        width: 113px;
+        height: 100vh;
+        padding-top: 31px;
+        background-color: #005977;
+        
         display: flex;
         flex-direction: column;
-        
-        svg {
-            width: 24px;
-            margin-bottom: 44px;
-            @include brandLightHover    
+        align-items: center;
+        z-index: 2;
+
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+
+        filter: drop-shadow(5px 0 20px rgba(0, 0, 0, 0.15));
+
+        .img {
+            margin-bottom: 55px;
+        }
+
+        .icons {
+            display: flex;
+            flex-direction: column;
+            
+            svg {
+                width: 24px;
+                margin-bottom: 44px;
+                @include brandLightHover    
+            }
         }
     }
+}
+
+.container-fluid {
+    display: flex;
 }

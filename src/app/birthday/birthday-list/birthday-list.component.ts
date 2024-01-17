@@ -57,13 +57,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        const id = Number(this.route.snapshot.paramMap.get('id'))
-        id !== 0 ? this.getGroupById(id) : null
-        this.getBirthdays(id)
+        this.route.params.subscribe(params => {
+            console.log(params)
+            this.handleRouteParams(params)
+        })
         
         this.renderer.listen('window', 'click', (e: Event) => {
             if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
-                this.isOptionVisible = false;
+                this.isOptionVisible = false
             }
         })
     }
@@ -80,18 +81,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             birthday.title.toLocaleLowerCase().includes(filterBy))
     }
 
-    getGroupById(id: number) {
-        this.groupService.getGroup(id).subscribe({
-            next: response => {
-                this.group = response
-                this.pageTitle = response.name
-            },
-            error: () => this.router.navigate(['**']),
-        })
+    private handleRouteParams(params: any): void {
+        const id = params['id']
+        id !== undefined ? this.getGroupById(id) : null
+        this.getBirthdays(id)
     }
 
     getBirthdays(id: number): void {
-        const observable = (id !== 0) ?
+        const observable = (id !== undefined) ?
             this.groupService.getBirthdaysByGroup(id, this.params) :
             this.birthdayService.getBirthdays(this.params)
 
@@ -101,6 +98,16 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 this.filteredBirthdays = this.birthdays
             },
             error: err => this.errorMessage = err,
+        })
+    }
+
+    getGroupById(id: number) {
+        this.groupService.getGroup(id).subscribe({
+            next: response => {
+                this.group = response
+                this.pageTitle = response.name
+            },
+            error: () => this.router.navigate(['**']),
         })
     }
 
