@@ -1,5 +1,5 @@
 <div class="container-fluid g-0 h-100 sidebar">
-    <div class="closed-panel column">
+    <div class="closed-panel">
         <div class="img">
             <a routerLink="/welcome">
                 <img src="../../assets/logo_transparent_no_text.png" width="38" alt="logo">
@@ -39,10 +39,11 @@
             </svg>
         </div>
     </div>
-    <div class="expanded-panel column">
-        <app-groups-panel 
-            [groups]="groups" 
-            [isGroupsPanelExpanded]="isGroupsPanelExpanded">
-        </app-groups-panel>
+    <div class="expanded-panel sticky-container">
+        <div class="absolute-container" [@panelAnimation] *ngIf="isGroupsPanelExpanded"> 
+            <app-groups-panel 
+                [groups]="groups">
+            </app-groups-panel>
+        </div> 
     </div>
 </div>

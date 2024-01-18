@@ -4,7 +4,7 @@
 
 
 .sidebar {
-    position: relative;
+    display: flex;
 
     .closed-panel {
         position: sticky;
@@ -40,8 +40,20 @@
             }
         }
     }
-}
 
-.container-fluid {
-    display: flex;
+    .expanded-panel {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        height: 0;
+    
+        .absolute-container {
+            position: absolute;
+            left: -15px;
+            width: 307px;
+            height: 100vh;
+            background-color: #00455C;
+            padding: 40px 18px 40px 36px;
+        }
+    }   
 }
