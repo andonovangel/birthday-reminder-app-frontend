@@ -58,7 +58,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
-            console.log(params)
             this.handleRouteParams(params)
         })
         

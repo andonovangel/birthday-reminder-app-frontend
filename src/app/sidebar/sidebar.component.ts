@@ -29,7 +29,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   getGroups() {
     this.getGroupsSub = this.groupService.getGroups().subscribe({
       next: res => {
-        console.log(res)
         this.groups = res
       },
       error: err => {

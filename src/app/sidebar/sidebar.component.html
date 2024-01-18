@@ -39,7 +39,10 @@
             </svg>
         </div>
     </div>
-    <div class="expanded-panel column" *ngIf="isGroupsPanelExpanded">
-        <app-groups-panel [groups]="groups"></app-groups-panel>
+    <div class="expanded-panel column">
+        <app-groups-panel 
+            [groups]="groups" 
+            [isGroupsPanelExpanded]="isGroupsPanelExpanded">
+        </app-groups-panel>
     </div>
 </div>
