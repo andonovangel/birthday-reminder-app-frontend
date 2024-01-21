@@ -87,7 +87,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     getBirthdays(id: number): void {
-        const observable = (id !== undefined) ?
+        const observable = (id !== undefined && id !== 0) ?
             this.groupService.getBirthdaysByGroup(id, this.params) :
             this.birthdayService.getBirthdays(this.params)
 
