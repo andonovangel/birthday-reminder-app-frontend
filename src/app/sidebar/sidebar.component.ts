@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { IGroup } from '../group/group';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group.service';
@@ -26,8 +26,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private getGroupsSub?: Subscription
 
-  constructor(private groupService: GroupService) {}
-  
+  constructor(
+    private groupService: GroupService,
+    private renderer: Renderer2,
+  ) {}
 
   ngOnInit(): void {
     this.getGroups()

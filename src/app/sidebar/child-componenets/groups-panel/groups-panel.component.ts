@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { IGroup } from 'src/app/group/group';
 
 @Component({
@@ -8,5 +8,9 @@ import { IGroup } from 'src/app/group/group';
 })
 export class GroupsPanelComponent{
   @Input() groups?: IGroup[]
+  @Output() closePanelToggle = new EventEmitter<any>()
 
+  closePanel() {
+    this.closePanelToggle.emit()
+  }
 }
