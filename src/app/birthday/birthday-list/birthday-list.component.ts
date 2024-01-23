@@ -19,6 +19,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     private getBirthdaysSub?: Subscription
     private getGroupsSub?: Subscription
+    private deleteBirthdaySub?: Subscription
 
     public filteredBirthdays: IBirthday[] = []
     public birthdays: IBirthday[] = []
@@ -53,6 +54,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.getBirthdaysSub?.unsubscribe()
         this.getGroupsSub?.unsubscribe()
+        this.deleteBirthdaySub?.unsubscribe()
     }
     
     performFilter(filterBy: string): IBirthday[] {
@@ -89,6 +91,20 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             },
             error: () => this.router.navigate(['**']),
         })
+    }
+
+    deleteBirthday(birthday: IBirthday) {
+      this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
+        next: res => {
+          console.log(res)
+        
+          // Refreshes component
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false
+          this.router.onSameUrlNavigation = 'reload'  
+          this.router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'merge' })
+        },
+        error: err => console.log(err)
+      })
     }
 
     @ViewChild('reminderSearch') reminderSearch?: ElementRef

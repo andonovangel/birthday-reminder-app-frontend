@@ -49,7 +49,8 @@
         [isOptionVisible]="isOptionVisible"
         [optionObject]="optionBirthday"
         (optionsToggle)="toggle()"
-        [customStyle]="'style-for-birthday-list'">
+        [customStyle]="'style-for-birthday-list'"
+        (deleteToggle)="deleteBirthday(birthday)">
       </app-options>
     </div>
   </div>
