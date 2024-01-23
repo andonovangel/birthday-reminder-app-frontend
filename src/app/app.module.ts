@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/groups-panel.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/g
     NgbModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     AuthService,

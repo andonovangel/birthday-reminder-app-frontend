@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IGroup } from 'src/app/group/group';
 
 @Component({
@@ -12,5 +12,17 @@ export class GroupsPanelComponent{
 
   closePanel() {
     this.closePanelToggle.emit()
+  }
+
+  public isOptionVisible: boolean = false
+  public optionGroup?: IGroup
+  toggleReminderOptions(event: Event, group: IGroup) {
+    event.stopPropagation()
+    this.toggle()
+    this.optionGroup = group
+  }
+
+  toggle() {
+    this.isOptionVisible = !this.isOptionVisible
   }
 }

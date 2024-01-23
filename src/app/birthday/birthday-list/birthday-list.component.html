@@ -37,22 +37,20 @@
         <span>{{ birthday.title }}</span>
         <span>|</span>
         <span>{{ birthday.birthday_date | date: 'd MMMM' }}</span>
-        <a (click)="openReminderOptions($event, birthday)" #toggleButton>
+        <a (click)="toggleReminderOptions($event, birthday)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
         </a>
       </div>
-      <div class="options-visibility" [@options] *ngIf="isOptionVisible">
-        <div class="options" *ngIf="optionBirthday === birthday">
-          <div class="option" [routerLink]="['/birthdays/edit', birthday.id]">
-            <i class="fa-regular fa-pen-to-square"></i> Edit
-          </div>
-          <div class="option" (click)="deleteBirthday($event, birthday)">
-            <i class="fa-solid fa-box-archive"></i> Archive
-          </div>
-        </div>
-      </div>
+      <app-options
+        [object]="birthday"
+        [editUrl]="'/birthdays/edit'"
+        [isOptionVisible]="isOptionVisible"
+        [optionObject]="optionBirthday"
+        (optionsToggle)="toggle()"
+        [customStyle]="'style-for-birthday-list'">
+      </app-options>
     </div>
   </div>
 </div>

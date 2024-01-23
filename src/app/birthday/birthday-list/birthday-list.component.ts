@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 import { IBirthday } from "../birthday";
 import { BirthdayService } from "../birthday.service";
@@ -6,19 +6,12 @@ import { IGroup } from "src/app/group/group";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import { animate, style, transition, trigger } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
 import { GroupService } from "src/app/group/group.service";
 
 @Component({
     templateUrl: './birthday-list.component.html',
-    styleUrls: ['./birthday-list.component.scss'],
-    animations: [
-        trigger('options', [
-            transition(':enter', [style({ opacity: 0 }), animate('200ms', style({ opacity: 1 }))]),
-            transition(':leave', [animate('200ms', style({ opacity: 0 }))]),
-        ]),
-    ]
+    styleUrls: ['./birthday-list.component.scss']
 })
 export class BirthdayListComponent implements OnInit, OnDestroy {
     public pageTitle: string = 'All Reminders'
@@ -26,14 +19,10 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     private getBirthdaysSub?: Subscription
     private getGroupsSub?: Subscription
-    private deleteBirthdaysSub?: Subscription
 
     public filteredBirthdays: IBirthday[] = []
     public birthdays: IBirthday[] = []
     public group?: IGroup
-
-    @ViewChild('toggleButton') toggleButton?: ElementRef
-    @ViewChild('options') options?: ElementRef
     
     public params?: HttpParams
 
@@ -53,25 +42,17 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
-        private renderer: Renderer2
     ) { }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
             this.handleRouteParams(params)
         })
-        
-        this.renderer.listen('window', 'click', (e: Event) => {
-            if (e.target !== this.toggleButton?.nativeElement && e.target !== this.options?.nativeElement){
-                this.isOptionVisible = false
-            }
-        })
     }
 
     ngOnDestroy(): void {
         this.getBirthdaysSub?.unsubscribe()
         this.getGroupsSub?.unsubscribe()
-        this.deleteBirthdaysSub?.unsubscribe()
     }
     
     performFilter(filterBy: string): IBirthday[] {
@@ -110,25 +91,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         })
     }
 
-    deleteBirthday(event: Event, birthday: IBirthday) {
-        event.stopPropagation()
-        if(confirm("Are you sure to delete " + birthday.name)) {
-            this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
-            next: res => {
-                console.log(res)
-                
-                // Refreshes component
-                this.router.routeReuseStrategy.shouldReuseRoute = () => false
-                this.router.onSameUrlNavigation = 'reload'
-                this.router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: "merge" })
-            },
-            error: err => {
-                console.log(err)
-            }
-            })
-        }
-    }
-
     @ViewChild('reminderSearch') reminderSearch?: ElementRef
     focusInput() {
         this.reminderSearch?.nativeElement.focus();
@@ -146,10 +108,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     public isOptionVisible: boolean = false
     public optionBirthday?: IBirthday
-    openReminderOptions(event: Event, birthday: IBirthday) {
+    toggleReminderOptions(event: Event, birthday: IBirthday) {
         event.stopPropagation()
-        this.isOptionVisible = !this.isOptionVisible
+        this.toggle()
         this.optionBirthday = birthday
+    }
+
+    toggle() {
+        this.isOptionVisible = !this.isOptionVisible
     }
 
     private titleSort: string = 'asc'

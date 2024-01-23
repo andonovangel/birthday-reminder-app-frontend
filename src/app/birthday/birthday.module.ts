@@ -9,6 +9,7 @@ import { BirthdayCreateComponent } from './birthday-create/birthday-create.compo
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
 import { IsGroupValidGuard } from '../guards/is-group-valid.guard';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { IsGroupValidGuard } from '../guards/is-group-valid.guard';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
       { 
         path: 'list',
