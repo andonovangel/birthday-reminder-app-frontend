@@ -36,7 +36,8 @@
         <div class="absolute-container" [@panelAnimation] *ngIf="isGroupsPanelExpanded"> 
             <app-groups-panel 
                 [groups]="groups"
-                (closePanelToggle)="handleGroupPanelToggle()">
+                (closePanelToggle)="handleGroupPanelToggle()"
+                (deleteToggle)="ngOnInit()">
             </app-groups-panel>
         </div> 
     </div>

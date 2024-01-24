@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IGroup } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
@@ -12,13 +11,10 @@ import { GroupService } from 'src/app/group/group.service';
 export class GroupsPanelComponent implements OnDestroy{
   @Input() groups?: IGroup[]
   @Output() closePanelToggle = new EventEmitter<any>()
+  @Output() deleteToggle = new EventEmitter<any>()
   private deleteGroupSub?: Subscription
 
-  constructor(
-    private groupService: GroupService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {}
+  constructor(private groupService: GroupService) {}
 
   ngOnDestroy(): void {
     this.deleteGroupSub?.unsubscribe()
@@ -44,11 +40,7 @@ export class GroupsPanelComponent implements OnDestroy{
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
-      
-        // Refreshes component
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false
-        this.router.onSameUrlNavigation = 'reload'  
-        this.router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'merge' })
+        this.deleteToggle.emit()
       },
       error: err => console.log(err)
     })
