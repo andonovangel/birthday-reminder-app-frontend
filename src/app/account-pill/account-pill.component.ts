@@ -3,19 +3,22 @@ import { AuthService } from '../auth/auth.service';
 import { IUser } from '../user-profile/user';
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  selector: 'account-pill',
+  templateUrl: './account-pill.component.html',
+  styleUrls: ['./account-pill.component.scss']
 })
-export class WelcomeComponent implements OnInit {
-  public pageTitle = 'Welcome'
+export class AccountPillComponent implements OnInit {
   public user?: IUser
 
-  constructor (private auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     if (this.auth.loggedIn()) {
       this.user = window.userData
     }
+  }
+
+  logoutUser() {
+    this.auth.logoutUser()
   }
 }

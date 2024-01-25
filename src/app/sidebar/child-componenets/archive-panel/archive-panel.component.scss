@@ -16,7 +16,7 @@
     align-items: center;
     
     svg {
-        width: 24px;
+        width: $icons-medium;
         @include brandLightHover;
     }
 
@@ -46,13 +46,13 @@
 
             svg {
                 margin-right: 23px;
-                width: 24px;
+                width: $icons-small;
             }
         }
 
         .archive-options {
             svg {
-                width: 24px;
+                width: $icons-small;
                 @include brandLightHover;
             }
         }

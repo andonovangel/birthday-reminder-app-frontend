@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { IBirthday } from './birthday/birthday';
-import { IGroup } from './group/group';
+import { IBirthday } from '../birthday/birthday';
+import { IGroup } from '../group/group';
 
 @Directive({
   selector: '[clickOutside]'

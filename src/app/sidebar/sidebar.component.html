@@ -39,6 +39,7 @@
                 (closePanelToggle)="handleGroupPanelToggle()"
                 (refreshToggle)="ngOnInit()">
             </app-groups-panel>
+            <account-pill></account-pill>
         </div> 
         <div class="absolute-container" [@panelAnimation] *ngIf="isArchivePanelExpanded"> 
             <app-archive-panel
@@ -47,6 +48,7 @@
                 (closePanelToggle)="handleArchivePanelToggle()"
                 (refreshToggle)="ngOnInit()">
             </app-archive-panel>
+            <account-pill></account-pill>
         </div> 
     </div>
 </div>

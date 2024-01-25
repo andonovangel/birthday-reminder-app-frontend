@@ -1,0 +1,29 @@
+@import '../styles/master/colors.scss';
+@import '../styles/master/mixins.scss';
+@import '../styles/master/fonts.scss';
+
+.pill {
+    width: 100%;
+    padding: 12px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #005977;
+    border-radius: 10px;
+
+    .account {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        word-break: break-word;
+
+        span:first-of-type {
+            font-weight: 500;
+        }
+    }
+
+    i {
+        font-size: $icons-small;
+        @include brandLightHover;
+    }
+}

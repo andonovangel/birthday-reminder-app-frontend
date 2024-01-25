@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OptionsComponent } from '../options/options.component';
-import { ClickOutsideDirective } from '../click-outside.directive';
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
 import { RouterModule } from '@angular/router';
+import { AccountPillComponent } from '../account-pill/account-pill.component';
 
 
 
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
   declarations: [
     OptionsComponent,
     ClickOutsideDirective,
+    AccountPillComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     OptionsComponent,
     ClickOutsideDirective,
+    AccountPillComponent,
   ]
 })
 export class SharedModule { }
