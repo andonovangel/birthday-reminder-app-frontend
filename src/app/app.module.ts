@@ -17,6 +17,7 @@ import { ErrorComponent } from './error/error.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/groups-panel.component';
 import { SharedModule } from './shared/shared.module';
+import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel/archive-panel.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     ErrorComponent,
     SidebarComponent,
     GroupsPanelComponent,
+    ArchivePanelComponent,
   ],
   imports: [
     BrowserModule,

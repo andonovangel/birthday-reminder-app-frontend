@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IGroup } from '../group/group';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { IBirthday } from '../birthday/birthday';
+import { BirthdayService } from '../birthday/birthday.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,36 +24,67 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   public isGroupsPanelExpanded: boolean = false
+  public isArchivePanelExpanded: boolean = false
+  
   public groups?: IGroup[]
+  public archivedBirthdays?: IBirthday[]
+  public archivedGroups?: IGroup[]
 
   private getGroupsSub?: Subscription
+  private getArchivedBirthdaysSub?: Subscription
+  private getArchivedGroupsSub?: Subscription
 
   constructor(
     private groupService: GroupService,
-    private renderer: Renderer2,
+    private birthdayService: BirthdayService,
   ) {}
 
   ngOnInit(): void {
+    this.getArchivedBirthdays()
+    this.getArchivedGroups()
     this.getGroups()
   }
 
   ngOnDestroy(): void {
+    this.getArchivedBirthdaysSub?.unsubscribe()
+    this.getArchivedGroupsSub?.unsubscribe()
     this.getGroupsSub?.unsubscribe()
   }
-
 
   getGroups() {
     this.getGroupsSub = this.groupService.getGroups().subscribe({
       next: res => {
         this.groups = res
       },
-      error: err => {
-        console.log(err)
+      error: err => console.log(err)
+    })
+  }
+
+  getArchivedBirthdays() {
+    this.getArchivedBirthdaysSub = this.birthdayService.getArchivedBirthdays().subscribe({
+      next: birthdays => {
+        this.archivedBirthdays = birthdays
       },
+      error: err => console.log(err)
+    })
+  }
+
+  getArchivedGroups() {
+    this.getArchivedGroupsSub = this.groupService.getArchivedGroups().subscribe({
+      next: birthdays => {
+        this.archivedGroups = birthdays
+      },
+      error: err => console.log(err)
     })
   }
 
   handleGroupPanelToggle () {
     this.isGroupsPanelExpanded = !this.isGroupsPanelExpanded
+    this.isArchivePanelExpanded = false
+  }
+
+  handleArchivePanelToggle () {
+    this.isArchivePanelExpanded = !this.isArchivePanelExpanded
+    this.isGroupsPanelExpanded = false
   }
 }

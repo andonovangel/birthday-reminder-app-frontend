@@ -10,8 +10,8 @@ import { GroupService } from 'src/app/group/group.service';
 })
 export class GroupsPanelComponent implements OnDestroy{
   @Input() groups?: IGroup[]
-  @Output() closePanelToggle = new EventEmitter<any>()
-  @Output() deleteToggle = new EventEmitter<any>()
+  @Output() closePanelToggle = new EventEmitter<void>()
+  @Output() refreshToggle = new EventEmitter<void>()
   private deleteGroupSub?: Subscription
 
   constructor(private groupService: GroupService) {}
@@ -40,7 +40,7 @@ export class GroupsPanelComponent implements OnDestroy{
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
-        this.deleteToggle.emit()
+        this.refreshToggle.emit()
       },
       error: err => console.log(err)
     })
