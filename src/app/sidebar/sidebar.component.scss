@@ -54,6 +54,10 @@
             height: 100vh;
             background-color: #00455C;
             padding: 40px 18px 40px 36px;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     }   
 }

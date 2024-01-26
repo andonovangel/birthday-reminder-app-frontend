@@ -33,22 +33,26 @@
         </div>
     </div>
     <div class="expanded-panel sticky-container">
-        <div class="absolute-container" [@panelAnimation] *ngIf="isGroupsPanelExpanded"> 
-            <app-groups-panel 
-                [groups]="groups"
-                (closePanelToggle)="handleGroupPanelToggle()"
-                (refreshToggle)="ngOnInit()">
-            </app-groups-panel>
-            <account-pill></account-pill>
-        </div> 
-        <div class="absolute-container" [@panelAnimation] *ngIf="isArchivePanelExpanded"> 
-            <app-archive-panel
-                [birthdays]="archivedBirthdays"
-                [groups]="archivedGroups"
-                (closePanelToggle)="handleArchivePanelToggle()"
-                (refreshToggle)="ngOnInit()">
-            </app-archive-panel>
-            <account-pill></account-pill>
-        </div> 
+        <ng-container *ngIf="isGroupsPanelExpanded">
+            <div class="absolute-container" [@panelAnimation]> 
+                <app-groups-panel 
+                    [groups]="groups"
+                    (closePanelToggle)="handleGroupPanelToggle()"
+                    (refreshToggle)="ngOnInit()">
+                </app-groups-panel>
+                <account-pill></account-pill>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isArchivePanelExpanded">
+            <div class="absolute-container" [@panelAnimation]> 
+                <app-archive-panel
+                    [birthdays]="archivedBirthdays"
+                    [groups]="archivedGroups"
+                    (closePanelToggle)="handleArchivePanelToggle()"
+                    (refreshToggle)="ngOnInit()">
+                </app-archive-panel>
+                <account-pill></account-pill>
+            </div> 
+        </ng-container>
     </div>
 </div>
