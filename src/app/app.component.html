@@ -1,6 +1,6 @@
-<!-- <nav class="navbar navbar-expand navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-light bg-light" *ngIf="!getAuthService().loggedIn()">
   <div class="container-fluid">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <!-- <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav me-auto">
         <li class="nav-item active">
           <a class="btn btn-primary m-1" routerLink="/welcome">Home</a>
@@ -27,38 +27,36 @@
           <a class="btn btn-primary m-1" routerLink="/groups/create" *ngIf="getAuthService().loggedIn()">Create</a>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto" href="/welcome">{{ pageTitle }}</a>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="btn btn-primary m-1" routerLink="/profile" *ngIf="getAuthService().loggedIn()">Profile</a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a class="btn btn-primary m-1" routerLink="/admin/users" *ngIf="getAuthService().loggedIn() && getUserRole() === 'Admin'">Admin Pannel</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="btn btn-primary m-1" routerLink="/register">Register</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-primary m-1" routerLink="/register" *ngIf="!getAuthService().loggedIn()">Register</a>
+          <a class="btn btn-primary m-1" routerLink="/login">Log in</a>
         </li>
-        <li class="nav-item">
-          <a class="btn btn-primary m-1" routerLink="/login" *ngIf="!getAuthService().loggedIn()">Log in</a>
-        </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="btn btn-primary m-1" routerLink="/logout" *ngIf="getAuthService().loggedIn()" (click)="getAuthService().logoutUser()">Log out</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
-</nav> -->
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-1 g-0" *ngIf="getAuthService().loggedIn()">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-10">
-      <router-outlet></router-outlet>
-    </div>
+</nav>
+<div class="main-container container-fluid g-0">
+  <div class="sidebar" *ngIf="getAuthService().loggedIn()">
+    <app-sidebar (isPanelExpanded)="isSidebarExpanded($event)"></app-sidebar>
+  </div>
+  <div class="app" [@shiftAnimation]="sidebarToggle ? 'open' : 'closed'">
+    <router-outlet></router-outlet>
   </div>
 </div>

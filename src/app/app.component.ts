@@ -1,27 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { Router } from '@angular/router';
-import { UserProfileService } from './user-profile/user-profile.service';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('shiftAnimation', [
+      state('open', style({ marginLeft: '307px' })),
+      transition('closed <=> open', animate('0.5s ease')),
+    ]),
+  ],
 })
 export class AppComponent{
-  title(title: any) {
-    throw new Error('Method not implemented.')
-  }
+  public pageTitle: string = 'Birthday Reminder'
+  public sidebarToggle: boolean = false
 
-  pageTitle = 'Birthday Reminder'
-
-  sidebarExpanded = true
-
-  constructor(
-    private auth: AuthService,
-    private userService: UserProfileService,
-    private router: Router
-  ) {}
+  constructor(private auth: AuthService) {}
 
   getUserRole() {
     return window.userData.role
@@ -29,5 +25,9 @@ export class AppComponent{
 
   getAuthService() {
     return this.auth
+  }
+
+  isSidebarExpanded(toggle: boolean) {
+    this.sidebarToggle = toggle
   }
 }

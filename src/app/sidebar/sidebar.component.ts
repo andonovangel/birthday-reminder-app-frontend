@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { IGroup } from '../group/group';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group.service';
@@ -11,20 +11,21 @@ import { BirthdayService } from '../birthday/birthday.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   animations: [
-      trigger('panelAnimation', [
-          transition(':enter', [
-            style({ transform: 'translateX(-100%)' }),
-            animate('500ms ease-out', style({ transform: 'translateX(0)' })),
-          ]),
-          transition(':leave', [
-            animate('500ms ease-out', style({ transform: 'translateX(-100%)' })),
-          ]),
+    trigger('panelAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('500ms ease-out', style({ transform: 'translateX(0)' })),
       ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ transform: 'translateX(-100%)' })),
+      ]),
+    ]),
   ]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   public isGroupsPanelExpanded: boolean = false
   public isArchivePanelExpanded: boolean = false
+  @Output() isPanelExpanded = new EventEmitter<boolean>()
   
   public groups?: IGroup[]
   public archivedBirthdays?: IBirthday[]
@@ -81,10 +82,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   handleGroupPanelToggle () {
     this.isGroupsPanelExpanded = !this.isGroupsPanelExpanded
     this.isArchivePanelExpanded = false
+
+    this.isPanelExpanded.emit(this.isGroupsPanelExpanded)
   }
 
   handleArchivePanelToggle () {
     this.isArchivePanelExpanded = !this.isArchivePanelExpanded
     this.isGroupsPanelExpanded = false
+
+    this.isPanelExpanded.emit(this.isArchivePanelExpanded)
   }
 }
