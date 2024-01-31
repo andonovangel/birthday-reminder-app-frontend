@@ -1,75 +1,90 @@
-<div class="container w-50">
+<div class="container form-container">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input  type="text" class="form-control" placeholder="Person name" 
-                    formControlName="name" required/>
-            <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
-                <div *ngIf="formGroup.controls['name'].errors?.['required']">
-                    Name is required
-                </div>
-                <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
-                    Name can have maximum 50 characters
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input type="text" class="form-control" placeholder="Title" 
-                    formControlName="title" required/>
+            <label class="form-label">Reminder Title</label>
+            <input type="text" class="form-control"
+                    formControlName="title" required
+                    [ngClass]="{'invalid-field': formGroup.controls['title'].invalid && (formGroup.controls['title'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['title'].invalid && (formGroup.controls['title'].dirty || formGroup.controls['title'].touched || submitted)" class="error"> 
                 <div *ngIf="formGroup.controls['title'].errors?.['required']">
-                    Title is required
+                    This field is required
                 </div>
                 <div *ngIf="formGroup.controls['title'].errors?.['maxlength']">
-                    Title can have maximum 50 characters
+                    This field can have maximum 50 characters
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label">Phone number</label>
-            <input type="text" class="form-control" placeholder="Phone number"
-                    formControlName="phone_number"/>
-            <div *ngIf="formGroup.controls['phone_number'].invalid" class="error"> 
-                <div *ngIf="formGroup.controls['phone_number'].errors?.['pattern']">
-                    Phone number can only contain numeric digits.
+            <label class="form-label">Birthday Person</label>
+            <input  type="text" class="form-control"
+                    formControlName="name" required
+                    [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}"/>
+            <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
+                <div *ngIf="formGroup.controls['name'].errors?.['required']">
+                    This field is required
+                </div>
+                <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
+                    This field can have maximum 50 characters
                 </div>
             </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Body</label>
-            <textarea class="form-control" rows="3"
-                        formControlName="body"></textarea>
-            <div *ngIf="formGroup.controls['body'].invalid" class="error"> 
-                <div *ngIf="formGroup.controls['body'].errors?.['maxlength']">
-                    Body can have maximum 200 characters
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
+        <div class="mb-3">            
             <label class="form-label">Birthday date</label>
-            <input type="datetime-local" class="form-control" placeholder="Birthday date" 
-                    formControlName="birthday_date" required/>
+            <input type="datetime-local" class="form-control" 
+                    formControlName="birthday_date" required
+                    [ngClass]="{'invalid-field': formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)" class="error"> 
                 <div *ngIf="formGroup.controls['birthday_date'].errors?.['required']">
-                    Birthday date is required
+                    This field is required
+                </div>
+            </div>
+        </div>
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col g-0 m-1">
+                    <label class="form-label">Phone number</label>
+                    <input type="text" class="form-control"
+                            formControlName="phone_number"
+                            [ngClass]="{'invalid-field': formGroup.controls['phone_number'].invalid}"/>
+                    <div *ngIf="formGroup.controls['phone_number'].invalid" class="error"> 
+                        <div *ngIf="formGroup.controls['phone_number'].errors?.['pattern']">
+                            Invalid characters entered. Please use only numbers
+                        </div>
+                    </div>
+                </div>
+                <div class="col g-0 m-1">
+                    <label class="form-label">Group</label>
+                    <select class="form-select" aria-label="Default select example"
+                            formControlName="group_id">
+                        <option selected value=null>Select a group</option>
+                        <option *ngFor="let group of groups" value="{{ group.id }}">{{ group.name }}</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <select class="form-select" aria-label="Default select example"
-                    formControlName="group_id">
-                <option selected value=null>Add to group</option>
-                <option *ngFor="let group of groups" value="{{ group.id }}">{{ group.name }}</option>
-            </select>
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="3"
+                        formControlName="body"
+                        [ngClass]="{'invalid-field': formGroup.controls['body'].invalid}"></textarea>
+            <div *ngIf="formGroup.controls['body'].invalid" class="error"> 
+                <div *ngIf="formGroup.controls['body'].errors?.['maxlength']">
+                    This field can have maximum 200 characters
+                </div>
+            </div>
         </div>
-            
-        <button type="submit" class="btn btn-primary">Create</button>
-        <button class="btn btn-outline-secondary" 
-                type="button"
-                style="width: 80px;"
-                (click)="onBack()">
-            <i class="fa fa-chevron-left"></i> Back
-        </button>
+
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col g-0 m-1">
+                    <button class="btn form-btn back-btn" type="button" (click)="onBack()">
+                        <i class="fa fa-chevron-left"></i> Cancel
+                    </button>
+                </div>
+                <div class="col g-0 m-1">
+                    <button class="btn form-btn create-btn" type="submit">Create</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>

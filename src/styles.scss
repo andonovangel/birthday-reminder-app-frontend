@@ -12,3 +12,7 @@ body {
     background-color: $backgroundMasterColor;
     color: #ffffff;
 }
+
+*:focus {
+    outline: none;
+}
