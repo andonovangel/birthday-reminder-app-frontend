@@ -24,7 +24,7 @@
                         [ngClass]="{'invalid-field': formGroup.controls['description'].invalid}"></textarea>
             <div *ngIf="formGroup.controls['description'].invalid" class="error"> 
                 <div *ngIf="formGroup.controls['description'].errors?.['maxlength']">
-                    Description can have maximum 200 characters
+                    This field can have maximum 200 characters
                 </div>
             </div>
         </div>
