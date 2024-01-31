@@ -61,6 +61,6 @@ export class GroupCreateComponent implements OnInit, OnDestroy {
   }
 
   onBack(): void {
-    this.router.navigate(['/groups/list']);
+    this.router.navigate(['/birthdays/list']);
   }
 }

@@ -1,15 +1,16 @@
-<div class="container w-50">
+<div class="container form-container">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label class="form-label">Name</label>
+            <label class="form-label">Group Name</label>
             <input  type="text" class="form-control" placeholder="Person name" 
-                    formControlName="name" required/>
+                    formControlName="name" required
+                    [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
                 <div *ngIf="formGroup.controls['name'].errors?.['required']">
-                    Name is required
+                    This field is required
                 </div>
                 <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
-                    Name can have maximum 50 characters
+                    This field can have maximum 50 characters
                 </div>
                 <div *ngIf="nameError" class="error">
                   {{ nameError }}
@@ -19,20 +20,26 @@
         <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea class="form-control" rows="3"
-                        formControlName="description"></textarea>
+                        formControlName="description"
+                        [ngClass]="{'invalid-field': formGroup.controls['description'].invalid}"></textarea>
             <div *ngIf="formGroup.controls['description'].invalid" class="error"> 
                 <div *ngIf="formGroup.controls['description'].errors?.['maxlength']">
                     Description can have maximum 200 characters
                 </div>
             </div>
         </div>
-            
-        <button type="submit" class="btn btn-primary">Create</button>
-        <button class="btn btn-outline-secondary" 
-                type="button"
-                style="width: 80px;"
-                (click)="onBack()">
-            <i class="fa fa-chevron-left"></i> Back
-        </button>
+
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col g-0 m-1">
+                    <button class="btn form-btn back-btn" type="button" (click)="onBack()">
+                        <i class="fa fa-chevron-left"></i> Cancel
+                    </button>
+                </div>
+                <div class="col g-0 m-1">
+                    <button class="btn form-btn create-btn" type="submit">Create</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
