@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       this.loginUserSub = this.auth.loginUser(this.formGroup.value).subscribe({
         next: () => {
-          this.router.navigate(['/welcome'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)

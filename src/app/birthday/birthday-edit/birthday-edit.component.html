@@ -5,7 +5,7 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label class="form-label">Reminder Title</label>
-            <input type="text" class="form-control" placeholder="Title"
+            <input type="text" class="form-control"
                     formControlName="title" required
                     [ngClass]="{'invalid-field': formGroup.controls['title'].invalid && (formGroup.controls['title'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['title'].invalid && (formGroup.controls['title'].dirty || formGroup.controls['title'].touched || submitted)" class="error"> 
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday Person</label>
-            <input type="text" class="form-control" placeholder="Person name"
+            <input type="text" class="form-control"
                     formControlName="name" required
                     [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday date</label>
-            <input type="datetime-local" class="form-control" placeholder="Birthday date"
+            <input type="datetime-local" class="form-control"
                     formControlName="birthday_date" required
                     [ngClass]="{'invalid-field': formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)" class="error"> 
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col g-0 m-1">
                     <label class="form-label">Phone number</label>
-                    <input type="text" class="form-control" placeholder="Phone number"
+                    <input type="text" class="form-control"
                             formControlName="phone_number"
                             [ngClass]="{'invalid-field': formGroup.controls['phone_number'].invalid}"/>
                     <div *ngIf="formGroup.controls['phone_number'].invalid" class="error"> 
