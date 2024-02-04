@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
@@ -13,7 +13,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
     ]),
   ],
 })
-export class AppComponent{
+export class AppComponent {
   public pageTitle: string = 'Birthday Reminder'
   public sidebarToggle: boolean = false
 
