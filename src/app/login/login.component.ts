@@ -47,11 +47,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: err => {
           console.log(err)
-          
-          if (err.error.message) {
-            this.errorMessage = err.error.message
-            this.formGroup.setErrors({'incorrect': true})
-          }
+          this.formGroup.reset()
+          this.errorMessage = 'Incorrect email or password'
         }
       })
     }

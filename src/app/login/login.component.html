@@ -1,39 +1,59 @@
-<div class="container w-50">
+<div class="container form-container">
+  <div class="title">
+    <div class="header">
+      Welcome to  memoflick
+    </div>
+    <div class="subheader">
+      Sign in to your account
+    </div>
+  </div>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div *ngIf="formGroup.invalid && errorMessage" class="alert alert-danger"> 
       {{ errorMessage }}
     </div>
     <div class="form-group mb-4">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-              formControlName="email" required>
-      <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)" class="error"> 
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              formControlName="email" required
+              [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
+      <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error"> 
         <div *ngIf="formGroup.controls['email'].errors?.['required']">
-            Email is required
+            This field is required
         </div>
       </div>
     </div>
     <div class="form-group mb-3">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-              formControlName="password" required>
-      <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].touched || submitted)" class="error"> 
+      <input type="password" class="form-control" id="exampleInputPassword1"
+              formControlName="password" required
+              [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && submitted}">
+      <div *ngIf="formGroup.controls['password'].invalid && submitted" class="error"> 
         <div *ngIf="formGroup.controls['password'].errors?.['required']">
-            Password is required
+          This field is required
         </div>
       </div>
     </div>
-    <div class="row mb-4">
-      <div class="col d-flex justify-content-center">
+    <div class="others">
+      <div class="checkbox">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="form2Example31"  formControlName="remember"/>
-          <label class="form-check-label" for="form2Example31"> Remember me </label>
+          <label class="form-check-label" for="form2Example31">Keep me signed in</label>
         </div>
       </div>
-      <div class="col">
-          <a [routerLink]="['/password-forget']">Forgot password</a>
+      <div class="link">
+          <a [routerLink]="['/password-forget']">Forgot password?</a>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Log in</button>
+    
+    <div class="container mb-3">
+      <div class="row">
+          <div class="col g-0 m-1">
+              <button class="btn form-btn login-btn" type="submit">Sign in</button>
+          </div>
+      </div>
+      <div class="register-link">
+        Don’t have an account? <span [routerLink]="['/register']">Sign up</span>
+      </div>
+  </div>
   </form>
 </div>
