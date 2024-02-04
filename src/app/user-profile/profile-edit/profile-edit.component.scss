@@ -1,14 +1,5 @@
-.ng-valid[required], 
-.ng-valid.required {
-    border-left: 5px solid #42A948;
-}
+@import '../../styles/master/colors.scss';
+@import '../../styles/master/mixins.scss';
+@import '../../styles/master/fonts.scss';
 
-.ng-invalid:not(form) {
-    border-left: 5px solid #a94442;
-}
-
-.error {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: #a94442;
-}
+@include basicForm;

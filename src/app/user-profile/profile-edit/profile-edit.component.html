@@ -1,37 +1,45 @@
-<div class="container w-50" *ngIf="formGroup">
+<div class="container form-container" *ngIf="formGroup">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="form-group mb-4">
         <label>Name</label>
         <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name"
-                formControlName="name" required>
+                formControlName="name" required
+                [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}">
         <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
           <div *ngIf="formGroup.controls['name'].errors?.['required']">
-            Name is required
+            This field is required
           </div>
           <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
-            Name can have maximum 20 characters
-          </div>
-          <div *ngIf="nameError" class="error">
-            {{ nameError }}
+            This field can have maximum 20 characters
           </div>
         </div>
       </div>
       <div class="form-group mb-4">
         <label>Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                formControlName="email" required>
+                formControlName="email" required
+                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
         <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
           <div *ngIf="formGroup.controls['email'].errors?.['required']">
-            Email is required
+            This field is required
           </div>
           <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
             Wrong pattern for email
           </div>
-          <div *ngIf="emailError" class="error">
-            {{ emailError }}
-          </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Edit profile</button>
+
+      <div class="container mb-3">
+        <div class="row">
+            <div class="col g-0 m-1">
+                <button class="btn form-btn back-btn" type="button" (click)="onBack()">
+                    <i class="fa fa-chevron-left"></i> Cancel
+                </button>
+            </div>
+            <div class="col g-0 m-1">
+                <button class="btn form-btn create-btn" type="submit">Edit profile</button>
+            </div>
+        </div>
+    </div>
   </form>
   </div>

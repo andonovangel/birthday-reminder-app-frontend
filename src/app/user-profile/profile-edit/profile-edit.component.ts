@@ -65,27 +65,33 @@ export class ProfileEditComponent implements OnDestroy {
   }
 
   onSubmit() {
-    this.submitted = true
-    
-    this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
-      next: res => {
-        this.router.navigate(['/profile'])
-      },
-      error: err => {
-        console.log(err)
+    if (this.formGroup?.invalid) {
+      this.submitted = true
+    } else {
+      this.updateUserSub = this.userService.updateUser(this.formGroup?.value).subscribe({
+        next: res => {
+          this.router.navigate(['/profile'])
+        },
+        error: err => {
+          console.log(err)
 
-        if (err.error.data['name']) {
-          console.log(err.error.data['name'])
-          this.nameError = err.error.data['name']
-          this.formGroup?.controls['name'].setErrors({'incorrect': true})
+          if (err.error.data['name']) {
+            console.log(err.error.data['name'])
+            this.nameError = err.error.data['name']
+            this.formGroup?.controls['name'].setErrors({'incorrect': true})
+          }
+          
+          if (err.error.data['email']) {
+            console.log(err.error.data['email'])
+            this.emailError = err.error.data['email']
+            this.formGroup?.controls['email'].setErrors({'incorrect': true})
+          }
         }
-        
-        if (err.error.data['email']) {
-          console.log(err.error.data['email'])
-          this.emailError = err.error.data['email']
-          this.formGroup?.controls['email'].setErrors({'incorrect': true})
-        }
-      }
-    })
+      })
+    }
+  }
+
+  onBack(): void {
+    this.router.navigate(['/profile'])
   }
 }
