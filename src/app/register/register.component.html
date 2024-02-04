@@ -1,15 +1,24 @@
-<div class="container w-50">
+<div class="container form-container">
+  <div class="title">
+    <div class="header">
+      Welcome to  memoflick
+    </div>
+    <div class="subheader">
+      Create your account
+    </div>
+  </div>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="form-group mb-4">
       <label>Name</label>
-      <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name"
-              formControlName="name" required>
+      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+              formControlName="name" required
+              [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}">
       <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
         <div *ngIf="formGroup.controls['name'].errors?.['required']">
-          Name is required
+          This field is required
         </div>
         <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
-          Name can have maximum 20 characters
+          This field can have maximum 20 characters
         </div>
         <div *ngIf="nameError" class="error">
           {{ nameError }}
@@ -18,11 +27,12 @@
     </div>
     <div class="form-group mb-4">
       <label>Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-              formControlName="email" required>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              formControlName="email" required
+              [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
       <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
         <div *ngIf="formGroup.controls['email'].errors?.['required']">
-          Email is required
+          This field is required
         </div>
         <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
           Wrong pattern for email
@@ -34,11 +44,12 @@
     </div>
     <div class="form-group mb-4">
       <label>Email confirmation</label>
-      <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email"
-              formControlName="confirmationEmail" required>
+      <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
+              formControlName="confirmationEmail" required
+              [ngClass]="{'invalid-field': formGroup.controls['confirmationEmail'].invalid && (formGroup.controls['confirmationEmail'].touched || submitted)}">
       <div *ngIf="formGroup.controls['confirmationEmail'].invalid && (formGroup.controls['confirmationEmail'].dirty || formGroup.controls['confirmationEmail'].touched || submitted)" class="error"> 
         <div *ngIf="formGroup.controls['confirmationEmail'].errors?.['required']">
-          Email confirmation is required
+          This field is required
         </div>
         <div *ngIf="confirmationEmailError" class="error">
           {{ confirmationEmailError }}
@@ -47,17 +58,18 @@
     </div>
     <div class="form-group mb-3">
       <label>Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-              formControlName="password" required>
+      <input type="password" class="form-control" id="exampleInputPassword1"
+              formControlName="password" required
+              [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && (formGroup.controls['password'].touched || submitted)}">
       <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
         <div *ngIf="formGroup.controls['password'].errors?.['required']">
-          Password is required
+          This field is required
         </div>
         <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
-          Password can have minimum 8 characters
+          This field can have minimum 8 characters
         </div>
         <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
-          Password can have maximum 20 characters
+          This field can have maximum 20 characters
         </div>
         <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
           Wrong pattern for password
@@ -66,17 +78,27 @@
     </div>
     <div class="form-group mb-3">
       <label>Password confirmation</label>
-      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"
-              formControlName="confirmationPassword" required>
+      <input type="password" class="form-control" id="exampleInputPassword2"
+              formControlName="confirmationPassword" required
+              [ngClass]="{'invalid-field': formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].touched || submitted)}">
       <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error"> 
         <div *ngIf="formGroup.controls['confirmationPassword'].errors?.['required']">
-          Password confirmation is required
+          This field is required
         </div>
         <div *ngIf="confirmationPasswordError" class="error">
           {{ confirmationPasswordError }}
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <div class="container mb-3">
+      <div class="row">
+          <div class="col g-0 m-1">
+              <button class="btn form-btn" type="submit">Sign up</button>
+          </div>
+      </div>
+      <div class="form-link">
+        Already have an account? <span [routerLink]="['/login']">Sign in</span>
+      </div>
+    </div>
 </form>
 </div>

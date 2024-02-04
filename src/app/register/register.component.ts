@@ -50,38 +50,41 @@ export class RegisterComponent implements OnInit, OnDestroy{
   }
 
   onSubmit(): void {
-    this.submitted = true
-    this.registerUserSub = this.auth.registerUser(this.formGroup.value).subscribe({
-      next: res => {
-        console.log(res)
-        this.router.navigate(['/welcome'])
-      },
-      error: err => {
-        console.log(err)
-        
-        if (err.error.errors['email']) {
-          this.emailError = err.error.errors['email']
-          this.formGroup.controls['email'].setErrors({'incorrect': true})
-        }
+    if (this.formGroup.invalid) {
+      this.submitted = true
+    } else {
+      this.registerUserSub = this.auth.registerUser(this.formGroup.value).subscribe({
+        next: res => {
+          console.log(res)
+          this.router.navigate(['/welcome'])
+        },
+        error: err => {
+          console.log(err)
+          
+          if (err.error.errors['email']) {
+            this.emailError = err.error.errors['email']
+            this.formGroup.controls['email'].setErrors({'incorrect': true})
+          }
 
-        if (err.error.errors['name']) {
-          this.nameError = err.error.errors['name']
+          if (err.error.errors['name']) {
+            this.nameError = err.error.errors['name']
 
-          this.formGroup.controls['name'].setErrors({'incorrect': true})
-        }
+            this.formGroup.controls['name'].setErrors({'incorrect': true})
+          }
 
-        if (err.error.errors['confirmationEmail']) {
-          this.confirmationEmailError = err.error.errors['confirmationEmail']
+          if (err.error.errors['confirmationEmail']) {
+            this.confirmationEmailError = err.error.errors['confirmationEmail']
 
-          this.formGroup.controls['confirmationEmail'].setErrors({'incorrect': true})
-        }
+            this.formGroup.controls['confirmationEmail'].setErrors({'incorrect': true})
+          }
 
-        if (err.error.errors['confirmationPassword']) {
-          this.confirmationPasswordError = err.error.errors['confirmationPassword']
+          if (err.error.errors['confirmationPassword']) {
+            this.confirmationPasswordError = err.error.errors['confirmationPassword']
 
-          this.formGroup.controls['confirmationPassword'].setErrors({'incorrect': true})
-        }
-      },
-    })
+            this.formGroup.controls['confirmationPassword'].setErrors({'incorrect': true})
+          }
+        },
+      })
+    }
   }
 }
