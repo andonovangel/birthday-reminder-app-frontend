@@ -24,4 +24,8 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getUserSub?.unsubscribe()
   }
+
+  logoutUser() {
+    this.auth.logoutUser()
+  }
 }
