@@ -15,7 +15,7 @@ export class ArchivePanelComponent implements OnDestroy {
   @Input() groups?: IGroup[]
 
   @Output() closePanelToggle = new EventEmitter<void>()
-  @Output() refreshToggle = new EventEmitter<void>()
+  @Output() refreshToggle = new EventEmitter<string>()
 
   private deleteBirthdaySub?: Subscription
   private restoreBirthdaySub?: Subscription
@@ -40,7 +40,7 @@ export class ArchivePanelComponent implements OnDestroy {
       this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
         next: res => {
           console.log(res)
-          this.refreshToggle.emit()
+          this.refreshToggle.emit('deleteBirthday')
         },
         error: err => console.log(err)
       })
@@ -51,7 +51,7 @@ export class ArchivePanelComponent implements OnDestroy {
     this.restoreBirthdaySub = this.birthdayService.restoreBirthday(birthday).subscribe({
       next: res => {
         console.log(res)
-        this.refreshToggle.emit()
+        this.refreshToggle.emit('restoreBirthday')
       },
       error: err => console.log(err)
     })
@@ -62,7 +62,7 @@ export class ArchivePanelComponent implements OnDestroy {
       this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
         next: res => {
           console.log(res)
-          this.refreshToggle.emit()
+          this.refreshToggle.emit('deleteGroup')
         },
         error: err => console.log(err)
       })
@@ -73,7 +73,7 @@ export class ArchivePanelComponent implements OnDestroy {
     this.restoreGroupSub = this.groupService.restoreGroup(group).subscribe({
       next: res => {
         console.log(res)
-        this.refreshToggle.emit()
+        this.refreshToggle.emit('restoreGroup')
       },
       error: err => console.log(err)
     })

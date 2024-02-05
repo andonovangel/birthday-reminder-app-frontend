@@ -11,7 +11,7 @@ import { GroupService } from 'src/app/group/group.service';
 export class GroupsPanelComponent implements OnDestroy{
   @Input() groups?: IGroup[]
   @Output() closePanelToggle = new EventEmitter<void>()
-  @Output() refreshToggle = new EventEmitter<void>()
+  @Output() refreshToggle = new EventEmitter<string>()
   private deleteGroupSub?: Subscription
 
   constructor(private groupService: GroupService) {}
@@ -40,7 +40,7 @@ export class GroupsPanelComponent implements OnDestroy{
       next: res => {
         console.log(res)
         this.isOptionVisible = false
-        this.refreshToggle.emit()
+        this.refreshToggle.emit('deleteGroup')
       },
       error: err => console.log(err)
     })

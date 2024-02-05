@@ -38,7 +38,7 @@
                 <app-groups-panel 
                     [groups]="groups"
                     (closePanelToggle)="handleGroupPanelToggle()"
-                    (refreshToggle)="ngOnInit()">
+                    (refreshToggle)="refreshPanel($event)">
                 </app-groups-panel>
                 <account-pill></account-pill>
             </div>
@@ -49,7 +49,7 @@
                     [birthdays]="archivedBirthdays"
                     [groups]="archivedGroups"
                     (closePanelToggle)="handleArchivePanelToggle()"
-                    (refreshToggle)="ngOnInit()">
+                    (refreshToggle)="refreshPanel($event)">
                 </app-archive-panel>
                 <account-pill></account-pill>
             </div> 

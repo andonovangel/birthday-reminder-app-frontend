@@ -92,4 +92,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.isPanelExpanded.emit(this.isArchivePanelExpanded)
   }
+
+
+
+  refreshPanel(refreshPanel: string) {
+    if (refreshPanel === 'deleteBirthday' || refreshPanel === 'restoreBirthday') {
+      this.getArchivedBirthdays()
+    }
+    else if (refreshPanel === 'deleteGroup' || refreshPanel === 'restoreGroup') {
+      this.getGroups()
+      this.getArchivedGroups()
+    }
+  }
 }
