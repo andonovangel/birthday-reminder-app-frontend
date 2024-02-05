@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBirthday } from '../birthday/birthday';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Subscription } from 'rxjs';
 import { IGroup } from '../group/group';
 
 @Component({

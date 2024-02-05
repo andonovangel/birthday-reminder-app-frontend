@@ -72,8 +72,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   getArchivedGroups() {
     this.getArchivedGroupsSub = this.groupService.getArchivedGroups().subscribe({
-      next: birthdays => {
-        this.archivedGroups = birthdays
+      next: groups => {
+        this.archivedGroups = groups
       },
       error: err => console.log(err)
     })

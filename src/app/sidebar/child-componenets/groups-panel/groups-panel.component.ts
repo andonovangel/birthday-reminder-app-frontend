@@ -31,7 +31,6 @@ export class GroupsPanelComponent implements OnDestroy{
     this.toggle()
     this.optionGroup = group
   }
-
   toggle() {
     this.isOptionVisible = !this.isOptionVisible
   }
@@ -40,6 +39,7 @@ export class GroupsPanelComponent implements OnDestroy{
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
+        this.isOptionVisible = false
         this.refreshToggle.emit()
       },
       error: err => console.log(err)
