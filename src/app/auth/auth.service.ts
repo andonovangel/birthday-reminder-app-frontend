@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, map } from 'rxjs';
+import { Observable, Subject, Subscription, map, tap } from 'rxjs';
 import { IUser } from '../user-profile/user';
 
 @Injectable({
@@ -13,6 +13,9 @@ export class AuthService implements OnDestroy {
   private logoutUrl = 'http://localhost:8000/api/logout'
 
   private logoutUserSub?: Subscription
+
+  private authSubject: Subject<any> = new Subject<any>()
+  public auth$: Observable<any> = this.authSubject.asObservable() 
 
   constructor(
     private http: HttpClient, 
@@ -29,6 +32,9 @@ export class AuthService implements OnDestroy {
         window.isAuthenticated = true
         window.userData = userInfo.user
         return userInfo.user
+      }),
+      tap(() => {
+        this.authSubject.next(true)
       })
     )
   }
@@ -39,6 +45,9 @@ export class AuthService implements OnDestroy {
         window.isAuthenticated = true
         window.userData = userInfo.user
         return userInfo.user;
+      }),
+      tap(() => {
+        this.authSubject.next(true)
       })
     )
   }
@@ -48,14 +57,20 @@ export class AuthService implements OnDestroy {
   }
 
   logoutUser() {
-    this.logoutUserSub = this.http.post<any>(this.logoutUrl, null, { withCredentials: true }).subscribe({
+    this.logoutUserSub = this.http.post<any>(this.logoutUrl, null, { 
+      withCredentials: true 
+    })
+    .pipe(
+      tap(() => {
+        this.authSubject.next(false)
+      })
+    )
+    .subscribe({
       next: () => {
         window.isAuthenticated = false
         this.router.navigate(['/login'])
       },
-      error: err => {
-          console.error('Logout failed:', err)
-      }
+      error: err => console.error('Logout failed:', err)
     })
   }
 }

@@ -13,18 +13,24 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
     ]),
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public pageTitle: string = 'Birthday Reminder'
   public sidebarToggle: boolean = false
 
   constructor(private auth: AuthService) {}
 
+  ngOnInit(): void {
+    this.auth.auth$.subscribe(isLoggedIn => {
+      this.sidebarToggle = this.sidebarToggle && isLoggedIn ? true : false
+    })
+  }
+
   getUserRole() {
     return window.userData.role
   }
 
-  getAuthService() {
-    return this.auth
+  loggedIn() {
+    return this.auth.loggedIn()
   }
 
   isSidebarExpanded(toggle: boolean) {

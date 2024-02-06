@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-light" *ngIf="!getAuthService().loggedIn()">
+<nav class="navbar navbar-expand navbar-light bg-light" *ngIf="!loggedIn()">
   <div class="container-fluid">
     <div class="mx-auto order-0">
       <a class="navbar-brand mx-auto" href="/welcome">{{ pageTitle }}</a>
@@ -16,19 +16,19 @@
   </div>
 </nav>
 
-<div class="main-container container-fluid g-0" *ngIf="getAuthService().loggedIn() else closedSidebar">
-  <div class="sidebar">
-    <app-sidebar (isPanelExpanded)="isSidebarExpanded($event)"></app-sidebar>
-  </div>
-  <div class="app" [@shiftAnimation]="sidebarToggle ? 'open' : 'closed'">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<div class="main-container container-fluid g-0">
+  <ng-container *ngIf="loggedIn(); else closedSidebarContent">
+    <div class="sidebar">
+      <app-sidebar (isPanelExpanded)="isSidebarExpanded($event)"></app-sidebar>
+    </div>
+    <div class="app" [@shiftAnimation]="sidebarToggle ? 'open' : 'closed'">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-container>
 
-<ng-template #closedSidebar>
-  <div class="main-container container-fluid g-0">
+  <ng-template #closedSidebarContent>
     <div class="app">
       <router-outlet></router-outlet>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+</div>
