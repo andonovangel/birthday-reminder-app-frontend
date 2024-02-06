@@ -41,6 +41,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.birthdayService.archivedBirthdays$.subscribe(updatedBirthdays => {
+      this.archivedBirthdays = updatedBirthdays
+    })
+    
     this.getArchivedBirthdays()
     this.getArchivedGroups()
     this.getGroups()

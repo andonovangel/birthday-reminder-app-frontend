@@ -57,11 +57,6 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
         next: res => {
           console.log(res)
           this.closeModal()
-
-          // Refreshes component
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false
-          this.router.onSameUrlNavigation = 'reload'
-          this.router.navigate(['birthdays/.'], { relativeTo: this.route, queryParamsHandling: "merge" })
         },
         error: err => {
           console.log(err)

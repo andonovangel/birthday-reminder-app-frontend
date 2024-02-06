@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, tap, catchError, throwError } from "rxjs";
+import { Observable, tap, Subject } from "rxjs";
 import { IBirthday } from "./birthday";
 
 @Injectable({
@@ -14,6 +14,12 @@ export class BirthdayService {
     private listArchivedBirthdaysUrl = 'http://localhost:8000/api/archived-birthdays'
     private restoreBirthdayUrl = 'http://localhost:8000/api/restore-birthday/'
 
+    private birthdaysSubject: Subject<IBirthday[]> = new Subject<IBirthday[]>()
+    public birthdays$: Observable<IBirthday[]> = this.birthdaysSubject.asObservable()
+
+    private archivedBirthdaysSubject: Subject<IBirthday[]> = new Subject<IBirthday[]>()
+    public archivedBirthdays$: Observable<IBirthday[]> = this.archivedBirthdaysSubject.asObservable()
+
     constructor(private http: HttpClient) {}
 
     getBirthdays(params?: HttpParams): Observable<IBirthday[]> {
@@ -21,6 +27,11 @@ export class BirthdayService {
             withCredentials: true, 
             params: params
         })
+        .pipe(
+            tap((birthdays: IBirthday[]) => {
+                this.birthdaysSubject.next(birthdays)
+            })
+        )
     }
 
     createBirthday(birthday: IBirthday) {
@@ -32,14 +43,37 @@ export class BirthdayService {
     }
   
     deleteBirthday(birthday: IBirthday) {
-        return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, { withCredentials: true })
+        return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, { 
+            withCredentials: true 
+        })
+        .pipe(
+            tap(() => {
+                this.getBirthdays().subscribe()
+                this.getArchivedBirthdays().subscribe()
+            })
+        )
     }
 
     getArchivedBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { withCredentials: true })
+        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { 
+            withCredentials: true 
+        })
+        .pipe(
+            tap((archivedBirthdays: IBirthday[]) => {
+                this.archivedBirthdaysSubject.next(archivedBirthdays)
+            })
+        )
     }
   
     restoreBirthday(birthday: IBirthday) {
-        return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, { withCredentials: true })
+        return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, { 
+            withCredentials: true 
+        })
+        .pipe(
+            tap(() => {
+              this.getBirthdays().subscribe()
+              this.getArchivedBirthdays().subscribe()
+            })
+        )
     }
 }

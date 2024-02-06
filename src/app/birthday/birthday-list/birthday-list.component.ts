@@ -20,6 +20,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     private getBirthdaysSub?: Subscription
     private getGroupsSub?: Subscription
     private deleteBirthdaySub?: Subscription
+    private birthdayObservableSub?: Subscription
 
     public filteredBirthdays: IBirthday[] = []
     public birthdays: IBirthday[] = []
@@ -43,9 +44,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
-    ) { }
+    ) {}
 
     ngOnInit(): void {
+        this.birthdayObservableSub = this.birthdayService.birthdays$.subscribe(updatedBirthdays => {
+            this.birthdays = updatedBirthdays
+            this.filteredBirthdays = updatedBirthdays
+        })
+
         this.route.params.subscribe(params => {
             this.handleRouteParams(params)
         })
@@ -55,6 +61,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         this.getBirthdaysSub?.unsubscribe()
         this.getGroupsSub?.unsubscribe()
         this.deleteBirthdaySub?.unsubscribe()
+        this.birthdayObservableSub?.unsubscribe()
     }
     
     performFilter(filterBy: string): IBirthday[] {
@@ -97,11 +104,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
       this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
         next: res => {
           console.log(res)
-        
-          // Refreshes component
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false
-          this.router.onSameUrlNavigation = 'reload'  
-          this.router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'merge' })
+          this.isOptionVisible = false
         },
         error: err => console.log(err)
       })
