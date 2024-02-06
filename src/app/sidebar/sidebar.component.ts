@@ -44,6 +44,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.birthdayService.archivedBirthdays$.subscribe(updatedBirthdays => {
       this.archivedBirthdays = updatedBirthdays
     })
+
+    this.groupService.groups$.subscribe(updatedGroups => {
+      this.groups = updatedGroups
+    })
+    
+    this.groupService.archivedGroups$.subscribe(updatedArchivedGroups => {
+      this.archivedGroups = updatedArchivedGroups
+    })
     
     this.getArchivedBirthdays()
     this.getArchivedGroups()
@@ -95,17 +103,5 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isGroupsPanelExpanded = false
 
     this.isPanelExpanded.emit(this.isArchivePanelExpanded)
-  }
-
-
-
-  refreshPanel(refreshPanel: string) {
-    if (refreshPanel === 'deleteBirthday' || refreshPanel === 'restoreBirthday') {
-      this.getArchivedBirthdays()
-    }
-    else if (refreshPanel === 'deleteGroup' || refreshPanel === 'restoreGroup') {
-      this.getGroups()
-      this.getArchivedGroups()
-    }
   }
 }

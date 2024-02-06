@@ -37,8 +37,7 @@
             <div class="absolute-container" [@panelAnimation]> 
                 <app-groups-panel 
                     [groups]="groups"
-                    (closePanelToggle)="handleGroupPanelToggle()"
-                    (refreshToggle)="refreshPanel($event)">
+                    (closePanelToggle)="handleGroupPanelToggle()">
                 </app-groups-panel>
                 <account-pill></account-pill>
             </div>
@@ -48,8 +47,7 @@
                 <app-archive-panel
                     [birthdays]="archivedBirthdays"
                     [groups]="archivedGroups"
-                    (closePanelToggle)="handleArchivePanelToggle()"
-                    (refreshToggle)="refreshPanel($event)">
+                    (closePanelToggle)="handleArchivePanelToggle()">
                 </app-archive-panel>
                 <account-pill></account-pill>
             </div> 
