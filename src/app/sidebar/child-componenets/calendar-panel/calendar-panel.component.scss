@@ -33,6 +33,10 @@ svg {
     .left {
         display: flex;
         font-size: $h5;
+
+        .sub-title {
+            font-size: 20px;
+        }
     }
 }
 
