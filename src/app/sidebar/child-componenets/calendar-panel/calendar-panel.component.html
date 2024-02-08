@@ -9,15 +9,17 @@
     </div>
 </div>
 <div class="line-break"></div>
-<ngb-datepicker #dp [(ngModel)]="model" (ngModelChange)="getDate(model)"/>
+<div class="calendar">
+    <ngb-datepicker #dp [(ngModel)]="model" (ngModelChange)="filterBirthdays(model)"/>
+</div>
 <div class="header">
     <div class="left">
-        <div class="title">Upcoming Birthdays</div>              
+        <div class="title">Selected Date</div>              
     </div>
 </div>
 <div class="line-break"></div>
-<div class="list" *ngFor="let birthday of filterdBirthdays">
-    <div class="list-item">
+<div class="list" >
+    <div class="list-item" *ngFor="let birthday of filterdBirthdays">
         <div class="item-link">{{ birthday.name }}</div>        
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { IBirthday } from 'src/app/birthday/birthday';
 
@@ -7,7 +7,7 @@ import { IBirthday } from 'src/app/birthday/birthday';
   templateUrl: './calendar-panel.component.html',
   styleUrls: ['./calendar-panel.component.scss']
 })
-export class CalendarPanelComponent{
+export class CalendarPanelComponent implements OnInit{
   @Output() closePanelToggle = new EventEmitter<void>()
   @Input() birthdays?: IBirthday[]
   public filterdBirthdays?: IBirthday[] = []
@@ -18,11 +18,15 @@ export class CalendarPanelComponent{
     this.model = { year: this.currentDate.getFullYear(), month: this.currentDate.getMonth() + 1, day: this.currentDate.getDate() }
   }
 
+  ngOnInit(): void {
+    this.filterBirthdays(this.model)
+  }
+
   closePanel() {
     this.closePanelToggle.emit()
   }
 
-  getDate(model: NgbDateStruct): void {
+  filterBirthdays(model: NgbDateStruct): void {
     var date = new Date(model.year, model.month - 1, model.day)
     this.filterdBirthdays = this.birthdays?.filter((b) => {
       const bDate = new Date(b.birthday_date);
