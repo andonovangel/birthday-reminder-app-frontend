@@ -38,9 +38,12 @@ export class GroupsPanelComponent implements OnDestroy{
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
-        this.isOptionVisible = false
       },
       error: err => console.log(err)
     })
+  }
+
+  closeOptions() {
+    this.isOptionVisible = false
   }
 }

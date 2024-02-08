@@ -45,7 +45,7 @@ export class GroupCreateComponent implements OnInit, OnDestroy {
       this.createGroupSub = this.groupService.createGroup(this.formGroup.value).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/groups/list'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)

@@ -65,7 +65,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
       this.editGroupSub = this.groupService.editGroup(this.formGroup.value, this.group?.id).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/groups/list'])
+          this.router.navigate(['/birthdays/list'])
         },
         error: err => {
           console.log(err)

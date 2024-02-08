@@ -69,7 +69,6 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
           console.log(err)
         }
       })
-      this.formGroup.reset()
     }
   }
 

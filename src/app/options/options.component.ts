@@ -24,6 +24,7 @@ export class OptionsComponent {
 
   @Output() optionsToggle = new EventEmitter()
   @Output() deleteToggle = new EventEmitter()
+  @Output() clickToggle = new EventEmitter()
 
   constructor() {}
   
@@ -31,10 +32,15 @@ export class OptionsComponent {
     this.optionsToggle.emit()
   }
 
+  toggleClick() {
+    this.clickToggle.emit()
+  }
+
   deleteObj(event: Event, object: IBirthday | IGroup) {
     event.stopPropagation()
     if(confirm("Are you sure to delete \"" + object.name + "\"")) {
       this.deleteToggle.emit(object)
+      this.clickToggle.emit()
     }
   }
 } 

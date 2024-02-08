@@ -36,11 +36,25 @@ export class GroupService {
   }
 
   createGroup(group: IGroup) {
-    return this.http.post<IGroup>(this.createGroupUrl, group, { withCredentials: true })
+    return this.http.post<IGroup>(this.createGroupUrl, group, { 
+      withCredentials: true 
+    })
+    .pipe(
+      tap(() => {
+        this.getGroups().subscribe()
+      })
+    )
   }
   
   editGroup(group: IGroup, id?: number) {
-    return this.http.put<IGroup>(this.editGroupUrl + id, group, { withCredentials: true })
+    return this.http.put<IGroup>(this.editGroupUrl + id, group, { 
+      withCredentials: true 
+    })
+    .pipe(
+      tap(() => {
+        this.getGroups().subscribe()
+      })
+    )
   }
   
   deleteGroup(group: IGroup) {
