@@ -1,0 +1,47 @@
+@import '../../../styles/master/colors.scss';
+@import '../../../styles/master/mixins.scss';
+@import '../../../styles/master/fonts.scss';
+
+ngb-datepicker {
+    background-color: white;
+    color: black;
+    margin-bottom: 15px;
+}
+
+svg {
+    width: 24px;
+    @include brandLightHover;
+}
+
+.line-break {
+    border: 0;
+    border-radius: 5px;
+    border-top: 2px solid white;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+        display: flex;
+        font-size: $h5;
+    }
+}
+
+.list {
+    position: relative;
+    .list-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: $p;
+        margin-bottom: 10px;
+
+        .item-link {
+            @include brandLightHover;
+        }
+    }
+}

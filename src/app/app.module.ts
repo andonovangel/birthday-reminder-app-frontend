@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/groups-panel.component';
 import { SharedModule } from './shared/shared.module';
 import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel/archive-panel.component';
+import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-panel/calendar-panel.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel
     SidebarComponent,
     GroupsPanelComponent,
     ArchivePanelComponent,
+    CalendarPanelComponent,
   ],
   imports: [
     BrowserModule,

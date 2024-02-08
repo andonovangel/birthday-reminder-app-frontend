@@ -25,8 +25,10 @@ import { BirthdayService } from '../birthday/birthday.service';
 export class SidebarComponent implements OnInit, OnDestroy {
   public isGroupsPanelExpanded: boolean = false
   public isArchivePanelExpanded: boolean = false
+  public isCalendarPanelExpanded: boolean = false
   @Output() isPanelExpanded = new EventEmitter<boolean>()
   
+  public birthdays?: IBirthday[]
   public groups?: IGroup[]
   public archivedBirthdays?: IBirthday[]
   public archivedGroups?: IGroup[]
@@ -41,6 +43,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.birthdayService.birthdays$.subscribe(updatedBirthdays => {
+      this.birthdays = updatedBirthdays
+    })
+
     this.birthdayService.archivedBirthdays$.subscribe(updatedBirthdays => {
       this.archivedBirthdays = updatedBirthdays
     })
@@ -53,6 +59,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.archivedGroups = updatedArchivedGroups
     })
     
+    this.getBirthdays()
     this.getArchivedBirthdays()
     this.getArchivedGroups()
     this.getGroups()
@@ -62,6 +69,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.getArchivedBirthdaysSub?.unsubscribe()
     this.getArchivedGroupsSub?.unsubscribe()
     this.getGroupsSub?.unsubscribe()
+  }
+
+  getBirthdays() {
+    this.birthdayService.getBirthdays().subscribe({
+      next: res => {
+        this.birthdays = res
+      },
+      error: err => console.log(err)
+    })
   }
 
   getGroups() {
@@ -94,6 +110,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   handleGroupPanelToggle () {
     this.isGroupsPanelExpanded = !this.isGroupsPanelExpanded
     this.isArchivePanelExpanded = false
+    this.isCalendarPanelExpanded = false
 
     this.isPanelExpanded.emit(this.isGroupsPanelExpanded)
   }
@@ -101,7 +118,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   handleArchivePanelToggle () {
     this.isArchivePanelExpanded = !this.isArchivePanelExpanded
     this.isGroupsPanelExpanded = false
+    this.isCalendarPanelExpanded = false
 
     this.isPanelExpanded.emit(this.isArchivePanelExpanded)
+  }
+
+  handleCalendarPanelToggle () {
+    this.isCalendarPanelExpanded = !this.isCalendarPanelExpanded
+    this.isGroupsPanelExpanded = false
+    this.isArchivePanelExpanded = false
+
+    this.isPanelExpanded.emit(this.isCalendarPanelExpanded)
   }
 }
