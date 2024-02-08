@@ -15,7 +15,11 @@ export class CalendarPanelComponent implements OnInit{
 	public model: NgbDateStruct
   
   constructor() {
-    this.model = { year: this.currentDate.getFullYear(), month: this.currentDate.getMonth() + 1, day: this.currentDate.getDate() }
+    this.model = { 
+      year: this.currentDate.getFullYear(), 
+      month: this.currentDate.getMonth() + 1, 
+      day: this.currentDate.getDate() 
+    }
   }
 
   ngOnInit(): void {

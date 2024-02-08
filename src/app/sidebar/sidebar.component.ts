@@ -33,6 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public archivedBirthdays?: IBirthday[]
   public archivedGroups?: IGroup[]
 
+  private getBirthdaysSub?: Subscription
   private getGroupsSub?: Subscription
   private getArchivedBirthdaysSub?: Subscription
   private getArchivedGroupsSub?: Subscription
@@ -59,15 +60,26 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.archivedGroups = updatedArchivedGroups
     })
     
+    this.getBirthdays()
     this.getArchivedBirthdays()
-    this.getArchivedGroups()
     this.getGroups()
+    this.getArchivedGroups()
   }
 
   ngOnDestroy(): void {
+    this.getBirthdaysSub?.unsubscribe()
     this.getArchivedBirthdaysSub?.unsubscribe()
-    this.getArchivedGroupsSub?.unsubscribe()
     this.getGroupsSub?.unsubscribe()
+    this.getArchivedGroupsSub?.unsubscribe()
+  }
+
+  getBirthdays() {
+    this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
+      next: res => {
+        this.birthdays = res
+      },
+      error: err => console.log(err)
+    })
   }
 
   getGroups() {
