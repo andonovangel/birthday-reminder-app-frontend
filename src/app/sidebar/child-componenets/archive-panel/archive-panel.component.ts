@@ -4,6 +4,7 @@ import { BirthdayService } from 'src/app/birthday/birthday.service';
 import { IBirthday } from 'src/app/birthday/birthday';
 import { IGroup } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
+import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-archive-panel',
@@ -20,7 +21,11 @@ export class ArchivePanelComponent implements OnDestroy {
   private deleteGroupSub?: Subscription
   private restoreGroupSub?: Subscription
 
-  constructor(private birthdayService: BirthdayService, private groupService: GroupService) {}
+  constructor(
+    private birthdayService: BirthdayService, 
+    private groupService: GroupService,
+    private cds: ConfirmationDialogService,
+  ) {}
 
   ngOnDestroy(): void {
     this.deleteBirthdaySub?.unsubscribe()
@@ -29,22 +34,30 @@ export class ArchivePanelComponent implements OnDestroy {
     this.restoreGroupSub?.unsubscribe()
   }
 
-  closePanel() {
+  closePanel(): void {
     this.closePanelToggle.emit()
   }
 
-  deleteBirthday(birthday: IBirthday) {
-    if(confirm("Are you sure to delete " + birthday.name)) {
-      this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
-        next: res => {
-          console.log(res)
-        },
-        error: err => console.log(err)
-      })
-    }
+  confirmBirthdayDeletion(birthday: IBirthday): void {
+    this.cds.confirm("Delete " + birthday.name + "?", 'You can\'t restore it after deleting.', 'Delete')
+    .then((confirmed) => {
+      if(confirmed) {
+        this.deleteBirthday(birthday)
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog'))
   }
 
-  restoreBirthday(birthday: IBirthday) {
+  deleteBirthday(birthday: IBirthday): void {
+    this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
+      next: res => {
+        console.log(res)
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  restoreBirthday(birthday: IBirthday): void {
     this.restoreBirthdaySub = this.birthdayService.restoreBirthday(birthday).subscribe({
       next: res => {
         console.log(res)
@@ -53,18 +66,26 @@ export class ArchivePanelComponent implements OnDestroy {
     })
   }
 
-  deleteGroup(group: IGroup) {
-    if(confirm("Are you sure to delete " + group.name)) {
-      this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
-        next: res => {
-          console.log(res)
-        },
-        error: err => console.log(err)
-      })
-    }
+  confirmGroupDeletion(group: IGroup): void {
+    this.cds.confirm("Delete " + group.name + "?", 'You can\'t restore it after deleting.', 'Delete')
+    .then((confirmed) => {
+      if(confirmed) {
+        this.deleteGroup(group)
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog'))
   }
 
-  restoreGroup(group: IGroup) {
+  deleteGroup(group: IGroup): void {
+    this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
+      next: res => {
+        console.log(res)
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  restoreGroup(group: IGroup): void {
     this.restoreGroupSub = this.groupService.restoreGroup(group).subscribe({
       next: res => {
         console.log(res)

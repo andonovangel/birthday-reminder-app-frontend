@@ -40,7 +40,7 @@ export class OptionsComponent {
   deleteObj(event: Event, object: IBirthday | IGroup): void {
     event.stopPropagation()
 
-    this.cds.confirm("Archive " + object.name + "?", 'You can restore it if you change your mind.')
+    this.cds.confirm("Archive " + object.name + "?", 'You can restore it if you change your mind.', 'Archive')
     .then((confirmed) => {
       if(confirmed) {
         this.deleteToggle.emit(object)

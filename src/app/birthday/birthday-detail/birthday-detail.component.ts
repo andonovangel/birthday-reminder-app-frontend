@@ -44,17 +44,17 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     this.deleteBirthdaysSub?.unsubscribe()
   }
 
-  closeModal() {
+  closeModal(): void {
     this.activeModal.close()
   }
 
-  editBirthday(id: number) {
+  editBirthday(id: number): void {
     this.closeModal()
     this.router.navigate(['/birthdays/edit', id])
   }
 
-  confirmDeletion(birthday: IBirthday) {    
-    this.cds.confirm("Archive " + birthday.name + "?", 'You can restore it if you change your mind.')
+  confirmDeletion(birthday: IBirthday): void {    
+    this.cds.confirm("Archive " + birthday.name + "?", 'You can restore it if you change your mind.', 'Archive')
     .then((confirmed) => {
       if(confirmed) {
         this.deleteBirthday(birthday)
@@ -63,7 +63,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     .catch(() => console.log('User dismissed the dialog'))
   }
 
-  deleteBirthday(birthday: IBirthday) {
+  deleteBirthday(birthday: IBirthday): void {
     this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
       next: res => {
         console.log(res)
@@ -86,11 +86,11 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  getGroup(birthday: IBirthday) {
+  getGroup(birthday: IBirthday): IGroup | undefined {
     return this.groups?.find(x => x.id === birthday.group_id)
   }
 
-  goToGroup(group?: IGroup) {
+  goToGroup(group?: IGroup): void {
     this.closeModal()
     this.router.navigate(['/birthdays/', group?.id])
   }
