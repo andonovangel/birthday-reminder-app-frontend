@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GroupService } from 'src/app/group/group.service';
 import { IGroup } from 'src/app/group/group';
+import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'birthday-detail',
@@ -30,7 +31,8 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute, 
     private router: Router,
     private activeModal: NgbActiveModal,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private cds: ConfirmationDialogService,
   ) {}
 
   ngOnInit(): void {
@@ -51,18 +53,26 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/birthdays/edit', id])
   }
 
+  confirmDeletion(birthday: IBirthday) {    
+    this.cds.confirm("Archive " + birthday.name + "?", 'You can restore it if you change your mind.')
+    .then((confirmed) => {
+      if(confirmed) {
+        this.deleteBirthday(birthday)
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog'))
+  }
+
   deleteBirthday(birthday: IBirthday) {
-    if(confirm("Are you sure to delete " + birthday.name)) {
-      this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
-        next: res => {
-          console.log(res)
-          this.closeModal()
-        },
-        error: err => {
-          console.log(err)
-        }
-      })
-    }
+    this.deleteBirthdaysSub = this.birthdayService.deleteBirthday(birthday).subscribe({
+      next: res => {
+        console.log(res)
+        this.closeModal()
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 
   getGroups(): Subscription {

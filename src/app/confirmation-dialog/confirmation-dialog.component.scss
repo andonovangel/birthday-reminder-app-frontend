@@ -1,0 +1,52 @@
+@import '../styles/master/colors.scss';
+@import '../styles/master/mixins.scss';
+@import '../styles/master/fonts.scss';
+
+.confirmation-modal .modal-content {
+    background-color: #393939;
+    border-radius: 8px;
+
+    .modal-header {
+        border: none;
+        padding-bottom: 5px;
+        justify-content: center;
+    }
+
+    .modal-body {
+        text-align: center;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    .modal-footer { 
+        border: none;    
+        justify-content: center;
+
+        .form-btn {
+            color: white;
+            border: 2px solid $brandBlueColor;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            font-weight: 500;
+        
+            &:hover {
+                background-color: $brandBlueColorMedium;
+                border: 2px solid $brandLightColor;
+            }
+        }
+        
+        .primary-btn {
+            background-color: $brandBlueColor;
+            font-weight: 500;
+        
+            &:hover {
+                background-color: $brandLightColor;
+                border: 2px solid $brandLightColor;
+            }
+        }
+    }
+}

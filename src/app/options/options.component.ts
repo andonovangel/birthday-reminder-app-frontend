@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBirthday } from '../birthday/birthday';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { IGroup } from '../group/group';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-options',
@@ -26,21 +27,26 @@ export class OptionsComponent {
   @Output() deleteToggle = new EventEmitter()
   @Output() clickToggle = new EventEmitter()
 
-  constructor() {}
+  constructor(private cds: ConfirmationDialogService) {}
   
-  handleClickOutside() {
+  handleClickOutside(): void {
     this.optionsToggle.emit()
   }
 
-  toggleClick() {
+  toggleClick(): void {
     this.clickToggle.emit()
   }
 
-  deleteObj(event: Event, object: IBirthday | IGroup) {
+  deleteObj(event: Event, object: IBirthday | IGroup): void {
     event.stopPropagation()
-    if(confirm("Are you sure to delete \"" + object.name + "\"")) {
-      this.deleteToggle.emit(object)
-      this.clickToggle.emit()
-    }
+
+    this.cds.confirm("Archive " + object.name + "?", 'You can restore it if you change your mind.')
+    .then((confirmed) => {
+      if(confirmed) {
+        this.deleteToggle.emit(object)
+        this.clickToggle.emit()
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog'))
   }
 } 

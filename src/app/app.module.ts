@@ -19,6 +19,7 @@ import { GroupsPanelComponent } from './sidebar/child-componenets/groups-panel/g
 import { SharedModule } from './shared/shared.module';
 import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel/archive-panel.component';
 import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-panel/calendar-panel.component';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-pan
     AuthService,
     BirthdayService,
     GroupService,
+    ConfirmationDialogService,
   ],
   bootstrap: [AppComponent]
 })
