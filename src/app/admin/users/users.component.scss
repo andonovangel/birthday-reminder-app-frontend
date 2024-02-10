@@ -13,3 +13,10 @@ input {
     outline: 0; 
     cursor: pointer;
 }
+
+select {
+    width: 100px;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 7px
+}

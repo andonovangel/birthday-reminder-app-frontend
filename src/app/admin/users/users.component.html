@@ -21,7 +21,6 @@
             <th>Role</th>
             <th>Date created</th>
             <th>Last login</th>
-            <th>Edit Role</th>
           </tr>
         </thead>
         <tbody>
@@ -29,10 +28,14 @@
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.role }}</td>
+              <td>
+                <select class="bg-dark text-white" [(ngModel)]="user.role" (change)="onUserRoleChange(user)">
+                  <option selected [value]="user.role">{{ user.role }}</option>
+                  <option *ngFor="let role of getUserRoles(user)" [value]="role">{{ role }}</option>
+                </select>
+              </td>
               <td>{{ user.created_at | date:'medium' }}</td>
               <td>{{ user.last_login | date:'medium' }}</td>
-              <td><a class="btn btn-outline-light" [routerLink]="['/admin/edit/', user.id]">Edit</a></td>
           </tr>
         </tbody>
       </table>
