@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../admin.service';
 import { IUser } from 'src/app/user-profile/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -18,9 +19,8 @@ export class UsersComponent implements OnInit {
   private _listFilter: string = ''
 
   public userRoles: string[] = []
-  public  currentUserRole: string = ''
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private toastr: ToastrService) {}
     
   get listFilter(): string {
     return this._listFilter
@@ -68,8 +68,24 @@ export class UsersComponent implements OnInit {
 
   onUserRoleChange(user: IUser): void {
     this.adminService.editRole({ role: user.role }, user.id).subscribe({
-      next: res => console.log(res),
-      error: err => console.log(err)
+      next: res => {
+        console.log(res)
+        this.showSuccess()
+      },
+      error: err => {
+        console.log(err)
+        this.showError()
+      }
     })
+  }
+
+  showSuccess() {
+    this.toastr.success('User role is changed.', 'Success');
+  }
+
+  showError() {
+    this.toastr.error('Something went wrong.', 'Error', {
+      timeOut: 3000,
+    });
   }
 }

@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel/archive-panel.component';
 import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-panel/calendar-panel.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,
