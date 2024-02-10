@@ -6,7 +6,8 @@
     margin: auto;
     padding-bottom: 10px;
     height: 120px;
-    width: 72%;
+    width: 100%;
+    padding: 0 240px;
 
     display: flex;
     justify-content: center;
@@ -28,6 +29,10 @@
         position: relative;
 
         input {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="white" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>');
+            background-repeat: no-repeat;
+            background-size: 50px 25px;
+            background-position: left -4px bottom 7px;
             background-color: $backgroundMasterColor;
             border-radius: 7px;
             border: 2px $brandBlueColorMedium solid;

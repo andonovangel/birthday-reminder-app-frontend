@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { IBirthday } from "../birthday";
 import { BirthdayService } from "../birthday.service";
@@ -108,11 +108,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         },
         error: err => console.log(err)
       })
-    }
-
-    @ViewChild('reminderSearch') reminderSearch?: ElementRef
-    focusInput() {
-        this.reminderSearch?.nativeElement.focus();
     }
 
     openModal(birthday: IBirthday) {
