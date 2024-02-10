@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
   public formGroup! : FormGroup
   public emailError?: string
   public nameError?: string
-  public confirmationEmailError?: string
   public confirmationPasswordError?: string
   public submitted: boolean = false;
   private registerUserSub?: Subscription
@@ -29,9 +28,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
       email: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]),
-      confirmationEmail: new FormControl('', [
-        Validators.required,
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -70,12 +66,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
             this.nameError = err.error.errors['name']
 
             this.formGroup.controls['name'].setErrors({'incorrect': true})
-          }
-
-          if (err.error.errors['confirmationEmail']) {
-            this.confirmationEmailError = err.error.errors['confirmationEmail']
-
-            this.formGroup.controls['confirmationEmail'].setErrors({'incorrect': true})
           }
 
           if (err.error.errors['confirmationPassword']) {

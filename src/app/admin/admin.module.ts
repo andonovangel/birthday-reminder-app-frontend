@@ -30,7 +30,7 @@ import { AdminEditUserComponent } from './admin-edit-user/admin-edit-user.compon
       },
       { 
         path: '**',
-        redirectTo: 'list',
+        redirectTo: 'users',
         pathMatch: 'full'
       }
     ]),

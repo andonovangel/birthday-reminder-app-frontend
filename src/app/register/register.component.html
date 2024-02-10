@@ -42,20 +42,6 @@
         </div>
       </div>
     </div>
-    <div class="form-group mb-4">
-      <label>Email confirmation</label>
-      <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-              formControlName="confirmationEmail" required
-              [ngClass]="{'invalid-field': formGroup.controls['confirmationEmail'].invalid && (formGroup.controls['confirmationEmail'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['confirmationEmail'].invalid && (formGroup.controls['confirmationEmail'].dirty || formGroup.controls['confirmationEmail'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['confirmationEmail'].errors?.['required']">
-          This field is required
-        </div>
-        <div *ngIf="confirmationEmailError" class="error">
-          {{ confirmationEmailError }}
-        </div>
-      </div>
-    </div>
     <div class="form-group mb-3">
       <label>Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1"

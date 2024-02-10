@@ -15,7 +15,6 @@ export class ProfileEditComponent implements OnDestroy {
   public formGroup?: FormGroup
   public emailError?: string
   public nameError?: string
-  public confirmationEmailError?: string
   public confirmationPasswordError?: string
   public submitted: boolean = false;
   public isFormCreated = false

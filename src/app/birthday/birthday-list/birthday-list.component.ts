@@ -76,8 +76,8 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         this.getBirthdays(id)
     }
 
-    getBirthdays(id: number): void {
-        const observable = (id !== undefined && id !== 0) ?
+    getBirthdays(id?: number): void {
+        const observable = (id !== undefined) ?
             this.groupService.getBirthdaysByGroup(id, this.params) :
             this.birthdayService.getBirthdays(this.params)
 
@@ -96,7 +96,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 this.group = response
                 this.pageTitle = response.name
             },
-            error: () => this.router.navigate(['**']),
+            error: () => this.router.navigate(['/birthdays/list']),
         })
     }
 
@@ -140,14 +140,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     private titleSort: string = 'asc'
     sortRemindersByTitle() {
         this.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.titleSort)
-        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(0)
+        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(undefined)
         this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
     }
 
     private dateSort: string = 'asc'
     sortRemindersByDate() {
         this.params = new HttpParams().set('sortBy', 'birthday_date').set('sortOrder', this.dateSort)
-        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(0)
+        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(undefined)
         this.dateSort = this.dateSort === 'asc' ? 'desc' : 'asc'
     }
 }
