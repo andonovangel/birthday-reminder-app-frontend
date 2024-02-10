@@ -1,46 +1,40 @@
-<div class="card">
+<div class="card bg-dark text-white mt-5">
     <div class="card-header">
         {{pageTitle}}
         {{ filteredUsers.length }}
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4">
-                <input type="text"
-                        [(ngModel)]="listFilter">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Filtered by: {{listFilter}}</h4>
+            <div class="col-md-1">Filter by:</div>
+            <div class="col-md-1">
+                <input class="bg-dark border border-2 border-white text-white rounded-3" type="text" [(ngModel)]="listFilter">
             </div>
         </div>
     </div>
-    <div class='table-responsive'>
-        <table class='table' *ngIf="filteredUsers.length">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Date created</th>
-              <th>Last login</th>
-              <th>Edit Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of filteredUsers">
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.role }}</td>
-                <td>{{ user.created_at | date:'medium' }}</td>
-                <td>{{ user.last_login | date:'medium' }}</td>
-                <td><a [routerLink]="['/admin/edit/', user.id]">Edit</a></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="table-responsive">
+      <table class="table table-hover table-dark table-striped text-center align-middle" *ngIf="filteredUsers.length">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Date created</th>
+            <th>Last login</th>
+            <th>Edit Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.created_at | date:'medium' }}</td>
+              <td>{{ user.last_login | date:'medium' }}</td>
+              <td><a class="btn btn-outline-light" [routerLink]="['/admin/edit/', user.id]">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
       </div>
 </div>

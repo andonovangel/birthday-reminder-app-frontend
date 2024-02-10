@@ -9,7 +9,7 @@ import { IUser } from 'src/app/user-profile/user';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  public pageTitle: string = 'Users List'
+  public pageTitle: string = 'Users'
   public errorMessage: string = ''
   private getUsersSub?: Subscription
 
