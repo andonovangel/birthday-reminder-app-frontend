@@ -64,6 +64,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.getArchivedBirthdays()
     this.getGroups()
     this.getArchivedGroups()
+
+    if (localStorage.getItem('sidebarPanel') === 'groupPanel') this.handleGroupPanelToggle()
+    else if (localStorage.getItem('sidebarPanel') === 'archivePanel') this.handleArchivePanelToggle()
+    else if (localStorage.getItem('sidebarPanel') === 'calendarPanel') this.handleCalendarPanelToggle()
   }
 
   ngOnDestroy(): void {
@@ -114,6 +118,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isArchivePanelExpanded = false
     this.isCalendarPanelExpanded = false
 
+    this.setCurrentOpenedPanel()
+
     this.isPanelExpanded.emit(this.isGroupsPanelExpanded)
   }
 
@@ -121,6 +127,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isArchivePanelExpanded = !this.isArchivePanelExpanded
     this.isGroupsPanelExpanded = false
     this.isCalendarPanelExpanded = false
+
+    this.setCurrentOpenedPanel()
 
     this.isPanelExpanded.emit(this.isArchivePanelExpanded)
   }
@@ -130,6 +138,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isGroupsPanelExpanded = false
     this.isArchivePanelExpanded = false
 
+    this.setCurrentOpenedPanel()
+
     this.isPanelExpanded.emit(this.isCalendarPanelExpanded)
+  }
+
+  setCurrentOpenedPanel() {
+    if (this.isGroupsPanelExpanded) 
+      localStorage.setItem('sidebarPanel', 'groupPanel')
+    else if (this.isArchivePanelExpanded) 
+      localStorage.setItem('sidebarPanel', 'archivePanel')
+    else if (this.isCalendarPanelExpanded) 
+      localStorage.setItem('sidebarPanel', 'calendarPanel')
+    else
+      localStorage.removeItem('sidebarPanel')
   }
 }

@@ -68,6 +68,7 @@ export class AuthService implements OnDestroy {
     .subscribe({
       next: () => {
         window.isAuthenticated = false
+        localStorage.removeItem('sidebarPanel')
         this.router.navigate(['/login'])
       },
       error: err => console.error('Logout failed:', err)
