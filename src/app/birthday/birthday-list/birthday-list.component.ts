@@ -1,41 +1,24 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
 import { IBirthday } from "../birthday";
 import { BirthdayService } from "../birthday.service";
-import { IGroup } from "src/app/group/group";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpParams } from "@angular/common/http";
 import { GroupService } from "src/app/group/group.service";
+import { BirthdayListWrapper } from "../birthday-list.wrapper";
 
 @Component({
     templateUrl: './birthday-list.component.html',
     styleUrls: ['./birthday-list.component.scss']
 })
 export class BirthdayListComponent implements OnInit, OnDestroy {
-    public pageTitle: string = 'All Reminders'
-    public errorMessage: string = ''
+    public data = new BirthdayListWrapper()
 
-    private getBirthdaysSub?: Subscription
-    private getGroupsSub?: Subscription
-    private deleteBirthdaySub?: Subscription
-    private birthdayObservableSub?: Subscription
-
-    public filteredBirthdays: IBirthday[] = []
-    public birthdays: IBirthday[] = []
-    public group?: IGroup
-    
-    public params?: HttpParams
-
-    private _listFilter: string = ''
-    get listFilter(): string {
-        return this._listFilter
-    }
     set listFilter(value: string) {
-        this._listFilter = value
+        this.data._listFilter = value
         console.log('In setter: ', value)
-        this.filteredBirthdays = this.performFilter(value)
+        this.data.filteredBirthdays = this.performFilter(value)
     }
 
     constructor(
@@ -47,9 +30,9 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.birthdayObservableSub = this.birthdayService.birthdays$.subscribe(updatedBirthdays => {
-            this.birthdays = updatedBirthdays
-            this.filteredBirthdays = updatedBirthdays
+        this.data.birthdayObservableSub = this.birthdayService.birthdays$.subscribe(updatedBirthdays => {
+            this.data.birthdays = updatedBirthdays
+            this.data.filteredBirthdays = updatedBirthdays
         })
 
         this.route.params.subscribe(params => {
@@ -58,53 +41,47 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.getBirthdaysSub?.unsubscribe()
-        this.getGroupsSub?.unsubscribe()
-        this.deleteBirthdaySub?.unsubscribe()
-        this.birthdayObservableSub?.unsubscribe()
+        this.data.getBirthdaysSub?.unsubscribe()
+        this.data.getGroupsSub?.unsubscribe()
+        this.data.deleteBirthdaySub?.unsubscribe()
+        this.data.birthdayObservableSub?.unsubscribe()
     }
     
     performFilter(filterBy: string): IBirthday[] {
         filterBy = filterBy.toLocaleLowerCase()
-        return this.birthdays.filter((birthday: IBirthday) =>
+        return this.data.birthdays.filter((birthday: IBirthday) =>
             birthday.title.toLocaleLowerCase().includes(filterBy))
-    }
-
-    private handleRouteParams(params: any): void {
-        const id = params['id']
-        id !== undefined ? this.getGroupById(id) : null
-        this.getBirthdays(id)
     }
 
     getBirthdays(id?: number): void {
         const observable = (id !== undefined) ?
-            this.groupService.getBirthdaysByGroup(id, this.params) :
-            this.birthdayService.getBirthdays(this.params)
+            this.groupService.getBirthdaysByGroup(id, this.data.params) :
+            this.birthdayService.getBirthdays(this.data.params)
 
-        this.getBirthdaysSub = observable.subscribe({
+        this.data.getBirthdaysSub = observable.subscribe({
             next: birthdays => {
-                this.birthdays = birthdays
-                this.filteredBirthdays = this.birthdays
+                this.data.birthdays = birthdays
+                this.data.filteredBirthdays = this.data.birthdays
             },
-            error: err => this.errorMessage = err,
+            error: err => this.data.errorMessage = err,
         })
     }
 
     getGroupById(id: number) {
         this.groupService.getGroup(id).subscribe({
             next: response => {
-                this.group = response
-                this.pageTitle = response.name
+                this.data.group = response
+                this.data.pageTitle = response.name
             },
             error: () => this.router.navigate(['/birthdays/list']),
         })
     }
 
     deleteBirthday(birthday: IBirthday) {
-      this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
+      this.data.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
         next: res => {
           console.log(res)
-          this.isOptionVisible = false
+          this.data.isOptionVisible = false
         },
         error: err => console.log(err)
       })
@@ -117,32 +94,34 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             size: 'lg' 
         })
         modalRef.componentInstance.birthday = birthday
-        modalRef.componentInstance.group = this.group
+        modalRef.componentInstance.group = this.data.group
     }
 
-    public isOptionVisible: boolean = false
-    public optionBirthday?: IBirthday
     toggleReminderOptions(event: Event, birthday: IBirthday) {
         event.stopPropagation()
         this.toggle()
-        this.optionBirthday = birthday
+        this.data.optionBirthday = birthday
     }
 
     toggle() {
-        this.isOptionVisible = !this.isOptionVisible
+        this.data.isOptionVisible = !this.data.isOptionVisible
     }
 
-    private titleSort: string = 'asc'
     sortRemindersByTitle() {
-        this.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.titleSort)
-        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(undefined)
-        this.titleSort = this.titleSort === 'asc' ? 'desc' : 'asc'
+        this.data.params = new HttpParams().set('sortBy', 'title').set('sortOrder', this.data.titleSort)
+        this.data.group ? this.getBirthdays(this.data.group.id) : this.getBirthdays(undefined)
+        this.data.titleSort = this.data.titleSort === 'asc' ? 'desc' : 'asc'
     }
 
-    private dateSort: string = 'asc'
     sortRemindersByDate() {
-        this.params = new HttpParams().set('sortBy', 'birthday_date').set('sortOrder', this.dateSort)
-        this.group ? this.getBirthdays(this.group.id) : this.getBirthdays(undefined)
-        this.dateSort = this.dateSort === 'asc' ? 'desc' : 'asc'
+        this.data.params = new HttpParams().set('sortBy', 'birthday_date').set('sortOrder', this.data.dateSort)
+        this.data.group ? this.getBirthdays(this.data.group.id) : this.getBirthdays(undefined)
+        this.data.dateSort = this.data.dateSort === 'asc' ? 'desc' : 'asc'
+    }
+
+    private handleRouteParams(params: any): void {
+        const id = params['id']
+        id !== undefined ? this.getGroupById(id) : null
+        this.getBirthdays(id)
     }
 }
