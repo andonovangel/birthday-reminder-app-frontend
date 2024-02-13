@@ -70,13 +70,22 @@ export class UsersComponent implements OnInit {
     this.adminService.editRole({ role: user.role }, user.id).subscribe({
       next: res => {
         console.log(res)
-        this.toastr.success('User role is changed.', 'Success')
+        this.showSuccess()
       },
       error: err => {
         console.log(err)
-        this.toastr.error('Something went wrong.', 'Error', {
-          timeOut: 3000,
-        })
+        this.showError()
       }
     })
-  }}
+  }
+
+  showSuccess() {
+    this.toastr.success('User role is changed.', 'Success');
+  }
+
+  showError() {
+    this.toastr.error('Something went wrong.', 'Error', {
+      timeOut: 3000,
+    });
+  }
+}
