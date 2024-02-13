@@ -118,7 +118,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isArchivePanelExpanded = false
     this.isCalendarPanelExpanded = false
 
-    this.setCurrentOpenedPanel()
+    this.setCurrentOpenPanel()
 
     this.isPanelExpanded.emit(this.isGroupsPanelExpanded)
   }
@@ -128,7 +128,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isGroupsPanelExpanded = false
     this.isCalendarPanelExpanded = false
 
-    this.setCurrentOpenedPanel()
+    this.setCurrentOpenPanel()
 
     this.isPanelExpanded.emit(this.isArchivePanelExpanded)
   }
@@ -138,12 +138,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isGroupsPanelExpanded = false
     this.isArchivePanelExpanded = false
 
-    this.setCurrentOpenedPanel()
+    this.setCurrentOpenPanel()
 
     this.isPanelExpanded.emit(this.isCalendarPanelExpanded)
   }
 
-  setCurrentOpenedPanel() {
+  setCurrentOpenPanel() {
     if (this.isGroupsPanelExpanded) 
       localStorage.setItem('sidebarPanel', 'groupPanel')
     else if (this.isArchivePanelExpanded) 

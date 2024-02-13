@@ -32,11 +32,18 @@
         .icons {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
             
             svg {
                 width: 24px;
                 margin-bottom: 44px;
                 @include brandLightHover    
+            }
+
+            .upperIcons {
+                display: flex;
+                flex-direction: column;
             }
         }
     }
@@ -60,4 +67,8 @@
             justify-content: space-between;
         }
     }   
+}
+
+.openPanel {    
+    color: $brandLightColor;
 }
