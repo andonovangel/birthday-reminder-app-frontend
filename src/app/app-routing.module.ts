@@ -45,10 +45,12 @@ const routes: Routes = [
   },
   { 
     path: 'password-forget',
+    canActivate: [RedirectGuard],
     component: ForgetPasswordComponent,
   },
   { 
     path: 'password-reset/:token',
+    canActivate: [RedirectGuard],
     component: ResetPasswordComponent,
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },

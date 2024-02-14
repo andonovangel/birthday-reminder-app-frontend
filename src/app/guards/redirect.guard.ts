@@ -11,7 +11,7 @@ export class RedirectGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this.authService.loggedIn()) {
-      this.router.navigate(['/welcome'])
+      this.router.navigate(['/birthdays/list'])
     }
     
     return true
