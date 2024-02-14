@@ -31,18 +31,13 @@ export class ProfileEditComponent implements OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.auth.loggedIn()) {
-      this.getUserSub = this.userService.getUser().subscribe({
-        next: (user: any) => {
-          this.user = user
-
-          this.createFormGroup() 
-        },
-        error: (err: any) => {
-          console.log(err)
-        }
-      })
-    }
+    this.getUserSub = this.userService.getUser().subscribe({
+      next: user => {
+        this.user = user
+        this.createFormGroup() 
+      },
+      error: err => console.log(err)
+    })
   }
   
   ngOnDestroy(): void {
@@ -50,7 +45,7 @@ export class ProfileEditComponent implements OnDestroy {
     this.updateUserSub?.unsubscribe()
   }
 
-  createFormGroup() {
+  createFormGroup(): void {
     this.formGroup = new FormGroup({
       username: new FormControl(this.user?.username, [
         Validators.required,
@@ -69,7 +64,7 @@ export class ProfileEditComponent implements OnDestroy {
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.formGroup?.invalid) {
       this.submitted = true
     } else {

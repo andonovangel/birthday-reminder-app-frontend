@@ -1,74 +1,76 @@
-<div class="conatiner py-5 profile-container" *ngIf="user">
-  <div class="header">Welcome to your profile</div>
-
-
-  <div class="icon" (click)="toggleOptionsVisibility()">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>  
-  </div>
-  <div class="options-visibility" [@options] *ngIf="isOptionVisible">
-    <div class="options" >
-      <div class="option" [routerLink]="['/profile/edit']">
-        <i class="fa-solid fa-pen"></i> Edit Profile
+<div class="container" *ngIf="user">
+  <div class="conatiner py-5 profile-container">
+    <div class="header">Welcome to your profile {{ user.name }}</div>
+  
+  
+    <div class="icon" (click)="toggleOptionsVisibility()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>  
+    </div>
+    <div class="options-visibility" [@options] *ngIf="isOptionVisible">
+      <div class="options" >
+        <div class="option" [routerLink]="['/profile/edit']">
+          <i class="fa-solid fa-pen"></i> Edit Profile
+        </div>
+        <div class="option" [routerLink]="['/profile/password-change']">
+          <i class="fa-solid fa-lock"></i> Change Password
+        </div>
+        <div class="option" (click)="logoutUser()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </div>
       </div>
-      <div class="option" [routerLink]="['/profile/password-change']">
-        <i class="fa-solid fa-lock"></i> Change Password
+    </div>
+  
+    <div class="user-info">
+      <div class="info">
+        <div class="row">
+          <div class="col-sm-2">
+            <p class="mb-0">Username</p>
+          </div>
+          <div class="col-sm-2">
+            <span>{{ user.username }}</span>
+          </div>
+        </div>
       </div>
-      <div class="option" (click)="logoutUser()">
-        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      <div class="info">
+        <div class="row">
+          <div class="col-sm-2">
+            <p class="mb-0">Full Name</p>
+          </div>
+          <div class="col-sm-5">
+            <span>{{ user.name }} {{ user.surname }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="row">
+          <div class="col-sm-2">
+            <p class="mb-0">Email</p>
+          </div>
+          <div class="col-sm-2">
+            <span>{{ user.email }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="row">
+          <div class="col-sm-2">
+            <p class="mb-0">Joined</p>
+          </div>
+          <div class="col-sm-5">
+            <span>{{ user.created_at | date:'mediumDate' }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="user-info">
-    <div class="info">
-      <div class="row">
-        <div class="col-sm-2">
-          <p class="mb-0">Username</p>
-        </div>
-        <div class="col-sm-2">
-          <span>{{ user.username }}</span>
-        </div>
-      </div>
+  
+  
+  <div class="complete-profile-container" *ngIf="!user?.name?.length || !user?.surname?.length">
+    <div class="header">
+      Your profile is not complete
     </div>
-    <div class="info">
-      <div class="row">
-        <div class="col-sm-2">
-          <p class="mb-0">Full Name</p>
-        </div>
-        <div class="col-sm-5">
-          <span>{{ user.name }} {{ user.surname }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="info">
-      <div class="row">
-        <div class="col-sm-2">
-          <p class="mb-0">Email</p>
-        </div>
-        <div class="col-sm-2">
-          <span>{{ user.email }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="info">
-      <div class="row">
-        <div class="col-sm-2">
-          <p class="mb-0">Joined</p>
-        </div>
-        <div class="col-sm-5">
-          <span>{{ user.created_at | date:'mediumDate' }}</span>
-        </div>
-      </div>
-    </div>
+    <button class="btn btn-primary" [routerLink]="['/profile/edit']">Complete</button>
   </div>
-</div>
-
-
-<div class="complete-profile-container" *ngIf="!user?.name?.length || !user?.surname?.length">
-  <div class="header">
-    Your profile is not complete
-  </div>
-  <button class="btn btn-primary" [routerLink]="['/profile/edit']">Complete</button>
 </div>

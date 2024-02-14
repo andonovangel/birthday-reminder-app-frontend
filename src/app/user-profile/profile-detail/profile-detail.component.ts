@@ -24,19 +24,21 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   constructor (private auth: AuthService, private userService: UserProfileService) {}
 
-  ngOnInit(): void {
-    this.user = window.userData
+  ngOnInit(): void {this.getUserSub = this.userService.getUser().subscribe({
+    next: user => this.user = user,
+    error: err => console.log(err)
+  })
   }
 
   ngOnDestroy(): void {
     this.getUserSub?.unsubscribe()
   }
 
-  logoutUser() {
+  logoutUser(): void {
     this.auth.logoutUser()
   }
 
-  toggleOptionsVisibility() {
+  toggleOptionsVisibility(): void {
     this.isOptionVisible = !this.isOptionVisible
   }
 }
