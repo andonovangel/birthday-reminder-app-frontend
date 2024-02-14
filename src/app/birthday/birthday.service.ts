@@ -76,4 +76,11 @@ export class BirthdayService {
             })
         )
     }
+
+    getBirthdaysByDate(params?: HttpParams): Observable<IBirthday[]> {
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
+            withCredentials: true, 
+            params: params
+        })
+    }
 }

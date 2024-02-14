@@ -21,6 +21,7 @@ import { ArchivePanelComponent } from './sidebar/child-componenets/archive-panel
 import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-panel/calendar-panel.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     BirthdayService,
     GroupService,
     ConfirmationDialogService,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })
