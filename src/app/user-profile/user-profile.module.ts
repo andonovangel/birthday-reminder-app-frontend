@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from '../guards/auth.guard';
-import { ForgetPasswordComponent } from './password-forget/forget-password.component';
-import { ResetPasswordComponent } from './password-reset/reset-password.component';
+import { ForgetPasswordComponent } from '../password/password-forget/forget-password.component';
+import { ResetPasswordComponent } from '../password/password-reset/reset-password.component';
 import { ChangePasswordComponent } from './password-change/change-password.component';
 
 
@@ -34,16 +34,9 @@ import { ChangePasswordComponent } from './password-change/change-password.compo
         canActivate: [AuthGuard],
       },
       { 
-        path: 'password-forget',
-        component: ForgetPasswordComponent,
-      },
-      { 
-        path: 'password-reset/:token',
-        component: ResetPasswordComponent,
-      },
-      { 
         path: 'password-change',
         component: ChangePasswordComponent,
+        canActivate: [AuthGuard],
       },
       { 
         path: '**',

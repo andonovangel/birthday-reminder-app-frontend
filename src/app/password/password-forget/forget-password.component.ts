@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { UserProfileService } from '../user-profile.service';
+import { UserProfileService } from '../../user-profile/user-profile.service';
 
 @Component({
   selector: 'app-forget-password',

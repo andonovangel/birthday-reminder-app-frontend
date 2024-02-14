@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RedirectGuard } from './guards/redirect.guard';
 import { ErrorComponent } from './error/error.component';
+import { ForgetPasswordComponent } from './password/password-forget/forget-password.component';
+import { ResetPasswordComponent } from './password/password-reset/reset-password.component';
 
 const routes: Routes = [
   { 
@@ -40,6 +42,14 @@ const routes: Routes = [
     path: 'login', 
     canActivate: [RedirectGuard],
     component: LoginComponent 
+  },
+  { 
+    path: 'password-forget',
+    component: ForgetPasswordComponent,
+  },
+  { 
+    path: 'password-reset/:token',
+    component: ResetPasswordComponent,
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: ErrorComponent},
