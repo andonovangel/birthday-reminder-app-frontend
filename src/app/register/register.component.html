@@ -9,19 +9,19 @@
   </div>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="form-group mb-4">
-      <label>Name</label>
+      <label>Username</label>
       <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-              formControlName="name" required
-              [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && (formGroup.controls['name'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['name'].invalid && (formGroup.controls['name'].dirty || formGroup.controls['name'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['name'].errors?.['required']">
+              formControlName="username" required
+              [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
+      <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['username'].errors?.['required']">
           This field is required
         </div>
-        <div *ngIf="formGroup.controls['name'].errors?.['maxlength']">
+        <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
           This field can have maximum 20 characters
         </div>
-        <div *ngIf="nameError" class="error">
-          {{ nameError }}
+        <div *ngIf="usernameError" class="error">
+          {{ usernameError }}
         </div>
       </div>
     </div>

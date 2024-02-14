@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent implements OnInit, OnDestroy{
   public formGroup! : FormGroup
   public emailError?: string
-  public nameError?: string
+  public usernameError?: string
   public confirmationPasswordError?: string
   public submitted: boolean = false;
   private registerUserSub?: Subscription
@@ -21,9 +21,15 @@ export class RegisterComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      name: new FormControl('', [
+      username: new FormControl('', [
         Validators.required,
         Validators.maxLength(20)
+      ]),
+      name: new FormControl('', [
+        Validators.nullValidator,
+      ]),
+      surname: new FormControl('', [
+        Validators.nullValidator,
       ]),
       email: new FormControl('', [
         Validators.required,
@@ -62,10 +68,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
             this.formGroup.controls['email'].setErrors({'incorrect': true})
           }
 
-          if (err.error.errors['name']) {
-            this.nameError = err.error.errors['name']
+          if (err.error.errors['username']) {
+            this.usernameError = err.error.errors['username']
 
-            this.formGroup.controls['name'].setErrors({'incorrect': true})
+            this.formGroup.controls['username'].setErrors({'incorrect': true})
           }
 
           if (err.error.errors['confirmationPassword']) {

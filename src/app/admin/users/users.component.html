@@ -16,7 +16,9 @@
         <thead>
           <tr>
             <th>Id</th>
+            <th>Username</th>
             <th>Name</th>
+            <th>Surname</th>
             <th>Email</th>
             <th>Role</th>
             <th>Date created</th>
@@ -26,7 +28,9 @@
         <tbody>
           <tr *ngFor="let user of filteredUsers">
               <td>{{ user.id }}</td>
+              <td>{{ user.username }}</td>
               <td>{{ user.name }}</td>
+              <td>{{ user.surname }}</td>
               <td>{{ user.email }}</td>
               <td>
                 <select class="bg-dark text-white" [(ngModel)]="user.role" (change)="onUserRoleChange(user)">

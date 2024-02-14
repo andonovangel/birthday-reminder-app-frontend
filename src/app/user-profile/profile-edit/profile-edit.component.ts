@@ -14,7 +14,7 @@ import { IUser } from '../user';
 export class ProfileEditComponent implements OnDestroy {
   public formGroup?: FormGroup
   public emailError?: string
-  public nameError?: string
+  public usernameError?: string
   public confirmationPasswordError?: string
   public submitted: boolean = false;
   public isFormCreated = false
@@ -52,7 +52,7 @@ export class ProfileEditComponent implements OnDestroy {
 
   createFormGroup() {
     this.formGroup = new FormGroup({
-      name: new FormControl(this.user?.name, [
+      username: new FormControl(this.user?.username, [
         Validators.required,
         Validators.maxLength(20)
       ]),
@@ -74,10 +74,10 @@ export class ProfileEditComponent implements OnDestroy {
         error: err => {
           console.log(err)
 
-          if (err.error.data['name']) {
-            console.log(err.error.data['name'])
-            this.nameError = err.error.data['name']
-            this.formGroup?.controls['name'].setErrors({'incorrect': true})
+          if (err.error.data['user']) {
+            console.log(err.error.data['user'])
+            this.usernameError = err.error.data['user']
+            this.formGroup?.controls['user'].setErrors({'incorrect': true})
           }
           
           if (err.error.data['email']) {
