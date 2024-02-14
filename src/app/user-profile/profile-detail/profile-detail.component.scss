@@ -76,3 +76,32 @@
         }
     }
 }
+
+.complete-profile-container {
+    width: 500px;
+    background-color: #404040;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 50px auto;
+
+    .header {
+        text-align: center;
+        font-size: $h5;
+        padding-bottom: 50px;
+    }
+
+    button {
+        width: 100%;
+        color: white;
+        border: 2px solid $brandBlueColor;
+        border-radius: 5px;
+        transition: 0.3s;
+        background-color: $brandBlueColor;
+        font-weight: 500;
+    
+        &:hover {
+            background-color: $brandLightColor;
+            border: 2px solid $brandLightColor;
+        }
+    }
+}

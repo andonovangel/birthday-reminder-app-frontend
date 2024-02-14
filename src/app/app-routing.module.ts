@@ -4,7 +4,6 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RedirectGuard } from './guards/redirect.guard';
-import { UserProfileModule } from './user-profile/user-profile.module';
 import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
@@ -21,6 +20,11 @@ const routes: Routes = [
     path: 'groups',
     loadChildren: () =>
       import('./group/group.module').then((b) => b.GroupModule),
+  },
+  { 
+    path: 'profile',
+    loadChildren: () =>
+      import('./user-profile/user-profile.module').then((b) => b.UserProfileModule),
   },
   { 
     path: 'admin',
@@ -44,7 +48,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    UserProfileModule
   ],
   exports: [RouterModule]
 })

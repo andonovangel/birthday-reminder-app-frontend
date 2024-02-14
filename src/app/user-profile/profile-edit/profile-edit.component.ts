@@ -56,6 +56,12 @@ export class ProfileEditComponent implements OnDestroy {
         Validators.required,
         Validators.maxLength(20)
       ]),
+      name: new FormControl(this.user?.name, [
+        Validators.nullValidator,
+      ]),
+      surname: new FormControl(this.user?.surname, [
+        Validators.nullValidator,
+      ]),
       email: new FormControl(this.user?.email, [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),

@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
       this.registerUserSub = this.auth.registerUser(this.formGroup.value).subscribe({
         next: res => {
           console.log(res)
-          this.router.navigate(['/welcome'])
+          this.router.navigate(['/profile'])
         },
         error: err => {
           console.log(err)

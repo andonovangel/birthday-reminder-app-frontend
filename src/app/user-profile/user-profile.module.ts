@@ -24,12 +24,12 @@ import { ChangePasswordComponent } from './password-change/change-password.compo
     ReactiveFormsModule,
     RouterModule.forChild([
       { 
-        path: 'profile',
+        path: '',
         component: ProfileDetailComponent,
         canActivate: [AuthGuard],
       },
       { 
-        path: 'profile-edit',
+        path: 'edit',
         component: ProfileEditComponent,
         canActivate: [AuthGuard],
       },
@@ -45,6 +45,11 @@ import { ChangePasswordComponent } from './password-change/change-password.compo
         path: 'password-change',
         component: ChangePasswordComponent,
       },
+      { 
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
+      }
     ])
   ]
 })

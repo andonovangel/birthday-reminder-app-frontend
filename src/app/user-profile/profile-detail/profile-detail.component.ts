@@ -25,9 +25,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   constructor (private auth: AuthService, private userService: UserProfileService) {}
 
   ngOnInit(): void {
-    if (this.auth.loggedIn()) {
-      this.user = window.userData
-    }
+    this.user = window.userData
   }
 
   ngOnDestroy(): void {
