@@ -1,9 +1,9 @@
 <div class="remindersNav">
-  <div class="col-md-3 mixin-h5">{{ data.pageTitle }}</div>
-  <div class="col-md-5 searchBar">
+  <div class="title mixin-h5">{{ data.pageTitle }}</div>
+  <div class="searchBar">
     <input type="text" [(ngModel)]="listFilter" #reminderSearch>     
   </div>
-  <div class="col-md">
+  <div class="filter">
     <button class="btn-nav" (click)="sortRemindersByTitle()">
       Title
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -11,7 +11,7 @@
       </svg>
     </button>
   </div>
-  <div class="col-md">
+  <div class="filter">
     <button class="btn-nav" (click)="sortRemindersByDate()">
       Date
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -19,7 +19,7 @@
       </svg>
     </button>
   </div>
-  <div class="col-md">
+  <div class="nav-button">
     <button class="btn-nav" [routerLink]="['/birthdays/create']"><i class="fa-regular fa-square-plus"></i></button>
   </div>
 </div>
