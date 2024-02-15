@@ -34,22 +34,14 @@ export class CalendarPanelComponent implements OnInit{
   }
 
   filterBirthdays(model: NgbDateStruct): void {
-    var date = this.datePipe.transform(new Date(model.year, model.month - 1, model.day), 'yyyy-MM-dd') || ''
-    var params = new HttpParams().set('date', date)
+    var date = new Date(model.year, model.month - 1, model.day)
+    this.currentDate = date
 
-    this.birthdayService.getBirthdaysByDate(params).subscribe({
+    this.birthdayService.getBirthdaysByDate(new HttpParams().set('date', this.datePipe.transform(date, 'yyyy-MM-dd') || '')).subscribe({
       next: res => {
         this.filteredBirthdays = res
       },
       error: err => console.log(err)
     })
-
-
-    // this.currentDate = date
-    // this.filterdBirthdays = this.birthdays?.filter((b) => {
-    //   const bDate = new Date(b.birthday_date);
-    //   bDate.setHours(0, 0, 0, 0);
-    //   return bDate.getTime() === date.getTime()
-    // })
   }
 }
