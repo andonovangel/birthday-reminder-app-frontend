@@ -1,55 +1,58 @@
 <div class="container form-container" *ngIf="formGroup">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <div class="form-group mb-4">
-        <label>Username</label>
-        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-                formControlName="username" required
-                [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
-          <div *ngIf="formGroup.controls['username'].errors?.['required']">
-            This field is required
-          </div>
-          <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
-            This field can have maximum 20 characters
-          </div>
+  <h3 class="text-center">
+      Editing your profile
+  </h3>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group mb-4">
+      <label>Username</label>
+      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+              formControlName="username" required
+              [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
+      <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['username'].errors?.['required']">
+          This field is required
+        </div>
+        <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
+          This field can have maximum 20 characters
         </div>
       </div>
-      <div class="form-group mb-4">
-        <label>Name</label>
-        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-            formControlName="name">
-      </div>
-      <div class="form-group mb-4">
-        <label>Surname</label>
-        <input type="text" class="form-control" id="exampleInputSurname1" aria-describedby="surnameHelp"
-          formControlName="surname">
-      </div>
-      <div class="form-group mb-4">
-        <label>Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                formControlName="email" required
-                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
-          <div *ngIf="formGroup.controls['email'].errors?.['required']">
-            This field is required
-          </div>
-          <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
-            Wrong pattern for email
-          </div>
+    </div>
+    <div class="form-group mb-4">
+      <label>Name</label>
+      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+          formControlName="name">
+    </div>
+    <div class="form-group mb-4">
+      <label>Surname</label>
+      <input type="text" class="form-control" id="exampleInputSurname1" aria-describedby="surnameHelp"
+        formControlName="surname">
+    </div>
+    <div class="form-group mb-4">
+      <label>Email</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              formControlName="email" required
+              [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
+      <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['email'].errors?.['required']">
+          This field is required
+        </div>
+        <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
+          Wrong pattern for email
         </div>
       </div>
+    </div>
 
-      <div class="container mb-3">
-        <div class="row">
-            <div class="col g-0 m-1">
-                <button class="btn form-btn back-btn" type="button" (click)="onBack()">
-                    <i class="fa fa-chevron-left"></i> Cancel
-                </button>
-            </div>
-            <div class="col g-0 m-1">
-                <button class="btn form-btn create-btn" type="submit">Edit profile</button>
-            </div>
+    <div class="container mb-3">
+      <div class="row">
+        <div class="col g-0 m-1">
+          <button class="btn form-btn back-btn" type="button" (click)="onBack()">
+            Cancel
+          </button>
         </div>
+        <div class="col g-0 m-1">
+            <button class="btn form-btn create-btn" type="submit">Edit profile</button>
+        </div>
+      </div>
     </div>
   </form>
-  </div>
+</div>
