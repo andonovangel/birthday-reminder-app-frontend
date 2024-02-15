@@ -31,15 +31,38 @@ svg {
 }
 
 .list {
-    position: relative;
-    .list-item {
-        display: flex;
-        justify-content: space-between;
-        font-size: $p;
-        margin-bottom: 10px;
+    height: 675px;
+    overflow: hidden;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
 
-        .item-link {
-            @include brandLightHover;
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $brandLightColor;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: $brandBlueColor;
+    }
+
+    .list-item {
+        position: relative;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            font-size: $p;
+            margin-bottom: 10px;
+            margin-right: 10px;
+    
+            .item-link {
+                @include brandLightHover;
+            }
         }
     }
 }
