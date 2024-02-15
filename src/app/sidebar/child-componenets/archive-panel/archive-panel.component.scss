@@ -37,16 +37,23 @@
         .item-name {
             display: flex;
             align-items: center;
-            text-wrap: balance;
+            word-break: break-word;
             width: 200px;
 
-            svg {
-                margin-right: 23px;
-                width: $icons-small;
+            .icon {
+                svg {
+                    margin-right: 23px;
+                    width: $icons-small;
+                }
             }
         }
 
         .archive-options {
+            display: flex;
+            margin: auto 0;
+            width: 47px;
+            justify-content: space-between;
+
             svg {
                 width: $icons-small;
                 @include brandLightHover;
