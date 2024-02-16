@@ -1,7 +1,7 @@
 <div class="remindersNav">
   <div class="title mixin-h5">{{ data.pageTitle }}</div>
   <div class="searchBar">
-    <input type="text" [(ngModel)]="listFilter" #reminderSearch>     
+    <input type="text" [(ngModel)]="data.listFilter" (input)="onSearchChange()">     
   </div>
   <div class="filter">
     <button class="btn-nav" (click)="sortRemindersByTitle()">

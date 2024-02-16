@@ -15,12 +15,6 @@ import { BirthdayListWrapper } from "../birthday-list.wrapper";
 export class BirthdayListComponent implements OnInit, OnDestroy {
     public data = new BirthdayListWrapper()
 
-    set listFilter(value: string) {
-        this.data._listFilter = value
-        console.log('In setter: ', value)
-        this.data.filteredBirthdays = this.performFilter(value)
-    }
-
     constructor(
         private birthdayService: BirthdayService,
         private groupService: GroupService,
@@ -46,12 +40,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         this.data.deleteBirthdaySub?.unsubscribe()
         this.data.birthdayObservableSub?.unsubscribe()
     }
-    
-    performFilter(filterBy: string): IBirthday[] {
-        filterBy = filterBy.toLocaleLowerCase()
-        return this.data.birthdays.filter((birthday: IBirthday) =>
-            birthday.title.toLocaleLowerCase().includes(filterBy))
-    }
 
     getBirthdays(id?: number): void {
         const observable = (id !== undefined) ?
@@ -65,6 +53,23 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             },
             error: err => this.data.errorMessage = err,
         })
+    }
+
+    onSearchChange() {
+        clearTimeout(this.data.timeout)
+        
+        if (this.data.listFilter.trim() !== '') {
+            this.data.timeout = setTimeout(() => {
+                console.log('In setter: ', this.data.listFilter)
+                this.birthdayService.searchForBirthdays(this.data.listFilter).subscribe({
+                    next: res => this.data.filteredBirthdays = res,
+                    error: err => console.log(err)            
+                })
+            }, 300)
+        }
+        else {
+            this.data.filteredBirthdays = this.data.birthdays
+        }
     }
 
     getGroupById(id: number) {

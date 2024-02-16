@@ -25,4 +25,7 @@ export class BirthdayListWrapper {
     
     public titleSort: string = 'asc'
     public dateSort: string = 'asc'
+    
+    public listFilter: string = ''
+    public timeout: any
 }
