@@ -1,8 +1,21 @@
-.main-container {
+.private-container {
     display: flex;
 
     .app {
         margin: 0 auto;
         width: 1450px;
+    }
+}
+
+
+
+.public-container {
+    .app-nav {
+        position: sticky;
+        top: 70px;
+    }
+
+    .app {
+        margin-top: 122px;
     }
 }

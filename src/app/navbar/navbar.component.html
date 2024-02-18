@@ -1,0 +1,20 @@
+<div class="nav">
+    <div class="nav-left">
+        <a [routerLink]="['/welcome']">
+            <img src="../../assets/logo_transparent_no_text.png" width="25" alt="logo">
+        </a>
+        <a class="link" [routerLink]="['/welcome']">Home</a>
+        <a class="link" [routerLink]="['/login']">About</a>
+        <a class="link" [routerLink]="['/login']">Contact</a>
+    </div>
+    <div class="nav-right">
+        <ng-container *ngIf="!loggedIn(); else loggedInButtons">
+            <button class="secondary-btn" [routerLink]="['/login']">Login</button>
+            <button class="primary-btn" [routerLink]="['/register']">Register</button>
+        </ng-container>
+        <ng-template #loggedInButtons>
+            <button class="secondary-btn" (click)="logout()">Logout</button>
+            <button class="primary-btn" [routerLink]="['/profile']">Profile</button>
+        </ng-template>
+    </div>
+</div>

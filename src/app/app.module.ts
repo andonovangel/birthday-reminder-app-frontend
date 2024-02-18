@@ -22,6 +22,7 @@ import { CalendarPanelComponent } from './sidebar/child-componenets/calendar-pan
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DatePipe } from '@angular/common';
     GroupsPanelComponent,
     ArchivePanelComponent,
     CalendarPanelComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,83 @@
+@import '../styles/master/colors.scss';
+@import '../styles/master/fonts.scss';
+@import '../styles/master/mixins.scss';
+
+.nav {    
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    width: 795px;
+    height: 52px;
+    background-color: $navbarColor;
+    backdrop-filter: blur(33px);
+    border-radius: 16px;
+    font-size: $h5;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: $navbarColorHover;
+    }
+
+    &-left {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        width: 435px;
+    }
+
+    &-right {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 290px;
+
+        .primary-btn {
+            width: 123px;
+            height: 31px;
+            color: white;
+            border: 2px solid $brandBlueColor;
+            border-radius: 5px;
+            transition: 0.3s;
+            
+            background-color: $brandBlueColor;
+            font-weight: 500;
+            font-size: $p;
+        
+            &:hover {
+                background-color: $brandLightColor;
+                border: 2px solid $brandLightColor;
+            }
+        }
+
+        .secondary-btn {
+            width: 123px;
+            height: 31px;
+            color: white;
+            border: 2px solid $brandBlueColor;
+            border-radius: 5px;
+            transition: 0.3s;
+    
+            background-color: transparent;
+            font-weight: 500;
+            font-size: $p;
+        
+            &:hover {
+                background-color: $brandBlueColorMedium;
+                border: 2px solid $brandLightColor;
+            }
+        }
+    }
+
+    .link {
+        text-decoration: none;
+        color: white;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            color: $brandLightColor;
+        }
+    }
+}

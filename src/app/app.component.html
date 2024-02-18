@@ -1,34 +1,21 @@
-<nav class="navbar navbar-expand navbar-light bg-light" *ngIf="!loggedIn()">
-  <div class="container-fluid">
-    <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="/welcome">{{ pageTitle }}</a>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="btn btn-primary m-1" [routerLink]="['/register']">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-primary m-1" [routerLink]="['/login']">Log in</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="main-container container-fluid g-0">
-  <ng-container *ngIf="loggedIn() && inPrivateRoute; else closedSidebarContent">
+<ng-container *ngIf="loggedIn() && inPrivateRoute; else closedSidebarContent">
+  <div class="private-container container-fluid g-0">
     <div class="sidebar">
       <app-sidebar (isPanelExpanded)="isSidebarExpanded($event)"></app-sidebar>
     </div>
     <div class="app" [@shiftAnimation]="sidebarToggle ? 'open' : 'closed'">
       <router-outlet></router-outlet>
     </div>
-  </ng-container>
+  </div>
+</ng-container>
 
-  <ng-template #closedSidebarContent>
+<ng-template #closedSidebarContent>
+  <div class="public-container">
+    <div class="app-nav">
+      <app-navbar></app-navbar>
+    </div>
     <div class="app">
       <router-outlet></router-outlet>
     </div>
-  </ng-template>
-</div>
+  </div>
+</ng-template>
