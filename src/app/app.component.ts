@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +18,26 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 export class AppComponent implements OnInit {
   public pageTitle: string = 'Birthday Reminder'
   public sidebarToggle: boolean = false
+  public inPrivateRoute: boolean = false
+  public publicRoutes: string[] = ['welcome']
 
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.auth.auth$.subscribe(isLoggedIn => {
       this.sidebarToggle = this.sidebarToggle && isLoggedIn ? true : false
     })
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const currentRoute = this.route.snapshot.firstChild?.routeConfig?.path as string
+        this.inPrivateRoute = !this.publicRoutes.includes(currentRoute)
+      })
   }
 
   getUserRole() {

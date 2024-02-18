@@ -17,7 +17,7 @@
 </nav>
 
 <div class="main-container container-fluid g-0">
-  <ng-container *ngIf="loggedIn(); else closedSidebarContent">
+  <ng-container *ngIf="loggedIn() && inPrivateRoute; else closedSidebarContent">
     <div class="sidebar">
       <app-sidebar (isPanelExpanded)="isSidebarExpanded($event)"></app-sidebar>
     </div>
