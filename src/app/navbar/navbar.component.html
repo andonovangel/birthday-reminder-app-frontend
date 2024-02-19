@@ -3,9 +3,9 @@
         <a [routerLink]="['/welcome']">
             <img src="../../assets/logo_transparent_no_text.png" width="25" alt="logo">
         </a>
-        <a class="link" [routerLink]="['/welcome']">Home</a>
-        <a class="link" [routerLink]="['/login']">About</a>
-        <a class="link" [routerLink]="['/login']">Contact</a>
+        <a class="link" href="/welcome#home">Home</a>
+        <a class="link" href="/welcome#about">About</a>
+        <a class="link" href="/welcome#contact">Contact</a>
     </div>
     <div class="nav-right">
         <ng-container *ngIf="!loggedIn(); else loggedInButtons">
