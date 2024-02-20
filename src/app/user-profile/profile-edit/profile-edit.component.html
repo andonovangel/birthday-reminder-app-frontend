@@ -24,7 +24,7 @@
         <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
           This field can have maximum 20 characters
         </div>
-        <div *ngIf="usernameError">
+        <div *ngIf="usernameError && !formGroup.controls['username'].errors?.['required']">
           {{ usernameError }}
         </div>
       </div>
@@ -51,7 +51,7 @@
         <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
           Wrong pattern for email
         </div>
-        <div *ngIf="emailError">
+        <div *ngIf="emailError && !formGroup.controls['email'].errors?.['required']">
           {{ emailError }}
         </div>
       </div>
