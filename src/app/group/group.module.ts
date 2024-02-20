@@ -8,6 +8,7 @@ import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupEditComponent } from './group-edit/group-edit.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthGuard } from '../guards/auth.guard';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: 'list',

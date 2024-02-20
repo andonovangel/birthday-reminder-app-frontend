@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../group.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-group-edit',
@@ -12,37 +13,45 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GroupEditComponent implements OnInit, OnDestroy {
   public group?: IGroup
-  private getGroupsSub?: Subscription
-  private editGroupSub?: Subscription
-  
-  public errorMessage: string = ''
-  public nameError?: string
 
-  submitted: boolean = false
-  formGroup!: FormGroup
+  public submitted: boolean = false
+  public formGroup!: FormGroup
+  public nameError?: String
+  public errorMessage: string = ''
+  
+  private getGroupSub?: Subscription
+  private editGroupSub?: Subscription
 
   constructor(
     private groupService: GroupService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-  
-    this.getGroupsSub = this.groupService.getGroups().subscribe({
-      next: groups => {
-        this.group = groups.find(x => x.id === id)
-
-        this.createFormGroup()
-      },
-      error: err => this.errorMessage = err
-    });
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    this.getGroup(id)
   }
 
   ngOnDestroy(): void {
-    this.getGroupsSub?.unsubscribe()
+    this.getGroupSub?.unsubscribe()
     this.editGroupSub?.unsubscribe()
+  }
+
+  getGroup(id: number): void {
+    this.spinner.show()
+    this.getGroupSub = this.groupService.getGroup(id).subscribe({
+      next: groups => {
+        this.group = groups
+        this.createFormGroup()
+        this.spinner.hide()
+      },
+      error: err => {
+        this.spinner.hide()
+        console.log(err)
+      }
+    })
   }
 
   createFormGroup(): void {
