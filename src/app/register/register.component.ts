@@ -10,11 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy{
-  public formGroup! : FormGroup
+  public formGroup!: FormGroup
   public emailError?: string
   public usernameError?: string
   public confirmationPasswordError?: string
-  public submitted: boolean = false;
+  public submitted: boolean = false
   private registerUserSub?: Subscription
 
   constructor(private auth: AuthService, private router: Router) {}
