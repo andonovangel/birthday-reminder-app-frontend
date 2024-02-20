@@ -6,6 +6,7 @@ import { IBirthday } from '../birthday';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IGroup } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-birthday-edit',
@@ -14,44 +15,53 @@ import { GroupService } from 'src/app/group/group.service';
 })
 export class BirthdayEditComponent implements OnInit, OnDestroy {
   public birthday?: IBirthday
-  private getBirthdaysSub?: Subscription
+  public groups?: IGroup[]
+  
+  public formGroup!: FormGroup
+  public submitted: boolean = false
+
+  private getBirthdaySub?: Subscription
   private editBirthdaySub?: Subscription
   private getGroupsSub?: Subscription
   public errorMessage: string = ''
-
-  public groups?: IGroup[]
-
-  public submitted: boolean = false
-  public formGroup!: FormGroup
 
   constructor(
     private birthdayService: BirthdayService,
     private groupService: GroupService,
     private route: ActivatedRoute, 
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) {}
   
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.getGroupsSub = this.getGroups()
-  
-    this.getBirthdaysSub = this.birthdayService.getBirthdays().subscribe({
-      next: birthdays => {
-        this.birthday = birthdays.find(x => x.id === id)
-
-        this.createFormGroup()
-      },
-      error: err => this.errorMessage = err
-    })
+    this.getGroups()
+    this.getBirthday(id)
   }
 
   ngOnDestroy(): void {
-    this.getBirthdaysSub?.unsubscribe()
+    this.getBirthdaySub?.unsubscribe()
     this.editBirthdaySub?.unsubscribe()
     this.getGroupsSub?.unsubscribe()
   }
 
-  createFormGroup() {
+  getBirthday(id: number): void {
+    this.spinner.show()
+    this.getBirthdaySub = this.birthdayService.getBirthday(id).subscribe({
+      next: birthdays => {
+        this.birthday = birthdays
+        this.createFormGroup()
+        this.spinner.hide()
+      },
+      error: err => {
+        this.spinner.hide()
+        this.errorMessage = err
+        this.router.navigate(['/birthdays/list'])
+      }
+    })
+  }
+
+  createFormGroup(): void {
     this.formGroup = new FormGroup({
       name: new FormControl(this.birthday?.name, [
         Validators.required,
@@ -74,7 +84,7 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
@@ -91,16 +101,16 @@ export class BirthdayEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  getGroups(): Subscription {
-    return this.groupService.getGroups().subscribe({
+  getGroups(): void {
+    this.getGroupsSub =  this.groupService.getGroups().subscribe({
       next: groups => {
         this.groups = groups
       }
     })
   }
 
-  getGroup(birthday: IBirthday) {
-      return this.groups?.find(x => x.id === birthday.group_id)?.name
+  getGroup(birthday: IBirthday): string | undefined {
+    return this.groups?.find(x => x.id === birthday.group_id)?.name
   }
 
   onBack(): void {

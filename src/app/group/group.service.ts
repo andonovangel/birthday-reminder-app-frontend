@@ -35,7 +35,7 @@ export class GroupService {
     )
   }
 
-  createGroup(group: IGroup) {
+  createGroup(group: IGroup): Observable<IGroup> {
     return this.http.post<IGroup>(this.createGroupUrl, group, { 
       withCredentials: true 
     })
@@ -46,7 +46,7 @@ export class GroupService {
     )
   }
   
-  editGroup(group: IGroup, id?: number) {
+  editGroup(group: IGroup, id?: number): Observable<IGroup> {
     return this.http.put<IGroup>(this.editGroupUrl + id, group, { 
       withCredentials: true 
     })
@@ -57,7 +57,7 @@ export class GroupService {
     )
   }
   
-  deleteGroup(group: IGroup) {
+  deleteGroup(group: IGroup): Observable<IGroup> {
     return this.http.delete<IGroup>(this.deleteGroupUrl + group.id, { 
       withCredentials: true 
     })
@@ -80,7 +80,7 @@ export class GroupService {
     )
   }
   
-  restoreGroup(group: IGroup) {
+  restoreGroup(group: IGroup): Observable<IGroup> {
     return this.http.post<IGroup>(this.restoreGroupUrl + group.id, group, { 
       withCredentials: true 
     })
@@ -92,14 +92,14 @@ export class GroupService {
     )
   }
   
-  getBirthdaysByGroup(id: number, params?: HttpParams) {
+  getBirthdaysByGroup(id: number, params?: HttpParams): Observable<IBirthday[]> {
     return this.http.get<IBirthday[]>(this.showGroupUrl + id + '/birthdays', { 
       withCredentials: true,
       params: params
     })
   }
   
-  getGroup(id: number) {
-    return this.http.get<any>(this.showGroupUrl + id, { withCredentials: true })
+  getGroup(id: number): Observable<IGroup> {
+    return this.http.get<IGroup>(this.showGroupUrl + id, { withCredentials: true })
   }
 }

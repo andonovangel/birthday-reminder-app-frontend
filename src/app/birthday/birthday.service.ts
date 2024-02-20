@@ -8,6 +8,7 @@ import { IBirthday } from "./birthday";
 })
 export class BirthdayService {
     private listBirthdaysUrl = 'http://localhost:8000/api/birthdays'
+    private showBirthdayUrl = 'http://localhost:8000/api/birthdays/'
     private searchForBirthdaysUrl = 'http://localhost:8000/api/birthdays/search/'
     private createBirthdayUrl = 'http://localhost:8000/api/birthdays'
     private editBirthdayUrl = 'http://localhost:8000/api/birthdays/'
@@ -34,20 +35,24 @@ export class BirthdayService {
             })
         )
     }
+  
+    getBirthday(id: number): Observable<IBirthday> {
+      return this.http.get<IBirthday>(this.showBirthdayUrl + id, { withCredentials: true })
+    }
 
     searchForBirthdays(value: string): Observable<IBirthday[]> {
         return this.http.get<IBirthday[]>(this.searchForBirthdaysUrl + value, { withCredentials: true})
     }
 
-    createBirthday(birthday: IBirthday) {
+    createBirthday(birthday: IBirthday): Observable<IBirthday> {
         return this.http.post<IBirthday>(this.createBirthdayUrl, birthday, { withCredentials: true })
     }
   
-    editBirthday(birthday: IBirthday, id?: number) {
+    editBirthday(birthday: IBirthday, id?: number): Observable<IBirthday> {
         return this.http.put<IBirthday>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
     }
   
-    deleteBirthday(birthday: IBirthday) {
+    deleteBirthday(birthday: IBirthday): Observable<IBirthday> {
         return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, { 
             withCredentials: true 
         })
@@ -70,7 +75,7 @@ export class BirthdayService {
         )
     }
   
-    restoreBirthday(birthday: IBirthday) {
+    restoreBirthday(birthday: IBirthday): Observable<IBirthday> {
         return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, { 
             withCredentials: true 
         })

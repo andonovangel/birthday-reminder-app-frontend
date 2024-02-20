@@ -8,7 +8,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { BirthdayCreateComponent } from './birthday-create/birthday-create.component';
 import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
-import { IsGroupValidGuard } from '../guards/is-group-valid.guard';
+import { IsIdValidGuard } from '../guards/is-id-valid.guard';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -37,7 +37,7 @@ import { SharedModule } from '../shared/shared.module';
       },
       { 
         path: 'edit/:id',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, IsIdValidGuard],
         component: BirthdayEditComponent,
       },
       { 
@@ -47,7 +47,7 @@ import { SharedModule } from '../shared/shared.module';
       },
       { 
         path: ':id', 
-        canActivate: [IsGroupValidGuard, AuthGuard],
+        canActivate: [IsIdValidGuard, AuthGuard],
         component: BirthdayListComponent,
       },
       { 
