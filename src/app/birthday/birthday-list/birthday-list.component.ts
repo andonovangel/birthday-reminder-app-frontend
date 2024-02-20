@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HttpParams } from "@angular/common/http";
 import { GroupService } from "src/app/group/group.service";
 import { BirthdayListWrapper } from "../birthday-list.wrapper";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     templateUrl: './birthday-list.component.html',
@@ -21,6 +22,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
+        private spinner: NgxSpinnerService,
     ) {}
 
     ngOnInit(): void {
@@ -46,12 +48,17 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             this.groupService.getBirthdaysByGroup(id, this.data.params) :
             this.birthdayService.getBirthdays(this.data.params)
 
+        this.spinner.show()
         this.data.getBirthdaysSub = observable.subscribe({
             next: birthdays => {
                 this.data.birthdays = birthdays
                 this.data.filteredBirthdays = this.data.birthdays
+                this.spinner.hide()
             },
-            error: err => this.data.errorMessage = err,
+            error: err => {
+                this.spinner.hide()
+                this.data.errorMessage = err
+            },
         })
     }
 
@@ -61,9 +68,16 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         if (this.data.listFilter.trim() !== '') {
             this.data.timeout = setTimeout(() => {
                 console.log('In setter: ', this.data.listFilter)
+                this.spinner.show()
                 this.birthdayService.searchForBirthdays(this.data.listFilter).subscribe({
-                    next: res => this.data.filteredBirthdays = res,
-                    error: err => console.log(err)            
+                    next: res => {
+                        this.data.filteredBirthdays = res
+                        this.spinner.hide()
+                    },
+                    error: err => {
+                        this.spinner.hide()
+                        console.log(err)
+                    }            
                 })
             }, 300)
         }

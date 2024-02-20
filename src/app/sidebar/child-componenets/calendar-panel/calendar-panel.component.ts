@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { IBirthday } from 'src/app/birthday/birthday';
 import { BirthdayService } from 'src/app/birthday/birthday.service';
 
@@ -17,7 +18,11 @@ export class CalendarPanelComponent implements OnInit{
   public currentDate: Date = new Date()
 	public model: NgbDateStruct
   
-  constructor(private birthdayService: BirthdayService, private datePipe: DatePipe) {
+  constructor(
+    private birthdayService: BirthdayService, 
+    private datePipe: DatePipe,
+    private spinner: NgxSpinnerService,
+  ) {
     this.model = { 
       year: this.currentDate.getFullYear(), 
       month: this.currentDate.getMonth() + 1, 
@@ -37,11 +42,16 @@ export class CalendarPanelComponent implements OnInit{
     var date = new Date(model.year, model.month - 1, model.day)
     this.currentDate = date
 
+    this.spinner.show('calendar-panel')
     this.birthdayService.getBirthdaysByDate(new HttpParams().set('date', this.datePipe.transform(date, 'yyyy-MM-dd') || '')).subscribe({
       next: res => {
         this.filteredBirthdays = res
+        this.spinner.hide('calendar-panel')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.spinner.hide('calendar-panel')
+        console.log(err)
+      }
     })
   }
 }

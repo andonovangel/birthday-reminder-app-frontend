@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { IUser } from '../user';
 import { UserProfileService } from '../user-profile.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile-detail',
@@ -22,12 +23,25 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   public isOptionVisible: boolean = false
 
-  constructor (private auth: AuthService, private userService: UserProfileService) {}
+  constructor (
+    private auth: AuthService, 
+    private userService: UserProfileService,
+    private spinner: NgxSpinnerService,
+  ) {}
 
-  ngOnInit(): void {this.getUserSub = this.userService.getUser().subscribe({
-    next: user => this.user = user,
-    error: err => console.log(err)
-  })
+  ngOnInit(): void {    
+    this.spinner.show()
+
+    this.getUserSub = this.userService.getUser().subscribe({
+      next: user => {
+        this.user = user
+        this.spinner.hide()
+      },
+      error: err => {
+        this.spinner.hide()
+        console.log(err)
+      }
+    })
   }
 
   ngOnDestroy(): void {

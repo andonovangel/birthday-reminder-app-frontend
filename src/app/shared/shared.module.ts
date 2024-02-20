@@ -4,6 +4,7 @@ import { OptionsComponent } from '../options/options.component';
 import { ClickOutsideDirective } from '../directives/click-outside.directive';
 import { RouterModule } from '@angular/router';
 import { AccountPillComponent } from '../account-pill/account-pill.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -15,12 +16,14 @@ import { AccountPillComponent } from '../account-pill/account-pill.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule,
   ],
   exports: [
     OptionsComponent,
     ClickOutsideDirective,
     AccountPillComponent,
+    NgxSpinnerModule,
   ]
 })
 export class SharedModule { }

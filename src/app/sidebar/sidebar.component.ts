@@ -1,10 +1,11 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { IGroup } from '../group/group';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { GroupService } from '../group/group.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { IBirthday } from '../birthday/birthday';
 import { BirthdayService } from '../birthday/birthday.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sidebar',
@@ -35,12 +36,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private getBirthdaysSub?: Subscription
   private getGroupsSub?: Subscription
-  private getArchivedBirthdaysSub?: Subscription
-  private getArchivedGroupsSub?: Subscription
+  private getArchivedSub?: Subscription
 
   constructor(
     private groupService: GroupService,
     private birthdayService: BirthdayService,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -61,9 +62,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     })
     
     this.getBirthdays()
-    this.getArchivedBirthdays()
     this.getGroups()
-    this.getArchivedGroups()
+    this.getArchived()
 
     if (localStorage.getItem('sidebarPanel') === 'groupPanel') this.handleGroupPanelToggle()
     else if (localStorage.getItem('sidebarPanel') === 'archivePanel') this.handleArchivePanelToggle()
@@ -72,9 +72,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.getBirthdaysSub?.unsubscribe()
-    this.getArchivedBirthdaysSub?.unsubscribe()
     this.getGroupsSub?.unsubscribe()
-    this.getArchivedGroupsSub?.unsubscribe()
+    this.getArchivedSub?.unsubscribe()
   }
 
   getBirthdays() {
@@ -87,29 +86,34 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   getGroups() {
+    this.spinner.show('groups-panel')
     this.getGroupsSub = this.groupService.getGroups().subscribe({
       next: res => {
         this.groups = res
+        this.spinner.hide('groups-panel')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.spinner.hide('groups-panel')
+        console.log(err)
+      }
     })
   }
 
-  getArchivedBirthdays() {
-    this.getArchivedBirthdaysSub = this.birthdayService.getArchivedBirthdays().subscribe({
-      next: birthdays => {
+  getArchived() {
+    this.spinner.show('archive-panel')
+    this.getArchivedSub = forkJoin({
+      birthdays: this.birthdayService.getArchivedBirthdays(), 
+      groups: this.groupService.getArchivedGroups()
+    }).subscribe({
+      next: ({birthdays, groups}) => {
         this.archivedBirthdays = birthdays
-      },
-      error: err => console.log(err)
-    })
-  }
-
-  getArchivedGroups() {
-    this.getArchivedGroupsSub = this.groupService.getArchivedGroups().subscribe({
-      next: groups => {
         this.archivedGroups = groups
+        this.spinner.hide('archive-panel')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.spinner.hide('archive-panel')
+        console.log(err)
+      }
     })
   }
 

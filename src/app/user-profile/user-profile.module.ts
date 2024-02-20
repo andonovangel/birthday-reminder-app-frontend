@@ -8,6 +8,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { ForgetPasswordComponent } from '../password/password-forget/forget-password.component';
 import { ResetPasswordComponent } from '../password/password-reset/reset-password.component';
 import { ChangePasswordComponent } from './password-change/change-password.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -22,6 +23,7 @@ import { ChangePasswordComponent } from './password-change/change-password.compo
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
       { 
         path: '',

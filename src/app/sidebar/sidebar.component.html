@@ -36,7 +36,16 @@
     </div>
     <div class="expanded-panel sticky-container">
         <ng-container *ngIf="isGroupsPanelExpanded">
-            <div class="absolute-container" [@panelAnimation]> 
+            <div class="absolute-container" [@panelAnimation]>
+                <ngx-spinner 
+                    name="groups-panel"
+                    bdColor = "#00455C" 
+                    size = "medium" 
+                    color = "#fffffffff" 
+                    type = "ball-triangle-path" 
+                    [fullScreen] = "false"
+                >
+                </ngx-spinner>
                 <app-groups-panel 
                     [groups]="groups"
                     (closePanelToggle)="handleGroupPanelToggle()">
@@ -45,7 +54,16 @@
             </div>
         </ng-container>
         <ng-container *ngIf="isArchivePanelExpanded">
-            <div class="absolute-container" [@panelAnimation]> 
+            <div class="absolute-container" [@panelAnimation]>
+                <ngx-spinner 
+                    name="archive-panel"
+                    bdColor = "#00455C" 
+                    size = "medium" 
+                    color = "#fffffffff" 
+                    type = "ball-triangle-path" 
+                    [fullScreen] = "false"
+                >
+                </ngx-spinner>
                 <app-archive-panel
                     [birthdays]="archivedBirthdays"
                     [groups]="archivedGroups"
@@ -55,7 +73,7 @@
             </div> 
         </ng-container>
         <ng-container *ngIf="isCalendarPanelExpanded">
-            <div class="absolute-container" [@panelAnimation]> 
+            <div class="absolute-container" [@panelAnimation]>
                 <app-calendar-panel
                     [birthdays]="birthdays"
                     (closePanelToggle)="handleCalendarPanelToggle()">
