@@ -1,3 +1,12 @@
+<ngx-spinner 
+  bdColor = "#1e1e1e" 
+  size = "large" 
+  color = "#54a9c4" 
+  type = "ball-triangle-path"
+  [fullScreen] = "false"
+>
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
 <div class="container form-container" *ngIf="formGroup">
   <h3 class="text-center">
       Editing your profile
@@ -14,6 +23,9 @@
         </div>
         <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
           This field can have maximum 20 characters
+        </div>
+        <div *ngIf="usernameError">
+          {{ usernameError }}
         </div>
       </div>
     </div>
@@ -38,6 +50,9 @@
         </div>
         <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
           Wrong pattern for email
+        </div>
+        <div *ngIf="emailError">
+          {{ emailError }}
         </div>
       </div>
     </div>

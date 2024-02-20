@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { UserProfileService } from '../user-profile.service';
 import { Subscription } from 'rxjs';
 import { IUser } from '../user';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile-edit',
@@ -15,9 +16,7 @@ export class ProfileEditComponent implements OnDestroy {
   public formGroup?: FormGroup
   public emailError?: string
   public usernameError?: string
-  public confirmationPasswordError?: string
-  public submitted: boolean = false;
-  public isFormCreated = false
+  public submitted: boolean = false
 
   public user?: IUser
 
@@ -28,21 +27,31 @@ export class ProfileEditComponent implements OnDestroy {
     private auth: AuthService, 
     private userService: UserProfileService,
     private router: Router,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
-    this.getUserSub = this.userService.getUser().subscribe({
-      next: user => {
-        this.user = user
-        this.createFormGroup() 
-      },
-      error: err => console.log(err)
-    })
+    this.getUser()
   }
   
   ngOnDestroy(): void {
     this.getUserSub?.unsubscribe()
     this.updateUserSub?.unsubscribe()
+  }
+
+  getUser(): void {
+    this.spinner.show()
+    this.getUserSub = this.userService.getUser().subscribe({
+      next: user => {
+        this.user = user
+        this.createFormGroup()
+        this.spinner.hide() 
+      },
+      error: err => {
+        this.spinner.hide()
+        console.log(err)
+      }
+    })
   }
 
   createFormGroup(): void {
@@ -75,10 +84,10 @@ export class ProfileEditComponent implements OnDestroy {
         error: err => {
           console.log(err)
 
-          if (err.error.data['user']) {
-            console.log(err.error.data['user'])
-            this.usernameError = err.error.data['user']
-            this.formGroup?.controls['user'].setErrors({'incorrect': true})
+          if (err.error.data['username']) {
+            console.log(err.error.data['username'])
+            this.usernameError = err.error.data['username']
+            this.formGroup?.controls['username'].setErrors({'incorrect': true})
           }
           
           if (err.error.data['email']) {
