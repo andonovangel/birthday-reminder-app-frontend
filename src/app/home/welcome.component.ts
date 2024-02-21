@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { IUser } from '../user-profile/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-welcome',
@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit {
   public formGroup!: FormGroup
   public submitted: boolean = false
 
-  constructor (private auth: AuthService) {}
+  constructor (private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -37,6 +37,8 @@ export class WelcomeComponent implements OnInit {
       this.submitted = true
     } else {
       console.log(this.formGroup.value)
+      this.formGroup.reset()
+      this.toastr.success('Message sent.', 'Success')
     }
   }
 }

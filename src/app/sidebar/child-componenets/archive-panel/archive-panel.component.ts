@@ -5,6 +5,7 @@ import { IBirthday } from 'src/app/birthday/birthday';
 import { IGroup } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
 import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-archive-panel',
@@ -25,6 +26,7 @@ export class ArchivePanelComponent implements OnDestroy {
     private birthdayService: BirthdayService, 
     private groupService: GroupService,
     private cds: ConfirmationDialogService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnDestroy(): void {
@@ -52,8 +54,14 @@ export class ArchivePanelComponent implements OnDestroy {
     this.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
       next: res => {
         console.log(res)
+        this.toastr.success('Deleted reminder.', 'Success')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
+        console.log(err)
+      }
     })
   }
 
@@ -61,8 +69,14 @@ export class ArchivePanelComponent implements OnDestroy {
     this.restoreBirthdaySub = this.birthdayService.restoreBirthday(birthday).subscribe({
       next: res => {
         console.log(res)
+        this.toastr.success('Restored reminder.', 'Success')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
+        console.log(err)
+      }
     })
   }
 
@@ -80,8 +94,14 @@ export class ArchivePanelComponent implements OnDestroy {
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
+        this.toastr.success('Deleted group.', 'Success')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
+        console.log(err)
+      }
     })
   }
 
@@ -89,8 +109,14 @@ export class ArchivePanelComponent implements OnDestroy {
     this.restoreGroupSub = this.groupService.restoreGroup(group).subscribe({
       next: res => {
         console.log(res)
+        this.toastr.success('Restored group.', 'Success')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
+        console.log(err)
+      }
     })
   }
 }

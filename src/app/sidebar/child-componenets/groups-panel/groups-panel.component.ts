@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { IGroup } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
@@ -13,7 +14,7 @@ export class GroupsPanelComponent implements OnDestroy{
   @Output() closePanelToggle = new EventEmitter<void>()
   private deleteGroupSub?: Subscription
 
-  constructor(private groupService: GroupService) {}
+  constructor(private groupService: GroupService, private toastr: ToastrService) {}
 
   ngOnDestroy(): void {
     this.deleteGroupSub?.unsubscribe()
@@ -38,8 +39,14 @@ export class GroupsPanelComponent implements OnDestroy{
     this.deleteGroupSub = this.groupService.deleteGroup(group).subscribe({
       next: res => {
         console.log(res)
+        this.toastr.success('Archived group.', 'Success')
       },
-      error: err => console.log(err)
+      error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
+        console.log(err)
+      }
     })
   }
 

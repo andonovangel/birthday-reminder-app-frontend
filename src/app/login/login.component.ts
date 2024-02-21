@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,13 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   public formGroup!: FormGroup
   public submitted: boolean = false
-  public errorMessage?: string
   
   private loginUserSub?: Subscription
 
   constructor(
-    private auth: AuthService, 
-    private router: Router
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: err => {
           console.log(err)
-          this.formGroup.reset()
-          this.errorMessage = 'Incorrect email or password'
+          this.toastr.error('Incorrect email or password.', 'Error', {
+            timeOut: 3000,
+          })
         }
       })
     }
