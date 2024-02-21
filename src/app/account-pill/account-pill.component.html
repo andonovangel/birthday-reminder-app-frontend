@@ -1,6 +1,6 @@
 <div class="pill">
     <div class="account">
-        <span>{{ user?.username }}</span>
+        <span [routerLink]="['/profile']">{{ user?.username }}</span>
         <span>{{ user?.email }}</span>
     </div>
     <i (click)="logoutUser()" class="fa-solid fa-right-from-bracket"></i>
