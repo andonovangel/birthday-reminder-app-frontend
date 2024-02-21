@@ -73,7 +73,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 this.spinner.show()
                 this.birthdayService.searchForBirthdays(this.data.listFilter).subscribe({
                     next: res => {
-                        this.data.filteredBirthdays = res
+                        this.data.filteredBirthdays = res.filter(i => i.group_id === this.data.group?.id)                        
                         this.spinner.hide()
                     },
                     error: err => {
