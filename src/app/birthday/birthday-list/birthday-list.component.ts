@@ -8,6 +8,7 @@ import { HttpParams } from "@angular/common/http";
 import { GroupService } from "src/app/group/group.service";
 import { BirthdayListWrapper } from "../birthday-list.wrapper";
 import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
     templateUrl: './birthday-list.component.html',
@@ -23,6 +24,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private spinner: NgxSpinnerService,
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -101,8 +103,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         next: res => {
           console.log(res)
           this.data.isOptionVisible = false
+          this.toastr.success('Archived reminder.', 'Success')
         },
-        error: err => console.log(err)
+        error: err => {
+            this.toastr.error('Something went wrong.', 'Error', {
+              timeOut: 3000,
+            })
+            console.log(err)
+        }
       })
     }
 

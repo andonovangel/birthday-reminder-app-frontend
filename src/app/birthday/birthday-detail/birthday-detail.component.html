@@ -1,9 +1,9 @@
 <div class="container" *ngIf="birthday">
   <div class="upperBirthdayItem">
     <!-- Left side content -->
-    <div class="group" *ngIf="!group; else showGroupName">
+    <div class="group">
       <span>Group: </span>
-      <a (click)="goToGroup(getGroup(birthday))">{{ getGroup(birthday)?.name }}</a>
+      <a (click)="goToGroup(group)">{{ group?.name }}</a>
     </div>
 
     <!-- Right side content -->
@@ -42,10 +42,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #showGroupName>
-  <div class="group">
-    <span>Group: </span>
-    <a (click)="goToGroup(group)">{{ group?.name }}</a>
-  </div>
-</ng-template>

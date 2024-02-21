@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IBirthday } from '../birthday';
 import { BirthdayService } from '../birthday.service';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GroupService } from 'src/app/group/group.service';
 import { IGroup } from 'src/app/group/group';
 import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'birthday-detail',
@@ -15,37 +16,38 @@ import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmat
   encapsulation: ViewEncapsulation.None
 })
 export class BirthdayDetailComponent implements OnInit, OnDestroy {
-  public pageTitle: string = 'Birthday Details'
-  public birthdays: IBirthday[] = []
+  @Input() birthday: IBirthday = {} as IBirthday
+  @Input() group?: IGroup
   public errorMessage: string = ''
-  public groups?: IGroup[]
   
   private deleteBirthdaysSub?: Subscription
-  private getGroupsSub?: Subscription
-
-  @Input() birthday?: IBirthday
-  @Input() group?: IGroup
+  private getGroupSub?: Subscription
 
   constructor(
-    private birthdayService: BirthdayService, 
-    private route: ActivatedRoute, 
+    private birthdayService: BirthdayService,
     private router: Router,
     private activeModal: NgbActiveModal,
     private groupService: GroupService,
     private cds: ConfirmationDialogService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
-    this.getGroupsSub = this.getGroups()
+    this.getGroup(this.birthday)
   }
 
   ngOnDestroy(): void {
-    this.getGroupsSub?.unsubscribe()
+    this.getGroupSub?.unsubscribe()
     this.deleteBirthdaysSub?.unsubscribe()
   }
 
-  closeModal(): void {
-    this.activeModal.close()
+  getGroup(birthday: IBirthday): void {
+    this.getGroupSub = this.groupService.getGroup(birthday.id).subscribe({
+        next: response => {
+          this.group = response
+        },
+        error: () => this.router.navigate(['/birthdays/list']),
+    })
   }
 
   editBirthday(id: number): void {
@@ -68,30 +70,23 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
       next: res => {
         console.log(res)
         this.closeModal()
+        this.toastr.success('Archived reminder.', 'Success')
       },
       error: err => {
+        this.toastr.error('Something went wrong.', 'Error', {
+          timeOut: 3000,
+        })
         console.log(err)
       }
     })
   }
 
-  getGroups(): Subscription {
-    return this.groupService.getGroups().subscribe({
-      next: groups => {
-        this.groups = groups
-      },
-      error: err => {
-        this.errorMessage = err
-      }
-    })
-  }
-
-  getGroup(birthday: IBirthday): IGroup | undefined {
-    return this.groups?.find(x => x.id === birthday.group_id)
-  }
-
   goToGroup(group?: IGroup): void {
     this.closeModal()
     this.router.navigate(['/birthdays/', group?.id])
+  }
+
+  closeModal(): void {
+    this.activeModal.close()
   }
 }
