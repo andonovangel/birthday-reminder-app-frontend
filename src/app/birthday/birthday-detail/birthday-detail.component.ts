@@ -33,7 +33,7 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getGroup(this.birthday)
+    (this.birthday.group_id && this.group === undefined) && this.getGroup(this.birthday.group_id)
   }
 
   ngOnDestroy(): void {
@@ -41,10 +41,10 @@ export class BirthdayDetailComponent implements OnInit, OnDestroy {
     this.deleteBirthdaysSub?.unsubscribe()
   }
 
-  getGroup(birthday: IBirthday): void {
-    this.getGroupSub = this.groupService.getGroup(birthday.id).subscribe({
-        next: response => {
-          this.group = response
+  getGroup(id: number): void {
+    this.getGroupSub = this.groupService.getGroup(id).subscribe({
+        next: res => {
+          this.group = res
         },
         error: () => this.router.navigate(['/birthdays/list']),
     })

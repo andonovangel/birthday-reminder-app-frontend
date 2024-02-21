@@ -3,7 +3,7 @@
     <!-- Left side content -->
     <div class="group">
       <span>Group: </span>
-      <a (click)="goToGroup(group)">{{ group?.name }}</a>
+      <a *ngIf="group" (click)="goToGroup(group)">{{ group.name }}</a>
     </div>
 
     <!-- Right side content -->
