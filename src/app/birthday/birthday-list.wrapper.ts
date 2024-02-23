@@ -4,10 +4,11 @@ import { IGroup } from "../group/group"
 import { IBirthday } from "./birthday"
 
 export class BirthdayListWrapper {
-    public pageTitle: string = 'All Reminders'
+    public pageTitle: string = ''
     public errorMessage: string = ''
 
     public getBirthdaysSub?: Subscription
+    public getBirthdaysDataSub?: Subscription
     public getGroupsSub?: Subscription
     public deleteBirthdaySub?: Subscription
     public birthdayObservableSub?: Subscription
@@ -16,15 +17,15 @@ export class BirthdayListWrapper {
     public birthdays: IBirthday[] = []
     public group?: IGroup
     
-    public params?: HttpParams
+    public params = new HttpParams()
 
     public _listFilter: string = ''
     
     public isOptionVisible: boolean = false
     public optionBirthday?: IBirthday
     
-    public titleSort: string = 'asc'
-    public dateSort: string = 'asc'
+    public titleSort: string = 'desc'
+    public dateSort: string = 'desc'
     
     public listFilter: string = ''
     public timeout: any

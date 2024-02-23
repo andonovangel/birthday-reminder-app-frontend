@@ -9,7 +9,6 @@ import { IBirthday } from "./birthday";
 export class BirthdayService {
     private listBirthdaysUrl = 'http://localhost:8000/api/birthdays'
     private showBirthdayUrl = 'http://localhost:8000/api/birthdays/'
-    private searchForBirthdaysUrl = 'http://localhost:8000/api/birthdays/search/'
     private createBirthdayUrl = 'http://localhost:8000/api/birthdays'
     private editBirthdayUrl = 'http://localhost:8000/api/birthdays/'
     private deleteBirthdayUrl = 'http://localhost:8000/api/birthdays/'
@@ -24,24 +23,24 @@ export class BirthdayService {
 
     constructor(private http: HttpClient) {}
 
-    getBirthdays(params?: HttpParams): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
-            withCredentials: true, 
-            params: params
-        })
+    getBirthdays(): Observable<IBirthday[]> {
+        return this.getBirthdaysData()
         .pipe(
             tap((birthdays: IBirthday[]) => {
                 this.birthdaysSubject.next(birthdays)
             })
         )
     }
+
+    getBirthdaysData(params?: HttpParams): Observable<IBirthday[]> {
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
+            withCredentials: true, 
+            params: params
+        })
+    }
   
     getBirthday(id: number): Observable<IBirthday> {
       return this.http.get<IBirthday>(this.showBirthdayUrl + id, { withCredentials: true })
-    }
-
-    searchForBirthdays(value: string): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.searchForBirthdaysUrl + value, { withCredentials: true})
     }
 
     createBirthday(birthday: IBirthday): Observable<IBirthday> {
@@ -85,12 +84,5 @@ export class BirthdayService {
               this.getArchivedBirthdays().subscribe()
             })
         )
-    }
-
-    getBirthdaysByDate(params?: HttpParams): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
-            withCredentials: true, 
-            params: params
-        })
     }
 }

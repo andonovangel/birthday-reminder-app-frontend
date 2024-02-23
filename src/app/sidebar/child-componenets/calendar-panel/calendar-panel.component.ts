@@ -43,7 +43,7 @@ export class CalendarPanelComponent implements OnInit{
     this.currentDate = date
 
     this.spinner.show('calendar-panel')
-    this.birthdayService.getBirthdaysByDate(new HttpParams().set('date', this.datePipe.transform(date, 'yyyy-MM-dd') || '')).subscribe({
+    this.birthdayService.getBirthdaysData(new HttpParams().set('date', this.datePipe.transform(date, 'yyyy-MM-dd') || '')).subscribe({
       next: res => {
         this.filteredBirthdays = res
         this.spinner.hide('calendar-panel')
