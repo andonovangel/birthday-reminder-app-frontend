@@ -9,6 +9,7 @@ import { BirthdayListWrapper } from "../birthday-list.wrapper";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
 import { Observable, Subscription } from "rxjs";
+import { sortOrderMap } from "../filtering.map";
 
 @Component({
     templateUrl: './birthday-list.component.html',
@@ -87,7 +88,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
         this.data.timeout = setTimeout(() => {
             console.log('In setter: ', this.data.listFilter)    
-            this.data.params = this.data.params.append('search', this.data.listFilter)           
+            this.data.params = this.data.params.append('search', this.data.listFilter)
             this.spinner.show()
             
             const observable = (this.data.group !== undefined) ?
@@ -96,7 +97,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
             observable.subscribe({
                 next: res => {
-                    this.data.filteredBirthdays = res                      
+                    this.data.filteredBirthdays = res
                     this.spinner.hide()
                 },
                 error: err => {
@@ -108,21 +109,23 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     }
 
     sortRemindersByTitle() {
+        this.data.titleSort = sortOrderMap[this.data.titleSort]
+        
         this.data.params = this.data.params
             .append('sortBy', 'title')
             .append('sortOrder', this.data.titleSort)
 
         this.data.group ? this.getBirthdaysData(this.data.group.id) : this.getBirthdaysData(undefined)
-        this.data.titleSort = this.data.titleSort === 'asc' ? 'desc' : 'asc'
     }
 
     sortRemindersByDate() {
+        this.data.dateSort = sortOrderMap[this.data.dateSort]
+
         this.data.params = this.data.params
             .append('sortBy', 'birthday_date')
             .append('sortOrder', this.data.dateSort)
 
         this.data.group ? this.getBirthdaysData(this.data.group.id) : this.getBirthdaysData(undefined)
-        this.data.dateSort = this.data.dateSort === 'asc' ? 'desc' : 'asc'
     }
 
     getGroupById(id: number) {

@@ -24,8 +24,8 @@ export class BirthdayListWrapper {
     public isOptionVisible: boolean = false
     public optionBirthday?: IBirthday
     
-    public titleSort: string = 'desc'
-    public dateSort: string = 'desc'
+    public titleSort: string = 'none'
+    public dateSort: string = 'none'
     
     public listFilter: string = ''
     public timeout: any
