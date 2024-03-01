@@ -23,6 +23,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminService } from './admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AuthService,
     BirthdayService,
     GroupService,
+    AdminService,
     ConfirmationDialogService,
     DatePipe,
   ],
