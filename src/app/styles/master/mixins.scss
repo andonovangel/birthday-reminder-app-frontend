@@ -68,7 +68,7 @@
 }
 
 @mixin dateInputStyle {
-    input[type="datetime-local"] {
+    input[type="datetime-local"], input[type="date"] {
         &::-webkit-calendar-picker-indicator {
             filter: invert(83%) sepia(10%) saturate(2857%) hue-rotate(162deg) brightness(75%) contrast(107%);
             cursor: pointer;

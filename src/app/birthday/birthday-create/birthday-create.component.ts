@@ -5,6 +5,10 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GroupService } from 'src/app/group/group.service';
 import { IGroup } from 'src/app/group/group';
+import { DatePipe } from '@angular/common';
+import { ConfirmationDialogService } from 'src/app/confirmation-dialog/confirmation-dialog.service';
+import { IBirthday } from '../birthday';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-birthday-create',
@@ -22,7 +26,10 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
   constructor (
     private birthdayService: BirthdayService,
     private groupService: GroupService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe,
+    private cds: ConfirmationDialogService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -59,17 +66,44 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
     if (this.formGroup.invalid) {
       this.submitted = true
     } else {
-      console.log(this.formGroup.value)
-      this.createBirthdaySub = this.birthdayService.createBirthday(this.formGroup.value).subscribe({
-        next: res => {
-          console.log(res)
-          this.router.navigate(['/birthdays/list'])
-        },
-        error: err => {
-          console.log(err)
+      this.datePipe.transform(this.formGroup.value.birthday_date, 'MM-dd') === this.datePipe.transform(new Date(), 'MM-dd') ? 
+        this.confirmEmailReminder(this.formGroup.value) :
+        this.create()
+    }
+  }
+
+  confirmEmailReminder(birthday: IBirthday) {
+    this.cds.confirm("You entered todays date", 'Do you want to be send an email reminder?', 'Send')
+      .then((confirmed) => {
+        this.create()
+        if(confirmed) {
+          this.birthdayService.sendEmail(birthday).subscribe({
+            next: res => {
+              console.log(res)
+              this.toastr.success(res.message, 'Success')
+            },
+            error: err => {
+              this.toastr.error('Something went wrong.', 'Error', {
+                timeOut: 3000,
+              })
+              console.log(err)
+            }
+          })
         }
       })
-    }
+      .catch(() => console.log('User dismissed the dialog'))
+  }
+
+  create() {
+    this.createBirthdaySub = this.birthdayService.createBirthday(this.formGroup.value).subscribe({
+      next: res => {
+        console.log(res)
+        this.router.navigate(['/birthdays/list'])
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 
   getGroups(): Subscription {

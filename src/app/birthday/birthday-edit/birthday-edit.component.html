@@ -42,7 +42,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Birthday date</label>
-            <input type="datetime-local" class="form-control"
+            <input type="date" class="form-control"
                     formControlName="birthday_date" required
                     [ngClass]="{'invalid-field': formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)}"/>
             <div *ngIf="formGroup.controls['birthday_date'].invalid && (formGroup.controls['birthday_date'].touched || submitted)" class="error"> 

@@ -15,6 +15,8 @@ export class BirthdayService {
     private listArchivedBirthdaysUrl = 'http://localhost:8000/api/archived-birthdays'
     private restoreBirthdayUrl = 'http://localhost:8000/api/restore-birthday/'
 
+    private sendEmailUrl = 'http://localhost:8000/api/send-email'
+
     private birthdaysSubject: Subject<IBirthday[]> = new Subject<IBirthday[]>()
     public birthdays$: Observable<IBirthday[]> = this.birthdaysSubject.asObservable()
 
@@ -84,5 +86,9 @@ export class BirthdayService {
               this.getArchivedBirthdays().subscribe()
             })
         )
+    }
+
+    sendEmail(birthday: IBirthday): Observable<any> {
+        return this.http.post<any>(this.sendEmailUrl, birthday, { withCredentials: true })
     }
 }
