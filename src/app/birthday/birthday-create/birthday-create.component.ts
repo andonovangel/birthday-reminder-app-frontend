@@ -73,7 +73,7 @@ export class BirthdayCreateComponent implements OnInit, OnDestroy {
   }
 
   confirmEmailReminder(birthday: IBirthday) {
-    this.cds.confirm("You entered todays date", 'Do you want to be send an email reminder?', 'Send')
+    this.cds.confirm("You entered todays date", 'Do you want to be sent an email reminder?', 'Send')
       .then((confirmed) => {
         this.create()
         if(confirmed) {
