@@ -15,7 +15,7 @@
 <div class="list">
     <div class="list-item" *ngFor="let group of groups">
         <div class="item">
-            <div class="item-link" [routerLink]="['/birthdays/', group.id]">{{ group.name }}</div>
+            <div class="item-link" [routerLink]="['/birthdays/list/', group.id]">{{ group.name }}</div>
             
             <a (click)="toggleReminderOptions($event, group)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

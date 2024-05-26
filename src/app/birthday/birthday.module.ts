@@ -31,6 +31,11 @@ import { SharedModule } from '../shared/shared.module';
         component: BirthdayListComponent,
       },
       { 
+        path: 'list/:id',
+        canActivate: [IsIdValidGuard, AuthGuard],
+        component: BirthdayListComponent,
+      },
+      { 
         path: 'create',
         canActivate: [AuthGuard],
         component: BirthdayCreateComponent,
@@ -44,11 +49,6 @@ import { SharedModule } from '../shared/shared.module';
         path: 'archived',
         canActivate: [AuthGuard],
         component: BirthdayArchivedComponent,
-      },
-      { 
-        path: ':id', 
-        canActivate: [IsIdValidGuard, AuthGuard],
-        component: BirthdayListComponent,
       },
       { 
         path: '**',
