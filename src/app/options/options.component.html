@@ -2,7 +2,6 @@
     [object]="object" [optionObject]="optionObject" 
     clickOutside (clickOutside)="handleClickOutside()" 
     [@options] *ngIf="isOptionVisible && object">
-    
     <div class="options" ngClass="{{ customStyle }}" *ngIf="optionObject === object">
         <div class="option" (click)="toggleClick()" [routerLink]="[editUrl, object.id]">
         <i class="fa-regular fa-pen-to-square"></i> Edit

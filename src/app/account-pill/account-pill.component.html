@@ -3,5 +3,5 @@
         <span [routerLink]="['/profile']">{{ user?.username }}</span>
         <span>{{ user?.email }}</span>
     </div>
-    <i (click)="logoutUser()" class="fa-solid fa-right-from-bracket"></i>
+    <i (click)="logoutUser()" class="fa-solid fa-right-from-bracket" tooltip [tooltipText]="'Logout'"></i>
 </div>
