@@ -8,6 +8,10 @@
     border-top: 2px solid white;
     margin: 1em 0;
     padding: 0;
+
+    &.secondary {
+        border-top: 2px solid rgba(255, 255, 255, 0.5);
+    }
 }
 
 .header {
@@ -15,13 +19,13 @@
     justify-content: space-between;
     align-items: center;
     
-    svg {
-        width: $icons-medium;
+    i {
+        font-size: $icons-small;
+        line-height: $icons-small;
         @include brandLightHover;
     }
 
-    .left {
-        display: flex;
+    .title {
         font-size: $h5;
     }
 }
@@ -60,24 +64,24 @@
                 display: flex;
                 align-items: center;
                 word-break: break-word;
-                width: 180px;
+                margin-right: 16px;
     
-                .icon {
-                    svg {
-                        margin-right: 23px;
-                        width: $icons-small;
-                    }
+                i {
+                    font-size: $icons-small;
+                    line-height: $icons-small;
+                    margin-right: 16px;
                 }
             }
     
             .archive-options {
                 display: flex;
-                margin: auto 0;
-                width: 43px;
+                align-items: center;
                 justify-content: space-between;
-    
-                svg {
-                    width: $icons-small;
+                gap: 8px;
+
+                i {
+                    font-size: $icons-small;
+                    line-height: $icons-small;
                     @include brandLightHover;
                 }
             }
