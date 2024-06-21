@@ -10,7 +10,7 @@
     <div class="icons">
       <button class="btn-filter" tooltip [tooltipText]="'Edit'" (click)="editBirthday(birthday.id)"><i class="fa-regular fa-pen-to-square"></i></button>
       <button class="btn-filter" tooltip [tooltipText]="'Archive'" (click)="confirmDeletion(birthday)"><i class="fa-solid fa-box-archive"></i></button>
-      <button class="btn-filter" tooltip [tooltipText]="'Close'" (click)="closeModal()"><i class="fa-regular fa-circle-xmark"></i></button>
+      <button class="btn-filter" tooltip [tooltipText]="'Close'" [type]="'click'" (click)="closeModal()"><i class="fa-regular fa-circle-xmark"></i></button>
     </div>
   </div>
   

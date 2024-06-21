@@ -1,14 +1,20 @@
-import { ApplicationRef, ComponentRef, Directive, ElementRef, HostListener, Inject, Input, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentRef, Directive, ElementRef, Host, HostListener, Inject, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[tooltip]'
 })
-export class TooltipDirective {
-  @Input() tooltipText: string = '';
+export class TooltipDirective implements OnDestroy {
+  private tooltipComponent?: ComponentRef<TooltipComponent>;
 
-  private tooltipComponent?: ComponentRef<any>;
+  @Input() tooltipText: string = '';
+  @Input() type: 'hover' | 'click' = 'hover';
+
+  @HostListener('click')
+  onMouseClick(): void {
+    this.type === 'click' && this.destroyTooltip();
+  }
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
@@ -36,7 +42,11 @@ export class TooltipDirective {
     @Inject(DOCUMENT) private document: Document, 
   ) {}
 
-  private setTooltipComponentProperties() {
+  ngOnDestroy(): void {
+    this.destroyTooltip();
+  }
+
+  private setTooltipComponentProperties(): void {
     if (this.tooltipComponent) {
       this.tooltipComponent.instance.text = this.tooltipText;
       const {
@@ -46,6 +56,13 @@ export class TooltipDirective {
       } = this.elementRef.nativeElement.getBoundingClientRect();
       this.tooltipComponent.instance.left = (right - left) / 2 + left;
       this.tooltipComponent.instance.top = bottom;
+    }
+  }
+
+  private destroyTooltip(): void {
+    if (this.tooltipComponent) {
+      this.tooltipComponent.destroy();
+      this.tooltipComponent = undefined
     }
   }
 }
