@@ -1,7 +1,5 @@
-<div class="pill">
-    <div class="account">
-        <span [routerLink]="['/profile']">{{ user?.username }}</span>
-        <span>{{ user?.email }}</span>
-    </div>
-    <i (click)="logoutUser()" class="fa-solid fa-right-from-bracket" tooltip [tooltipText]="'Logout'"></i>
+<div class="account">
+    <span class="username" [routerLink]="['/profile']">{{ user?.username }}</span>
+    <span>{{ user?.email }}</span>
 </div>
+<i class="fi fi-br-exit" (click)="logoutUser()" tooltip [tooltipText]="'Logout'"></i>

@@ -2,30 +2,31 @@
 @import '../styles/master/mixins.scss';
 @import '../styles/master/fonts.scss';
 
-.pill {
+:host {
     width: 100%;
-    padding: 12px 10px;
+    padding: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 6px;
     background-color: #005977;
     border-radius: 10px;
 
     .account {
         display: flex;
         flex-direction: column;
-        width: 90%;
         word-break: break-word;
 
-        span:first-of-type {
+        .username {
+            width: max-content;
             font-weight: 500;
-
             @include brandLightHover;
         }
     }
 
     i {
         font-size: $icons-small;
+        line-height: $icons-small;
         @include brandLightHover;
     }
 }
