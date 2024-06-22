@@ -12,8 +12,9 @@
     }
 }
 
-svg {
-    width: 24px;
+i {
+    font-size: $icons-small;
+    height: $icons-small;
     @include brandLightHover;
 }
 
@@ -23,6 +24,10 @@ svg {
     border-top: 2px solid white;
     margin: 1em 0;
     padding: 0;
+
+    &.secondary {
+        border-top: 2px solid rgba(255, 255, 255, 0.5);
+    }
 }
 
 .header {
@@ -30,7 +35,7 @@ svg {
     justify-content: space-between;
     align-items: center;
 
-    .left {
+    .title {
         display: flex;
         font-size: $h5;
 
