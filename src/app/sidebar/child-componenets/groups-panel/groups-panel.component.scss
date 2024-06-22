@@ -2,8 +2,9 @@
 @import '../../../styles/master/mixins.scss';
 @import '../../../styles/master/fonts.scss';
 
-svg {
-    width: 24px;
+i {
+    font-size: $icons-small;
+    height: $icons-small;
     @include brandLightHover;
 }
 
@@ -22,10 +23,11 @@ svg {
 
     .left {
         display: flex;
-        font-size: $h5;
+        align-items: center;
 
         .title {
             margin-right: 8px;
+            font-size: $h5;
         }
     }
 }
