@@ -72,7 +72,7 @@
         </svg>
       </a>
     </div>
-    <app-options
+    <more-options
       [object]="birthday"
       [editUrl]="'/birthdays/edit'"
       [isOptionVisible]="data.isOptionVisible"
@@ -80,6 +80,6 @@
       (optionsToggle)="toggle()"
       [customStyle]="'style-for-birthday-list'"
       (deleteToggle)="deleteBirthday(birthday)">
-    </app-options>
+    </more-options>
   </div>
 </div>

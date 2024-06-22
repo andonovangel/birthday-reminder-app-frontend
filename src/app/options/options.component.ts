@@ -5,7 +5,7 @@ import { IGroup } from '../group/group';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
-  selector: 'app-options',
+  selector: 'more-options',
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss'],
   animations: [
@@ -27,8 +27,8 @@ export class OptionsComponent {
   @Output() deleteToggle = new EventEmitter()
   @Output() clickToggle = new EventEmitter()
 
-  constructor(private cds: ConfirmationDialogService) {}
-  
+  constructor(private cds: ConfirmationDialogService) { }
+
   handleClickOutside(): void {
     this.optionsToggle.emit()
   }
@@ -41,12 +41,12 @@ export class OptionsComponent {
     event.stopPropagation()
 
     this.cds.confirm("Archive " + object.name + "?", 'You can restore it if you change your mind.', 'Archive')
-    .then((confirmed) => {
-      if(confirmed) {
-        this.deleteToggle.emit(object)
-        this.clickToggle.emit()
-      }
-    })
-    .catch(() => console.log('User dismissed the dialog'))
+      .then((confirmed) => {
+        if (confirmed) {
+          this.deleteToggle.emit(object)
+          this.clickToggle.emit()
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog'))
   }
-} 
+}

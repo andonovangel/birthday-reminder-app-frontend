@@ -4,10 +4,12 @@
     [@options] *ngIf="isOptionVisible && object">
     <div class="options" ngClass="{{ customStyle }}" *ngIf="optionObject === object">
         <div class="option" (click)="toggleClick()" [routerLink]="[editUrl, object.id]">
-        <i class="fa-regular fa-pen-to-square"></i> Edit
+            <i class="fi fi-rr-edit"></i>
+            Edit
         </div>
         <div class="option" (click)="deleteObj($event, object)">
-        <i class="fa-solid fa-box-archive"></i> Archive
+            <i class="fi fi-sr-box"></i>
+            Archive
         </div>
     </div>
 </div>

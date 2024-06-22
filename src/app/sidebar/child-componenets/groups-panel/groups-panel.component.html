@@ -18,7 +18,7 @@
                 (click)="toggleReminderOptions($event, group)">
             </i>
         </div>
-        <app-options
+        <more-options
           [object]="group"
           [editUrl]="'/groups/edit'"
           [isOptionVisible]="isOptionVisible"
@@ -27,6 +27,6 @@
           [customStyle]="'style-for-group-panel'"
           (deleteToggle)="deleteGroup(group)"
           (clickToggle)="closeOptions()">
-        </app-options>
+        </more-options>
     </div>
 </div>
