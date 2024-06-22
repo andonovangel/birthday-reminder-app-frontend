@@ -35,15 +35,43 @@
             justify-content: space-between;
             height: 100vh;
             
-            svg {
-                width: 24px;
+            i {
+                font-size: $icons-medium;
+                line-height: $icons-medium;
                 margin-bottom: 44px;
-                @include brandLightHover    
+                @include brandLightHover;
             }
 
-            .upperIcons {
+            .upper-icons {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+            }
+
+            .icon-border {
+                border: 3px solid white;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 44px;
+                transition: 0.3s;
+                cursor: pointer;
+                
+                &:hover{
+                    border-color: $brandLightColor;
+
+                    i {
+                        color: $brandLightColor;
+                    }
+                }
+            
+                i {
+                    margin: 0;
+                    transition: 0.3s;
+                }
             }
         }
     }
@@ -69,6 +97,6 @@
     }   
 }
 
-.openPanel {    
+.open-panel {    
     color: $brandLightColor;
 }
