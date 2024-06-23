@@ -2,16 +2,17 @@
 @import '../../styles/master/mixins.scss';
 @import '../../styles/master/fonts.scss';
 
-.remindersNav {
+.reminders-nav {
     margin: auto;
     height: 120px;
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 32px;
 
     display: flex;
     justify-content: center;
     align-items: flex-end;
     text-align: center;
+    gap: 32px;
 
     position: sticky;
     top: 0;
@@ -21,10 +22,9 @@
 
     .title {
        font-size: $h5;
-       width: 216px;
     }
 
-    .searchBar {
+    .search-bar {
         align-items: center;
         position: relative;
         width: 400px;
@@ -53,15 +53,12 @@
         }
     }
 
-    .filter {
-        width: 110px;
-    }
-
-    .nav-button {
-        width: 55px
-    }
-
     .btn-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
         padding: 0;
         border: none;
         background: none;
@@ -70,67 +67,66 @@
         transition: 0.3s;
         @include brandLightHover;
 
-        svg {
-            width: $h5;
+        i {
+            font-size: $icons-medium;
+            line-height: $icons-medium;
+            height: $icons-medium;
         }
     }
 }
 
-.container-fluid{
-    padding: 21px;
+.birthday-list {
+    margin: auto;
+    width: 900px;
 
-    .birthdayList {
+    position: relative;
+
+    .birthday-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
         margin: auto;
-        width: 907px;
+        margin-bottom: 29px;
+        padding: 15px 30px 15px 30px;
 
-        position: relative;
+        background-color: $reminderColor;
+        border: 3px $brandBlueColorMedium solid;
+        border-radius: 16px;
+        
+        cursor: pointer;
+        transition: 0.3s;
 
-        .birthdayItem {
+        font-size: $h5;
+
+        &:hover {
+            background-color: $reminderColorHover;
+        }
+
+        i {
+            font-size: $icons-medium;
+            line-height: $icons-medium;
+            height: $icons-medium;
+        }
+
+        .left {
             display: flex;
-            justify-content: left;
+            align-items: center;
+            gap: 8px;
+
+            i {
+                margin-right: 8px;
+                color: $brandBlueColor;
+            }
+        }
+
+        .right {
+            display: flex;
             align-items: center;
 
-            width: 100%;
-            margin: auto;
-            margin-bottom: 29px;
-            padding: 15px 30px 15px 30px;
-
-            background-color: $reminderColor;
-            border: 3px $brandBlueColorMedium solid;
-            border-radius: 16px;
-            
-            cursor: pointer;
-            transition: 0.3s;
-
-            font-size: $h5;
-
-            &:hover {
-                background-color: $reminderColorHover;
-            }
-
-            svg {
-                width: 24px;
-                color: $brandBlueColor;
-                margin-right: 15px;
-            }
-
-            span {
-                margin-right: 7px;
-            }
-
-            a {
-                display: flex;
-                margin-left: auto;
-                
-                svg {
-                color: #ffffff;
-                transition: 0.3s;
-                margin-right: 0;
-
-                    &:hover {
-                        color: $brandBlueColor;
-                    }
-                }
+            i {
+                @include brandLightHover;
             }
         }
     }

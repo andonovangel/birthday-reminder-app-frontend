@@ -7,70 +7,59 @@
 >
   <p style="color: white" > Loading... </p>
 </ngx-spinner>
-<div class="remindersNav">
+
+<div class="reminders-nav">
   <div class="title mixin-h5">{{ data.pageTitle }}</div>
-  <div class="searchBar">
+  <div class="search-bar">
     <input type="text" [(ngModel)]="data.listFilter" (input)="onSearchChange()">     
   </div>
-  <div class="filter" tooltip [tooltipText]="'Sort by title'">
-    <button class="btn-nav" (click)="sortRemindersByTitle()">
-      Title
-      <ng-container *ngIf="data.titleSort === 'none'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-        </svg>
-      </ng-container>
-      <ng-container *ngIf="data.titleSort === 'asc'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-        </svg>
-      </ng-container>
-      <ng-container *ngIf="data.titleSort === 'desc'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-        </svg>
-      </ng-container>
-    </button>
-  </div>
-  <div class="filter" tooltip [tooltipText]="'Sort by date'">
-    <button class="btn-nav" (click)="sortRemindersByDate()">
-      Date
-      <ng-container *ngIf="data.dateSort === 'none'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-        </svg>
-      </ng-container>
-      <ng-container *ngIf="data.dateSort === 'asc'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-        </svg>
-      </ng-container>
-      <ng-container *ngIf="data.dateSort === 'desc'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-        </svg>
-      </ng-container>
-    </button>
-  </div>
-  <div class="nav-button" tooltip [tooltipText]="'Create reminder'">
-    <button class="btn-nav" [routerLink]="['/birthdays/create']"><i class="fa-regular fa-square-plus"></i></button>
-  </div>
+  <button class="btn-nav" tooltip [tooltipText]="'Sort by title'" (click)="sortRemindersByTitle()">
+    <span>Title</span>
+    <ng-container *ngIf="data.titleSort === 'none'">
+      <i class="fi fi-br-angles-up-down"></i>
+    </ng-container>
+    <ng-container *ngIf="data.titleSort === 'asc'">
+      <i class="fi fi-br-angle-small-up"></i>
+    </ng-container>
+    <ng-container *ngIf="data.titleSort === 'desc'">
+      <i class="fi fi-br-angle-small-down"></i>
+    </ng-container>
+  </button>
+  <button class="btn-nav" tooltip [tooltipText]="'Sort by date'" (click)="sortRemindersByDate()">
+    <span>Date</span>
+    <ng-container *ngIf="data.dateSort === 'none'">
+      <i class="fi fi-br-angles-up-down"></i>
+    </ng-container>
+    <ng-container *ngIf="data.dateSort === 'asc'">
+      <i class="fi fi-br-angle-small-up"></i>
+    </ng-container>
+    <ng-container *ngIf="data.dateSort === 'desc'">
+      <i class="fi fi-br-angle-small-down"></i>
+    </ng-container>
+  </button>
+  <button class="btn-nav" tooltip [tooltipText]="'Create reminder'" [routerLink]="['/birthdays/create']">
+    <i class="fi fi-br-square-plus"></i>
+  </button>
 </div>
 
-<div class="base container-fluid">
-  <div class="birthdayList" *ngFor="let birthday of data.filteredBirthdays">
-    <div class="birthdayItem" (click)="openModal(birthday)">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z" />
-      </svg>
-      <span>{{ birthday.title }}</span>
-      <span>|</span>
-      <span>{{ birthday.birthday_date | date: 'd MMMM' }}</span>
-      <a (click)="toggleReminderOptions($event, birthday)" tooltip [tooltipText]="'More options'" [type]="'click'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
-      </a>
+<div class="base">
+  <div class="birthday-list" *ngFor="let birthday of data.filteredBirthdays">
+    <div class="birthday-item" (click)="openModal(birthday)">
+      <div class="left">
+        <i class="fi fi-br-cake-birthday"></i>
+        <span>{{ birthday.title }}</span>
+        <span>|</span>
+        <span>{{ birthday.birthday_date | date: 'd MMMM' }}</span>
+      </div>
+      <div class="right">
+        <i
+          class="fi fi-br-circle-ellipsis"
+          (click)="toggleReminderOptions($event, birthday)"
+          tooltip
+          [tooltipText]="'More options'"
+          [type]="'click'">
+        </i>
+      </div>
     </div>
     <more-options
       [object]="birthday"
