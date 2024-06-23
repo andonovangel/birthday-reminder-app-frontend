@@ -22,9 +22,11 @@
         top: 30px;
         right: 30px;
 
-        svg {
+        i {
+            font-size: $icons-medium;
+            line-height: $icons-medium;
+            height: $icons-medium;
             @include brandLightHover;
-            width: 24px;
         }
     }
 
