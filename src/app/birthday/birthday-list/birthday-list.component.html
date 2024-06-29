@@ -42,33 +42,6 @@
   </button>
 </div>
 
-<div class="base">
-  <div class="birthday-list" *ngFor="let birthday of data.filteredBirthdays">
-    <div class="birthday-item" (click)="openModal(birthday)">
-      <div class="left">
-        <i class="fi fi-br-cake-birthday"></i>
-        <span>{{ birthday.title }}</span>
-        <span>|</span>
-        <span>{{ birthday.birthday_date | date: 'd MMMM' }}</span>
-      </div>
-      <div class="right">
-        <i
-          class="fi fi-br-circle-ellipsis"
-          (click)="toggleReminderOptions($event, birthday)"
-          tooltip
-          [tooltipText]="'More options'"
-          [type]="'click'">
-        </i>
-      </div>
-    </div>
-    <more-options
-      [object]="birthday"
-      [editUrl]="'/birthdays/edit'"
-      [isOptionVisible]="data.isOptionVisible"
-      [optionObject]="data.optionBirthday"
-      (optionsToggle)="toggle()"
-      [customStyle]="'style-for-birthday-list'"
-      (deleteToggle)="deleteBirthday(birthday)">
-    </more-options>
-  </div>
-</div>
+<ng-container *ngFor="let birthday of data.filteredBirthdays">
+  <app-birthday-list-item [birthday]="birthday" [group]="data.group"></app-birthday-list-item>
+</ng-container>

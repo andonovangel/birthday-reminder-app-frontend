@@ -10,6 +10,7 @@ import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
 import { BirthdayArchivedComponent } from './birthday-archived/birthday-archived.component';
 import { IsIdValidGuard } from '../guards/is-id-valid.guard';
 import { SharedModule } from '../shared/shared.module';
+import { BirthdayListItemComponent } from './birthday-list/birthday-list-item/birthday-list-item.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     BirthdayCreateComponent,
     BirthdayEditComponent,
     BirthdayArchivedComponent,
+    BirthdayListItemComponent,
   ],
   imports: [
     CommonModule,

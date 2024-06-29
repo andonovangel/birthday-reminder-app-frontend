@@ -1,0 +1,61 @@
+@import '../../../styles/master/colors.scss';
+@import '../../../styles/master/mixins.scss';
+@import '../../../styles/master/fonts.scss';
+
+:host {
+    display: block;
+    position: relative;
+    margin: auto;
+    width: calc(100% - 64px);
+    max-width: 900px;
+
+    .birthday-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        width: 100%;
+        margin: auto;
+        margin-bottom: 29px;
+        padding: 15px 30px 15px 30px;
+    
+        background-color: $reminderColor;
+        border: 3px $brandBlueColorMedium solid;
+        border-radius: 16px;
+        
+        cursor: pointer;
+        transition: 0.3s;
+    
+        font-size: $h5;
+    
+        &:hover {
+            background-color: $reminderColorHover;
+        }
+    
+        i {
+            font-size: $icons-medium;
+            line-height: $icons-medium;
+            height: $icons-medium;
+        }
+    
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+    
+            i {
+                margin-right: 8px;
+                color: $brandBlueColor;
+            }
+        }
+    
+        .right {
+            display: flex;
+            align-items: center;
+    
+            i {
+                @include brandLightHover;
+            }
+        }
+    }
+}

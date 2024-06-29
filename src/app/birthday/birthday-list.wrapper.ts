@@ -4,29 +4,25 @@ import { IGroup } from "../group/group"
 import { IBirthday } from "./birthday"
 
 export class BirthdayListWrapper {
-    public pageTitle: string = ''
-    public errorMessage: string = ''
+    public pageTitle: string = '';
+    public errorMessage: string = '';
 
-    public getBirthdaysSub?: Subscription
-    public getBirthdaysDataSub?: Subscription
-    public getGroupsSub?: Subscription
-    public deleteBirthdaySub?: Subscription
-    public birthdayObservableSub?: Subscription
+    public getBirthdaysSub?: Subscription;
+    public getBirthdaysDataSub?: Subscription;
+    public getGroupsSub?: Subscription;
+    public birthdayObservableSub?: Subscription;
 
-    public filteredBirthdays: IBirthday[] = []
-    public birthdays: IBirthday[] = []
-    public group?: IGroup
+    public filteredBirthdays: IBirthday[] = [];
+    public birthdays: IBirthday[] = [];
+    public group?: IGroup;
     
-    public params = new HttpParams()
+    public params = new HttpParams();
 
-    public _listFilter: string = ''
+    public _listFilter: string = '';
     
-    public isOptionVisible: boolean = false
-    public optionBirthday?: IBirthday
+    public titleSort: string = 'none';
+    public dateSort: string = 'none';
     
-    public titleSort: string = 'none'
-    public dateSort: string = 'none'
-    
-    public listFilter: string = ''
-    public timeout: any
+    public listFilter: string = '';
+    public timeout: any;
 }

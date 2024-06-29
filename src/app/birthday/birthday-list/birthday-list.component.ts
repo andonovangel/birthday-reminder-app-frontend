@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { IBirthday } from "../birthday";
 import { BirthdayService } from "../birthday.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { BirthdayDetailComponent } from "../birthday-detail/birthday-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GroupService } from "src/app/group/group.service";
 import { BirthdayListWrapper } from "../birthday-list.wrapper";
 import { NgxSpinnerService } from "ngx-spinner";
-import { ToastrService } from "ngx-toastr";
 import { Observable, Subscription } from "rxjs";
 import { sortOrderMap } from "../filtering.map";
 
@@ -21,11 +18,9 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
     constructor(
         private birthdayService: BirthdayService,
         private groupService: GroupService,
-        private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
         private spinner: NgxSpinnerService,
-        private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -47,7 +42,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             this.data.getBirthdaysDataSub.unsubscribe()
         }
         this.data.getGroupsSub?.unsubscribe()
-        this.data.deleteBirthdaySub?.unsubscribe()
         this.data.birthdayObservableSub?.unsubscribe()
     }
 
@@ -136,42 +130,6 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
             },
             error: () => this.router.navigate(['/birthdays/list']),
         })
-    }
-
-    deleteBirthday(birthday: IBirthday) {
-      this.data.deleteBirthdaySub = this.birthdayService.deleteBirthday(birthday).subscribe({
-        next: res => {
-          console.log(res)
-          this.data.isOptionVisible = false
-          this.toastr.success('Archived reminder.', 'Success')
-        },
-        error: err => {
-            this.toastr.error('Something went wrong.', 'Error', {
-              timeOut: 3000,
-            })
-            console.log(err)
-        }
-      })
-    }
-
-    openModal(birthday: IBirthday) {
-        const modalRef = this.modalService.open(BirthdayDetailComponent, {
-            modalDialogClass: 'custom-modal', 
-            centered: true, 
-            size: 'lg' 
-        })
-        modalRef.componentInstance.birthday = birthday
-        modalRef.componentInstance.group = this.data.group
-    }
-
-    toggleReminderOptions(event: Event, birthday: IBirthday) {
-        event.stopPropagation()
-        this.toggle()
-        this.data.optionBirthday = birthday
-    }
-
-    toggle() {
-        this.data.isOptionVisible = !this.data.isOptionVisible
     }
 
     private handleRouteParams(params: any): void {
