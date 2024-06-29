@@ -49,38 +49,42 @@
     <div class="expanded-panel sticky-container">
         <ng-container *ngIf="isGroupsPanelExpanded">
             <div class="absolute-container" [@panelAnimation]>
-                <ngx-spinner 
-                    name="groups-panel"
-                    bdColor = "#00455C" 
-                    size = "medium" 
-                    color = "#fffffffff" 
-                    type = "ball-triangle-path" 
-                    [fullScreen] = "false"
-                >
-                </ngx-spinner>
-                <app-groups-panel 
-                    [groups]="groups"
-                    (closePanelToggle)="handleGroupPanelToggle()">
-                </app-groups-panel>
+                <div>
+                    <ngx-spinner 
+                        name="groups-panel"
+                        bdColor = "#00455C" 
+                        size = "medium" 
+                        color = "#fffffffff" 
+                        type = "ball-triangle-path" 
+                        [fullScreen] = "false"
+                    >
+                    </ngx-spinner>
+                    <app-groups-panel 
+                        [groups]="groups"
+                        (closePanelToggle)="handleGroupPanelToggle()">
+                    </app-groups-panel>
+                </div>
                 <account-pill></account-pill>
             </div>
         </ng-container>
         <ng-container *ngIf="isArchivePanelExpanded">
             <div class="absolute-container" [@panelAnimation]>
-                <ngx-spinner 
-                    name="archive-panel"
-                    bdColor = "#00455C" 
-                    size = "medium" 
-                    color = "#fffffffff" 
-                    type = "ball-triangle-path" 
-                    [fullScreen] = "false"
-                >
-                </ngx-spinner>
-                <app-archive-panel
-                    [birthdays]="archivedBirthdays"
-                    [groups]="archivedGroups"
-                    (closePanelToggle)="handleArchivePanelToggle()">
-                </app-archive-panel>
+                <div>
+                    <ngx-spinner
+                        name="archive-panel"
+                        bdColor = "#00455C" 
+                        size = "medium" 
+                        color = "#fffffffff" 
+                        type = "ball-triangle-path" 
+                        [fullScreen] = "false"
+                    >
+                    </ngx-spinner>
+                    <app-archive-panel
+                        [birthdays]="archivedBirthdays"
+                        [groups]="archivedGroups"
+                        (closePanelToggle)="handleArchivePanelToggle()">
+                    </app-archive-panel>
+                </div>
                 <account-pill></account-pill>
             </div> 
         </ng-container>

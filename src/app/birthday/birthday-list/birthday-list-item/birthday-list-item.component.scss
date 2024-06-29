@@ -3,9 +3,8 @@
 @import '../../../styles/master/fonts.scss';
 
 :host {
-    display: block;
+    display: flex;
     position: relative;
-    margin: auto;
     width: calc(100% - 64px);
     max-width: 900px;
 

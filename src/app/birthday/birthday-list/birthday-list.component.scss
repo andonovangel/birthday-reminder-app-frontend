@@ -3,7 +3,6 @@
 @import '../../styles/master/fonts.scss';
 
 .reminders-nav {
-    margin: auto;
     height: 120px;
     width: 100%;
     padding-bottom: 32px;
@@ -73,4 +72,10 @@
             height: $icons-medium;
         }
     }
+}
+
+.birthday-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

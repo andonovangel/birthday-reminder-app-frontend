@@ -42,6 +42,8 @@
   </button>
 </div>
 
-<ng-container *ngFor="let birthday of data.filteredBirthdays">
-  <app-birthday-list-item [birthday]="birthday" [group]="data.group"></app-birthday-list-item>
-</ng-container>
+<div class="birthday-list">
+  <ng-container *ngFor="let birthday of data.filteredBirthdays">
+    <app-birthday-list-item [birthday]="birthday" [group]="data.group"></app-birthday-list-item>
+  </ng-container>
+</div>
