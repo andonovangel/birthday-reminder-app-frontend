@@ -7,10 +7,10 @@
 >
   <p style="color: white" > Loading... </p>
 </ngx-spinner>
-<div class="container" *ngIf="user">
-  <div class="conatiner py-5 profile-container">
+
+<ng-container *ngIf="user">
+  <div class="profile-container">
     <div class="header">Welcome to your profile {{ user.name }}</div>
-  
   
     <div class="icon">
       <i class="fi fi-br-circle-ellipsis" tooltip [tooltipText]="'More options'" [type]="'click'" (click)="toggleOptionsVisibility()"></i>
@@ -32,55 +32,26 @@
       </div>
     </div>
   
-    <div class="user-info">
-      <div class="info">
-        <div class="row">
-          <div class="col-sm-2">
-            <p class="mb-0">Username</p>
-          </div>
-          <div class="col-sm-2">
-            <span>{{ user.username }}</span>
-          </div>
-        </div>
+    <div class="user-info-wrapper">
+      <div class="info-title">
+        <p>Username</p>
+        <p>Full Name</p>
+        <p>Email</p>
+        <p>Joined</p>
       </div>
-      <div class="info">
-        <div class="row">
-          <div class="col-sm-2">
-            <p class="mb-0">Full Name</p>
-          </div>
-          <div class="col-sm-5">
-            <span>{{ user.name }} {{ user.surname }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="info">
-        <div class="row">
-          <div class="col-sm-2">
-            <p class="mb-0">Email</p>
-          </div>
-          <div class="col-sm-2">
-            <span>{{ user.email }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="info">
-        <div class="row">
-          <div class="col-sm-2">
-            <p class="mb-0">Joined</p>
-          </div>
-          <div class="col-sm-5">
-            <span>{{ user.created_at | date:'mediumDate' }}</span>
-          </div>
-        </div>
+      <div class="user-info">
+        <span>{{ user.username }}</span>
+        <span>{{ user.name }} {{ user.surname }}</span>
+        <span>{{ user.email }}</span>
+        <span>{{ user.created_at | date:'mediumDate' }}</span>
       </div>
     </div>
   </div>
   
-  
-  <div class="complete-profile-container" *ngIf="!user?.name?.length || !user?.surname?.length">
+  <div class="complete-profile-container" *ngIf="!user.name.length || !user.surname.length">
     <div class="header">
       Your profile is not complete
     </div>
     <button class="btn btn-primary" [routerLink]="['/profile/edit']">Complete</button>
   </div>
-</div>
+</ng-container>
