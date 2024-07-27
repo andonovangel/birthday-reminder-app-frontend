@@ -1,0 +1,246 @@
+@mixin brandLightHover {
+    &:hover{
+        color: $brandLightColor;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+}
+
+@mixin basicForm {
+    .form-container {
+        width: 600px;
+        margin-top: 60px;
+
+        .invalid-field {
+            border: 1px solid red;
+        }
+        
+        .error {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #a94442;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            background-color: $backgroundMasterColor;
+            color: white;
+            border: 2px solid $inputsBorderFocus;
+            transition: 0.3s;
+            box-sizing: border-box;
+        
+            &:focus {
+                background-color: $backgroundMasterColor;
+                border: 2px solid $brandLightColor;
+                color: white;
+                box-shadow: none;
+            }
+        }
+        
+        .form-btn {
+            width: 100%;
+            color: white;
+            border: 2px solid $brandBlueColor;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        
+        .back-btn {
+            background-color: transparent;
+            font-weight: 500;
+        
+            &:hover {
+                background-color: $brandBlueColorMedium;
+                border: 2px solid $brandLightColor;
+            }
+        }
+        
+        .create-btn {
+            background-color: $brandBlueColor;
+            font-weight: 500;
+        
+            &:hover {
+                background-color: $brandLightColor;
+                border: 2px solid $brandLightColor;
+            }
+        }
+    }
+}
+
+@mixin dateInputStyle {
+    input[type="datetime-local"], input[type="date"] {
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(83%) sepia(10%) saturate(2857%) hue-rotate(162deg) brightness(75%) contrast(107%);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        &::-webkit-calendar-picker-indicator:hover {
+            filter: invert(22%) sepia(61%) saturate(2221%) hue-rotate(170deg) brightness(93%) contrast(103%);
+        }
+    }
+}
+
+@mixin selectStyle {
+    select {
+        cursor: pointer;
+        background-image:
+            linear-gradient(45deg, transparent 50%, $brandLightColor 50%),
+            linear-gradient(135deg, $brandLightColor 50%, transparent 50%);
+        background-position:
+            calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px),
+            100% 0;
+        background-size:
+            5px 5px,
+            5px 5px,
+            2.5em 2.5em;
+        background-repeat: no-repeat;
+    }
+}
+
+@mixin authForm {
+    .form-container {
+        width: 500px;
+        margin: auto;
+    
+        .invalid-field {
+            border: 1px solid red !important;
+        }
+        
+        .error {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #a94442;
+        }
+    
+        .title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+
+            img {
+                height: 43px;
+                margin-bottom: 50px;
+            }
+    
+            .header {
+                font-size: 35px;
+                font-weight: 500;
+            }
+    
+            .subheader {
+                @include text-2xl();
+                color: $brandLightColor;
+            }
+        }
+        
+        input[type=password], input[type=email], input[type=text] {
+            width: 100%;
+            border: 2px solid #5B5966;
+            border-radius: 10px;
+        }
+            
+        input[type=checkbox] {
+            border: 2px solid white;
+            cursor: pointer;
+        }
+    
+        input {
+            background-color: $backgroundMasterColor;
+            color: white;
+            transition: 0.3s;
+            box-sizing: border-box;
+        
+            &:focus {
+                background-color: $backgroundMasterColor;
+                border: 2px solid $brandLightColor;
+                color: white;
+                box-shadow: none;
+            }
+        }
+    
+        label {
+            color: #5B5966;
+            cursor: pointer;
+        }
+    
+        .others {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            margin-bottom: 35px;
+    
+            .checkbox {
+                label {
+                    color: #ffffff;
+                }
+            }
+    
+            a {
+                text-decoration: none;
+                color: $brandBlueColor;
+                transition: 0.3s;
+                font-weight: 500;
+    
+                &:hover {
+                    color: $brandLightColor;
+                }
+            }
+        }
+        
+        .form-btn {
+            width: 100%;
+            color: white;
+            background-color: $brandBlueColor;
+            border: 2px solid $brandBlueColor;
+            border-radius: 8px;
+            transition: 0.3s;
+        
+            &:hover {
+                background-color: $brandLightColor;
+                border: 2px solid $brandLightColor;
+            }
+        }
+    
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+            
+            span {
+                color: $brandBlueColor;
+                transition: 0.3s;
+                cursor: pointer;
+    
+                &:hover {
+                    color: $brandLightColor;
+                }
+            }
+        }
+    }
+}
+
+@mixin breakpoints($breakpoint) {
+    @if $breakpoint == breakpoint-s { // Small devices (landscape phones, 576px and up)
+        @media (min-width: 576px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-m { // Medium devices (tablets, 768px and up)
+        @media (min-width: 768px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-l { // Large devices (desktops, 992px and up)
+        @media (min-width: 992px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-xl { // Extra large devices (large desktops, 1200px and up)
+        @media (min-width: 1200px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-xxl { // Extra extra large devices (larger desktops, 1400px and up)
+        @media (min-width: 1400px) { 
+            @content;
+        }
+    }
+}

@@ -1,5 +1,5 @@
-@use '../src/app/styles/master/fonts.scss';
-@use '../src/app/styles/master/common.scss';
+@use 'fonts';
+@use 'common';
 
 @import 'bootstrap/scss/bootstrap';
 @import 'app/styles/master/colors.scss';
