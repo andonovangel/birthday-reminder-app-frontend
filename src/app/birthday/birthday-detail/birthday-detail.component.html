@@ -1,5 +1,5 @@
 <div class="container" *ngIf="birthday">
-  <div class="upperBirthdayItem">
+  <div class="upper-birthday-item">
     <!-- Left side content -->
     <div class="group">
       <span>Group: </span>
@@ -20,13 +20,13 @@
     </div>
   </div>
   
-  <div class="lowerBirthdayItem">
+  <div class="lower-birthday-item">
     <div class="row text-2xl">
       <div class="col">
       {{ birthday.title }}
       </div>
     </div>
-    <div class="row itemOtherInfo">
+    <div class="row item-other-info">
       <div class="col">
         <span>Birthday person</span><br>
         {{  birthday.name }}
@@ -40,7 +40,7 @@
         {{ birthday.phone_number }}
       </div>
     </div>
-    <div class="row itemNotes">
+    <div class="row item-notes">
       <div class="col">
         <span>Notes</span><br>
         <div class="notes">{{ birthday.body }}</div>
