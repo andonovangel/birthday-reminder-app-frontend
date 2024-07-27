@@ -1,11 +1,11 @@
-@import '../../../styles/master/colors.scss';
-@import '../../../styles/master/mixins.scss';
-@import '../../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 i {
-    font-size: $icons-small;
-    height: $icons-small;
-    @include brandLightHover;
+    font-size: fonts.$icons-small;
+    height: fonts.$icons-small;
+    @include mixins.brandLightHover;
 }
 
 .line-break {
@@ -48,7 +48,7 @@ i {
             margin-bottom: 10px;
     
             .item-link {
-                @include brandLightHover;
+                @include mixins.brandLightHover;
             }
         }
     }

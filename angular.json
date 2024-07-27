@@ -38,9 +38,7 @@
               "node_modules/ngx-spinner/animations/fire.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/memoflick-ui/styles"
-              ]
+              "includePaths": ["src/memoflick-ui/styles"]
             },
             "scripts": []
           },
@@ -105,6 +103,9 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/memoflick-ui/styles"]
+            },
             "scripts": []
           }
         }

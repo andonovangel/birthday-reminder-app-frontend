@@ -1,6 +1,6 @@
-@import '../../styles/master/colors.scss';
-@import '../../styles/master/mixins.scss';
-@import '../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 :host {
     display: flex;
@@ -18,7 +18,7 @@
         position: relative;
 
         .header {
-            @include text-3xl();
+            @include fonts.text-3xl();
             text-align: center;
             padding-bottom: 50px;
         }
@@ -29,15 +29,15 @@
             right: 30px;
 
             i {
-                font-size: $icons-medium;
-                line-height: $icons-medium;
-                height: $icons-medium;
-                @include brandLightHover;
+                font-size: fonts.$icons-medium;
+                line-height: fonts.$icons-medium;
+                height: fonts.$icons-medium;
+                @include mixins.brandLightHover;
             }
         }
 
         .user-info-wrapper {
-            @include text-xl();
+            @include fonts.text-xl();
             display: flex;
             gap: 32px;
 
@@ -76,7 +76,7 @@
 
         width: 192px;
         height: 132px;
-        background-color: $reminderColorSecondary;
+        background-color: colors.$reminderColorSecondary;
         backdrop-filter: blur(10px);
         border-radius: 16px;
         filter: drop-shadow(5px 5px 4px #000000);
@@ -98,7 +98,7 @@
             }
 
             &:hover {
-                background-color: $reminderColorSecondaryHover;
+                background-color: colors.$reminderColorSecondaryHover;
             }
         }
     }
@@ -111,7 +111,7 @@
         margin: 50px auto;
 
         .header {
-            @include text-2xl();
+            @include fonts.text-2xl();
             text-align: center;
             padding-bottom: 50px;
         }
@@ -119,15 +119,15 @@
         button {
             width: 100%;
             color: white;
-            border: 2px solid $brandBlueColor;
+            border: 2px solid colors.$brandBlueColor;
             border-radius: 5px;
             transition: 0.3s;
-            background-color: $brandBlueColor;
+            background-color: colors.$brandBlueColor;
             font-weight: 500;
         
             &:hover {
-                background-color: $brandLightColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandLightColor;
+                border: 2px solid colors.$brandLightColor;
             }
         }
     }

@@ -1,6 +1,6 @@
-@import '../../../styles/master/colors.scss';
-@import '../../../styles/master/mixins.scss';
-@import '../../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 .line-break {
     border: 0;
@@ -20,9 +20,9 @@
     align-items: center;
     
     i {
-        font-size: $icons-small;
-        height: $icons-small;
-        @include brandLightHover;
+        font-size: fonts.$icons-small;
+        height: fonts.$icons-small;
+        @include mixins.brandLightHover;
     }
 }
 
@@ -40,11 +40,11 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $brandLightColor;
+        background: colors.$brandLightColor;
     }
     
     &::-webkit-scrollbar-thumb:hover {
-        background: $brandBlueColor;
+        background: colors.$brandBlueColor;
     }
 
     .list {
@@ -62,8 +62,8 @@
                 margin-right: 16px;
     
                 i {
-                    font-size: $icons-small;
-                    line-height: $icons-small;
+                    font-size: fonts.$icons-small;
+                    line-height: fonts.$icons-small;
                     margin-right: 16px;
                 }
             }
@@ -75,9 +75,9 @@
                 gap: 8px;
 
                 i {
-                    font-size: $icons-small;
-                    line-height: $icons-small;
-                    @include brandLightHover;
+                    font-size: fonts.$icons-small;
+                    line-height: fonts.$icons-small;
+                    @include mixins.brandLightHover;
                 }
             }
         }

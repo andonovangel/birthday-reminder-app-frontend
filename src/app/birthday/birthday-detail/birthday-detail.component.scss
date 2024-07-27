@@ -1,6 +1,5 @@
-@import '../../styles/master/colors.scss';
-@import '../../styles/master/mixins.scss';
-@import '../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
 
 .custom-modal .modal-content {
     width: 623px;
@@ -8,7 +7,7 @@
     border: 2px #404040 solid;
     border-radius: 16px;
     color: #ffffff;
-    background-color: $reminderColor;
+    background-color: colors.$reminderColor;
     backdrop-filter: blur(10px);
 
     .upperBirthdayItem {
@@ -19,7 +18,7 @@
 
         .group {
             span {
-                color: $birthdayReminderLightGrey
+                color: colors.$birthdayReminderLightGrey
             }
 
             a {
@@ -27,7 +26,7 @@
                 color: #ffffff;
                 cursor: pointer;
                 transition: 0.3s;
-                @include brandLightHover;
+                @include mixins.brandLightHover;
             }
         }
 
@@ -39,7 +38,7 @@
                 margin-left: 18px;
                 color: #ffffff;
                 transition: 0.3s;
-                @include brandLightHover;
+                @include mixins.brandLightHover;
             }
         }
     }
@@ -47,7 +46,7 @@
     .lowerBirthdayItem{
         padding: 33px 73px 18px 73px;
         span {
-            color: $birthdayReminderLightGrey;
+            color: colors.$birthdayReminderLightGrey;
         }
 
         .row {
@@ -56,7 +55,7 @@
 
         .itemOtherInfo, .itemNotes{
             .notes {
-                border: 1px $birthdayReminderLightGrey solid;
+                border: 1px colors.$birthdayReminderLightGrey solid;
                 border-radius: 7px;
                 color: #ffffff;
                 padding: 10px;

@@ -1,6 +1,6 @@
-@import '../styles/master/colors.scss';
-@import '../styles/master/fonts.scss';
-@import '../styles/master/mixins.scss';
+@use 'colors';
+@use 'fonts';
+@use 'mixins';
 
 .app-nav {
     position: sticky;
@@ -112,14 +112,14 @@ section {
     .hero {
         z-index: 1;
         .header {
-            @include text-6xl();
+            @include fonts.text-6xl();
             text-transform: uppercase;
             margin-bottom: 16px;
             font-weight: 600;
             text-shadow: -4px -4px rgba(255, 255, 255, 0.5);
     
             span {
-                text-shadow: -4px -4px $brandLightColor;
+                text-shadow: -4px -4px colors.$brandLightColor;
             }
         }
     
@@ -128,9 +128,9 @@ section {
         }
         
         .button {
-            background-color: $brandLightColor;
+            background-color: colors.$brandLightColor;
             color: white;
-            border: 2px solid $brandLightColor;
+            border: 2px solid colors.$brandLightColor;
             border-radius: 8px;
             width: 123px;
             height: 31px;
@@ -281,8 +281,8 @@ section {
             color: #959595;
     
             span {
-                @include text-xs();
-                color: $brandLightColor;
+                @include fonts.text-xs();
+                color: colors.$brandLightColor;
             }
         }
     
@@ -303,7 +303,7 @@ section {
     margin: 25px 120px;
     padding: 160px 25px 100px 25px;
 
-    @include basicForm;
+    @include mixins.basicForm;
 
     .left {
         width: 500px;
@@ -339,7 +339,7 @@ section {
         }
 
         .header {
-            @include text-5xl();
+            @include fonts.text-5xl();
             font-weight: 600;
             text-shadow: 5px 5px 17px #000000;
         }
@@ -362,7 +362,7 @@ footer {
         padding: 80px 80px 60px;
         width: 80%;
 
-        background-color: $navbarColor;
+        background-color: colors.$navbarColor;
         border-radius: 29px;
         color: #ffffff;
 
@@ -376,7 +376,7 @@ footer {
                 display: flex;
                 justify-content: center;
                 gap: 25px;
-                font-size: $icons-large;
+                font-size: fonts.$icons-large;
 
                 a {
                     color: #ffffff;
@@ -386,7 +386,7 @@ footer {
                         cursor: pointer;
                         
                         &:hover {
-                            color: $brandLightColor;
+                            color: colors.$brandLightColor;
                         }
                     }
                 }

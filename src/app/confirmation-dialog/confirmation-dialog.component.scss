@@ -1,6 +1,4 @@
-@import '../styles/master/colors.scss';
-@import '../styles/master/mixins.scss';
-@import '../styles/master/fonts.scss';
+@use 'colors';
 
 .confirmation-modal .modal-content {
     background-color: #393939;
@@ -24,7 +22,7 @@
 
         .form-btn {
             color: white;
-            border: 2px solid $brandBlueColor;
+            border: 2px solid colors.$brandBlueColor;
             border-radius: 10px;
             transition: 0.3s;
         }
@@ -34,18 +32,18 @@
             font-weight: 500;
         
             &:hover {
-                background-color: $brandBlueColorMedium;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandBlueColorMedium;
+                border: 2px solid colors.$brandLightColor;
             }
         }
         
         .primary-btn {
-            background-color: $brandBlueColor;
+            background-color: colors.$brandBlueColor;
             font-weight: 500;
         
             &:hover {
-                background-color: $brandLightColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandLightColor;
+                border: 2px solid colors.$brandLightColor;
             }
         }
     }
