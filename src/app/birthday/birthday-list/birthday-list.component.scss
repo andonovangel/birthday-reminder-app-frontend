@@ -19,10 +19,6 @@
 
     background-color: $backgroundMasterColor;
 
-    .title {
-       font-size: $h5;
-    }
-
     .search-bar {
         align-items: center;
         position: relative;
@@ -53,6 +49,7 @@
     }
 
     .btn-nav {
+        @include text-2xl();
         display: flex;
         align-items: center;
         justify-content: center;
@@ -61,7 +58,6 @@
         padding: 0;
         border: none;
         background: none;
-        font-size: $h5;
         color: #ffffff;
         transition: 0.3s;
         @include brandLightHover;

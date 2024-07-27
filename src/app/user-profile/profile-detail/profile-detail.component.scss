@@ -18,8 +18,8 @@
         position: relative;
 
         .header {
+            @include text-3xl();
             text-align: center;
-            font-size: $h4;
             padding-bottom: 50px;
         }
 
@@ -37,9 +37,9 @@
         }
 
         .user-info-wrapper {
+            @include text-xl();
             display: flex;
             gap: 32px;
-            font-size: 20px;
 
             .info-title {
                 display: flex;
@@ -76,7 +76,6 @@
 
         width: 192px;
         height: 132px;
-        font-size: $p;
         background-color: $reminderColorSecondary;
         backdrop-filter: blur(10px);
         border-radius: 16px;
@@ -112,8 +111,8 @@
         margin: 50px auto;
 
         .header {
+            @include text-2xl();
             text-align: center;
-            font-size: $h5;
             padding-bottom: 50px;
         }
 

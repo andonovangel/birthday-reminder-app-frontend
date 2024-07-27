@@ -131,7 +131,7 @@
             }
     
             .subheader {
-                font-size: $h5;
+                @include text-2xl();
                 color: $brandLightColor;
             }
         }
@@ -217,6 +217,30 @@
                     color: $brandLightColor;
                 }
             }
+        }
+    }
+}
+
+@mixin breakpoints($breakpoint) {
+    @if $breakpoint == breakpoint-s { // Small devices (landscape phones, 576px and up)
+        @media (min-width: 576px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-m { // Medium devices (tablets, 768px and up)
+        @media (min-width: 768px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-l { // Large devices (desktops, 992px and up)
+        @media (min-width: 992px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-xl { // Extra large devices (large desktops, 1200px and up)
+        @media (min-width: 1200px) { 
+            @content;
+        }
+    } @else if $breakpoint == breakpoint-xxl { // Extra extra large devices (larger desktops, 1400px and up)
+        @media (min-width: 1400px) { 
+            @content;
         }
     }
 }

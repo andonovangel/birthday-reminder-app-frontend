@@ -1,0 +1,254 @@
+// Margin mixins
+@mixin mt-0 { margin-top: 0px; }
+@mixin mt-4 { margin-top: 4px; }
+@mixin mt-8 { margin-top: 8px; }
+@mixin mt-12 { margin-top: 12px; }
+@mixin mt-16 { margin-top: 16px; }
+@mixin mt-20 { margin-top: 20px; }
+@mixin mt-24 { margin-top: 24px; }
+@mixin mt-28 { margin-top: 28px; }
+@mixin mt-32 { margin-top: 32px; }
+
+@mixin mr-0 { margin-right: 0px; }
+@mixin mr-4 { margin-right: 4px; }
+@mixin mr-8 { margin-right: 8px; }
+@mixin mr-12 { margin-right: 12px; }
+@mixin mr-16 { margin-right: 16px; }
+@mixin mr-20 { margin-right: 20px; }
+@mixin mr-24 { margin-right: 24px; }
+@mixin mr-28 { margin-right: 28px; }
+@mixin mr-32 { margin-right: 32px; }
+
+@mixin mb-0 { margin-bottom: 0px; }
+@mixin mb-4 { margin-bottom: 4px; }
+@mixin mb-8 { margin-bottom: 8px; }
+@mixin mb-12 { margin-bottom: 12px; }
+@mixin mb-16 { margin-bottom: 16px; }
+@mixin mb-20 { margin-bottom: 20px; }
+@mixin mb-24 { margin-bottom: 24px; }
+@mixin mb-28 { margin-bottom: 28px; }
+@mixin mb-32 { margin-bottom: 32px; }
+
+@mixin ml-0 { margin-left: 0px; }
+@mixin ml-4 { margin-left: 4px; }
+@mixin ml-8 { margin-left: 8px; }
+@mixin ml-12 { margin-left: 12px; }
+@mixin ml-16 { margin-left: 16px; }
+@mixin ml-20 { margin-left: 20px; }
+@mixin ml-24 { margin-left: 24px; }
+@mixin ml-28 { margin-left: 28px; }
+@mixin ml-32 { margin-left: 32px; }
+
+@mixin mx-0 { margin-left: 0px; margin-right: 0px; }
+@mixin mx-4 { margin-left: 4px; margin-right: 4px; }
+@mixin mx-8 { margin-left: 8px; margin-right: 8px; }
+@mixin mx-12 { margin-left: 12px; margin-right: 12px; }
+@mixin mx-16 { margin-left: 16px; margin-right: 16px; }
+@mixin mx-20 { margin-left: 20px; margin-right: 20px; }
+@mixin mx-24 { margin-left: 24px; margin-right: 24px; }
+@mixin mx-28 { margin-left: 28px; margin-right: 28px; }
+@mixin mx-32 { margin-left: 32px; margin-right: 32px; }
+
+@mixin my-0 { margin-top: 0px; margin-bottom: 0px; }
+@mixin my-4 { margin-top: 4px; margin-bottom: 4px; }
+@mixin my-8 { margin-top: 8px; margin-bottom: 8px; }
+@mixin my-12 { margin-top: 12px; margin-bottom: 12px; }
+@mixin my-16 { margin-top: 16px; margin-bottom: 16px; }
+@mixin my-20 { margin-top: 20px; margin-bottom: 20px; }
+@mixin my-24 { margin-top: 24px; margin-bottom: 24px; }
+@mixin my-28 { margin-top: 28px; margin-bottom: 28px; }
+@mixin my-32 { margin-top: 32px; margin-bottom: 32px; }
+
+// Padding mixins
+@mixin pt-0 { padding-top: 0px; }
+@mixin pt-4 { padding-top: 4px; }
+@mixin pt-8 { padding-top: 8px; }
+@mixin pt-12 { padding-top: 12px; }
+@mixin pt-16 { padding-top: 16px; }
+@mixin pt-20 { padding-top: 20px; }
+@mixin pt-24 { padding-top: 24px; }
+@mixin pt-28 { padding-top: 28px; }
+@mixin pt-32 { padding-top: 32px; }
+
+@mixin pr-0 { padding-right: 0px; }
+@mixin pr-4 { padding-right: 4px; }
+@mixin pr-8 { padding-right: 8px; }
+@mixin pr-12 { padding-right: 12px; }
+@mixin pr-16 { padding-right: 16px; }
+@mixin pr-20 { padding-right: 20px; }
+@mixin pr-24 { padding-right: 24px; }
+@mixin pr-28 { padding-right: 28px; }
+@mixin pr-32 { padding-right: 32px; }
+
+@mixin pb-0 { padding-bottom: 0px; }
+@mixin pb-4 { padding-bottom: 4px; }
+@mixin pb-8 { padding-bottom: 8px; }
+@mixin pb-12 { padding-bottom: 12px; }
+@mixin pb-16 { padding-bottom: 16px; }
+@mixin pb-20 { padding-bottom: 20px; }
+@mixin pb-24 { padding-bottom: 24px; }
+@mixin pb-28 { padding-bottom: 28px; }
+@mixin pb-32 { padding-bottom: 32px; }
+
+@mixin pl-0 { padding-left: 0px; }
+@mixin pl-4 { padding-left: 4px; }
+@mixin pl-8 { padding-left: 8px; }
+@mixin pl-12 { padding-left: 12px; }
+@mixin pl-16 { padding-left: 16px; }
+@mixin pl-20 { padding-left: 20px; }
+@mixin pl-24 { padding-left: 24px; }
+@mixin pl-28 { padding-left: 28px; }
+@mixin pl-32 { padding-left: 32px; }
+
+@mixin px-0 { padding-left: 0px; padding-right: 0px; }
+@mixin px-4 { padding-left: 4px; padding-right: 4px; }
+@mixin px-8 { padding-left: 8px; padding-right: 8px; }
+@mixin px-12 { padding-left: 12px; padding-right: 12px; }
+@mixin px-16 { padding-left: 16px; padding-right: 16px; }
+@mixin px-20 { padding-left: 20px; padding-right: 20px; }
+@mixin px-24 { padding-left: 24px; padding-right: 24px; }
+@mixin px-28 { padding-left: 28px; padding-right: 28px; }
+@mixin px-32 { padding-left: 32px; padding-right: 32px; }
+
+@mixin py-0 { padding-top: 0px; padding-bottom: 0px; }
+@mixin py-4 { padding-top: 4px; padding-bottom: 4px; }
+@mixin py-8 { padding-top: 8px; padding-bottom: 8px; }
+@mixin py-12 { padding-top: 12px; padding-bottom: 12px; }
+@mixin py-16 { padding-top: 16px; padding-bottom: 16px; }
+@mixin py-20 { padding-top: 20px; padding-bottom: 20px; }
+@mixin py-24 { padding-top: 24px; padding-bottom: 24px; }
+@mixin py-28 { padding-top: 28px; padding-bottom: 28px; }
+@mixin py-32 { padding-top: 32px; padding-bottom: 32px; }
+
+// Margin classes
+.mt-0 { @include mt-0; }
+.mt-4 { @include mt-4; }
+.mt-8 { @include mt-8; }
+.mt-12 { @include mt-12; }
+.mt-16 { @include mt-16; }
+.mt-20 { @include mt-20; }
+.mt-24 { @include mt-24; }
+.mt-28 { @include mt-28; }
+.mt-32 { @include mt-32; }
+
+.mr-0 { @include mr-0; }
+.mr-4 { @include mr-4; }
+.mr-8 { @include mr-8; }
+.mr-12 { @include mr-12; }
+.mr-16 { @include mr-16; }
+.mr-20 { @include mr-20; }
+.mr-24 { @include mr-24; }
+.mr-28 { @include mr-28; }
+.mr-32 { @include mr-32; }
+
+.mb-0 { @include mb-0; }
+.mb-4 { @include mb-4; }
+.mb-8 { @include mb-8; }
+.mb-12 { @include mb-12; }
+.mb-16 { @include mb-16; }
+.mb-20 { @include mb-20; }
+.mb-24 { @include mb-24; }
+.mb-28 { @include mb-28; }
+.mb-32 { @include mb-32; }
+
+.ml-0 { @include ml-0; }
+.ml-4 { @include ml-4; }
+.ml-8 { @include ml-8; }
+.ml-12 { @include ml-12; }
+.ml-16 { @include ml-16; }
+.ml-20 { @include ml-20; }
+.ml-24 { @include ml-24; }
+.ml-28 { @include ml-28; }
+.ml-32 { @include ml-32; }
+
+.mx-0 { @include mx-0; }
+.mx-4 { @include mx-4; }
+.mx-8 { @include mx-8; }
+.mx-12 { @include mx-12; }
+.mx-16 { @include mx-16; }
+.mx-20 { @include mx-20; }
+.mx-24 { @include mx-24; }
+.mx-28 { @include mx-28; }
+.mx-32 { @include mx-32; }
+
+.my-0 { @include my-0; }
+.my-4 { @include my-4; }
+.my-8 { @include my-8; }
+.my-12 { @include my-12; }
+.my-16 { @include my-16; }
+.my-20 { @include my-20; }
+.my-24 { @include my-24; }
+.my-28 { @include my-28; }
+.my-32 { @include my-32; }
+
+// Padding classes
+.pt-0 { @include pt-0; }
+.pt-4 { @include pt-4; }
+.pt-8 { @include pt-8; }
+.pt-12 { @include pt-12; }
+.pt-16 { @include pt-16; }
+.pt-20 { @include pt-20; }
+.pt-24 { @include pt-24; }
+.pt-28 { @include pt-28; }
+.pt-32 { @include pt-32; }
+
+.pr-0 { @include pr-0; }
+.pr-4 { @include pr-4; }
+.pr-8 { @include pr-8; }
+.pr-12 { @include pr-12; }
+.pr-16 { @include pr-16; }
+.pr-20 { @include pr-20; }
+.pr-24 { @include pr-24; }
+.pr-28 { @include pr-28; }
+.pr-32 { @include pr-32; }
+
+.pb-0 { @include pb-0; }
+.pb-4 { @include pb-4; }
+.pb-8 { @include pb-8; }
+.pb-12 { @include pb-12; }
+.pb-16 { @include pb-16; }
+.pb-20 { @include pb-20; }
+.pb-24 { @include pb-24; }
+.pb-28 { @include pb-28; }
+.pb-32 { @include pb-32; }
+
+.pl-0 { @include pl-0; }
+.pl-4 { @include pl-4; }
+.pl-8 { @include pl-8; }
+.pl-12 { @include pl-12; }
+.pl-16 { @include pl-16; }
+.pl-20 { @include pl-20; }
+.pl-24 { @include pl-24; }
+.pl-28 { @include pl-28; }
+.pl-32 { @include pl-32; }
+
+.px-0 { @include px-0; }
+.px-4 { @include px-4; }
+.px-8 { @include px-8; }
+.px-12 { @include px-12; }
+.px-16 { @include px-16; }
+.px-20 { @include px-20; }
+.px-24 { @include px-24; }
+.px-28 { @include px-28; }
+.px-32 { @include px-32; }
+
+.py-0 { @include py-0; }
+.py-4 { @include py-4; }
+.py-8 { @include py-8; }
+.py-12 { @include py-12; }
+.py-16 { @include py-16; }
+.py-20 { @include py-20; }
+.py-24 { @include py-24; }
+.py-28 { @include py-28; }
+.py-32 { @include py-32; }
+
+// font weights
+.fw-100 { font-weight: 100; }
+.fw-200 { font-weight: 200; }
+.fw-300 { font-weight: 300; }
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
+.fw-800 { font-weight: 800; }
+.fw-900 { font-weight: 900; }

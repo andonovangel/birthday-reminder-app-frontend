@@ -1,6 +1,8 @@
 @import '../styles/master/colors.scss';
+@import '../styles/master/fonts.scss';
 
 :host {
+    @include text-xs();
     width: max-content;
     position: fixed;
     transform: translateX(-50%);
@@ -8,7 +10,6 @@
     margin-top: 5px;
     border-radius: 5px;
     background-color: $birthdayReminderLightGrey;
-    font-size: 13px;
     font-weight: 500;
     color: #ffffff;
     z-index: 9999;

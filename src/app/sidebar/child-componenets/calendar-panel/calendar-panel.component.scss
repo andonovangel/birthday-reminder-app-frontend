@@ -34,15 +34,6 @@ i {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .title {
-        display: flex;
-        font-size: $h5;
-
-        .sub-title {
-            font-size: 20px;
-        }
-    }
 }
 
 .list {
@@ -73,7 +64,6 @@ i {
         justify-content: space-between;
         align-items: center;
 
-        font-size: $p;
         margin-bottom: 10px;
 
         .item-link {

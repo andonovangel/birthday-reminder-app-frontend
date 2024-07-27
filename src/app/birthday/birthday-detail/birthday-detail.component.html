@@ -8,20 +8,20 @@
 
     <!-- Right side content -->
     <div class="icons">
-      <button class="btn-filter" tooltip [tooltipText]="'Edit'" (click)="editBirthday(birthday.id)">
-        <i class="fi fi-br-edit"></i>
+      <button tooltip [tooltipText]="'Edit'" (click)="editBirthday(birthday.id)">
+        <i class="fi fi-br-edit icon-xs"></i>
       </button>
-      <button class="btn-filter" tooltip [tooltipText]="'Archive'" (click)="confirmDeletion(birthday)">
-        <i class="fi fi-br-box"></i>
+      <button tooltip [tooltipText]="'Archive'" (click)="confirmDeletion(birthday)">
+        <i class="fi fi-br-box icon-xs"></i>
       </button>
-      <button class="btn-filter" tooltip [tooltipText]="'Close'" [type]="'click'" (click)="closeModal()">
-        <i class="fi fi-br-cross-circle"></i>
+      <button tooltip [tooltipText]="'Close'" [type]="'click'" (click)="closeModal()">
+        <i class="fi fi-br-cross-circle icon-xs"></i>
       </button>
     </div>
   </div>
   
   <div class="lowerBirthdayItem">
-    <div class="row itemName">
+    <div class="row text-2xl">
       <div class="col">
       {{ birthday.title }}
       </div>

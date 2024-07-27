@@ -18,11 +18,10 @@
         padding: 22px 22px 0px 22px;
 
         .group {
-            font-size: $p;
-
             span {
                 color: $birthdayReminderLightGrey
             }
+
             a {
                 text-decoration: none;
                 color: #ffffff;
@@ -33,12 +32,11 @@
         }
 
         .icons {            
-            .btn-filter {
+            button {
                 padding: 0;
                 border: none;
                 background: none;
                 margin-left: 18px;
-                font-size: $p;
                 color: #ffffff;
                 transition: 0.3s;
                 @include brandLightHover;
@@ -56,13 +54,7 @@
             margin-bottom: 15px;
         }
 
-        .itemName{
-            font-size: $h5;
-        }
-
         .itemOtherInfo, .itemNotes{
-            font-size: $p;
-
             .notes {
                 border: 1px $birthdayReminderLightGrey solid;
                 border-radius: 7px;

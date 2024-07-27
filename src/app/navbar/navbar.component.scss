@@ -2,7 +2,8 @@
 @import '../styles/master/fonts.scss';
 @import '../styles/master/mixins.scss';
 
-.nav {    
+.nav {
+    @include text-2xl();
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -12,7 +13,6 @@
     background-color: $navbarColor;
     backdrop-filter: blur(33px);
     border-radius: 16px;
-    font-size: $h5;
     transition: 0.3s;
 
     &:hover {
@@ -34,6 +34,7 @@
         width: 290px;
 
         .primary-btn {
+            @include text-base();
             width: 123px;
             height: 31px;
             color: white;
@@ -43,7 +44,6 @@
             
             background-color: $brandBlueColor;
             font-weight: 500;
-            font-size: $p;
         
             &:hover {
                 background-color: $brandLightColor;
@@ -52,6 +52,7 @@
         }
 
         .secondary-btn {
+            @include text-base();
             width: 123px;
             height: 31px;
             color: white;
@@ -61,7 +62,6 @@
     
             background-color: transparent;
             font-weight: 500;
-            font-size: $p;
         
             &:hover {
                 background-color: $brandBlueColorMedium;

@@ -9,6 +9,7 @@
     max-width: 900px;
 
     .birthday-item {
+        @include text-2xl();
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -24,8 +25,6 @@
         
         cursor: pointer;
         transition: 0.3s;
-    
-        font-size: $h5;
     
         &:hover {
             background-color: $reminderColorHover;

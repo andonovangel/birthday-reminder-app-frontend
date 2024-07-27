@@ -1,7 +1,68 @@
-$h5: 26px;
-$h4: 35px;
-$h2: 55px;
-$h1: 65px;
-$p: 16px;
 $icons-small: 20px;
 $icons-medium: 24px;
+$icons-large: 26px;
+
+@mixin text-xs { // 12px
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@mixin text-s { // 14px
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin text-base { // 16px
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@mixin text-l { // 18px
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+@mixin text-xl { // 20px
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+@mixin text-2xl { // 24px
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+@mixin text-3xl { // 30px
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+@mixin text-4xl { // 36px
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+@mixin text-5xl { // 48px
+    font-size: 3rem;
+    line-height: 1;
+}
+
+@mixin text-6xl { // 60px
+    font-size: 3.75rem;
+    line-height: 1;
+}
+
+@mixin text-7xl { // 72px
+    font-size: 4.5rem;
+    line-height: 1;
+}
+
+@mixin text-8xl { // 96px
+    font-size: 6rem;
+    line-height: 1;
+}
+
+@mixin text-9xl { // 128px
+    font-size: 8rem;
+    line-height: 1;
+}

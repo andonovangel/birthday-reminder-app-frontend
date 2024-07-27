@@ -112,11 +112,10 @@ section {
     .hero {
         z-index: 1;
         .header {
+            @include text-6xl();
             text-transform: uppercase;
-            margin-bottom: 12px;
-            font-size: $h1;
+            margin-bottom: 16px;
             font-weight: 600;
-            line-height: 90%;
             text-shadow: -4px -4px rgba(255, 255, 255, 0.5);
     
             span {
@@ -125,7 +124,6 @@ section {
         }
     
         .sub-header {
-            font-size: $h5;
             margin-bottom: 38px;
         }
         
@@ -279,17 +277,11 @@ section {
             }
         }
     
-        .header {
-            font-size: $h2;
-            font-weight: 600;
-        }
-    
         .sub-header {
-            font-size: $p;
             color: #959595;
     
             span {
-                font-size: 13px;
+                @include text-xs();
                 color: $brandLightColor;
             }
         }
@@ -347,13 +339,12 @@ section {
         }
 
         .header {
-            font-size: $h2;
+            @include text-5xl();
             font-weight: 600;
             text-shadow: 5px 5px 17px #000000;
         }
 
         .sub-header {
-            font-size: $p;
             text-shadow: 5px 5px 17px #000000;
         }
     }
@@ -385,7 +376,7 @@ footer {
                 display: flex;
                 justify-content: center;
                 gap: 25px;
-                font-size: 26px;
+                font-size: $icons-large;
 
                 a {
                     color: #ffffff;
