@@ -1,6 +1,6 @@
-@import '../styles/master/colors.scss';
-@import '../styles/master/mixins.scss';
-@import '../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 
 .sidebar {
@@ -36,10 +36,10 @@
             height: 100vh;
             
             i {
-                font-size: $icons-medium;
-                line-height: $icons-medium;
+                font-size: fonts.$icons-medium;
+                line-height: fonts.$icons-medium;
                 margin-bottom: 44px;
-                @include brandLightHover;
+                @include mixins.brandLightHover;
             }
 
             .upper-icons {
@@ -61,10 +61,10 @@
                 cursor: pointer;
                 
                 &:hover{
-                    border-color: $brandLightColor;
+                    border-color: colors.$brandLightColor;
 
                     i {
-                        color: $brandLightColor;
+                        color: colors.$brandLightColor;
                     }
                 }
             
@@ -98,5 +98,5 @@
 }
 
 .open-panel {    
-    color: $brandLightColor;
+    color: colors.$brandLightColor;
 }

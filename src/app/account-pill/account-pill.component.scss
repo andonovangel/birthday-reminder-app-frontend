@@ -20,13 +20,13 @@
         .username {
             width: max-content;
             font-weight: 500;
-            @include brandLightHover;
+            @include mixins.brandLightHover();
         }
     }
 
     i {
-        font-size: $icons-small;
-        line-height: $icons-small;
-        @include brandLightHover;
+        font-size: fonts.$icons-small;
+        line-height: fonts.$icons-small;
+        @include mixins.brandLightHover();
     }
 }

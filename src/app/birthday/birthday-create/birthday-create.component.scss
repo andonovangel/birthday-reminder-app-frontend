@@ -1,7 +1,5 @@
-@import '../../styles/master/colors.scss';
-@import '../../styles/master/mixins.scss';
-@import '../../styles/master/fonts.scss';
+@use 'mixins';
 
-@include basicForm;
-@include dateInputStyle;
-@include selectStyle;
+@include mixins.basicForm;
+@include mixins.dateInputStyle;
+@include mixins.selectStyle;

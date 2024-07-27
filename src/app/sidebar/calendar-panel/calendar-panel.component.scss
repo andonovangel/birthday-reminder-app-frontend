@@ -1,6 +1,6 @@
-@import '../../../styles/master/colors.scss';
-@import '../../../styles/master/mixins.scss';
-@import '../../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 .calendar {
     margin: 0 10px;
@@ -13,9 +13,9 @@
 }
 
 i {
-    font-size: $icons-small;
-    height: $icons-small;
-    @include brandLightHover;
+    font-size: fonts.$icons-small;
+    height: fonts.$icons-small;
+    @include mixins.brandLightHover;
 }
 
 .line-break {
@@ -50,11 +50,11 @@ i {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $brandLightColor;
+        background: colors.$brandLightColor;
     }
     
     &::-webkit-scrollbar-thumb:hover {
-        background: $brandBlueColor;
+        background: colors.$brandBlueColor;
     }
 
     .list-item {
@@ -67,7 +67,7 @@ i {
         margin-bottom: 10px;
 
         .item-link {
-            @include brandLightHover;
+            @include mixins.brandLightHover;
         }
     }
 }

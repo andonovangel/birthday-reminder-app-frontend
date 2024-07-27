@@ -1,6 +1,9 @@
+@use 'colors';
+@use 'fonts';
+
 @mixin brandLightHover {
     &:hover{
-        color: $brandLightColor;
+        color: colors.$brandLightColor;
         transition: 0.3s;
         cursor: pointer;
     }
@@ -23,15 +26,15 @@
         
         input, textarea, select {
             width: 100%;
-            background-color: $backgroundMasterColor;
+            background-color: colors.$backgroundMasterColor;
             color: white;
-            border: 2px solid $inputsBorderFocus;
+            border: 2px solid colors.$inputsBorderFocus;
             transition: 0.3s;
             box-sizing: border-box;
         
             &:focus {
-                background-color: $backgroundMasterColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$backgroundMasterColor;
+                border: 2px solid colors.$brandLightColor;
                 color: white;
                 box-shadow: none;
             }
@@ -40,7 +43,7 @@
         .form-btn {
             width: 100%;
             color: white;
-            border: 2px solid $brandBlueColor;
+            border: 2px solid colors.$brandBlueColor;
             border-radius: 5px;
             transition: 0.3s;
         }
@@ -50,18 +53,18 @@
             font-weight: 500;
         
             &:hover {
-                background-color: $brandBlueColorMedium;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandBlueColorMedium;
+                border: 2px solid colors.$brandLightColor;
             }
         }
         
         .create-btn {
-            background-color: $brandBlueColor;
+            background-color: colors.$brandBlueColor;
             font-weight: 500;
         
             &:hover {
-                background-color: $brandLightColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandLightColor;
+                border: 2px solid colors.$brandLightColor;
             }
         }
     }
@@ -85,8 +88,8 @@
     select {
         cursor: pointer;
         background-image:
-            linear-gradient(45deg, transparent 50%, $brandLightColor 50%),
-            linear-gradient(135deg, $brandLightColor 50%, transparent 50%);
+            linear-gradient(45deg, transparent 50%, colors.$brandLightColor 50%),
+            linear-gradient(135deg, colors.$brandLightColor 50%, transparent 50%);
         background-position:
             calc(100% - 20px) calc(1em + 2px),
             calc(100% - 15px) calc(1em + 2px),
@@ -131,8 +134,8 @@
             }
     
             .subheader {
-                @include text-2xl();
-                color: $brandLightColor;
+                @include fonts.text-2xl();
+                color: colors.$brandLightColor;
             }
         }
         
@@ -148,14 +151,14 @@
         }
     
         input {
-            background-color: $backgroundMasterColor;
+            background-color: colors.$backgroundMasterColor;
             color: white;
             transition: 0.3s;
             box-sizing: border-box;
         
             &:focus {
-                background-color: $backgroundMasterColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$backgroundMasterColor;
+                border: 2px solid colors.$brandLightColor;
                 color: white;
                 box-shadow: none;
             }
@@ -180,12 +183,12 @@
     
             a {
                 text-decoration: none;
-                color: $brandBlueColor;
+                color: colors.$brandBlueColor;
                 transition: 0.3s;
                 font-weight: 500;
     
                 &:hover {
-                    color: $brandLightColor;
+                    color: colors.$brandLightColor;
                 }
             }
         }
@@ -193,14 +196,14 @@
         .form-btn {
             width: 100%;
             color: white;
-            background-color: $brandBlueColor;
-            border: 2px solid $brandBlueColor;
+            background-color: colors.$brandBlueColor;
+            border: 2px solid colors.$brandBlueColor;
             border-radius: 8px;
             transition: 0.3s;
         
             &:hover {
-                background-color: $brandLightColor;
-                border: 2px solid $brandLightColor;
+                background-color: colors.$brandLightColor;
+                border: 2px solid colors.$brandLightColor;
             }
         }
     
@@ -209,12 +212,12 @@
             margin-top: 20px;
             
             span {
-                color: $brandBlueColor;
+                color: colors.$brandBlueColor;
                 transition: 0.3s;
                 cursor: pointer;
     
                 &:hover {
-                    color: $brandLightColor;
+                    color: colors.$brandLightColor;
                 }
             }
         }

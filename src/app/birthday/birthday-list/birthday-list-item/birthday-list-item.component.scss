@@ -1,6 +1,6 @@
-@import '../../../styles/master/colors.scss';
-@import '../../../styles/master/mixins.scss';
-@import '../../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 :host {
     display: flex;
@@ -9,7 +9,7 @@
     max-width: 900px;
 
     .birthday-item {
-        @include text-2xl();
+        @include fonts.text-2xl();
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -19,21 +19,21 @@
         margin-bottom: 29px;
         padding: 15px 30px 15px 30px;
     
-        background-color: $reminderColor;
-        border: 3px $brandBlueColorMedium solid;
+        background-color: colors.$reminderColor;
+        border: 3px colors.$brandBlueColorMedium solid;
         border-radius: 16px;
         
         cursor: pointer;
         transition: 0.3s;
     
         &:hover {
-            background-color: $reminderColorHover;
+            background-color: colors.$reminderColorHover;
         }
     
         i {
-            font-size: $icons-medium;
-            line-height: $icons-medium;
-            height: $icons-medium;
+            font-size: fonts.$icons-medium;
+            line-height: fonts.$icons-medium;
+            height: fonts.$icons-medium;
         }
     
         .left {
@@ -43,7 +43,7 @@
     
             i {
                 margin-right: 8px;
-                color: $brandBlueColor;
+                color: colors.$brandBlueColor;
             }
         }
     
@@ -52,7 +52,7 @@
             align-items: center;
     
             i {
-                @include brandLightHover;
+                @include mixins.brandLightHover;
             }
         }
     }

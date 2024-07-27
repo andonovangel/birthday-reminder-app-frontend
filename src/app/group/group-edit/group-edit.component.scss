@@ -1,5 +1,3 @@
-@import '../../styles/master/colors.scss';
-@import '../../styles/master/mixins.scss';
-@import '../../styles/master/fonts.scss';
+@use 'mixins';
 
-@include basicForm;
+@include mixins.basicForm;

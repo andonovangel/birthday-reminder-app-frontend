@@ -1,6 +1,6 @@
-@import '../../styles/master/colors.scss';
-@import '../../styles/master/mixins.scss';
-@import '../../styles/master/fonts.scss';
+@use 'colors';
+@use 'mixins';
+@use 'fonts';
 
 .reminders-nav {
     height: 120px;
@@ -17,7 +17,7 @@
     top: 0;
     z-index: 1;
 
-    background-color: $backgroundMasterColor;
+    background-color: colors.$backgroundMasterColor;
 
     .search-bar {
         align-items: center;
@@ -30,9 +30,9 @@
             background-repeat: no-repeat;
             background-size: 50px 25px;
             background-position: left -4px bottom 7px;
-            background-color: $backgroundMasterColor;
+            background-color: colors.$backgroundMasterColor;
 
-            border: 2px $brandBlueColorMedium solid;
+            border: 2px colors.$brandBlueColorMedium solid;
             border-radius: 7px;
             color: #ffffff;
             width: 100%;
@@ -43,13 +43,13 @@
             transition: 0.4s;
 
             &:focus {
-                border: 2px $brandLightColor solid;
+                border: 2px colors.$brandLightColor solid;
             }
         }
     }
 
     .btn-nav {
-        @include text-2xl();
+        @include fonts.text-2xl();
         display: flex;
         align-items: center;
         justify-content: center;
@@ -60,12 +60,12 @@
         background: none;
         color: #ffffff;
         transition: 0.3s;
-        @include brandLightHover;
+        @include mixins.brandLightHover;
 
         i {
-            font-size: $icons-medium;
-            line-height: $icons-medium;
-            height: $icons-medium;
+            font-size: fonts.$icons-medium;
+            line-height: fonts.$icons-medium;
+            height: fonts.$icons-medium;
         }
     }
 }
