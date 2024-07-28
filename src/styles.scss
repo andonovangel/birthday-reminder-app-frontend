@@ -8,9 +8,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import '@flaticon/flaticon-uicons/css/all/all';
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     @include fonts.text-base();
-    margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: colors.$backgroundMasterColor;
     color: #ffffff;

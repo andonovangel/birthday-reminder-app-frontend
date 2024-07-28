@@ -1,14 +1,28 @@
-.private-container {
+:host {
+    height: 100%;
     display: flex;
+    flex-direction: column;
 
-    .app {
-        width: 100%;
-        position: relative;
+    & > *,
+    .private-container > *,
+    .public-container > * {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
-}
 
-.public-container {
-    .app {
-        margin-top: 70px;
+    .private-container {
+        display: flex;
+    
+        .app {
+            width: 100%;
+            position: relative;
+        }
+    }
+    
+    .public-container {
+        // .app {
+        //     margin-top: 70px;
+        // }
     }
 }

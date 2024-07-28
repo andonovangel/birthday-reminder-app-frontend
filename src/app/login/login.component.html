@@ -1,57 +1,79 @@
-<div class="container form-container">
-  <div class="title">
-    <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
-    <div class="header">
-      Welcome to  memoflick
-    </div>
-    <div class="subheader">
-      Sign in to your account
-    </div>
-  </div>
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="form-group mb-4">
-      <label for="exampleInputEmail1">Email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              formControlName="email" required
-              [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
-      <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error"> 
-        <div *ngIf="formGroup.controls['email'].errors?.['required']">
-            This field is required
-        </div>
+<div class="form-container">
+  <div class="form-wrapper">
+    <div class="title">
+      <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
+      <div class="header">
+        Welcome to  memoflick
+      </div>
+      <div class="subheader">
+        Sign in to your account
       </div>
     </div>
-    <div class="form-group mb-3">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1"
-              formControlName="password" required
-              [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && submitted}">
-      <div *ngIf="formGroup.controls['password'].invalid && submitted" class="error"> 
-        <div *ngIf="formGroup.controls['password'].errors?.['required']">
-          This field is required
-        </div>
-      </div>
-    </div>
-    <div class="others">
-      <div class="checkbox">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="form2Example31"  formControlName="remember"/>
-          <label class="form-check-label" for="form2Example31">Keep me signed in</label>
-        </div>
-      </div>
-      <div class="link">
-          <a [routerLink]="['/password-forget']">Forgot password?</a>
-      </div>
-    </div>
-    
-    <div class="container mb-3">
-      <div class="row">
-          <div class="col g-0 m-1">
-              <button class="btn form-btn login-btn" type="submit">Sign in</button>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-4">
+        <label for="exampleInputEmail1">Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="email" required
+                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
+        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error"> 
+          <div *ngIf="formGroup.controls['email'].errors?.['required']">
+              This field is required
           </div>
+        </div>
       </div>
-      <div class="form-link">
-        Don&#39;t have an account? <span [routerLink]="['/register']">Sign up</span>
+      <div class="form-group mb-3">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1"
+                formControlName="password" required
+                [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && submitted}">
+        <div *ngIf="formGroup.controls['password'].invalid && submitted" class="error"> 
+          <div *ngIf="formGroup.controls['password'].errors?.['required']">
+            This field is required
+          </div>
+        </div>
       </div>
-    </div>
-  </form>
+      <div class="others">
+        <div class="checkbox">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="form2Example31"  formControlName="remember"/>
+            <label class="form-check-label" for="form2Example31">Keep me signed in</label>
+          </div>
+        </div>
+        <div class="link">
+            <a [routerLink]="['/password-forget']">Forgot password?</a>
+        </div>
+      </div>
+      
+      <div class="container mb-3">
+        <div class="row">
+            <div class="col g-0 m-1">
+                <button class="btn form-btn login-btn" type="submit">Sign in</button>
+            </div>
+        </div>
+        <div class="form-link">
+          Don&#39;t have an account? <span [routerLink]="['/register']">Sign up</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="right-image">
+  <img class="shape1" src="../../assets/shape1.png" width="303" alt="shape">
+  <img class="shape2" src="../../assets/shape1.png" width="303" alt="shape">
+  <img class="shape3" src="../../assets/shape2.png" width="258" alt="shape">
+  <img class="shape4" src="../../assets/shape2.png" width="258" alt="shape">
+  <img class="shape5" src="../../assets/shape3.png" width="316" alt="shape">
+  <div class="glass-wrapper">
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+    <div class="glass"></div>
+  </div>
 </div>
