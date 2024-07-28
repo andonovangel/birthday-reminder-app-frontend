@@ -3,14 +3,14 @@
 @use 'fonts';
 
 :host {
+    height: 100%;
     display: flex;
-    flex: 1;
 
     .form-container {
         display: flex;
         justify-content: center;
+        align-self: center;
         flex: 1;
-        margin-top: 128px;
 
         .form-wrapper {
             width: calc(100% - 128px);
@@ -21,8 +21,8 @@
             }
             
             .error {
+                @include fonts.text-xs;
                 margin-top: 0.5rem;
-                font-size: 0.8rem;
                 color: #a94442;
             }
         
@@ -35,11 +35,6 @@
                 img {
                     height: 43px;
                     margin-bottom: 50px;
-                }
-        
-                .header {
-                    font-size: 35px;
-                    font-weight: 500;
                 }
         
                 .subheader {
