@@ -7,6 +7,14 @@
 @import 'bootstrap/scss/bootstrap';
 @import '@flaticon/flaticon-uicons/css/all/all';
 
+:root {
+    color-scheme: light dark;
+}
+
+*:focus {
+    outline: none;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -20,24 +28,4 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: colors.$backgroundMasterColor;
     color: #ffffff;
-    
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: colors.$brandLightColor;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-        background: colors.$brandBlueColor;
-    }
-}
-
-*:focus {
-    outline: none;
 }

@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminService } from './admin/admin.service';
+import { FormBrandBackgroundComponent } from "../memoflick-ui/form-brand-background/form-brand-background.component";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AdminService } from './admin/admin.service';
     BrowserAnimationsModule,
     SharedModule,
     ToastrModule.forRoot(),
-  ],
+    FormBrandBackgroundComponent
+],
   providers: [
     AuthService,
     BirthdayService,

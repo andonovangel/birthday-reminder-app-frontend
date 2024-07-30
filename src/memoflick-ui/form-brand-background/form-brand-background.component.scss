@@ -1,0 +1,55 @@
+:host {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    background-color: #ffffff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    img {
+        position: absolute;
+    }
+
+    .shape1 {
+        top: -7px;
+        left: 0;
+        transform: rotate(39deg);
+    }
+
+    .shape2 {
+        bottom: -91px;
+        right: -81px;
+        transform: rotate(-34deg);
+    }
+
+    .shape3 {
+        top: -62px;
+        right: -110px;
+    }
+
+    .shape4 {
+        bottom: 9px;
+        left: 16px;
+        transform: rotate(46deg);
+    }
+
+    .shape5 {
+        top: 50%;
+        left: 50%;
+        transform: translate(0%, -50%);
+    }
+
+    .glass-wrapper {
+        display: flex;
+        height: 100%;
+
+        .glass {
+            height: 100%;
+            width: 7%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(30, 30, 30, 0.2) 70.83%, rgba(255, 255, 255, 0.2) 100%);
+            background-blend-mode: overlay;
+            backdrop-filter: blur(40px);
+
+        }
+    }
+}
