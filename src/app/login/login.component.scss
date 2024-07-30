@@ -5,12 +5,14 @@
 :host {
     height: 100%;
     display: flex;
+    box-sizing: content-box;
 
     .form-container {
         display: flex;
         justify-content: center;
         align-self: center;
         flex: 1;
+        padding: 32px 0;
 
         .form-wrapper {
             width: calc(100% - 128px);
@@ -30,15 +32,22 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-bottom: 50px;
+                text-align: center;
+                margin-bottom: 32px;
     
                 img {
                     height: 43px;
-                    margin-bottom: 50px;
+                    margin-bottom: 32px;
+                }
+
+                .header {
+                    @include fonts.text-xl();
+                    font-weight: 600;
+                    margin-bottom: 8px;
                 }
         
                 .subheader {
-                    @include fonts.text-2xl();
+                    @include fonts.text-base();
                     color: colors.$brandLightColor;
                 }
             }
@@ -75,7 +84,10 @@
         
             .others {
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
+                align-items: center;
+                gap: 8px;
                 margin-top: 24px;
                 margin-bottom: 32px;
         
@@ -126,5 +138,59 @@
                 }
             }
         }
+    }
+
+    form-brand-background {
+        display: none;
+    }
+}
+
+@include mixins.breakpoints(breakpoint-s) {
+    :host .form-container .form-wrapper {
+        .title {
+            .header {
+                @include fonts.text-2xl();
+            }
+
+            .subheader {
+                @include fonts.text-l();
+            }
+        }
+
+        .others {
+            flex-direction: row;
+        }
+    }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+    :host {
+        box-sizing: border-box;
+
+        .form-container .form-wrapper {
+            .title {
+                .header {
+                    @include fonts.text-4xl();
+                }
+    
+                .subheader {
+                    @include fonts.text-2xl();
+                }
+            }
+
+            .others {
+                flex-direction: column;
+            }
+        }
+
+        form-brand-background {
+            display: block;
+        }
+    }
+}
+
+@include mixins.breakpoints(breakpoint-l) {
+    :host .form-container .form-wrapper .others {
+        flex-direction: row;
     }
 }
