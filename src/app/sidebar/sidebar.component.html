@@ -11,12 +11,14 @@
                     class="fi fi-br-table-list"
                     tooltip
                     [tooltipText]="'Reminders'"
+                    type='click'
                     [routerLink]="['/birthdays/list']">
                 </i>
                 <i
                     class="fi fi-br-users-alt"
                     tooltip
                     [tooltipText]="'Groups'"
+                    type='click'
                     (click)="handleGroupPanelToggle()"
                     [ngClass]="{'open-panel': isGroupsPanelExpanded}"
                     #toggleButton>
@@ -25,6 +27,7 @@
                     class="fi fi-br-calendar"
                     tooltip
                     [tooltipText]="'Calendar'"
+                    type='click'
                     (click)="handleCalendarPanelToggle()"
                     [ngClass]="{'open-panel': isCalendarPanelExpanded}">
                 </i>
@@ -32,16 +35,18 @@
                     class="fi fi-br-box"
                     tooltip
                     [tooltipText]="'Archive'"
+                    type='click'
                     (click)="handleArchivePanelToggle()"
                     [ngClass]="{'open-panel': isArchivePanelExpanded}">
                 </i>
                 <i
                     class="fi fi-rr-settings"
                     tooltip
-                    [tooltipText]="'Settings'">
+                    [tooltipText]="'Settings'"
+                    type='click'>
                 </i>
             </div>
-            <div class="icon-border" tooltip [tooltipText]="'Profile'" [routerLink]="['/profile']">
+            <div class="icon-wrapper" tooltip [tooltipText]="'Profile'" type='click' [routerLink]="['/profile']">
                 <i class="fi fi-br-user"></i>
             </div>
         </div>

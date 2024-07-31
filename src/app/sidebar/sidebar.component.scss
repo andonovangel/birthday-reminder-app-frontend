@@ -2,7 +2,6 @@
 @use 'mixins';
 @use 'fonts';
 
-
 .sidebar {
     display: flex;
 
@@ -48,8 +47,8 @@
                 align-items: center;
             }
 
-            .icon-border {
-                border: 3px solid white;
+            .icon-wrapper {
+                background-color: #003546;
                 border-radius: 50%;
                 width: 40px;
                 height: 40px;
@@ -61,7 +60,7 @@
                 cursor: pointer;
                 
                 &:hover{
-                    border-color: colors.$brandLightColor;
+                    background-color: #00455c;
 
                     i {
                         color: colors.$brandLightColor;
@@ -97,6 +96,6 @@
     }   
 }
 
-.open-panel {    
+.sidebar .closed-panel .icons .open-panel {    
     color: colors.$brandLightColor;
 }
