@@ -1,59 +1,58 @@
-@use 'colors';
-@use 'mixins';
-@use 'fonts';
+@use "colors";
+@use "mixins";
+@use "fonts";
 
 :host {
-    display: flex;
-    position: relative;
-    width: calc(100% - 64px);
-    max-width: 900px;
+  display: flex;
+  position: relative;
+  width: calc(100% - 64px);
+  max-width: 900px;
 
-    .birthday-item {
-        @include fonts.text-2xl();
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    
-        width: 100%;
-        margin: auto;
-        margin-bottom: 29px;
-        padding: 15px 30px 15px 30px;
-    
-        background-color: colors.$reminderColor;
-        border: 3px colors.$brandBlueColorMedium solid;
-        border-radius: 16px;
-        
-        cursor: pointer;
-        transition: 0.3s;
-    
-        &:hover {
-            background-color: colors.$reminderColorHover;
-        }
-    
-        i {
-            font-size: fonts.$icons-medium;
-            line-height: fonts.$icons-medium;
-            height: fonts.$icons-medium;
-        }
-    
-        .left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-    
-            i {
-                margin-right: 8px;
-                color: colors.$brandBlueColor;
-            }
-        }
-    
-        .right {
-            display: flex;
-            align-items: center;
-    
-            i {
-                @include mixins.brandLightHover;
-            }
-        }
+  .birthday-item {
+    @include fonts.text-2xl();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    margin: auto;
+    padding: 15px 30px 15px 30px;
+
+    background-color: colors.$reminderColor;
+    border: 3px colors.$brandBlueColorMedium solid;
+    border-radius: 16px;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: colors.$reminderColorHover;
     }
+
+    i {
+      font-size: fonts.$icons-medium;
+      line-height: fonts.$icons-medium;
+      height: fonts.$icons-medium;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      i {
+        margin-right: 8px;
+        color: colors.$brandBlueColor;
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+
+      i {
+        @include mixins.brandLightHover;
+      }
+    }
+  }
 }

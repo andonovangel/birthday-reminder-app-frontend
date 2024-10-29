@@ -5,7 +5,7 @@
                 <img src="../../assets/logo_transparent_no_text.png" width="38" alt="logo">
             </a>
         </div>
-        <div class="icons">        
+        <div class="icons">
             <div class="upper-icons">
                 <i
                     class="fi fi-br-table-list"
@@ -39,12 +39,12 @@
                     (click)="handleArchivePanelToggle()"
                     [ngClass]="{'open-panel': isArchivePanelExpanded}">
                 </i>
-                <i
+                <!-- <i
                     class="fi fi-rr-settings"
                     tooltip
                     [tooltipText]="'Settings'"
                     type='click'>
-                </i>
+                </i> -->
             </div>
             <div class="icon-wrapper" tooltip [tooltipText]="'Profile'" type='click' [routerLink]="['/profile']">
                 <i class="fi fi-br-user"></i>
@@ -55,16 +55,16 @@
         <ng-container *ngIf="isGroupsPanelExpanded">
             <div class="absolute-container" [@panelAnimation]>
                 <div>
-                    <ngx-spinner 
+                    <ngx-spinner
                         name="groups-panel"
-                        bdColor = "#00455C" 
-                        size = "medium" 
-                        color = "#fffffffff" 
-                        type = "ball-triangle-path" 
+                        bdColor = "#00455C"
+                        size = "medium"
+                        color = "#fffffffff"
+                        type = "ball-triangle-path"
                         [fullScreen] = "false"
                     >
                     </ngx-spinner>
-                    <app-groups-panel 
+                    <app-groups-panel
                         [groups]="groups"
                         (closePanelToggle)="handleGroupPanelToggle()">
                     </app-groups-panel>
@@ -77,10 +77,10 @@
                 <div>
                     <ngx-spinner
                         name="archive-panel"
-                        bdColor = "#00455C" 
-                        size = "medium" 
-                        color = "#fffffffff" 
-                        type = "ball-triangle-path" 
+                        bdColor = "#00455C"
+                        size = "medium"
+                        color = "#fffffffff"
+                        type = "ball-triangle-path"
                         [fullScreen] = "false"
                     >
                     </ngx-spinner>
@@ -91,7 +91,7 @@
                     </app-archive-panel>
                 </div>
                 <account-pill></account-pill>
-            </div> 
+            </div>
         </ng-container>
         <ng-container *ngIf="isCalendarPanelExpanded">
             <div class="absolute-container" [@panelAnimation]>
@@ -100,7 +100,7 @@
                     (closePanelToggle)="handleCalendarPanelToggle()">
                 </app-calendar-panel>
                 <account-pill></account-pill>
-            </div> 
+            </div>
         </ng-container>
     </div>
 </div>

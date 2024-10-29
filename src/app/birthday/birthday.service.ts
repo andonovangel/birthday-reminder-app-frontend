@@ -35,12 +35,12 @@ export class BirthdayService {
     }
 
     getBirthdaysData(params?: HttpParams): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, { 
-            withCredentials: true, 
+        return this.http.get<IBirthday[]>(this.listBirthdaysUrl, {
+            withCredentials: true,
             params: params
         })
     }
-  
+
     getBirthday(id: number): Observable<IBirthday> {
       return this.http.get<IBirthday>(this.showBirthdayUrl + id, { withCredentials: true })
     }
@@ -48,14 +48,14 @@ export class BirthdayService {
     createBirthday(birthday: IBirthday): Observable<IBirthday> {
         return this.http.post<IBirthday>(this.createBirthdayUrl, birthday, { withCredentials: true })
     }
-  
+
     editBirthday(birthday: IBirthday, id?: number): Observable<IBirthday> {
         return this.http.put<IBirthday>(this.editBirthdayUrl + id, birthday, { withCredentials: true })
     }
-  
+
     deleteBirthday(birthday: IBirthday): Observable<IBirthday> {
-        return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, { 
-            withCredentials: true 
+        return this.http.delete<IBirthday>(this.deleteBirthdayUrl + birthday.id, {
+            withCredentials: true
         })
         .pipe(
             tap(() => {
@@ -66,8 +66,8 @@ export class BirthdayService {
     }
 
     getArchivedBirthdays(): Observable<IBirthday[]> {
-        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, { 
-            withCredentials: true 
+        return this.http.get<IBirthday[]>(this.listArchivedBirthdaysUrl, {
+            withCredentials: true
         })
         .pipe(
             tap((archivedBirthdays: IBirthday[]) => {
@@ -75,10 +75,10 @@ export class BirthdayService {
             })
         )
     }
-  
+
     restoreBirthday(birthday: IBirthday): Observable<IBirthday> {
-        return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, { 
-            withCredentials: true 
+        return this.http.post<IBirthday>(this.restoreBirthdayUrl + birthday.id, birthday, {
+            withCredentials: true
         })
         .pipe(
             tap(() => {
