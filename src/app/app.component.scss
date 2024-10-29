@@ -1,14 +1,16 @@
-.private-container {
-    display: flex;
+:host {
+    height: 100%;
 
-    .app {
-        width: 100%;
-        position: relative;
+    .public-container {
+        height: 100%;
     }
-}
 
-.public-container {
-    .app {
-        margin-top: 70px;
+    .private-container {
+        display: flex;
+    
+        .app {
+            width: 100%;
+            position: relative;
+        }
     }
 }

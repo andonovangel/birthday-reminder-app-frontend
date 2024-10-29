@@ -1,91 +1,91 @@
-<div class="container form-container">
-  <div class="title">
-    <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
-    <div class="header">
-      Welcome to  memoflick
-    </div>
-    <div class="subheader">
-      Create your account
-    </div>
-  </div>
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="form-group mb-4">
-      <label>Username</label>
-      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-              formControlName="username" required
-              [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['username'].errors?.['required']">
-          This field is required
-        </div>
-        <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
-          This field can have maximum 20 characters
-        </div>
-        <div *ngIf="usernameError" class="error">
-          {{ usernameError }}
-        </div>
+<div class="form-container">
+  <div class="form-wrapper">
+    <div class="title">
+      <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
+      <div class="header fw-600 mb-8">
+        Welcome to  memoflick
+      </div>
+      <div class="subheader">
+        Create your account
       </div>
     </div>
-    <div class="form-group mb-4">
-      <label>Email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              formControlName="email" required
-              [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['email'].errors?.['required']">
-          This field is required
-        </div>
-        <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
-          Wrong pattern for email
-        </div>
-        <div *ngIf="emailError" class="error">
-          {{ emailError }}
-        </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label>Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1"
-              formControlName="password" required
-              [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && (formGroup.controls['password'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['password'].errors?.['required']">
-          This field is required
-        </div>
-        <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
-          This field can have minimum 8 characters
-        </div>
-        <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
-          This field can have maximum 20 characters
-        </div>
-        <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
-          Wrong pattern for password
-        </div>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <label>Password confirmation</label>
-      <input type="password" class="form-control" id="exampleInputPassword2"
-              formControlName="confirmationPassword" required
-              [ngClass]="{'invalid-field': formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].touched || submitted)}">
-      <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error"> 
-        <div *ngIf="formGroup.controls['confirmationPassword'].errors?.['required']">
-          This field is required
-        </div>
-        <div *ngIf="confirmationPasswordError" class="error">
-          {{ confirmationPasswordError }}
-        </div>
-      </div>
-    </div>
-    <div class="container mb-3">
-      <div class="row">
-          <div class="col g-0 m-1">
-              <button class="btn form-btn" type="submit">Sign up</button>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-4">
+        <label>Username</label>
+        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+                formControlName="username" required
+                [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
+        <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
+          <div *ngIf="formGroup.controls['username'].errors?.['required']">
+            This field is required
           </div>
+          <div *ngIf="formGroup.controls['username'].errors?.['maxlength']">
+            This field can have maximum 20 characters
+          </div>
+          <div *ngIf="usernameError" class="error">
+            {{ usernameError }}
+          </div>
+        </div>
       </div>
-      <div class="form-link">
-        Already have an account? <span [routerLink]="['/login']">Sign in</span>
+      <div class="form-group mb-4">
+        <label>Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="email" required
+                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
+        <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
+          <div *ngIf="formGroup.controls['email'].errors?.['required']">
+            This field is required
+          </div>
+          <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
+            Wrong pattern for email
+          </div>
+          <div *ngIf="emailError" class="error">
+            {{ emailError }}
+          </div>
+        </div>
       </div>
-    </div>
-</form>
+      <div class="form-group mb-4">
+        <label>Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1"
+                formControlName="password" required
+                [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && (formGroup.controls['password'].touched || submitted)}">
+        <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
+          <div *ngIf="formGroup.controls['password'].errors?.['required']">
+            This field is required
+          </div>
+          <div *ngIf="formGroup.controls['password'].errors?.['minlength']">
+            This field can have minimum 8 characters
+          </div>
+          <div *ngIf="formGroup.controls['password'].errors?.['maxlength']">
+            This field can have maximum 20 characters
+          </div>
+          <div *ngIf="formGroup.controls['password'].errors?.['pattern']">
+            Wrong pattern for password
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-32">
+        <label>Password confirmation</label>
+        <input type="password" class="form-control" id="exampleInputPassword2"
+                formControlName="confirmationPassword" required
+                [ngClass]="{'invalid-field': formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].touched || submitted)}">
+        <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error"> 
+          <div *ngIf="formGroup.controls['confirmationPassword'].errors?.['required']">
+            This field is required
+          </div>
+          <div *ngIf="confirmationPasswordError" class="error">
+            {{ confirmationPasswordError }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn form-btn" type="submit">Sign up</button>
+        <div class="form-link">
+          Already have an account? <span [routerLink]="['/login']">Sign in</span>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+
+<form-brand-background></form-brand-background>

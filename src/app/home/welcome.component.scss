@@ -2,19 +2,13 @@
 @use 'fonts';
 @use 'mixins';
 
-.app-nav {
-    position: sticky;
-    top: 70px;
-    z-index: 2;
-}
-
 section {
     text-align: center;
     overflow-x: clip;
 }
 
 #home {
-    padding-top: 130px;
+    padding-top: 184px;
 
     .radials {
         position: relative;

@@ -5,33 +5,27 @@
 @use 'common';
 
 @import 'bootstrap/scss/bootstrap';
-@import 'bootstrap/scss/bootstrap';
 @import '@flaticon/flaticon-uicons/css/all/all';
 
-body {
-    @include fonts.text-base();
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: colors.$backgroundMasterColor;
-    color: #ffffff;
-    
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: colors.$brandLightColor;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-        background: colors.$brandBlueColor;
-    }
+:root {
+    color-scheme: light dark;
 }
 
 *:focus {
     outline: none;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    @include fonts.text-base();
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: colors.$backgroundMasterColor;
+    color: #ffffff;
 }

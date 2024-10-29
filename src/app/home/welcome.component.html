@@ -1,6 +1,4 @@
-<div class="app-nav">
-    <app-navbar></app-navbar>
-</div>
+<app-navbar></app-navbar>
 
 <section id="home">
   <div class="radials">
@@ -15,20 +13,20 @@
   </div>
   <div class="hero">
     <div class="header">
-      Instant smiles 
-      <br> 
+      Instant smiles
+      <br>
       <span>Automated style</span>
     </div>
     <div class="sub-header text-2xl">
-      Never miss a birthday wish with our advanced 
-      <br> 
+      Never miss a birthday wish with our advanced
+      <br>
       reminder application
     </div>
     <button class="button" [routerLink]="['/register']">Get started</button>
     <div class="collage">
       <div class="collage-highlight"></div>
       <img src="https://cdn.cdnparenting.com/articles/2018/12/29113733/722931703-H-1024x700.webp" alt="image1">
-      <img src="https://www.theraviz.com/wp-content/uploads/2018/05/birthday-celebration-ashtamudi-2.jpg" alt="image2">
+      <img src="https://images.pexels.com/photos/6800133/pexels-photo-6800133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image2">
       <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2023/05/birthday-celebration-restaurant.jpg?quality=82&strip=1" alt="image3">
       <img src="https://media.flyingflowers.co.uk/i/flyingflowers/birthday-celebration-man.jpg?$poi-square$&fmt=auto&qlt=default&fmt.jp2.qlt=60&bg=rgb%28247%2C+194%2C+206%29&w=960&aspect=16%3A9" alt="image4">
     </div>
@@ -50,9 +48,9 @@
       Create your own reminders
     </div>
     <div class="sub-header">
-      Make variety of birthday reminders, organize them into specific groups and 
-      <br> 
-      never forget your close ones special day 
+      Make variety of birthday reminders, organize them into specific groups and
+      <br>
+      never forget your close ones special day
       <br>
       <span>* All examples produced with the Reminder Builder</span>
     </div>
@@ -67,7 +65,7 @@
         <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
                 formControlName="name" required
                 [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error"> 
+        <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error">
           <div *ngIf="formGroup.controls['name'].errors?.['required']">
               This field is required
           </div>
@@ -78,7 +76,7 @@
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 formControlName="email" required
                 [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error"> 
+        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
           <div *ngIf="formGroup.controls['email'].errors?.['required']">
               This field is required
           </div>
@@ -92,7 +90,7 @@
         <textarea class="form-control" rows="3"
                   formControlName="message" required
                   [ngClass]="{'invalid-field': formGroup.controls['message'].invalid && submitted}"></textarea>
-        <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error"> 
+        <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error">
           <div *ngIf="formGroup.controls['message'].errors?.['required']">
               This field is required
           </div>

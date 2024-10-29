@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
       ])
     })
   }
-  
+
   ngOnDestroy(): void {
     this.registerUserSub?.unsubscribe()
   }
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
         },
         error: err => {
           console.log(err)
-          
+
           if (err.error.errors['email']) {
             this.emailError = err.error.errors['email']
             this.formGroup.controls['email'].setErrors({'incorrect': true})

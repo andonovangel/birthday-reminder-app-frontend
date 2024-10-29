@@ -1,7 +1,13 @@
 @use 'colors';
 @use 'fonts';
 
-.nav {
+:host {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    
     @include fonts.text-2xl();
     display: flex;
     justify-content: space-between;
@@ -13,20 +19,24 @@
     backdrop-filter: blur(33px);
     border-radius: 16px;
     transition: 0.3s;
-
+    
     &:hover {
         background-color: colors.$navbarColorHover;
     }
 
-    &-left {
+    .nav-left {
         display: flex;
         align-items: center;
         justify-content: space-around;
 
         width: 435px;
+
+        .logo-link {
+            line-height: 1.5rem;
+        }
     }
 
-    &-right {
+    .nav-right {
         display: flex;
         align-items: center;
         justify-content: space-around;

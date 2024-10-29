@@ -13,6 +13,8 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('click')
   onMouseClick(): void {
+    console.log('here');
+    console.log(this.type);
     this.type === 'click' && this.destroyTooltip();
   }
 
