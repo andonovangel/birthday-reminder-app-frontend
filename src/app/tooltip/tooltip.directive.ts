@@ -13,8 +13,6 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('click')
   onMouseClick(): void {
-    console.log('here');
-    console.log(this.type);
     this.type === 'click' && this.destroyTooltip();
   }
 
@@ -41,7 +39,7 @@ export class TooltipDirective implements OnDestroy {
     private viewContainerRef: ViewContainerRef,
     private elementRef: ElementRef,
     private appRef: ApplicationRef,
-    @Inject(DOCUMENT) private document: Document, 
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnDestroy(): void {
