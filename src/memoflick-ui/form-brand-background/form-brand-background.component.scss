@@ -42,10 +42,11 @@
     .glass-wrapper {
         display: flex;
         height: 100%;
+        width: fit-content;
 
         .glass {
             height: 100%;
-            width: 7%;
+            width: 55px;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(30, 30, 30, 0.2) 70.83%, rgba(255, 255, 255, 0.2) 100%);
             background-blend-mode: overlay;
             backdrop-filter: blur(40px);
