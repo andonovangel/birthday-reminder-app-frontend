@@ -1,134 +1,140 @@
-@use 'colors';
-@use 'mixins';
-@use 'fonts';
+@use "colors";
+@use "mixins";
+@use "fonts";
 
 :host {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .profile-container {
-        width: calc(100% - 64px);
-        max-width: 938px;
-        background-color: #303030;
-        border-radius: 10px;
-        padding: 30px;
-        margin-top: 64px;
+  .profile-container {
+    width: calc(100% - 64px);
+    max-width: 938px;
+    background-color: #303030;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 64px;
 
-        position: relative;
+    position: relative;
 
-        .header {
-            @include fonts.text-3xl();
-            text-align: center;
-            padding-bottom: 50px;
+    .header {
+      @include fonts.text-3xl();
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      padding-bottom: 50px;
+
+      .title {
+        grid-column: 2;
+        text-align: center;
+      }
+
+      .icon {
+        margin-left: auto;
+
+        i {
+          font-size: fonts.$icons-medium;
+          line-height: fonts.$icons-medium;
+          height: fonts.$icons-medium;
+          @include mixins.brandLightHover;
         }
-
-        .icon {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-
-            i {
-                font-size: fonts.$icons-medium;
-                line-height: fonts.$icons-medium;
-                height: fonts.$icons-medium;
-                @include mixins.brandLightHover;
-            }
-        }
-
-        .user-info-wrapper {
-            @include fonts.text-xl();
-            display: flex;
-            gap: 32px;
-
-            .info-title {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-
-                p {
-                    margin: 0;
-                }
-            }
-
-            .user-info {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-
-                span {
-                    color: #5B5B5B;
-                }
-            }
-        }
+      }
     }
 
-    .options {
+    .user-info-wrapper {
+      display: flex;
+      gap: 16px;
+
+      .info-title {
+        @include fonts.text-l();
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        align-items: flex-end;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
 
-        position: absolute;
-        z-index: 1;
-        top: 50px;
-        right: 44px;
-
-        width: 192px;
-        height: 132px;
-        background-color: colors.$reminderColorSecondary;
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        filter: drop-shadow(5px 5px 4px #000000);
-
-        cursor: pointer;
-        
-        .option {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-
-            transition: 0.3s;
-            padding-left: 10px;
-            border-radius: 16px;
-            
-            i {
-                margin-right: 10px;
-            }
-
-            &:hover {
-                background-color: colors.$reminderColorSecondaryHover;
-            }
+        span {
+          flex: 1;
+          color: #5b5b5b;
         }
+      }
+    }
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    right: 44px;
+
+    width: 192px;
+    height: 132px;
+    background-color: colors.$reminderColorSecondary;
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    filter: drop-shadow(5px 5px 4px #000000);
+
+    cursor: pointer;
+
+    .option {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      transition: 0.3s;
+      padding-left: 10px;
+      border-radius: 16px;
+
+      i {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        background-color: colors.$reminderColorSecondaryHover;
+      }
+    }
+  }
+
+  .complete-profile-container {
+    max-width: 500px;
+    width: calc(100% - 64px);
+    background-color: #404040;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 50px auto;
+
+    .header {
+      @include fonts.text-2xl();
+      text-align: center;
+      padding-bottom: 50px;
     }
 
-    .complete-profile-container {
-        width: 500px;
-        background-color: #404040;
-        border-radius: 10px;
-        padding: 30px;
-        margin: 50px auto;
+    button {
+      width: 100%;
+      color: white;
+      border: 2px solid colors.$brandBlueColor;
+      border-radius: 5px;
+      transition: 0.3s;
+      background-color: colors.$brandBlueColor;
+      font-weight: 500;
 
-        .header {
-            @include fonts.text-2xl();
-            text-align: center;
-            padding-bottom: 50px;
-        }
-
-        button {
-            width: 100%;
-            color: white;
-            border: 2px solid colors.$brandBlueColor;
-            border-radius: 5px;
-            transition: 0.3s;
-            background-color: colors.$brandBlueColor;
-            font-weight: 500;
-        
-            &:hover {
-                background-color: colors.$brandLightColor;
-                border: 2px solid colors.$brandLightColor;
-            }
-        }
+      &:hover {
+        background-color: colors.$brandLightColor;
+        border: 2px solid colors.$brandLightColor;
+      }
     }
+  }
 }
