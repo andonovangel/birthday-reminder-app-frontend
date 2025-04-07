@@ -2,19 +2,20 @@
 <p class="label">* Experience it yourself</p>
 <div class="steps-wrapper">
   <div class="img-wrapper">
-    <ng-container *ngFor="let img of imgs; let i = index">
-      <img [class.active]="i === selectedStep" [src]="selectedImg.imgUrl" [alt]="selectedImg.alt" />
+    <ng-container *ngFor="let step of steps; let i = index">
+      <img [class.active]="i === selectedStepIndex" [src]="step.imgUrl" [alt]="step.alt" />
     </ng-container>
   </div>
   <div class="steps">
     <ng-container *ngFor="let step of steps; let i = index">
       <a (click)="selectStep(i)" class="step">
-        <div [class.active]="selectedStep === i" class="bracket"></div>
-        <div class="content" [class.active]="selectedStep === i">
+        <div [class.active]="selectedStepIndex === i" class="bracket"></div>
+        <div class="content" [class.active]="selectedStepIndex === i">
+          <img [src]="step.imgUrl" [alt]="step.alt" />
           <div class="text-2xl fw-600">
             <span *ngIf="i + 1 < 10">0</span>{{ i + 1 }}. {{ step.title }}
           </div>
-          <div *ngIf="selectedStep === i" class="description">
+          <div  [class.active]="selectedStepIndex === i" class="description">
             {{ step.description }}
           </div>
         </div>
@@ -22,3 +23,4 @@
     </ng-container>
   </div>
 </div>
+

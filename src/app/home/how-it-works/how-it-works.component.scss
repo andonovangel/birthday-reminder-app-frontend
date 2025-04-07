@@ -1,9 +1,10 @@
 @use "fonts";
 @use "colors";
+@use "mixins";
 
 :host {
   display: block;
-  width: 100%;
+  width: calc(100% - 64px);
   max-width: 1200px;
   margin: 0 auto;
   color: colors.$neutral-14;
@@ -24,21 +25,13 @@
   }
 
   .steps-wrapper {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 32px;
 
     .img-wrapper {
-      img {
-        opacity: 0;
-        height: 0;
-
-        &.active {
-          opacity: 1;
-          height: 100%;
-          transition: all, opacity 1s;
-        }
-      }
+      display: none;
     }
 
     a {
@@ -48,38 +41,106 @@
     }
 
     .steps {
+      width: 100%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
+      gap: 32px;
 
       .step {
-        padding: 16px 0 16px 16px;
+        width: 100%;
         display: flex;
         position: relative;
 
         .bracket {
-          width: 3px;
-          height: 0%;
-          transition: height .6s cubic-bezier(.77,0,.175,1);
-          position: absolute;
-          inset: 0% auto auto 0%;
-          background-color: colors.$primary-6;
-
-          &.active {
-            height: 100%;
-          }
+          display: none;
         }
 
         .content {
-          &.active {
-            padding: 16px 32px;
-          }
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
 
           .description {
             margin-top: 8px;
           }
         }
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+  :host {
+    .steps-wrapper {
+      .img-wrapper {
+        display: block;
+        flex: 1;
+
+        img {
+          opacity: 0;
+          height: 0;
+          width: 100%;
+
+          &.active {
+            opacity: 1;
+            height: 100%;
+            transition: all, opacity 1s;
+          }
+        }
+      }
+
+      .steps {
+        gap: 0;
+
+        .step {
+          padding: 16px 0 16px 16px;
+
+          .bracket {
+            display: block;
+            width: 3px;
+            height: 0%;
+            transition: height 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            position: absolute;
+            inset: 0% auto auto 0%;
+            background-color: colors.$primary-6;
+
+            &.active {
+              height: 100%;
+            }
+          }
+
+          .content {
+            &.active {
+              padding: 16px 32px;
+            }
+
+            img {
+              display: none;
+            }
+
+            .description {
+              display: none;
+
+              &.active {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-l) {
+  :host {
+    .steps-wrapper {
+      .img-wrapper {
+        flex: 2;
       }
     }
   }

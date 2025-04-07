@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 interface ProjectStep {
   title: string;
   description: string;
-}
-
-interface StepImg {
   imgUrl: string;
   alt: string;
 }
@@ -21,57 +18,45 @@ export class HowItWorksComponent {
       title: 'Create your profile',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue a ex nec mollis. Phasellus rhoncus massa ut fringilla hendrerit. Vivamus pulvinar convallis nibh.',
+        imgUrl: 'assets/how-it-works/Presentation1.png',
+        alt: 'step',
     },
     {
       title: 'Create birthday reminders',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue a ex nec mollis. Phasellus rhoncus massa ut fringilla hendrerit. Vivamus pulvinar convallis nibh.',
+        imgUrl: 'assets/how-it-works/Presentation2.png',
+        alt: 'step',
     },
     {
       title: 'Group your reminders',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue a ex nec mollis. Phasellus rhoncus massa ut fringilla hendrerit. Vivamus pulvinar convallis nibh.',
+        imgUrl: 'assets/how-it-works/Presentation3.png',
+        alt: 'step',
     },
     {
       title: 'You can optionally archive reminders',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue a ex nec mollis. Phasellus rhoncus massa ut fringilla hendrerit. Vivamus pulvinar convallis nibh.',
+        imgUrl: 'assets/how-it-works/Presentation4.png',
+        alt: 'step',
     },
     {
       title: 'Celebrate 🎉',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue a ex nec mollis. Phasellus rhoncus massa ut fringilla hendrerit. Vivamus pulvinar convallis nibh.',
+        imgUrl: 'assets/how-it-works/Presentation5.png',
+        alt: 'step',
     },
   ];
-  public imgs: StepImg[] = [
-    {
-      imgUrl: 'assets/how-it-works/Presentation1.png',
-      alt: 'step',
-    },
-    {
-      imgUrl: 'assets/how-it-works/Presentation2.png',
-      alt: 'step',
-    },
-    {
-      imgUrl: 'assets/how-it-works/Presentation3.png',
-      alt: 'step',
-    },
-    {
-      imgUrl: 'assets/how-it-works/Presentation4.png',
-      alt: 'step',
-    },
-    {
-      imgUrl: 'assets/how-it-works/Presentation5.png',
-      alt: 'step',
-    },
-  ];
-  public selectedStep: number = 0;
-  public selectedImg: StepImg = this.imgs[0];
+  public selectedStepIndex: number = 0;
+  public selectedStep: ProjectStep = this.steps[0];
 
   constructor() {}
 
   selectStep(index: number): void {
-    this.selectedStep = index;
-    this.selectedImg = this.imgs[index];
+    this.selectedStepIndex = index;
+    this.selectedStep = this.steps[index];
   }
 }
