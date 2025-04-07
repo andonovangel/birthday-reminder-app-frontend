@@ -2,13 +2,19 @@
 @use "fonts";
 @use "mixins";
 
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 128px;
+}
+
 section {
   text-align: center;
   overflow-x: clip;
 }
 
 #home {
-  padding-top: 184px;
+  padding: 64px 0;
 
   .radials {
     position: relative;
@@ -71,8 +77,8 @@ section {
 
     .middle {
       position: absolute;
-      width: 523px;
-      height: 282px;
+      width: 520px;
+      height: 250px;
 
       top: 0;
       left: 0;
@@ -90,11 +96,12 @@ section {
 
     .left {
       position: absolute;
-      left: -302px;
+      left: -100px;
       top: 127px;
-      width: 494px;
-      height: 494px;
+      width: 250px;
+      height: 250px;
       border-radius: 402px;
+      transition: 300ms;
     }
 
     .right {
@@ -127,7 +134,8 @@ section {
     }
 
     .sub-header {
-      margin-bottom: 38px;
+      @include fonts.text-2xl;
+      margin-bottom: 16px;
     }
 
     .button {
@@ -146,37 +154,65 @@ section {
     }
 
     .collage {
-      margin-top: 69px;
+      position: relative;
+      display: block;
+      width: 100%;
+      margin-top: 64px;
 
       .collage-highlight {
         position: absolute;
-        width: 1168px;
-        height: 282px;
-        top: 615px;
-        left: 0;
-        right: 0;
+        width: calc(100% - 64px);
+        max-width: 580px;
+        height: 100%;
+        max-height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         margin-left: auto;
         margin-right: auto;
         border-radius: 150px;
         background-color: rgba(217, 217, 217, 0.15);
         filter: blur(60px);
         z-index: -1;
+        transition: 0.3s;
       }
 
-      img {
-        object-fit: cover;
-        border-radius: 24px;
-        width: 248px;
-        height: 248px;
+      .img-wrapper {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
 
-        margin: 0 17.5px;
+        img {
+          position: absolute;
+          object-fit: cover;
+          border-radius: 24px;
+          width: 250px;
+          height: 250px;
 
-        &:nth-child(odd) {
-          margin-bottom: 30px;
-        }
+          &:nth-child(1) {
+            z-index: 4;
+            left: 0;
+            top: 0;
+          }
 
-        &:nth-child(even) {
-          margin-top: 30px;
+          &:nth-child(2) {
+            z-index: 3;
+            left: 10px;
+            top: 10px;
+          }
+
+          &:nth-child(3) {
+            z-index: 2;
+            left: 20px;
+            top: 20px;
+          }
+
+          &:nth-child(4) {
+            z-index: 1;
+            left: 30px;
+            top: 30px;
+          }
         }
       }
     }
@@ -184,9 +220,6 @@ section {
 }
 
 #about {
-  margin-top: 216px;
-  padding-top: 130px;
-
   .about {
     .radials {
       position: relative;
@@ -288,6 +321,20 @@ section {
       }
     }
 
+    .header,
+    .sub-header,
+    img {
+      width: calc(100% - 64px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      @include fonts.text-5xl;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
     .sub-header {
       color: #959595;
 
@@ -300,16 +347,16 @@ section {
     img {
       margin-top: 124px;
       margin-bottom: 200px;
-      width: 935px;
-      height: 606px;
-      border-radius: 29px;
+      max-width: 935px;
+      max-height: 606px;
+      border-radius: 15px;
+      // border-radius: 30px;
       filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.57));
     }
   }
 }
 
 #how-it-works {
-  height: 100dvh;
   padding: 160px 0;
   background-color: colors.$neutral-1;
 }
@@ -317,7 +364,6 @@ section {
 #contact {
   display: flex;
   justify-content: space-around;
-  margin: 25px 120px;
   padding: 160px 25px 100px 25px;
 
   @include mixins.basicForm;
@@ -398,6 +444,7 @@ footer {
         a {
           color: #ffffff;
           text-decoration: none;
+
           i {
             transition: 0.3s;
             cursor: pointer;
@@ -405,6 +452,48 @@ footer {
             &:hover {
               color: colors.$brandLightColor;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+  #about .about img {
+    border-radius: 30px;
+  }
+}
+
+@include mixins.breakpoints(breakpoint-xl) {
+  #home {
+    .highlights .left {
+      left: -302px;
+      width: 494px;
+      height: 494px;
+    }
+
+    .hero .collage {
+      .collage-highlight {
+        max-width: 1170px;
+      }
+
+      .img-wrapper {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+
+        img {
+          position: static;
+          margin: 0 17.5px;
+
+          &:nth-child(odd) {
+            margin-bottom: 30px;
+          }
+
+          &:nth-child(even) {
+            margin-top: 30px;
           }
         }
       }

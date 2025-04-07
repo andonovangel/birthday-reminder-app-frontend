@@ -60,9 +60,10 @@
 
     .actions {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 8px;
 
       .primary-btn {
         @include fonts.text-base();
@@ -98,5 +99,12 @@
         }
       }
     }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-s) {
+  .wrapper .wrapper-content .actions {
+    flex-direction: row;
+    gap: 16px;
   }
 }

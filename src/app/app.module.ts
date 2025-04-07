@@ -26,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdminService } from './admin/admin.service';
 import { FormBrandBackgroundComponent } from "../memoflick-ui/form-brand-background/form-brand-background.component";
 import { HowItWorksComponent } from './home/how-it-works/how-it-works.component';
+import { MobileMenuComponent } from './navbar/mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HowItWorksComponent } from './home/how-it-works/how-it-works.component'
     CalendarPanelComponent,
     NavbarComponent,
     HowItWorksComponent,
+    MobileMenuComponent,
   ],
   imports: [
     BrowserModule,
