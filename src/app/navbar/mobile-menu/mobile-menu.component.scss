@@ -3,28 +3,22 @@
 @use "mixins";
 
 .wrapper {
+  margin-top: 8px;
+  opacity: 0;
+  height: 0;
+  visibility: hidden;
   display: block;
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  z-index: 9;
+  transition: 300ms;
 
   .wrapper-content {
     width: calc(100% - 128px);
     max-width: 1000px;
-
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-
     margin: 0 auto;
     padding: 16px;
     background-color: colors.$navbarColor;
     backdrop-filter: blur(33px);
     border-radius: 16px;
-    transition: 0.3s;
+    transition: 300ms;
 
     &:hover {
       background-color: colors.$navbarColorHover;
@@ -41,22 +35,20 @@
 
     .links-wrapper {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: space-around;
+      align-items: center;
       gap: 16px;
+      margin-bottom: 32px;
 
-      .links {
-        display: none;
+      .link {
+        text-decoration: none;
+        color: white;
+        transition: 0.3s;
+        cursor: pointer;
 
-        .link {
-          text-decoration: none;
-          color: white;
-          transition: 0.3s;
-          cursor: pointer;
-
-          &:hover {
-            color: colors.$brandLightColor;
-          }
+        &:hover {
+          color: colors.$brandLightColor;
         }
       }
     }
@@ -67,7 +59,11 @@
     }
 
     .actions {
-      display: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
 
       .primary-btn {
         @include fonts.text-base();
@@ -104,53 +100,11 @@
       }
     }
   }
-
-  app-mobile-menu {
-    display: block;
-
-    &.open {
-      ::ng-deep .wrapper {
-        opacity: 1;
-        visibility: visible;
-        height: 100%;
-      }
-    }
-  }
 }
 
-@include mixins.breakpoints(breakpoint-m) {
-  .wrapper {
-    .wrapper-content {
-      .links-wrapper {
-        .links {
-          display: flex;
-          gap: 16px;
-        }
-      }
-
-      .actions {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        gap: 16px;
-      }
-    }
-
-    .wrapper-content i,
-    app-mobile-menu {
-      display: none;
-    }
-  }
-}
-
-@include mixins.breakpoints(breakpoint-l) {
-  .wrapper {
-    .wrapper-content {
-      .links-wrapper {
-        .links {
-          @include fonts.text-xl();
-        }
-      }
-    }
+@include mixins.breakpoints(breakpoint-s) {
+  .wrapper .wrapper-content .actions {
+    flex-direction: row;
+    gap: 16px;
   }
 }

@@ -17,7 +17,7 @@
       <br>
       <span>Automated style</span>
     </div>
-    <div class="sub-header text-2xl">
+    <div class="sub-header">
       Never miss a birthday wish with our advanced
       <br>
       reminder application
@@ -25,10 +25,12 @@
     <button class="button" [routerLink]="['/register']">Get started</button>
     <div class="collage">
       <div class="collage-highlight"></div>
-      <img src="https://cdn.cdnparenting.com/articles/2018/12/29113733/722931703-H-1024x700.webp" alt="image1">
-      <img src="https://images.pexels.com/photos/6800133/pexels-photo-6800133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image2">
-      <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2023/05/birthday-celebration-restaurant.jpg?quality=82&strip=1" alt="image3">
-      <img src="https://media.flyingflowers.co.uk/i/flyingflowers/birthday-celebration-man.jpg?$poi-square$&fmt=auto&qlt=default&fmt.jp2.qlt=60&bg=rgb%28247%2C+194%2C+206%29&w=960&aspect=16%3A9" alt="image4">
+      <div class="img-wrapper">
+        <img src="https://cdn.cdnparenting.com/articles/2018/12/29113733/722931703-H-1024x700.webp" alt="image1">
+        <img src="https://images.pexels.com/photos/6800133/pexels-photo-6800133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image2">
+        <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2023/05/birthday-celebration-restaurant.jpg?quality=82&strip=1" alt="image3">
+        <img src="https://media.flyingflowers.co.uk/i/flyingflowers/birthday-celebration-man.jpg?$poi-square$&fmt=auto&qlt=default&fmt.jp2.qlt=60&bg=rgb%28247%2C+194%2C+206%29&w=960&aspect=16%3A9" alt="image4">
+      </div>
     </div>
   </div>
 </section>
@@ -44,7 +46,7 @@
       <div class="top blue"></div>
       <div class="bottom blue"></div>
     </div>
-    <div class="text-5xl fw-600 mb-16">
+    <div class="header">
       Create your own reminders
     </div>
     <div class="sub-header">
@@ -57,63 +59,68 @@
     <img src="../../assets/memoflick all reminders list prototype.png" alt="all reminders">
   </div>
 </section>
+<section id="how-it-works">
+  <app-how-it-works></app-how-it-works>
+</section>
 <section id="contact">
-  <div class="left form-container">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <div class="form-group mb-4">
-        <label for="exampleInputName1">Name</label>
-        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-                formControlName="name" required
-                [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['name'].errors?.['required']">
-              This field is required
-          </div>
-        </div>
-      </div>
-      <div class="form-group mb-4">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                formControlName="email" required
-                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['email'].errors?.['required']">
-              This field is required
-          </div>
-          <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
-            Wrong pattern for email
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Message</label>
-        <textarea class="form-control" rows="3"
-                  formControlName="message" required
-                  [ngClass]="{'invalid-field': formGroup.controls['message'].invalid && submitted}"></textarea>
-        <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['message'].errors?.['required']">
-              This field is required
-          </div>
-          <div *ngIf="formGroup.controls['message'].errors?.['maxlength']">
-              This field can have maximum 200 characters
-          </div>
-        </div>
-      </div>
-      <div class="container mb-3">
-        <div class="row">
-            <div class="col g-0 m-1">
-                <button class="btn form-btn create-btn" type="submit">Send</button>
-            </div>
-        </div>
-    </div>
-    </form>
+  <div class="highlights">
+    <div class="top blue"></div>
   </div>
-  <div class="right">
-    <div class="highlights">
-      <div class="top blue"></div>
+  <div class="contact-wrapper">
+    <div class="left form-container">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="exampleInputName1">Name</label>
+          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+                  formControlName="name" required
+                  [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && submitted}">
+          <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['name'].errors?.['required']">
+                This field is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  formControlName="email" required
+                  [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
+          <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['email'].errors?.['required']">
+                This field is required
+            </div>
+            <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
+              Wrong pattern for email
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea class="form-control" rows="3"
+                    formControlName="message" required
+                    [ngClass]="{'invalid-field': formGroup.controls['message'].invalid && submitted}"></textarea>
+          <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['message'].errors?.['required']">
+                This field is required
+            </div>
+            <div *ngIf="formGroup.controls['message'].errors?.['maxlength']">
+                This field can have maximum 200 characters
+            </div>
+          </div>
+        </div>
+        <div class="container mb-3">
+          <div class="row">
+              <div class="col g-0 m-1">
+                  <button class="btn form-btn create-btn" type="submit">Send</button>
+              </div>
+          </div>
+      </div>
+      </form>
     </div>
-    <div class="header">Contact us</div>
-    <div class="sub-header">Whether you&#39;ve got a burning question, a brilliant idea, or just want to chat, we&#39;re all ears. Reach out about anything related to our service, and we&#39;ll be thrilled to connect.</div>
+    <div class="right">
+      <div class="header">Contact us</div>
+      <div class="sub-header">Whether you&#39;ve got a burning question, a brilliant idea, or just want to chat, we&#39;re all ears. Reach out about anything related to our service, and we&#39;ll be thrilled to connect.</div>
+    </div>
   </div>
 </section>
 <footer>
@@ -123,7 +130,7 @@
     </div>
     <div class="footer-item">
       <div class="footer-info">
-        &copy; 2024 — memoflick. All rights reserved
+        &copy; {{ year }} — memoflick. All rights reserved
       </div>
     </div>
     <div class="footer-item">

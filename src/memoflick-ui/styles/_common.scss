@@ -1,3 +1,17 @@
+@use 'mixins';
+
+// Container max width
+.mw-container {
+  max-width: 100%;
+  width: calc(100% - 2rem);
+
+  @include mixins.breakpoints(breakpoint-xxl) {
+    max-width: 85rem;
+    width: calc(100% - 4rem);
+    margin: 0 auto;
+  }
+}
+
 // Margin mixins
 @mixin mt-0 { margin-top: 0px; }
 @mixin mt-4 { margin-top: 4px; }

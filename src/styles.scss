@@ -1,31 +1,40 @@
-@use 'fonts';
-@use 'mixins';
-@use 'colors';
-@use 'icons';
-@use 'common';
+@use "fonts";
+@use "mixins";
+@use "colors";
+@use "icons";
+@use "common";
 
-@import 'bootstrap/scss/bootstrap';
-@import '@flaticon/flaticon-uicons/css/all/all';
+@import "bootstrap/scss/bootstrap";
+@import "@flaticon/flaticon-uicons/css/all/all";
 
 :root {
-    color-scheme: light dark;
+  color-scheme: light dark;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    @include fonts.text-base();
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: colors.$backgroundMasterColor;
-    color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  @include fonts.text-base();
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: colors.$backgroundMasterColor;
+  color: #ffffff;
 }
+
+// [id] {
+//   scroll-margin-top: 130px;
+
+//   @include mixins.breakpoints(breakpoint-m) {
+//     scroll-margin-top: 140px;
+//   }
+// }

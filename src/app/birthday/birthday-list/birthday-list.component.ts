@@ -81,10 +81,10 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
         clearTimeout(this.data.timeout)
 
         this.data.timeout = setTimeout(() => {
-            console.log('In setter: ', this.data.listFilter)    
+            console.log('In setter: ', this.data.listFilter)
             this.data.params = this.data.params.set('search', this.data.listFilter)
             this.spinner.show()
-            
+
             const observable = (this.data.group !== undefined) ?
             this.groupService.getBirthdaysByGroup(this.data.group.id, this.data.params) :
             this.birthdayService.getBirthdaysData(this.data.params)
@@ -97,14 +97,14 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
                 error: err => {
                     this.spinner.hide()
                     console.log(err)
-                }            
+                }
             })
         }, 300)
     }
 
     sortRemindersByTitle() {
         this.data.titleSort = sortOrderMap[this.data.titleSort]
-        
+
         this.data.params = this.data.params
             .set('sortBy', 'title')
             .set('sortOrder', this.data.titleSort)
@@ -134,7 +134,7 @@ export class BirthdayListComponent implements OnInit, OnDestroy {
 
     private handleRouteParams(params: any): void {
         const id = params['id']
-        id !== undefined ? this.getGroupById(id) : (this.data.pageTitle = 'All reminder')
+        id !== undefined ? this.getGroupById(id) : (this.data.pageTitle = 'All reminders')
         this.getBirthdays(id)
     }
 }
