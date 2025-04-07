@@ -7,14 +7,20 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  public isMobileMenuOpenned: boolean = false;
 
   constructor(private auth: AuthService) {}
 
-  loggedIn() {
+  public loggedIn(): boolean {
     return this.auth.loggedIn()
   }
-  
-  logout() {
+
+  public logout(): void {
     this.auth.logoutUser()
+  }
+
+  public toggleMobileMenu(state?: boolean): void {
+    this.isMobileMenuOpenned =
+      state !== undefined ? state : !this.isMobileMenuOpenned;
   }
 }

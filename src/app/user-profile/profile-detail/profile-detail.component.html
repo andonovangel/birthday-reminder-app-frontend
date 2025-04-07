@@ -1,7 +1,7 @@
-<ngx-spinner 
-  bdColor = "#1e1e1e" 
-  size = "large" 
-  color = "#54a9c4" 
+<ngx-spinner
+  bdColor = "#1e1e1e"
+  size = "large"
+  color = "#54a9c4"
   type = "ball-triangle-path"
   [fullScreen] = "false"
 >
@@ -10,11 +10,14 @@
 
 <ng-container *ngIf="user">
   <div class="profile-container">
-    <div class="header">Welcome to your profile {{ user.name }}</div>
-  
-    <div class="icon">
-      <i class="fi fi-br-circle-ellipsis" tooltip [tooltipText]="'More options'" [type]="'click'" (click)="toggleOptionsVisibility()"></i>
+    <div class="header">
+      <p class="title">Welcome to your profile {{ user.name }}</p>
+
+      <div class="icon">
+        <i class="fi fi-br-circle-ellipsis" tooltip [tooltipText]="'More options'" [type]="'click'" (click)="toggleOptionsVisibility()"></i>
+      </div>
     </div>
+
     <div class="options-visibility" [@options] *ngIf="isOptionVisible">
       <div class="options" >
         <div class="option" [routerLink]="['/profile/edit']">
@@ -31,7 +34,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="user-info-wrapper">
       <div class="info-title">
         <p>Username</p>
@@ -47,7 +50,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="complete-profile-container" *ngIf="!user.name.length || !user.surname.length">
     <div class="header">
       Your profile is not complete
