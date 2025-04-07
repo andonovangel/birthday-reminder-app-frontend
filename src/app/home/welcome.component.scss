@@ -350,7 +350,6 @@ section {
       max-width: 935px;
       max-height: 606px;
       border-radius: 15px;
-      // border-radius: 30px;
       filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.57));
     }
   }
@@ -362,83 +361,107 @@ section {
 }
 
 #contact {
-  display: flex;
-  justify-content: space-around;
-  padding: 160px 25px 100px 25px;
+  width: 100%;
 
-  @include mixins.basicForm;
+  .highlights {
+    position: relative;
+    z-index: -2;
 
-  .left {
-    width: 500px;
-    text-align: left;
-    margin: 0;
+    .top {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 402px;
+      top: -39px;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .blue {
+      background-color: rgba(2, 157, 208, 0.5);
+      filter: blur(80px);
+    }
   }
 
-  .right {
-    width: 500px;
-    text-align: justify;
-    margin: 20px 20px 100px 100px;
+  .contact-wrapper {
+    max-width: 1400px;
+    width: calc(100% - 64px);
+    margin: 0 auto;
 
-    .highlights {
-      position: relative;
-      z-index: -2;
+    display: flex;
+    justify-content: space-around;
 
-      .top {
-        position: absolute;
-        width: 350px;
-        height: 350px;
-        border-radius: 402px;
-        top: -39px;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
+    flex-direction: column-reverse;
+    gap: 16px;
 
-      .blue {
-        background-color: rgba(2, 157, 208, 0.5);
-        filter: blur(80px);
+    @include mixins.basicForm;
+
+    .left {
+      max-width: none;
+      text-align: left;
+      margin: 0;
+      flex: 1;
+
+      form .form-group {
+        margin-bottom: 8px;
       }
     }
 
-    .header {
-      @include fonts.text-5xl();
-      font-weight: 600;
-      text-shadow: 5px 5px 17px #000000;
-    }
+    .right {
+      text-align: justify;
+      flex: 1;
 
-    .sub-header {
-      text-shadow: 5px 5px 17px #000000;
+      .header {
+        @include fonts.text-5xl();
+        font-weight: 600;
+        text-shadow: 5px 5px 17px #000000;
+        margin-bottom: 8px;
+      }
+
+      .sub-header {
+        text-shadow: 5px 5px 17px #000000;
+      }
     }
   }
 }
 
 footer {
-  padding: 80px;
+  width: 100%;
+  margin-bottom: 32px;
 
   .footer-container {
+    max-width: 1400px;
+    width: calc(100% - 64px);
+    margin: 0 auto;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 16px;
 
     margin: 0 auto;
-    padding: 80px 80px 60px;
-    width: 80%;
+    padding: 16px 64px;
 
     background-color: colors.$navbarColor;
     border-radius: 29px;
     color: #ffffff;
 
     .footer-item {
-      width: 285px;
       img {
         height: 50px;
+      }
+
+      .footer-info {
+        text-align: center;
       }
 
       .social-media-icons {
         display: flex;
         justify-content: center;
-        gap: 25px;
+        gap: 8px;
         font-size: fonts.$icons-large;
 
         a {
@@ -462,6 +485,31 @@ footer {
 @include mixins.breakpoints(breakpoint-m) {
   #about .about img {
     border-radius: 30px;
+  }
+
+  #contact {
+    .contact-wrapper {
+      flex-direction: row;
+      gap: 32px;
+
+      .left {
+        max-width: 500px;
+      }
+
+      .right {
+        max-width: 500px;
+      }
+    }
+  }
+
+  footer {
+    padding: 64px;
+
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 64px;
+    }
   }
 }
 

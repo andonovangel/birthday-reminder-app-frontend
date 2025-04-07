@@ -63,65 +63,67 @@
   <app-how-it-works></app-how-it-works>
 </section>
 <section id="contact">
-  <div class="left form-container">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <div class="form-group mb-4">
-        <label for="exampleInputName1">Name</label>
-        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
-                formControlName="name" required
-                [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['name'].errors?.['required']">
-              This field is required
-          </div>
-        </div>
-      </div>
-      <div class="form-group mb-4">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                formControlName="email" required
-                [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['email'].errors?.['required']">
-              This field is required
-          </div>
-          <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
-            Wrong pattern for email
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Message</label>
-        <textarea class="form-control" rows="3"
-                  formControlName="message" required
-                  [ngClass]="{'invalid-field': formGroup.controls['message'].invalid && submitted}"></textarea>
-        <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error">
-          <div *ngIf="formGroup.controls['message'].errors?.['required']">
-              This field is required
-          </div>
-          <div *ngIf="formGroup.controls['message'].errors?.['maxlength']">
-              This field can have maximum 200 characters
-          </div>
-        </div>
-      </div>
-      <div class="container mb-3">
-        <div class="row">
-            <div class="col g-0 m-1">
-                <button class="btn form-btn create-btn" type="submit">Send</button>
-            </div>
-        </div>
-    </div>
-    </form>
+  <div class="highlights">
+    <div class="top blue"></div>
   </div>
-  <div class="right">
-    <div class="highlights">
-      <div class="top blue"></div>
+  <div class="contact-wrapper">
+    <div class="left form-container">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="exampleInputName1">Name</label>
+          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
+                  formControlName="name" required
+                  [ngClass]="{'invalid-field': formGroup.controls['name'].invalid && submitted}">
+          <div *ngIf="formGroup.controls['name'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['name'].errors?.['required']">
+                This field is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  formControlName="email" required
+                  [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
+          <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['email'].errors?.['required']">
+                This field is required
+            </div>
+            <div *ngIf="formGroup.controls['email'].errors?.['pattern']">
+              Wrong pattern for email
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea class="form-control" rows="3"
+                    formControlName="message" required
+                    [ngClass]="{'invalid-field': formGroup.controls['message'].invalid && submitted}"></textarea>
+          <div *ngIf="formGroup.controls['message'].invalid && submitted" class="error">
+            <div *ngIf="formGroup.controls['message'].errors?.['required']">
+                This field is required
+            </div>
+            <div *ngIf="formGroup.controls['message'].errors?.['maxlength']">
+                This field can have maximum 200 characters
+            </div>
+          </div>
+        </div>
+        <div class="container mb-3">
+          <div class="row">
+              <div class="col g-0 m-1">
+                  <button class="btn form-btn create-btn" type="submit">Send</button>
+              </div>
+          </div>
+      </div>
+      </form>
     </div>
-    <div class="header">Contact us</div>
-    <div class="sub-header">Whether you&#39;ve got a burning question, a brilliant idea, or just want to chat, we&#39;re all ears. Reach out about anything related to our service, and we&#39;ll be thrilled to connect.</div>
+    <div class="right">
+      <div class="header">Contact us</div>
+      <div class="sub-header">Whether you&#39;ve got a burning question, a brilliant idea, or just want to chat, we&#39;re all ears. Reach out about anything related to our service, and we&#39;ll be thrilled to connect.</div>
+    </div>
   </div>
 </section>
-<!-- <footer>
+<footer>
   <div class="footer-container">
     <div class="footer-item">
       <img src="../../assets/logo_transparent_with_text.png" alt="brand_logo">
@@ -139,4 +141,4 @@
       </div>
     </div>
   </div>
-</footer> -->
+</footer>
