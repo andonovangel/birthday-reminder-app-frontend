@@ -13,7 +13,7 @@
 
   .wrapper-content {
     width: calc(100% - 128px);
-    max-width: 1000px;
+    max-width: 200px;
 
     display: flex;
     justify-content: space-between;
@@ -121,6 +121,8 @@
 @include mixins.breakpoints(breakpoint-m) {
   .wrapper {
     .wrapper-content {
+      max-width: fit-content;
+
       .links-wrapper {
         .links {
           display: flex;

@@ -1,4 +1,16 @@
 <div class="form-container">
+  <div class="radials">
+    <div class="one light-blue"></div>
+    <div class="two light-green"></div>
+    <div class="three blue"></div>
+    <div class="four light-blue"></div>
+    <div class="five light-green"></div>
+    <div class="six blue"></div>
+  </div>
+  <div class="highlights">
+    <div class="top blue"></div>
+    <div class="bottom blue"></div>
+  </div>
   <div class="form-wrapper">
     <div class="title">
       <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
@@ -6,16 +18,17 @@
         Welcome to  memoflick
       </div>
       <div class="subheader">
-        Sign in to your account
+        <!-- Sign in to your account -->
+        It’s coming soon!
       </div>
     </div>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <!-- <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="form-group mb-4">
         <label for="exampleInputEmail1">Email</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 formControlName="email" required
                 [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error"> 
+        <div *ngIf="formGroup.controls['email'].invalid && submitted" class="error">
           <div *ngIf="formGroup.controls['email'].errors?.['required']">
               This field is required
           </div>
@@ -26,7 +39,7 @@
         <input type="password" class="form-control" id="exampleInputPassword1"
                 formControlName="password" required
                 [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && submitted}">
-        <div *ngIf="formGroup.controls['password'].invalid && submitted" class="error"> 
+        <div *ngIf="formGroup.controls['password'].invalid && submitted" class="error">
           <div *ngIf="formGroup.controls['password'].errors?.['required']">
             This field is required
           </div>
@@ -39,18 +52,20 @@
             <label class="form-check-label" for="form2Example31">Keep me signed in</label>
           </div>
         </div>
-        <div class="link">
-            <a [routerLink]="['/password-forget']">Forgot password?</a>
-        </div>
+        <a [routerLink]="['/password-forget']">Forgot password?</a>
       </div>
-      
+
       <div class="form-group">
         <button class="btn form-btn login-btn" type="submit">Sign in</button>
         <div class="form-link">
           Don&#39;t have an account? <span [routerLink]="['/register']">Sign up</span>
         </div>
       </div>
-    </form>
+    </form> -->
+  </div>
+  <div class="treydev-wrapper">
+    <h1 class="text-xl">In Development By</h1>
+    <a href="https://treydev.com/" target="_blank"><img src="./../assets/treydev-logo.png" alt="treydev"></a>
   </div>
 </div>
 

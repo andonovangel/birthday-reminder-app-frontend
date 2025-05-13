@@ -12,7 +12,7 @@
 
   .wrapper-content {
     width: calc(100% - 128px);
-    max-width: 1000px;
+    max-width: 200px;
     margin: 0 auto;
     padding: 16px;
     background-color: colors.$navbarColor;
@@ -39,7 +39,7 @@
       justify-content: space-around;
       align-items: center;
       gap: 16px;
-      margin-bottom: 32px;
+      // margin-bottom: 32px;
 
       .link {
         text-decoration: none;
