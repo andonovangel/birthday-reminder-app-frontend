@@ -15,13 +15,31 @@
   }
 
   .title {
-    @include fonts.text-5xl;
+    @include fonts.text-4xl;
     font-weight: 700;
   }
 
   .label {
     @include fonts.text-s;
     color: colors.$primary-5;
+    margin: 8px;
+  }
+
+  .button {
+    background-color: colors.$brandLightColor;
+    color: white;
+    border: 2px solid colors.$brandLightColor;
+    border-radius: 8px;
+    width: 123px;
+    height: 31px;
+    transition: 0.3s;
+
+    margin-bottom: 32px;
+
+    &:hover {
+      background-color: #005977;
+      border: 2px solid #005977;
+    }
   }
 
   .steps-wrapper {
@@ -63,12 +81,16 @@
           display: flex;
           flex-direction: column;
           gap: 8px;
-
-          .description {
-            margin-top: 8px;
-          }
         }
       }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-s) {
+  :host {
+    .title {
+      @include fonts.text-5xl;
     }
   }
 }

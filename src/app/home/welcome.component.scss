@@ -5,7 +5,11 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 128px;
+  gap: 96px;
+
+  [id] {
+    scroll-margin-top: 64px;
+  }
 }
 
 section {
@@ -120,9 +124,12 @@ section {
   }
 
   .hero {
+    max-width: calc(100% - 32px);
+    margin: auto;
     z-index: 1;
+
     .header {
-      @include fonts.text-6xl();
+      @include fonts.text-4xl();
       text-transform: uppercase;
       margin-bottom: 16px;
       font-weight: 600;
@@ -134,7 +141,7 @@ section {
     }
 
     .sub-header {
-      @include fonts.text-2xl;
+      @include fonts.text-l;
       margin-bottom: 16px;
     }
 
@@ -330,13 +337,14 @@ section {
     }
 
     .header {
-      @include fonts.text-5xl;
+      @include fonts.text-4xl;
       font-weight: 600;
       margin-bottom: 16px;
     }
 
     .sub-header {
       color: #959595;
+      @include fonts.text-s();
 
       span {
         @include fonts.text-xs();
@@ -414,13 +422,14 @@ section {
       flex: 1;
 
       .header {
-        @include fonts.text-5xl();
+        @include fonts.text-4xl();
         font-weight: 600;
         text-shadow: 5px 5px 17px #000000;
         margin-bottom: 8px;
       }
 
       .sub-header {
+        @include fonts.text-s();
         text-shadow: 5px 5px 17px #000000;
       }
     }
@@ -481,8 +490,45 @@ footer {
     }
   }
 }
+@include mixins.breakpoints(breakpoint-s) {
+  #home .hero {
+    .header {
+      @include fonts.text-6xl();
+    }
+
+    .sub-header {
+      @include fonts.text-2xl;
+    }
+  }
+
+  #about .about {
+    .header {
+      @include fonts.text-5xl;
+    }
+
+    .sub-header {
+      @include fonts.text-base;
+    }
+  }
+
+  #contact {
+    .contact-wrapper .right {
+      .header {
+        @include fonts.text-5xl;
+      }
+
+      .sub-header {
+        @include fonts.text-base;
+      }
+    }
+  }
+}
 
 @include mixins.breakpoints(breakpoint-m) {
+  #home .hero {
+    max-width: calc(100% - 64px);
+  }
+
   #about .about img {
     border-radius: 30px;
   }
@@ -509,6 +555,18 @@ footer {
       flex-direction: row;
       justify-content: space-around;
       padding: 64px;
+
+      a {
+        margin: 0;
+        transition: 300ms;
+        text-decoration: none;
+        cursor: pointer;
+        color: colors.$neutral-1;
+
+        &:hover {
+          color: colors.$brandLightColor;;
+        }
+      }
     }
   }
 }

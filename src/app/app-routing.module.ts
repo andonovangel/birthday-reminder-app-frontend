@@ -9,46 +9,46 @@ import { ForgetPasswordComponent } from './password/password-forget/forget-passw
 import { ResetPasswordComponent } from './password/password-reset/reset-password.component';
 
 const routes: Routes = [
-  { 
+  {
     path: 'welcome',
-    component: WelcomeComponent 
+    component: WelcomeComponent
   },
-  { 
+  {
     path: 'birthdays',
     loadChildren: () =>
       import('./birthday/birthday.module').then((b) => b.BirthdayModule),
   },
-  { 
+  {
     path: 'groups',
     loadChildren: () =>
       import('./group/group.module').then((b) => b.GroupModule),
   },
-  { 
+  {
     path: 'profile',
     loadChildren: () =>
       import('./user-profile/user-profile.module').then((b) => b.UserProfileModule),
   },
-  { 
+  {
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((b) => b.AdminModule),
   },
-  { 
-    path: 'register', 
+  {
+    path: 'register',
     canActivate: [RedirectGuard],
-    component: RegisterComponent 
-  }, 
-  { 
-    path: 'login', 
-    canActivate: [RedirectGuard],
-    component: LoginComponent 
+    component: RegisterComponent
   },
-  { 
+  {
+    path: 'coming-soon',
+    canActivate: [RedirectGuard],
+    component: LoginComponent
+  },
+  {
     path: 'password-forget',
     canActivate: [RedirectGuard],
     component: ForgetPasswordComponent,
   },
-  { 
+  {
     path: 'password-reset/:token',
     canActivate: [RedirectGuard],
     component: ResetPasswordComponent,
