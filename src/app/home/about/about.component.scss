@@ -1,0 +1,158 @@
+@use "colors";
+@use "fonts";
+@use "mixins";
+
+:host {
+  .about {
+    .radials {
+      position: relative;
+      z-index: -1;
+
+      .one {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+
+        position: absolute;
+        left: 92px;
+        top: 202px;
+
+        filter: blur(2.8px);
+      }
+
+      .four {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        position: absolute;
+        right: 225px;
+        top: 940px;
+      }
+
+      .blue {
+        background: linear-gradient(
+          342deg,
+          rgba(2, 67, 89, 1) 0%,
+          rgba(2, 106, 139, 1) 50%,
+          rgba(1, 183, 242, 1) 99%
+        );
+      }
+
+      .two {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        right: 165px;
+        top: 421px;
+
+        filter: blur(2.8px);
+      }
+
+      .three {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        left: 228px;
+        top: 909px;
+      }
+
+      .light {
+        background: linear-gradient(
+          25deg,
+          rgba(89, 114, 167, 1) 0%,
+          rgba(129, 167, 190, 1) 50%,
+          rgba(78, 100, 145, 1) 99%
+        );
+      }
+    }
+
+    .highlights {
+      position: relative;
+      z-index: -2;
+
+      .top {
+        position: absolute;
+        width: 494px;
+        height: 494px;
+        border-radius: 402px;
+
+        top: 192px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .bottom {
+        position: absolute;
+        width: 494px;
+        height: 494px;
+        border-radius: 402px;
+
+        top: 496px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .blue {
+        background-color: rgba(2, 157, 208, 0.5);
+        filter: blur(80px);
+      }
+    }
+
+    .header,
+    .sub-header,
+    img {
+      width: calc(100% - 64px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      @include fonts.text-4xl;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .sub-header {
+      color: #959595;
+      @include fonts.text-s();
+
+      span {
+        @include fonts.text-xs();
+        color: colors.$brandLightColor;
+      }
+    }
+
+    img {
+      margin-top: 64px;
+      margin-bottom: 200px;
+      max-width: 935px;
+      max-height: 606px;
+      border-radius: 15px;
+      filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.57));
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-s) {
+  :host .about {
+    .header {
+      @include fonts.text-5xl;
+    }
+
+    .sub-header {
+      @include fonts.text-base;
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+  :host .about img {
+    border-radius: 30px;
+  }
+}

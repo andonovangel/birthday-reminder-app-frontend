@@ -27,6 +27,10 @@ import { AdminService } from './admin/admin.service';
 import { FormBrandBackgroundComponent } from "../memoflick-ui/form-brand-background/form-brand-background.component";
 import { HowItWorksComponent } from './home/how-it-works/how-it-works.component';
 import { MobileMenuComponent } from './navbar/mobile-menu/mobile-menu.component';
+import { HeroComponent } from './home/hero/hero.component';
+import { AboutComponent } from './home/about/about.component';
+import { ContactComponent } from './home/contact/contact.component';
+import { FooterComponent } from './home/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,10 @@ import { MobileMenuComponent } from './navbar/mobile-menu/mobile-menu.component'
     NavbarComponent,
     HowItWorksComponent,
     MobileMenuComponent,
+    HeroComponent,
+    AboutComponent,
+    ContactComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

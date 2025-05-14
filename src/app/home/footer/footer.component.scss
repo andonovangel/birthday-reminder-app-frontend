@@ -1,0 +1,82 @@
+@use "colors";
+@use "fonts";
+@use "mixins";
+
+:host {
+  width: 100%;
+
+  .footer-container {
+    max-width: 1400px;
+    width: calc(100% - 64px);
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    margin: 0 auto;
+    padding: 16px 64px;
+
+    background-color: colors.$navbarColor;
+    border-radius: 29px;
+    color: #ffffff;
+
+    .footer-item {
+      img {
+        height: 50px;
+      }
+
+      .footer-info {
+        text-align: center;
+      }
+
+      .social-media-icons {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-size: fonts.$icons-large;
+
+        a {
+          color: #ffffff;
+          text-decoration: none;
+
+          i {
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover {
+              color: colors.$brandLightColor;
+            }
+          }
+        }
+      }
+    }
+
+    a {
+      margin: 0;
+      transition: 300ms;
+      text-decoration: none;
+      cursor: pointer;
+      color: colors.$neutral-1;
+      text-align: center;
+
+      &:hover {
+        color: colors.$brandLightColor;
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+  :host {
+    padding: 64px;
+
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 64px;
+    }
+  }
+}

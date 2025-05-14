@@ -1,0 +1,102 @@
+@use "colors";
+@use "fonts";
+@use "mixins";
+
+:host {
+  width: 100%;
+
+  .highlights {
+    position: relative;
+    z-index: -2;
+
+    .top {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 402px;
+      top: -39px;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .blue {
+      background-color: rgba(2, 157, 208, 0.5);
+      filter: blur(80px);
+    }
+  }
+
+  .contact-wrapper {
+    max-width: 1400px;
+    width: calc(100% - 64px);
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-around;
+
+    flex-direction: column-reverse;
+    gap: 16px;
+
+    @include mixins.basicForm;
+
+    .left {
+      max-width: none;
+      text-align: left;
+      margin: 0;
+      flex: 1;
+
+      form .form-group {
+        margin-bottom: 8px;
+      }
+    }
+
+    .right {
+      text-align: justify;
+      flex: 1;
+
+      .header {
+        @include fonts.text-4xl();
+        font-weight: 600;
+        text-shadow: 5px 5px 17px #000000;
+        margin-bottom: 8px;
+      }
+
+      .sub-header {
+        @include fonts.text-s();
+        text-shadow: 5px 5px 17px #000000;
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-s) {
+  :host {
+    .contact-wrapper .right {
+      .header {
+        @include fonts.text-5xl;
+      }
+
+      .sub-header {
+        @include fonts.text-base;
+      }
+    }
+  }
+}
+
+@include mixins.breakpoints(breakpoint-m) {
+  :host {
+    .contact-wrapper {
+      flex-direction: row;
+      gap: 32px;
+
+      .left {
+        max-width: 500px;
+      }
+
+      .right {
+        max-width: 500px;
+      }
+    }
+  }
+}
