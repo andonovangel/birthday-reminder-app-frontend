@@ -1,4 +1,16 @@
 <div class="form-container">
+  <div class="radials">
+    <div class="one light-blue"></div>
+    <div class="two light-green"></div>
+    <div class="three blue"></div>
+    <div class="four light-blue"></div>
+    <div class="five light-green"></div>
+    <div class="six blue"></div>
+  </div>
+  <div class="highlights">
+    <div class="top blue"></div>
+    <div class="bottom blue"></div>
+  </div>
   <div class="form-wrapper">
     <div class="title">
       <a [routerLink]="['/welcome']"><img src="../../assets/logo_transparent_no_text.png" alt="logo"></a>
@@ -15,7 +27,7 @@
         <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp"
                 formControlName="username" required
                 [ngClass]="{'invalid-field': formGroup.controls['username'].invalid && (formGroup.controls['username'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['username'].invalid && (formGroup.controls['username'].dirty || formGroup.controls['username'].touched || submitted)" class="error">
           <div *ngIf="formGroup.controls['username'].errors?.['required']">
             This field is required
           </div>
@@ -32,7 +44,7 @@
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 formControlName="email" required
                 [ngClass]="{'invalid-field': formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].dirty || formGroup.controls['email'].touched || submitted)" class="error">
           <div *ngIf="formGroup.controls['email'].errors?.['required']">
             This field is required
           </div>
@@ -49,7 +61,7 @@
         <input type="password" class="form-control" id="exampleInputPassword1"
                 formControlName="password" required
                 [ngClass]="{'invalid-field': formGroup.controls['password'].invalid && (formGroup.controls['password'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['password'].invalid && (formGroup.controls['password'].dirty || formGroup.controls['password'].touched || submitted)" class="error">
           <div *ngIf="formGroup.controls['password'].errors?.['required']">
             This field is required
           </div>
@@ -69,7 +81,7 @@
         <input type="password" class="form-control" id="exampleInputPassword2"
                 formControlName="confirmationPassword" required
                 [ngClass]="{'invalid-field': formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].touched || submitted)}">
-        <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error"> 
+        <div *ngIf="formGroup.controls['confirmationPassword'].invalid && (formGroup.controls['confirmationPassword'].dirty || formGroup.controls['confirmationPassword'].touched || submitted)" class="error">
           <div *ngIf="formGroup.controls['confirmationPassword'].errors?.['required']">
             This field is required
           </div>

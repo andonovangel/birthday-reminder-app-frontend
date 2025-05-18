@@ -16,7 +16,6 @@
     padding: 32px 0;
 
     overflow-x: clip;
-    overflow-y: hidden;
 
     .radials {
       position: relative;
@@ -279,14 +278,6 @@
     }
   }
 
-  .treydev-wrapper {
-    text-align: center;
-
-    img {
-      width: 200px;
-    }
-  }
-
   form-brand-background {
     display: none;
   }
@@ -333,7 +324,7 @@
         }
 
         .subheader {
-          @include fonts.text-2xl();
+          @include fonts.text-xl();
         }
       }
 

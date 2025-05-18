@@ -39,7 +39,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'coming-soon',
+    path: 'login',
     canActivate: [RedirectGuard],
     component: LoginComponent
   },

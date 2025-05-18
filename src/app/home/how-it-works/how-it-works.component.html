@@ -1,10 +1,14 @@
 <h1 class="title">How it works</h1>
 <p class="label">* Experience it yourself</p>
-<button class="button" routerLink="/coming-soon">Get started</button>
+<button class="button" routerLink="/register">Get started</button>
 <div class="steps-wrapper">
   <div class="img-wrapper">
     <ng-container *ngFor="let step of steps; let i = index">
-      <img [class.active]="i === selectedStepIndex" [src]="step.imgUrl" [alt]="step.alt" />
+      <img
+        [class.active]="i === selectedStepIndex"
+        [src]="step.imgUrl"
+        [alt]="step.alt"
+      />
     </ng-container>
   </div>
   <div class="steps">
@@ -16,7 +20,7 @@
           <div class="text-2xl fw-600">
             <span *ngIf="i + 1 < 10">0</span>{{ i + 1 }}. {{ step.title }}
           </div>
-          <div  [class.active]="selectedStepIndex === i" class="description">
+          <div [class.active]="selectedStepIndex === i" class="description">
             {{ step.description }}
           </div>
         </div>

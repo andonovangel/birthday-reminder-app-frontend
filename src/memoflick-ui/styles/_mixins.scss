@@ -1,127 +1,135 @@
-@use 'colors';
-@use 'fonts';
+@use "colors";
+@use "fonts";
 
 @mixin brandLightHover {
-    &:hover{
-        color: colors.$brandLightColor;
-        transition: 0.3s;
-        cursor: pointer;
-    }
+  &:hover {
+    color: colors.$brandLightColor;
+    transition: 0.3s;
+    cursor: pointer;
+  }
 }
 
 @mixin basicForm {
-    .form-container {
-        max-width: 600px;
-        margin-top: 60px;
+  .form-container {
+    max-width: 600px;
+    margin-top: 60px;
 
-        .invalid-field {
-            border: 1px solid red;
-        }
-        
-        .error {
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: #a94442;
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            background-color: colors.$backgroundMasterColor;
-            color: white;
-            border: 2px solid colors.$inputsBorderFocus;
-            transition: 0.3s;
-            box-sizing: border-box;
-        
-            &:focus {
-                background-color: colors.$backgroundMasterColor;
-                border: 2px solid colors.$brandLightColor;
-                color: white;
-                box-shadow: none;
-            }
-        }
-        
-        .form-btn {
-            width: 100%;
-            color: white;
-            border: 2px solid colors.$brandBlueColor;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        
-        .back-btn {
-            background-color: transparent;
-            font-weight: 500;
-        
-            &:hover {
-                background-color: colors.$brandBlueColorMedium;
-                border: 2px solid colors.$brandLightColor;
-            }
-        }
-        
-        .create-btn {
-            background-color: colors.$brandBlueColor;
-            font-weight: 500;
-        
-            &:hover {
-                background-color: colors.$brandLightColor;
-                border: 2px solid colors.$brandLightColor;
-            }
-        }
+    .invalid-field {
+      border: 1px solid red;
     }
+
+    .error {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #a94442;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background-color: colors.$backgroundMasterColor;
+      color: white;
+      border: 2px solid colors.$inputsBorderFocus;
+      transition: 0.3s;
+      box-sizing: border-box;
+
+      &:focus {
+        background-color: colors.$backgroundMasterColor;
+        border: 2px solid colors.$brandLightColor;
+        color: white;
+        box-shadow: none;
+      }
+    }
+
+    .form-btn {
+      width: 100%;
+      color: white;
+      border: 2px solid colors.$brandBlueColor;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .back-btn {
+      background-color: transparent;
+      font-weight: 500;
+
+      &:hover {
+        background-color: colors.$brandBlueColorMedium;
+        border: 2px solid colors.$brandLightColor;
+      }
+    }
+
+    .create-btn {
+      background-color: colors.$brandBlueColor;
+      font-weight: 500;
+
+      &:hover {
+        background-color: colors.$brandLightColor;
+        border: 2px solid colors.$brandLightColor;
+      }
+    }
+  }
 }
 
 @mixin dateInputStyle {
-    input[type="datetime-local"], input[type="date"] {
-        &::-webkit-calendar-picker-indicator {
-            filter: invert(83%) sepia(10%) saturate(2857%) hue-rotate(162deg) brightness(75%) contrast(107%);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        &::-webkit-calendar-picker-indicator:hover {
-            filter: invert(22%) sepia(61%) saturate(2221%) hue-rotate(170deg) brightness(93%) contrast(103%);
-        }
+  input[type="datetime-local"],
+  input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(83%) sepia(10%) saturate(2857%) hue-rotate(162deg)
+        brightness(75%) contrast(107%);
+      cursor: pointer;
+      transition: 0.3s;
     }
+
+    &::-webkit-calendar-picker-indicator:hover {
+      filter: invert(22%) sepia(61%) saturate(2221%) hue-rotate(170deg)
+        brightness(93%) contrast(103%);
+    }
+  }
 }
 
 @mixin selectStyle {
-    select {
-        cursor: pointer;
-        background-image:
-            linear-gradient(45deg, transparent 50%, colors.$brandLightColor 50%),
-            linear-gradient(135deg, colors.$brandLightColor 50%, transparent 50%);
-        background-position:
-            calc(100% - 20px) calc(1em + 2px),
-            calc(100% - 15px) calc(1em + 2px),
-            100% 0;
-        background-size:
-            5px 5px,
-            5px 5px,
-            2.5em 2.5em;
-        background-repeat: no-repeat;
-    }
+  select {
+    cursor: pointer;
+    background-image: linear-gradient(
+        45deg,
+        transparent 50%,
+        colors.$brandLightColor 50%
+      ),
+      linear-gradient(135deg, colors.$brandLightColor 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px), 100% 0;
+    background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+  }
 }
 
 @mixin breakpoints($breakpoint) {
-    @if $breakpoint == breakpoint-s { // Small devices (landscape phones, 576px and up)
-        @media (min-width: 576px) { 
-            @content;
-        }
-    } @else if $breakpoint == breakpoint-m { // Medium devices (tablets, 768px and up)
-        @media (min-width: 768px) { 
-            @content;
-        }
-    } @else if $breakpoint == breakpoint-l { // Large devices (desktops, 992px and up)
-        @media (min-width: 992px) { 
-            @content;
-        }
-    } @else if $breakpoint == breakpoint-xl { // Extra large devices (large desktops, 1200px and up)
-        @media (min-width: 1200px) { 
-            @content;
-        }
-    } @else if $breakpoint == breakpoint-xxl { // Extra extra large devices (larger desktops, 1400px and up)
-        @media (min-width: 1400px) { 
-            @content;
-        }
+  @if $breakpoint == breakpoint-s {
+    // Small devices (landscape phones, 576px and up)
+    @media (min-width: 576px) {
+      @content;
     }
+  } @else if $breakpoint == breakpoint-m {
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-l {
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-xl {
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-xxl {
+    // Extra extra large devices (larger desktops, 1400px and up)
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
 }
